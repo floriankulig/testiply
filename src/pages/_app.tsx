@@ -1,8 +1,8 @@
 import { AppProps } from 'next/app'
-import "scss/base/globals.scss"
+import "scss/App.scss"
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  return <Component {...pageProps} />
+  return (<Component {...pageProps} />)
 }
 
 export default MyApp
