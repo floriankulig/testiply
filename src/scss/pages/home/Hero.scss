@@ -1,6 +1,9 @@
 #page--home {
   .hero {
-    margin-top: 5em;
+    margin-top: 10em;
+    @include mq($mq-medium) {
+      margin-top: 5em;
+    }
     @include no-select();
     align-items: center;
     display: flex;
@@ -15,9 +18,16 @@
     }
 
     &__content {
+      margin: 2%;
+      @include mq($mq-small) {
+        margin-left: 10%;
+      }
+      @include mq($mq-big) {
+        margin: 0;
+      }
       &-heading {
         color: white;
-        font-size: clamp(2rem, 6vw, 5rem);
+        font-size: clamp(3.5rem, 6vw, 5rem);
         margin: 0 0 0.25em 0;
         &:last-of-type {
           color: #ff0000;
@@ -36,6 +46,14 @@
     }
 
     &__svg {
+      display: none;
+      @include mq($mq-medium) {
+        display: block;
+      }
+      margin-right: 10%;
+      @include mq($mq-big) {
+        margin: 0;
+      }
       height: clamp(200px, 40vw, 600px);
     }
   }
