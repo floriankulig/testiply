@@ -1,0 +1,42 @@
+#page--home {
+  .hero {
+    margin-top: 5em;
+    @include no-select();
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+
+    &__bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: -9000;
+    }
+
+    &__content {
+      &-heading {
+        color: white;
+        font-size: clamp(2rem, 6vw, 5rem);
+        margin: 0 0 0.25em 0;
+        &:last-of-type {
+          color: #ff0000;
+        }
+      }
+      button {
+        background-color: white;
+        border: none;
+        padding: 0.8em 2em;
+        font-weight: bold;
+        font-size: 1.2rem;
+        border-radius: 2em;
+        margin-top: 2em;
+        cursor: pointer;
+      }
+    }
+
+    &__svg {
+      height: clamp(200px, 40vw, 600px);
+    }
+  }
+}
