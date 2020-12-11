@@ -1,7 +1,0 @@
-.container {
-  margin: 0 auto;
-  width: 90%;
-  @include mq($mq-normal) {
-    width: 70%;
-  }
-}
