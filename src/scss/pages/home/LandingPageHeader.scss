@@ -1,0 +1,22 @@
+#page--home header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  color: white;
+
+  .logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+
+  .nav-links {
+    @include mq($mq-medium) {
+      width: 10em;
+    }
+    width: 8em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
