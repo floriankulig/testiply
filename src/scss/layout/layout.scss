@@ -1,7 +1,7 @@
 .container {
   width: 90%;
   margin: 0 auto;
-  @include mq($mq-medium) {
+  @include mq($mq-big) {
     width: 70%;
   }
 }
