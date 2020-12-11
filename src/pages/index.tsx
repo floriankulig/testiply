@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import styles from '../scss/Home.module.scss'
 
-const Home = () => {
+const Home: React.FC = () => {
   return (
     <div className={styles.container}>
       <Head>
