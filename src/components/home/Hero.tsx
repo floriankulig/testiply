@@ -1,7 +1,7 @@
 import { useIsMobile } from "hooks"
 
 export const Hero: React.FC = () => {
-    const isMobile = useIsMobile(960);
+    const isMobile = useIsMobile(1080);
 
     return (
         <section className="hero container">
