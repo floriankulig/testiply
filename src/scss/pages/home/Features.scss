@@ -1,0 +1,22 @@
+#page--home {
+  .features {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin-top: 35vw;
+
+    @include mq($mq-big) {
+      flex-direction: row;
+    }
+
+    &__item {
+      width: 350px;
+      margin: 0 auto;
+      margin-bottom: 4em;
+      @include mq($mq-big) {
+        margin: 0;
+        width: clamp(230px, 18vw, 330px);
+      }
+    }
+  }
+}

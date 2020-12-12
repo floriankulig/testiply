@@ -10,8 +10,8 @@ const Home: React.FC = () => {
       </Head>
       <Header></Header>
       <Hero></Hero>
-      {/*<Features></Features>
-      <Benefits></Benefits>
+      <Features></Features>
+      {/*<Benefits></Benefits>
       <Footer></Footer> */}
     </div>
   )
