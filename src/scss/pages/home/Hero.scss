@@ -46,10 +46,6 @@
     }
 
     &__svg {
-      display: none;
-      @include mq($mq-medium) {
-        display: block;
-      }
       margin-right: 10%;
       @include mq($mq-big) {
         margin: 0;
