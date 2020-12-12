@@ -12,6 +12,7 @@ export const useIsMobile = (breakpoint: number = 960) => {
     }
 
     useEffect(() => {
+        setIsMobile(window.innerWidth <= breakpoint);
         window.addEventListener("resize", onResize);
         return () => window.removeEventListener("resize", onResize)
     }, [])
