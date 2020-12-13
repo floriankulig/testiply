@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-export const useIsMobile = (breakpoint: number = 1080) => {
-    const [isMobile, setIsMobile] = useState(false);
+export const useIsMobile = (breakpoint: number = 1080): boolean => {
+    const [isMobile, setIsMobile] = useState<boolean>(false);
 
     const onResize = (e) => {
         if (e.currentTarget.innerWidth > breakpoint) {
