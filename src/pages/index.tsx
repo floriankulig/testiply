@@ -8,11 +8,11 @@ const Home: React.FC = () => {
         <title>Beta App Store</title>
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
       </Head>
-      <Header></Header>
-      <Hero></Hero>
-      <Features></Features>
-      {/*<Benefits></Benefits>
-      <Footer></Footer> */}
+      <Header />
+      <Hero />
+      <Features />
+      <Benefits />
+      {/*<Footer></Footer> */}
     </div>
   )
 }
