@@ -5,36 +5,36 @@ const HeroSection = styled.section`
     margin-top: 10em;
     margin-bottom: 30em;
     @media (min-width: 1080px) {
-      margin-top: 5em;
-      margin-bottom: 20vw;
+    margin-top: 5em;
+    margin-bottom: 20vw;
     }
     align-items: center;
     display: flex;
     justify-content: space-between;
 
     .hero__svg {
-      margin-right: 10%;
-      @media (min-width: 1200px) {
+    margin-right: 10%;
+    @media (min-width: 1200px) {
         margin: 0;
-      }
-      height: clamp(200px, 40vw, 600px);
+    }
+    height: clamp(200px, 40vw, 600px);
     }
 `;
 
 
-const Background = styled.img`
-position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: -9000;
+const BackgroundImage = styled.img`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -9000;
 
-      &.mobile {
+    &.mobile {
         width: 100%;
         height: auto;
         min-height: 800px;
         object-fit: cover;
-      }
+    }
 `
 
 const Content = styled.div`
@@ -75,7 +75,7 @@ export const Hero: React.FC = () => {
 
     return (
         <HeroSection className="container">
-            <Background className={`${isMobile ? "mobile" : ""}`} src={`/images/hero_bg${isMobile ? "-mobile" : ""}.svg`} alt="" />
+            <BackgroundImage className={`${isMobile ? "mobile" : ""}`} src={`/images/hero_bg${isMobile ? "-mobile" : ""}.svg`} alt="" />
             <Content>
                 <h1>Test Apps.</h1>
                 <h1>Give Feedback.</h1>
