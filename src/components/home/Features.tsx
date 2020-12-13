@@ -5,7 +5,7 @@ const FeaturesContainer = styled("ul")`
     justify-content: space-between;
     flex-direction: column;
     margin-top: 35vw;
-    @media (min-width: 1200px) {
+    @media (min-width: 1201px) {
         flex-direction: row;
     }
 `
@@ -15,7 +15,7 @@ const Feature = styled.li`
     margin: 0 auto;
     margin-bottom: 4em;
 
-    @media (min-width: 1200px) {
+    @media (min-width: 1201px) {
         margin: 0;
         width: clamp(230px, 18vw, 330px);
     }
