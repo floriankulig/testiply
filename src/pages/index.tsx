@@ -12,7 +12,7 @@ const Home: React.FC = () => {
       <Hero />
       <Features />
       <Benefits />
-      {/*<Footer></Footer> */}
+      <Footer></Footer>
     </div>
   )
 }
