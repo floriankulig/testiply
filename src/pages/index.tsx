@@ -3,7 +3,7 @@ import { Header, Hero, Features, Benefits, Footer } from "components/home"
 
 const Home: React.FC = () => {
   return (
-    <div id="page--home">
+    <>
       <Head>
         <title>Beta App Store</title>
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
@@ -12,8 +12,8 @@ const Home: React.FC = () => {
       <Hero />
       <Features />
       <Benefits />
-      <Footer></Footer>
-    </div>
+      <Footer />
+    </>
   )
 }
 
