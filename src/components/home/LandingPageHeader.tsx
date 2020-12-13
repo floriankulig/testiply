@@ -10,6 +10,7 @@ const Header = styled.header`
     .logo {
         font-size:1.8rem;
         font-weight: bold;
+        user-select: none;
     }
 
     .nav-links {

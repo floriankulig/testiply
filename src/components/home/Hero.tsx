@@ -38,25 +38,26 @@ position: absolute;
 `
 
 const Content = styled.div`
-      margin: 1%;
-      @media (min-width: 720px) {
+    user-select: none;
+    margin: 1%;
+    @media (min-width: 720px) {
         margin-left: 10%;
-      }
+    }
 
-      @media (min-width: 1200px) {
+    @media (min-width: 1200px) {
         margin: 0;
-      }
+    }
 
-      h1 {
+    h1 {
         color: white;
         font-size: clamp(3.5rem, 6vw, 5rem);
         margin: 0 0 0.25em 0;
         &:last-of-type {
-          color: #ff0000;
+        color: #ff0000;
         }
-      }
+    }
 
-      button {
+    button {
         background-color: white;
         border: none;
         padding: 0.8em 2em;
@@ -66,7 +67,7 @@ const Content = styled.div`
         margin-top: 2em;
         cursor: pointer;
         box-shadow: 4px 5px 15px rgba(110, 127, 218, 0.25);
-      }
+    }
 `
 
 export const Hero: React.FC = () => {
