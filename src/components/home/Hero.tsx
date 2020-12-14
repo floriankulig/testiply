@@ -60,6 +60,7 @@ const Content = styled.div`
     }
 
     button{
+        box-shadow: 4px 5px 15px rgba(110, 127, 218, 0.25);
         font-size: clamp(1rem, 2vw, 1.2rem);
     }
 `
