@@ -102,7 +102,7 @@ export const InfoFooter: React.FC = () => {
                             <a href="https://twitter.com/betaAppStoree" target="_blank" rel="noopener noreferrer">
                                 <FaTwitter />
                             </a>
-                            <a href="https://discord.com/invite/fHNhAM" target="_blank" rel="noopener noreferrer">
+                            <a href="https://discord.com/invite/6Buy9FdC" target="_blank" rel="noopener noreferrer">
                                 <FaDiscord />
                             </a>
                         </div>
