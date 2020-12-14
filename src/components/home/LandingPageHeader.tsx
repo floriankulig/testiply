@@ -14,8 +14,8 @@ const Header = styled.header`
     }
 
     .nav-links {
-        @media (min-width(1081px)) {
-        width: 10em;
+        @media (min-width: 1081px) {
+            width: 10em;
         }
         width: 8em;
         display: flex;
