@@ -1,3 +1,4 @@
+import { Button } from "components/Button";
 import { useIsMobile } from "hooks"
 import styled from "styled-components";
 
@@ -54,19 +55,12 @@ const Content = styled.div`
         margin: 0 0 0.25em 0;
         &:last-of-type {
             color: #ff0000;
+            margin-bottom: .75em;
         }
     }
 
-    button {
-        background-color: white;
-        border: none;
-        padding: 0.8em 2em;
-        font-weight: bold;
+    button{
         font-size: clamp(1rem, 2vw, 1.2rem);
-        border-radius: 2em;
-        margin-top: 2em;
-        cursor: pointer;
-        box-shadow: 4px 5px 15px rgba(110, 127, 218, 0.25);
     }
 `
 
@@ -79,7 +73,7 @@ export const Hero: React.FC = () => {
             <Content>
                 <h1>Test Apps.</h1>
                 <h1>Give Feedback.</h1>
-                <button>View Apps</button>
+                <Button>View Apps</Button>
             </Content>
             {!isMobile && <img className="hero__svg" src="/images/app_phone.svg" alt="" />}
         </HeroSection>
