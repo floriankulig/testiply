@@ -67,7 +67,7 @@ const BenefitDescription = styled.div`
     @media (min-width: 721px){
         width: clamp(450px, 30vw,550px);
         margin-left: auto;
-        margin-right: 10%;
+        margin-right: 5%;
     }
 
     @media (min-width: 1201px){
@@ -76,7 +76,7 @@ const BenefitDescription = styled.div`
 
     &.even {
         @media (min-width: 721px){
-            margin-left:10% ;
+            margin-left: 5%;
             margin-right: auto;
         }
 
