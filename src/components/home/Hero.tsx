@@ -13,11 +13,11 @@ const HeroSection = styled.section`
     justify-content: space-between;
 
     .hero__svg {
-    margin-right: 10%;
-    @media (min-width: 1201px) {
-        margin: 0;
-    }
-    height: clamp(200px, 40vw, 600px);
+        margin-right: 10%;
+        @media (min-width: 1201px) {
+            margin: 0;
+        }
+        height: clamp(200px, 40vw, 600px);
     }
 `;
 
