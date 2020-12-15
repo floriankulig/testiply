@@ -8,7 +8,7 @@ export const InfoCard = styled.div`
   width: 400px;
   max-width: 100%;
   clip-path: circle(30px at 92.3% 19%);
-  transition: all 0.3s ease-in-out;
+  transition: all 0.4s ease-in-out;
   cursor: pointer;
 
   &:hover {
