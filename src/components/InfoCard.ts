@@ -6,7 +6,8 @@ export const InfoCard = styled.div`
   border-radius: 10px;
   margin-bottom: -5em;
   width: 400px;
-  clip-path: circle(30px at calc(400px - 30px) 30px);
+  max-width: 100%;
+  clip-path: circle(30px at 92.3% 19%);
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 
@@ -19,7 +20,6 @@ export const InfoCard = styled.div`
   h1 {
     color: white;
     margin: 0;
-    width: min-content;
   }
 
   p {
