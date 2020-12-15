@@ -89,10 +89,6 @@ const NewsletterSection = styled.div`
             width: 400px;
         }
 
-        .card{
-            float: right;
-        }
-
         button{
             border-radius:5px;
             background-color: #3626a7;
@@ -133,8 +129,10 @@ export const NewsLetter: React.FC = () => {
             <SectionHeader>Subscribe To Our Newsletter</SectionHeader>
             <div className="content">
                 <InfoCard>
-                    <h1>Our Newsletter</h1>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi doloremque quo, non numquam maxime deleniti cum fugit distinctio laborum suscipit?</p>
+                    <h1>What you'll get:</h1>
+                    <p>Updates on our state of development</p>
+                    <p>App recommendations</p>
+                    <p>Notifications when we release a new feature</p>
                 </InfoCard>
                 <StyledInput>
                     <input
