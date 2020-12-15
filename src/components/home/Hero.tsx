@@ -14,10 +14,7 @@ const HeroSection = styled.section`
     justify-content: space-between;
 
     .hero__svg {
-        margin-right: 10%;
-        @media (min-width: 1201px) {
-            margin: 0;
-        }
+        margin: 0;
         height: clamp(200px, 40vw, 600px);
     }
 `;
@@ -40,22 +37,18 @@ const BackgroundImage = styled.img`
 
 const Content = styled.div`
     user-select: none;
-    margin: 1%;
-    @media (min-width: 721px) {
-        margin-left: 10%;
-    }
 
-    @media (min-width: 1201px) {
+    @media (min-width: 1081px){
         margin: 0;
     }
 
     h1 {
         color: white;
-        font-size: clamp(3.5rem, 6vw, 5rem);
+        font-size: clamp(3.3rem, 6.3vw, 5rem);
         margin: 0 0 0.25em 0;
         &:last-of-type {
             color: #ff0000;
-            margin-bottom: .75em;
+            margin-bottom: .5em;
         }
     }
 
