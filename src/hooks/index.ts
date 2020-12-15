@@ -1,3 +1,4 @@
 import { useIsMobile } from "./useIsMobile";
+import { useOnClickOutside } from "./useOnClickOutside";
 
-export { useIsMobile };
+export { useIsMobile, useOnClickOutside };

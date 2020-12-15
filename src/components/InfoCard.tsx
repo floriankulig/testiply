@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useOnClickOutside } from "hooks";
+import { useRef, useState } from "react";
 import styled from "styled-components";
 
 const StyledInfoCard = styled.div`
@@ -23,6 +24,7 @@ const StyledInfoCard = styled.div`
       background: #4d4d4d;
       margin-bottom: 1em;
       transform: translateX(0);
+      cursor: default;
 
       span{
         color: rgba(255, 255, 255, 0);
@@ -70,6 +72,9 @@ const StyledInfoCard = styled.div`
 
 export const InfoCard: React.FC = ({ children }) => {
   const [open, setOpen] = useState<boolean>(false);
+  const ref = useRef<HTMLDivElement>();
+
+  useOnClickOutside(ref, () => setOpen(false))
 
   return (
     <StyledInfoCard
@@ -78,6 +83,7 @@ export const InfoCard: React.FC = ({ children }) => {
       onKeyDown={() => setOpen(true)}
       role="button"
       aria-label="Open infocard for Newsletter."
+      ref={ref}
     >
       <span>i</span>
       {children}
