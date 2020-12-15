@@ -2,9 +2,14 @@ import styled from "styled-components"
 
 export const SectionHeader = styled.h1`
     text-align: center;
-    font-size: clamp(36px, 5vw, 52px);
+    font-size: clamp(34px, 5vw, 52px);
     margin-top: 5em;
     margin-bottom: 3em;
+
+    
+    @media (min-width: 1201px) {
+    margin-bottom: 2em;
+    }
 `
 
 const Benefit = styled.li`
@@ -26,12 +31,6 @@ const Benefit = styled.li`
         @media (min-width: 721px){
             max-height: 400px;
             width:45%;
-            margin-left:10%;
-            margin-right: auto;
-        }
-
-        @media (min-width: 1201px){
-            margin: 0;
         }
     }
 
@@ -41,22 +40,7 @@ const Benefit = styled.li`
             padding-right: 0;
             padding-left:clamp(0.1em, 2vw,5em);
         }
-
-        img{
-            max-width:100%;
-
-            @media (min-width: 721px){
-                margin-left: auto;
-                margin-right: 10%;
-            }
-
-            @media (min-width: 1201px){
-                margin: 0;
-            }
-        }
     }
-
-    
 `
 
 const BenefitDescription = styled.div`
@@ -66,23 +50,6 @@ const BenefitDescription = styled.div`
 
     @media (min-width: 721px){
         width: clamp(450px, 30vw,550px);
-        margin-left: auto;
-        margin-right: 5%;
-    }
-
-    @media (min-width: 1201px){
-        margin: 0;
-    }
-
-    &.even {
-        @media (min-width: 721px){
-            margin-left: 5%;
-            margin-right: auto;
-        }
-
-        @media (min-width: 1201px){
-            margin: 0;
-        }
     }
 
     h2 {
