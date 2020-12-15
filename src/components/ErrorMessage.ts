@@ -6,6 +6,7 @@ export const ErrorMessage = styled.p`
   border: 1px solid red;
   border-radius: 5px;
   width: max-content;
+  margin-bottom: 0;
   max-width: 100%;
 
   svg {
