@@ -6,7 +6,7 @@ const StyledInfoCard = styled.div`
   border-radius: 10px;
   width: 400px;
   max-width: 100%;
-  margin-bottom: 1em;
+  margin-bottom: 2em;
   margin-left: auto;
   margin-right: 0;
   transition: all 0.4s ease-in-out;
@@ -49,7 +49,17 @@ const StyledInfoCard = styled.div`
   p {
     font-size: 0.9rem;
     max-width: 95%;
+    margin: 0;
     color: black;
+
+    &:first-of-type{
+      margin-top: 2em;
+    }
+
+    &:before{
+      content: '● ';
+    }
+
     @media (min-width: 450px){
       color: white;
     }
