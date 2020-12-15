@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Header, Hero, Features, Benefits, Footer } from "components/home"
+import { Header, Hero, Features, Benefits, Footer, NewsLetter } from "components/home"
 
 const Home: React.FC = () => {
   return (
@@ -12,6 +12,7 @@ const Home: React.FC = () => {
       <Hero />
       <Features />
       <Benefits />
+      <NewsLetter />
       <Footer />
     </>
   )
