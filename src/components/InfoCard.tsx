@@ -15,7 +15,7 @@ const StyledInfoCard = styled.div`
   @media (min-width: 450px){
     clip-path: circle(10% at 90% 20.5%);
     margin-bottom: -4.5em;
-    background: #2262b6;
+    background: ${({ theme }) => theme.colors.primary};
     padding: 1em;
     cursor: pointer;
 

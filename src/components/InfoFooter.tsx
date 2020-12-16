@@ -4,7 +4,7 @@ import { FaInstagram, FaTwitter, FaFacebook, FaDiscord } from "react-icons/fa"
 
 const StyledFooter = styled.footer`
     width: 100%;
-    background-color: #2F2E41;
+    background-color: ${({ theme }) => theme.colors.navy};
     align-items: center;
     bottom: 0;
     height: 425px;
@@ -118,6 +118,6 @@ export const InfoFooter: React.FC = () => {
                 </FooterContentGrid>
                 <p>© {new Date().getFullYear()} Beta App Store</p>
             </div>
-        </StyledFooter >
+        </StyledFooter>
     )
 }

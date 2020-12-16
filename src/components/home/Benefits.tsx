@@ -8,7 +8,7 @@ export const SectionHeader = styled.h1`
 
     
     @media (${({ theme }) => theme.bp.big}) {
-    margin-bottom: 2em;
+        margin-bottom: 2em;
     }
 `
 
@@ -53,7 +53,7 @@ const BenefitDescription = styled.div`
     }
 
     h2 {
-        color: #2262b6;
+        color: ${({ theme }) => theme.colors.primary};
         font-size: clamp(1.5rem,4vw,2.25rem);
     }
 `
