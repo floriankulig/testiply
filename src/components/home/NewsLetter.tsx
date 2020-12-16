@@ -16,7 +16,7 @@ const StyledInput = styled.div`
     border-radius: 12px;
     border: 2px solid lightgrey;
     width: 100%;
-    @media (min-width: 721px){
+    @media (${({ theme }) => theme.bp.small}){
         width: 400px;
     }
 
@@ -85,7 +85,7 @@ const NewsletterSection = styled.div`
         width: 100%;
         margin: 0 auto;
         
-        @media (min-width: 721px){
+        @media (${({ theme }) => theme.bp.small}){
             width: 400px;
         }
 
@@ -95,7 +95,7 @@ const NewsletterSection = styled.div`
             margin-top: 1em;
             color: #fff;
             width: 100%;
-            @media (min-width: 721px){
+            @media (${({ theme }) => theme.bp.small}){
                 width: 400px;
             }
         }   

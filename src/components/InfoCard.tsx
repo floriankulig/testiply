@@ -33,7 +33,7 @@ const StyledInfoCard = styled.div`
     }
   }
 
-  @media (min-width: 721px){
+  @media (${({ theme }) => theme.bp.small}){
     transform: translateX(-40%);
   }
 

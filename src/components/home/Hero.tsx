@@ -5,7 +5,7 @@ import styled from "styled-components";
 const HeroSection = styled.section`
     margin-top: 10em;
     margin-bottom: 30em;
-    @media (min-width: 1081px) {
+    @media (${({ theme }) => theme.bp.medium}) {
     margin-top: 5em;
     margin-bottom: 20vw;
     }
@@ -38,7 +38,7 @@ const BackgroundImage = styled.img`
 const Content = styled.div`
     user-select: none;
 
-    @media (min-width: 1081px){
+    @media (${({ theme }) => theme.bp.medium}){
         margin: 0;
     }
 

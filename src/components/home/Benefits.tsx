@@ -7,7 +7,7 @@ export const SectionHeader = styled.h1`
     margin-bottom: 3em;
 
     
-    @media (min-width: 1201px) {
+    @media (${({ theme }) => theme.bp.big}) {
     margin-bottom: 2em;
     }
 `
@@ -20,7 +20,7 @@ const Benefit = styled.li`
     align-items: center;
     margin-bottom: 5em;
 
-    @media (min-width: 1201px) {
+    @media (${({ theme }) => theme.bp.big}) {
         flex-direction: row;
         padding-right: clamp(0.1em, 2vw,5em);
     }
@@ -28,14 +28,14 @@ const Benefit = styled.li`
     img{
         max-width:100%;
 
-        @media (min-width: 721px){
+        @media (${({ theme }) => theme.bp.small}){
             max-height: 400px;
             width:45%;
         }
     }
 
     &:nth-of-type(even){
-        @media (min-width: 1201px) {
+        @media (${({ theme }) => theme.bp.big}) {
             flex-direction: row-reverse;
             padding-right: 0;
             padding-left:clamp(0.1em, 2vw,5em);
@@ -48,7 +48,7 @@ const BenefitDescription = styled.div`
     margin-bottom: 2em;
     max-width: 100%;
 
-    @media (min-width: 721px){
+    @media (${({ theme }) => theme.bp.small}){
         width: clamp(450px, 30vw,550px);
     }
 

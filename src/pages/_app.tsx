@@ -1,6 +1,7 @@
 import { AppProps } from 'next/app'
 import Head from 'next/head'
-import { GlobalStyle } from "styles/GlobalStyle"
+import { ThemeProvider } from 'styled-components'
+import { GlobalStyle, theme } from "styles"
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
@@ -9,8 +10,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
       </Head>
-      <GlobalStyle />
-      <Component {...pageProps} />
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <Component {...pageProps} />
+      </ThemeProvider>
     </>
   )
 }

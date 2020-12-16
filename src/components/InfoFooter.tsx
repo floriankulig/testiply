@@ -11,7 +11,7 @@ const StyledFooter = styled.footer`
     margin-top: 15em;
     color: #ffffff;
 
-    @media (min-width: 721px){
+    @media (${({ theme }) => theme.bp.small}){
         height: 300px;
     }
 
@@ -37,7 +37,7 @@ const FooterContentGrid = styled.div`
         }
     }
 
-    @media (min-width: 721px){
+    @media (${({ theme }) => theme.bp.small}){
         flex-direction: row;
     }
 `
@@ -48,7 +48,7 @@ const Socials = styled.div`
     width: 200px;
     margin: 0 auto;
 
-    @media (min-width: 721px){
+    @media (${({ theme }) => theme.bp.small}){
         margin: 0;
     }
 
@@ -78,7 +78,7 @@ const Policies = styled.div`
     width: 200px;
     margin: 0 auto;
     margin-top: 2em;
-    @media (min-width: 721px){
+    @media (${({ theme }) => theme.bp.small}){
         margin: 0 ;
     }
 `
