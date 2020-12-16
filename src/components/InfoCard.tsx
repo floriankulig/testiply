@@ -81,7 +81,11 @@ const StyledInfoCard = styled.div`
   }
 `;
 
-export const InfoCard: React.FC = ({ children }) => {
+interface InfoCardProps {
+  children: React.ReactNode;
+}
+
+export const InfoCard: React.FC<InfoCardProps> = ({ children }) => {
   const [open, setOpen] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>();
 
