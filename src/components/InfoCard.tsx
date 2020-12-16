@@ -9,6 +9,7 @@ const StyledInfoCard = styled.div`
   margin-bottom: 2em;
   margin-left: auto;
   margin-right: 0;
+  position: relative;
   transition: all 0.4s ease-in-out;
 
   @media (min-width: 450px){
@@ -66,12 +67,12 @@ const StyledInfoCard = styled.div`
   }
 
   span {
-    float: right;
+    position: absolute;
+    top: 10%;
+    right: 9%;
     font-size: 30px;
     font-weight: bold;
     transition: color 0.5s;
-    position: relative;
-    margin-right: 5.5%;
     color: rgba(255, 255, 255, 0);
 
     @media (min-width: 450px){
