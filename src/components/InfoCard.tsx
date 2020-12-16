@@ -21,7 +21,7 @@ const StyledInfoCard = styled.div`
     &:hover, 
     &.open{
       clip-path: circle(75%);
-      background: #4d4d4d;
+      background: #2F2E41;
       margin-bottom: 1em;
       transform: translateX(0);
       cursor: default;
