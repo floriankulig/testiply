@@ -91,7 +91,7 @@ const NewsletterSection = styled.div`
 
         button{
             border-radius:5px;
-            background-color: #3626a7;
+            background-color: #2262b6;
             margin-top: 1em;
             color: #fff;
             width: 100%;
@@ -132,7 +132,7 @@ export const NewsLetter: React.FC = () => {
                     <h1>What you'll get:</h1>
                     <p>Updates on our state of development</p>
                     <p>App recommendations</p>
-                    <p>Notifications when we release a new feature</p>
+                    <p>Notifications for recently released features</p>
                 </InfoCard>
                 <StyledInput>
                     <input
