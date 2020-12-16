@@ -17,7 +17,7 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     line-height: 1;
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
