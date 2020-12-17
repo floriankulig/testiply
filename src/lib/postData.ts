@@ -5,9 +5,7 @@ const postData = async (url: string, data) => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      email: "test@",
-    }),
+    body: JSON.stringify(data),
   });
 
   return response;
