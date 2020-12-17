@@ -127,7 +127,7 @@ export const NewsLetter: React.FC = () => {
             setErrorMessage("")
         }
 
-        postData("https://api.beta-app-store.com/newsletterregister", { email: "test@mail.com" }) //normalerweise {email: email}
+        postData("https://api.beta-app-store.com/newsletterregister", { email: "test@mail.com" }).then((data) => console.log(data)) //normalerweise {email: email}
     }
 
     return (
