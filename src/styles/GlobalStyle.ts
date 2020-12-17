@@ -1,6 +1,11 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
+  :root{
+    --primary: #2262b6;
+    --navy: #2f2e41;
+  }
+
   html {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;

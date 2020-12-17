@@ -91,7 +91,7 @@ const NewsletterSection = styled.div`
 
         button{
             border-radius:5px;
-            background-color: ${({ theme }) => theme.colors.primary};
+            background-color: var(--primary);
             margin-top: 1em;
             color: #fff;
             width: 100%;
