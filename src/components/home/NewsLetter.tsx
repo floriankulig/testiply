@@ -145,7 +145,7 @@ export const NewsLetter: React.FC = () => {
                     <div className="bg" />
                 </StyledInput>
                 {errorMessage && <ErrorMessage><MdError />{errorMessage}</ErrorMessage>}
-                <Button onClick={(e) => onSubmit(e)} onKeyDown={(e) => onSubmit(e)}>
+                <Button onClick={(e) => onSubmit(e)} onKeyDown={(e) => onSubmit(e)} aria-label="Sign Up for our newsletter.">
                     Join Now!
                 </Button>
             </div>

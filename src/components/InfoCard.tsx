@@ -97,7 +97,7 @@ export const InfoCard: React.FC<InfoCardProps> = ({ children }) => {
       onClick={() => setOpen(true)}
       onKeyDown={() => setOpen(true)}
       role="button"
-      aria-label="Open infocard for Newsletter."
+      aria-label="Keep InfoCard open."
       ref={ref}
     >
       <span>i</span>
