@@ -7,6 +7,7 @@ import { MdError } from "react-icons/md";
 import styled from "styled-components";
 import { rgba } from "polished";
 import { SectionHeader } from "./Benefits";
+import { postData } from "lib";
 
 const StyledInput = styled.div`
     background-color: #f5f5f5;
@@ -121,9 +122,12 @@ export const NewsLetter: React.FC = () => {
         const inputElement: any = document.getElementById("newsletterEmailInput")
         if (!inputElement.validity.valid || !email) {
             setErrorMessage("Please put in a valid E-Mail Address.")
+            return;
         } else {
             setErrorMessage("")
         }
+
+        postData("https://api.beta-app-store.com/newsletterregister", { email: "test@mail.com" }) //normalerweise {email: email}
     }
 
     return (
