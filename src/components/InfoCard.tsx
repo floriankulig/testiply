@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import styled from "styled-components";
 
 const StyledInfoCard = styled.div`
-  border-radius: 10px;
+  border-radius: var(--border-radius);
   width: 400px;
   max-width: 100%;
   margin-bottom: 2em;

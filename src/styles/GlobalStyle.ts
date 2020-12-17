@@ -4,6 +4,7 @@ const GlobalStyle = createGlobalStyle`
   :root{
     --primary: #2262b6;
     --navy: #2f2e41;
+    --border-radius: 10px;
   }
 
   html {

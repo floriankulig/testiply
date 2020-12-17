@@ -13,7 +13,7 @@ const StyledInput = styled.div`
     align-items: center;
     justify-content: center;
     padding: 5px;
-    border-radius: 12px;
+    border-radius: var(--border-radius);
     border: 2px solid lightgrey;
     width: 100%;
     @media (${({ theme }) => theme.bp.small}){
@@ -46,7 +46,7 @@ const StyledInput = styled.div`
     svg {
         order: -1;
         background: #ffffff;
-        border-radius: 10px;
+        border-radius: var(--border-radius);
         justify-content: center;
         align-items: center;
         width: 40px;
@@ -90,7 +90,7 @@ const NewsletterSection = styled.div`
         }
 
         button{
-            border-radius:5px;
+            border-radius: var(--border-radius);
             background-color: var(--primary);
             margin-top: 1em;
             color: #fff;
