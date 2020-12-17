@@ -5,6 +5,7 @@ import { useState } from "react";
 import { AiOutlineMail } from "react-icons/ai";
 import { MdError } from "react-icons/md";
 import styled from "styled-components";
+import { rgba } from "polished";
 import { SectionHeader } from "./Benefits";
 
 const StyledInput = styled.div`
@@ -13,7 +14,7 @@ const StyledInput = styled.div`
     align-items: center;
     justify-content: center;
     padding: 5px;
-    border-radius: var(--border-radius);
+    border-radius: ${({ theme }) => theme.borderRadius};
     border: 2px solid lightgrey;
     width: 100%;
     @media (${({ theme }) => theme.bp.small}){
@@ -46,7 +47,7 @@ const StyledInput = styled.div`
     svg {
         order: -1;
         background: #ffffff;
-        border-radius: var(--border-radius);
+        border-radius: ${({ theme }) => theme.borderRadius};
         justify-content: center;
         align-items: center;
         width: 40px;
@@ -90,14 +91,15 @@ const NewsletterSection = styled.div`
         }
 
         button{
-            border-radius: var(--border-radius);
-            background-color: var(--primary);
+            border-radius: ${({ theme }) => theme.borderRadius};
+            background-color: ${({ theme }) => theme.primary};
             margin-top: 1em;
             color: #fff;
             width: 100%;
             @media (${({ theme }) => theme.bp.small}){
                 width: 400px;
             }
+            box-shadow:5px 8px 20px ${({ theme }) => rgba(theme.primary, .25)};
         }   
     }
 `;

@@ -4,7 +4,7 @@ import { FaInstagram, FaTwitter, FaFacebook, FaDiscord } from "react-icons/fa"
 
 const StyledFooter = styled.footer`
     width: 100%;
-    background-color: var(--navy);
+    background-color: ${({ theme }) => theme.navy};
     align-items: center;
     bottom: 0;
     height: 425px;
