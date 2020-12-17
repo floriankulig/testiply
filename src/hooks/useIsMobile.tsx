@@ -12,7 +12,7 @@ export const useIsMobile = (breakpoint: number = 1080): boolean => {
     }
 
     useEffect(() => {
-        // set this as an initial without having to resize first
+        // set this as an initial value without having to resize first
         setIsMobile(window.innerWidth <= breakpoint);
 
         // handle on resize
