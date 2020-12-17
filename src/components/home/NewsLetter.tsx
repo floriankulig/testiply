@@ -25,7 +25,7 @@ const StyledInput = styled.div`
         border-radius: 5px;
         background: transparent;
         outline: none;
-        font-size: 1.3rem;
+        font-size: 1.2rem;
         margin-left: 8px;
         transition: all 0.25s ease;
         width: 90%;
