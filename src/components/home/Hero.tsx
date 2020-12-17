@@ -63,7 +63,7 @@ export const Hero: React.FC = () => {
 
     return (
         <HeroSection className="container">
-            <BackgroundImage className={`${isMobile ? "mobile" : ""}`} src={`/images/hero_bg${isMobile ? "-mobile" : ""}.svg`} alt="" />
+            <BackgroundImage className={`${isMobile && "mobile"}`} src={`/images/hero_bg${isMobile ? "-mobile" : ""}.svg`} alt="" />
             <Content>
                 <h1>Test Apps.</h1>
                 <h1>Give Feedback.</h1>
