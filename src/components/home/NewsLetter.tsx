@@ -108,6 +108,8 @@ const NewsletterSection = styled.div`
 export const NewsLetter: React.FC = () => {
     const [email, setEmail] = useState<string>("");
     const [errorMessage, setErrorMessage] = useState<string>("");
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [submitted, setSubmitted] = useState<boolean>(false);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         event.preventDefault();
@@ -118,16 +120,26 @@ export const NewsLetter: React.FC = () => {
     const onSubmit = (event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>): void => {
         event.preventDefault();
 
-        //Validate formatting of email-address
+        //Validate formatting of email-address and do not proceed if email invalid
         const inputElement: any = document.getElementById("newsletterEmailInput")
         if (!inputElement.validity.valid || !email) {
             setErrorMessage("Please put in a valid E-Mail Address.")
             return;
         }
 
-        postData("https://api.beta-app-store.com/newsletterregister", { email }).then(data => { console.log(data.res) })
-            .catch((err) => console.log(err));
-
+        setIsLoading(true)
+        postData(
+            "https://api.beta-app-store.com/newsletterregister",
+            { email })
+            .then(data => {
+                console.log(data.res)
+                setIsLoading(false)
+                setSubmitted(true)
+            })
+            .catch((err) => {
+                console.log(err)
+                setErrorMessage("Oops... something went wrong")
+            });
     }
 
     return (
@@ -151,8 +163,13 @@ export const NewsLetter: React.FC = () => {
                     <div className="bg" />
                 </StyledInput>
                 {errorMessage && <ErrorMessage><MdError />{errorMessage}</ErrorMessage>}
-                <Button onClick={(e) => onSubmit(e)} onKeyDown={(e) => onSubmit(e)} aria-label="Sign Up for our newsletter.">
-                    Join Now!
+                <Button
+                    onClick={(e) => onSubmit(e)}
+                    onKeyDown={(e) => onSubmit(e)}
+                    disabled={submitted || isLoading}
+                    aria-label="Sign Up for our newsletter."
+                >
+                    {isLoading ? "loading..." : submitted ? "Submitted!" : "Join Now!"}
                 </Button>
             </div>
         </NewsletterSection>
