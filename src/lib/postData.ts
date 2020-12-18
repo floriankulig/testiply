@@ -1,14 +1,15 @@
-const postData = async (url: string, data) => {
-  const response = await fetch(url, {
-    method: "POST",
-    mode: "no-cors",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
+import axios from "axios";
+
+const postData = (url: string, data: Object): Promise<any> => {
+  const promise = axios({
+    method: "post",
+    url: url,
+    data: data,
   });
 
-  return response;
+  const dataPromise = promise.then((res) => res.data);
+
+  return dataPromise;
 };
 
 export default postData;
