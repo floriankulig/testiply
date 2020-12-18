@@ -123,11 +123,11 @@ export const NewsLetter: React.FC = () => {
         if (!inputElement.validity.valid || !email) {
             setErrorMessage("Please put in a valid E-Mail Address.")
             return;
-        } else {
-            setErrorMessage("")
         }
 
-        postData("https://api.beta-app-store.com/newsletterregister", { email: "test@mail.com" }).then((data) => console.log(data)) //normalerweise {email: email}
+        postData("https://api.beta-app-store.com/newsletterregister", { email }).then(data => { console.log(data.res) })
+            .catch((err) => console.log(err));
+
     }
 
     return (
