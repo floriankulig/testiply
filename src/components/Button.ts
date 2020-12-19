@@ -1,4 +1,4 @@
-import { cssVar, darken, rgba } from "polished";
+import { darken, rgba } from "polished";
 import styled, { css } from "styled-components";
 
 interface ButtonProps {
