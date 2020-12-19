@@ -5,9 +5,8 @@ import { useState } from "react";
 import { AiOutlineMail } from "react-icons/ai";
 import { MdError } from "react-icons/md";
 import styled from "styled-components";
-import { rgba } from "polished";
 import { SectionHeader } from "./Benefits";
-import { postData } from "lib";
+import { postData } from "api";
 
 const StyledInput = styled.div`
     background-color: #f5f5f5;
