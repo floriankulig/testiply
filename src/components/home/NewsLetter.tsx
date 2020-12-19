@@ -7,6 +7,7 @@ import { MdError } from "react-icons/md";
 import styled from "styled-components";
 import { SectionHeader } from "./Benefits";
 import { postData } from "api";
+import { evaluateEmailRes } from "helpers";
 
 const StyledInput = styled.div`
     background-color: #f5f5f5;
@@ -128,8 +129,13 @@ export const NewsLetter: React.FC = () => {
             { email })
             .then(data => {
                 console.log(data.res)
+                setErrorMessage("")
                 setIsLoading(false)
-                setSubmitted(true)
+                if (data.res === 0) {
+                    setSubmitted(true)
+                } else {
+                    setErrorMessage(evaluateEmailRes(data.res))
+                }
             })
             .catch((err) => {
                 console.log(err)
