@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import styled from "styled-components";
 
 const StyledInfoCard = styled.div`
-  border-radius: ${({ theme }) => theme.borderRadius};
+  border-radius: var(--border-radius);
   width: 400px;
   max-width: 100%;
   margin-bottom: 2em;
@@ -15,14 +15,14 @@ const StyledInfoCard = styled.div`
   @media (min-width: 450px){
     clip-path: circle(10% at 90% 20.5%);
     margin-bottom: -4.5em;
-    background: ${({ theme }) => theme.primary};
+    background: var(--primary);
     padding: 1em;
     cursor: pointer;
 
     &:hover, 
     &.open{
       clip-path: circle(75%);
-      background: ${({ theme }) => theme.navy};
+      background: var(--navy);
       margin-bottom: 1em;
       transform: translateX(0);
       cursor: default;

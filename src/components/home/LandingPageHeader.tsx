@@ -14,7 +14,7 @@ const Header = styled.header`
     }
 
     .nav-links {
-        @media (: ${({ theme }) => theme.bp.medium}) {
+        @media (${({ theme }) => theme.bp.medium}) {
             width: 10em;
         }
         width: 8em;

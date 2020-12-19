@@ -53,7 +53,7 @@ const BenefitDescription = styled.div`
     }
 
     h2 {
-        color: ${({ theme }) => theme.primary};
+        color: var(--primary);
         font-size: clamp(1.5rem,4vw,2.25rem);
     }
 `
