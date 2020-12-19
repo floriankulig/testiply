@@ -128,7 +128,6 @@ export const NewsLetter: React.FC = () => {
             "https://api.beta-app-store.com/newsletterregister",
             { email })
             .then(data => {
-                console.log(data.res)
                 setErrorMessage("")
                 setIsLoading(false)
                 if (data.res === 0) {
