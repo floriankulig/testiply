@@ -100,7 +100,6 @@ const NewsletterSection = styled.div`
             @media (${({ theme }) => theme.bp.small}){
                 width: 400px;
             }
-            box-shadow:5px 8px 20px ${({ theme }) => rgba(theme.primary, .25)};
         }   
     }
 `;
@@ -157,7 +156,7 @@ export const NewsLetter: React.FC = () => {
                         id="newsletterEmailInput"
                         onChange={(e) => handleChange(e)}
                         value={email} type="email"
-                        placeholder="Put in your E-Mail Address"
+                        placeholder="Enter your E-Mail Address"
                     />
                     <AiOutlineMail />
                     <div className="bg" />
