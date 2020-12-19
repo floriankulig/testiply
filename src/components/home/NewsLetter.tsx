@@ -15,7 +15,7 @@ const StyledInput = styled.div`
     align-items: center;
     justify-content: center;
     padding: 5px;
-    border-radius: ${({ theme }) => theme.borderRadius};
+    border-radius: var(--border-radius);
     border: 2px solid lightgrey;
     width: 100%;
     @media (${({ theme }) => theme.bp.small}){
@@ -48,7 +48,7 @@ const StyledInput = styled.div`
     svg {
         order: -1;
         background: #ffffff;
-        border-radius: ${({ theme }) => theme.borderRadius};
+        border-radius: var(--border-radius);
         justify-content: center;
         align-items: center;
         width: 40px;
@@ -92,10 +92,7 @@ const NewsletterSection = styled.div`
         }
 
         button{
-            border-radius: ${({ theme }) => theme.borderRadius};
-            background-color: ${({ theme }) => theme.primary};
             margin-top: 1em;
-            color: #fff;
             width: 100%;
             @media (${({ theme }) => theme.bp.small}){
                 width: 400px;
@@ -167,6 +164,7 @@ export const NewsLetter: React.FC = () => {
                     onKeyDown={(e) => onSubmit(e)}
                     disabled={submitted || isLoading}
                     aria-label="Sign Up for our newsletter."
+                    bold
                 >
                     {isLoading ? "loading..." : submitted ? "Submitted!" : "Join Now!"}
                 </Button>
