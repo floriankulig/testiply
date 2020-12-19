@@ -55,6 +55,7 @@ const Content = styled.div`
     button{
         box-shadow: 4px 5px 15px rgba(110, 127, 218, 0.25);
         font-size: clamp(1rem, 2vw, 1.2rem);
+        color: black;
     }
 `
 
@@ -67,7 +68,7 @@ export const Hero: React.FC = () => {
             <Content>
                 <h1>Test Apps.</h1>
                 <h1>Give Feedback.</h1>
-                <Button>View Apps</Button>
+                <Button rounded bold color="white">View Apps</Button>
             </Content>
             {!isMobile && <img className="hero__svg" src="/images/app_phone.svg" alt="" />}
         </HeroSection>
