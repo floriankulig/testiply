@@ -139,7 +139,7 @@ export const NewsLetter: React.FC = () => {
             })
             .catch((err) => {
                 console.log(err)
-                setErrorMessage("Oops... something went wrong")
+                setErrorMessage("Oops... something went wrong. Please retry.")
             });
     }
 
