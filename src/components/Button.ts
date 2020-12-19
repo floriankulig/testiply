@@ -12,12 +12,21 @@ interface ButtonProps {
 
 export const Button = styled.button<ButtonProps>`
   border: none;
-  padding: 0.8em 1.8em;
   font-size: 1.1rem;
-  ${(p) => p.bold && "font-weight: bold"};
-  border-radius: ${(p) => (p.rounded ? "3em" : "var(--border-radius)")};
   cursor: pointer;
-  transition: 0.5s all;
+  transition: 0.25s all;
+  ${(p) => p.bold && "font-weight: bold"};
+  ${(p) =>
+    p.rounded
+      ? css`
+          padding: 0.8em 1.8em;
+          border-radius: 3em;
+        `
+      : css`
+          padding: 1em 1.8em;
+          border-radius: var(--border-radius);
+        `};
+
   ${(p) =>
     !p.disableElevation &&
     css`
