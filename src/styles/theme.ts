@@ -1,5 +1,3 @@
-import { DefaultTheme } from "styled-components";
-
 //All styles inherit from this file (Css variables too)
 const theme = {
   primary: `#2262b6`,
