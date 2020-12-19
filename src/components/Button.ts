@@ -1,5 +1,6 @@
 import { darken, rgba } from "polished";
 import styled, { css } from "styled-components";
+import { getTextColor } from "helpers";
 
 interface ButtonProps {
   basic?: boolean;
@@ -55,7 +56,7 @@ export const Button = styled.button<ButtonProps>`
       : css`
           //default styles (normal primary color)
           background-color: ${p.color ? p.color : "var(--primary)"};
-          color: white;
+          color: ${p.color ? getTextColor(p.color) : "#ffffff"};
           &:hover {
             background-color: ${p.color
               ? darken(0.05, p.color)
