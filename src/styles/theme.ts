@@ -7,8 +7,8 @@ const theme = {
   borderRadius: `10px`,
   bp: {
     small: `min-width: 721px`,
-    medium: `min - width: 1081px`,
-    big: `min - width: 1201px`,
+    medium: `min-width: 1081px`,
+    big: `min-width: 1201px`,
   },
 };
 
