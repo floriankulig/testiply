@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import Image from "next/image"
 
 export const SectionHeader = styled.h1`
     text-align: center;
@@ -25,14 +26,6 @@ const Benefit = styled.li`
         padding-right: clamp(0.1em, 2vw,5em);
     }
 
-    img{
-        max-width:100%;
-
-        @media (${({ theme }) => theme.bp.small}){
-            max-height: 400px;
-            width:45%;
-        }
-    }
 
     &:nth-of-type(even){
         @media (${({ theme }) => theme.bp.big}) {
@@ -42,6 +35,16 @@ const Benefit = styled.li`
         }
     }
 `
+
+const BenefitImageWrapper = styled.div`
+    max-width:100%;
+
+    @media (${({ theme }) => theme.bp.small}){
+        max-height: 400px;
+        width:45%;
+    }
+`
+
 
 const BenefitDescription = styled.div`
     margin-top: 2em;
@@ -65,14 +68,16 @@ export const Benefits: React.FC = () => {
             <SectionHeader className="container">Benefits for Publishers</SectionHeader>
             <ul className="container">
                 <Benefit>
-                    <img src="/images/bug_fixing.svg" alt="Fix Bugs" />
+                    <BenefitImageWrapper>
+                        <Image src="/images/bug_fixing.svg" alt="Fix Bugs" width={560} height={400} />
+                    </BenefitImageWrapper>
                     <BenefitDescription>
                         <h2>Find Bugs, Eliminate Them</h2>
                         <p>Large amounts of testers allow you to find bugs faster. <br /> Not having to set up expensive servers to host and evaluate A-/B-Testing data, you can get valueable responses from your future users - even in your apps’s beta-phase.</p>
                     </BenefitDescription>
                 </Benefit>
                 <Benefit>
-                    <img src="/images/attention.svg" alt="Aquire Users" />
+                    <img src="/images/attention.svg" alt="Aquire Users" width={560} height={400} />
                     <BenefitDescription className="even">
                         <h2>Grab Attention, Aquire Users</h2>
                         <p>While you as the developer can fully focus on enhancing your app’s experience, we provide you a large platform to promote your app. A well-rated app will attract future users who are looking for new, innovative apps.</p>
