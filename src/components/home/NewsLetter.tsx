@@ -116,15 +116,16 @@ export const NewsLetter: React.FC = () => {
 
     const onSubmit = (event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>): void => {
         event.preventDefault();
+        setIsLoading(true)
 
         // Validate formatting of email - address and do not proceed if email invalid
         const inputElement: any = document.getElementById("newsletterEmailInput")
         if (!inputElement.validity.valid || !email) {
             setErrorMessage("Please put in a valid E-Mail Address.")
+            setIsLoading(false)
             return;
         }
 
-        setIsLoading(true)
         postData(
             "https://api.beta-app-store.com/newsletterregister",
             { email })
