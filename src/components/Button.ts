@@ -1,4 +1,4 @@
-import { darken, rgba } from "polished";
+import { darken, rgba, rgb } from "polished";
 import styled, { css } from "styled-components";
 import { getTextColor } from "helpers";
 
@@ -67,7 +67,7 @@ export const Button = styled.button<ButtonProps>`
   &:disabled {
     cursor: default;
     background-color: ${rgba(0, 0, 0, 0.12)};
-    color: rgba(0, 0, 0, 0.26);
+    color: #c8c8c8;
     box-shadow: none;
     &:hover {
       box-shadow: none;
