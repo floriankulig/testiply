@@ -8,6 +8,7 @@ import styled from "styled-components";
 import { SectionHeader } from "./Benefits";
 import { postData } from "api";
 import { evaluateEmailRes } from "helpers";
+import { Loading } from "components/Loading";
 
 const StyledInput = styled.div`
     background-color: #f5f5f5;
@@ -116,7 +117,7 @@ export const NewsLetter: React.FC = () => {
     const onSubmit = (event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>): void => {
         event.preventDefault();
 
-        //Validate formatting of email-address and do not proceed if email invalid
+        // Validate formatting of email - address and do not proceed if email invalid
         const inputElement: any = document.getElementById("newsletterEmailInput")
         if (!inputElement.validity.valid || !email) {
             setErrorMessage("Please put in a valid E-Mail Address.")
@@ -170,7 +171,12 @@ export const NewsLetter: React.FC = () => {
                     aria-label="Sign Up for our newsletter."
                     bold
                 >
-                    {isLoading ? "loading..." : submitted ? "Submitted!" : "Join Now!"}
+                    {isLoading ? (
+                        <>
+                            {"Loading"}
+                            <Loading size={45} style={{ marginLeft: "5px", transform: "translateY(2px)" }} />
+                        </>
+                    ) : submitted ? "Submitted!" : "Join Now!"}
                 </Button>
             </div>
         </NewsletterSection>
