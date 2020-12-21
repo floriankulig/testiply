@@ -77,7 +77,7 @@ export const Benefits: React.FC = () => {
                     </BenefitDescription>
                 </Benefit>
                 <Benefit>
-                    <img src="/images/attention.svg" alt="Aquire Users" width={560} height={400} />
+                    <Image src="/images/attention.svg" alt="Aquire Users" width={560} height={400} />
                     <BenefitDescription className="even">
                         <h2>Grab Attention, Aquire Users</h2>
                         <p>While you as the developer can fully focus on enhancing your app’s experience, we provide you a large platform to promote your app. A well-rated app will attract future users who are looking for new, innovative apps.</p>
