@@ -9,6 +9,8 @@ const GlobalStyle = createGlobalStyle`
     --border-radius: ${theme.borderRadius};
     --sidebar-width: ${theme.sidebarWidth};
     --header-height: ${theme.headerHeight};
+    --inner-padding: 50px;
+    --mobile-inner-padding: 20px;
     --easing: cubic-bezier(0.645, 0.045, 0.355, 1);
     --btn-shadow: ${rgba(0, 0, 0, 0.2)} 0px 3px 1px -2px,
       ${rgba(0, 0, 0, 0.14)} 0px 2px 2px 0px,
@@ -70,8 +72,12 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .inner-content {
-    padding-left:50px;
-    padding-right:50px;
+    padding-left:var(--mobile-inner-padding);
+    padding-right:var(--mobile-inner-padding);
+    @media (min-width: 1081px) {
+      padding-left:var(--inner-padding);
+      padding-right:var(--inner-padding);
+    }
   }
 `;
 
