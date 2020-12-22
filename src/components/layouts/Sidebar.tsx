@@ -14,6 +14,8 @@ const StyledSidebar = styled.div<StyledSidebarProps>`
     }
     height: 100vh;
     position: fixed;
+    z-index: 99999;
+    transition: 0.1s transform var(--easing);
 `
 
 interface SidebarProps {
