@@ -8,8 +8,11 @@ interface StyledHeaderProps {
 const StyledHeader = styled.div<StyledHeaderProps>`
     background-color: blue;
     color: white;
-    width: ${p => p.sidebarOpen ? "calc(100vw - var(--sidebar-width))" : "100vw"};
-    margin-left: ${p => p.sidebarOpen ? "var(--sidebar-width)" : "0"};
+    width: 100vw;
+    @media (${({ theme }) => theme.bp.big}){
+        width: calc(100vw - var(--sidebar-width));
+        margin-left: var(--sidebar-width)
+    }
     height: var(--header-height);
     position: fixed;
 `

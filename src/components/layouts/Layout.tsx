@@ -11,8 +11,11 @@ interface StyledContentProps {
 
 const StyledContent = styled.div<StyledContentProps>`
     min-height: 100vh;
-    width: ${p => p.sidebarOpen ? "calc(100vw - var(--sidebar-width))" : "100vw"};
-    margin-left: ${p => p.sidebarOpen ? "var(--sidebar-width)" : "0"};
+    width: 100vw;
+    @media (${({ theme }) => theme.bp.big}){
+        width: calc(100vw - var(--sidebar-width));
+        margin-left: var(--sidebar-width)
+    }
     padding-top: var(--header-height);
     background-color: red;
 `
