@@ -1,3 +1,5 @@
+import { useOnClickOutside } from "hooks"
+import { useRef } from "react";
 import styled from "styled-components"
 
 interface StyledSidebarProps {
@@ -24,7 +26,10 @@ interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
+    const ref = useRef<HTMLDivElement>();
+    useOnClickOutside(ref, () => setOpen(false))
+
     return (
-        <StyledSidebar open={open}>Sidebar</StyledSidebar>
+        <StyledSidebar ref={ref} open={open}>Sidebar</StyledSidebar>
     )
 }
