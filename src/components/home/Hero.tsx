@@ -1,4 +1,5 @@
 import { Button } from "components/Button";
+import Link from "next/link"
 import { useIsMobile } from "hooks"
 import styled from "styled-components";
 
@@ -67,7 +68,9 @@ export const Hero: React.FC = () => {
             <Content>
                 <h1>Test Apps.</h1>
                 <h1>Give Feedback.</h1>
-                <Button rounded bold color="white">View Apps</Button>
+                <Link href="/apps">
+                    <Button rounded bold color="white">View Apps</Button>
+                </Link>
             </Content>
             {!isMobile && <img className="hero__svg" src="/images/app_phone.svg" alt="" />}
         </HeroSection>
