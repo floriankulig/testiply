@@ -1,4 +1,4 @@
-import { Sidebar } from "./Sidebar"
+import { Sidebar } from "./sidebar/Sidebar"
 import { Header } from "./Header"
 import styled from "styled-components"
 import { useEffect, useState } from "react"
@@ -25,7 +25,7 @@ interface LayoutProps {
 }
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
-    const [sidebarOpen, setSidebarOpen] = useState<boolean>(true)
+    const [sidebarOpen, setSidebarOpen] = useState<boolean>(false)
     const isMobile = useIsMobile(1200)
 
     useEffect(() => {
