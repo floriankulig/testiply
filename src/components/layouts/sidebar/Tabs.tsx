@@ -1,25 +1,31 @@
 import { useSelectedTabValue } from "context";
 import { rgba } from "polished";
 import { useState } from "react";
+import { AiOutlineHome, AiFillHome, AiOutlineAppstore, AiFillAppstore } from "react-icons/ai"
+import { IoGameControllerOutline, IoGameController, IoNewspaperOutline, IoNewspaper } from "react-icons/io5"
+import { RiStackLine, RiStackFill } from "react-icons/ri"
 import styled, { css } from "styled-components"
 
 const SidebarTabs = styled.ul`
     margin: 2em 0;
-
 `;
 
 interface TabRowProps {
     selected: boolean;
+    icon: boolean;
 };
 const TabRow = styled.li<TabRowProps>`
     width: 100%;
-    padding: 15px 15px;
+    padding: 15px ${p => p.icon && "50px"};
     margin-bottom: .25em;
     border-radius: var(--border-radius);
     font-size: 1.2rem;
     cursor: pointer;
+    position: relative;
     font-weight: bold;
     text-transform: capitalize;
+    display: inline-flex;
+    align-items: center;
     ${p => p.selected ? css`
         color: var(--primary);
         font-weight: bold;
@@ -32,6 +38,16 @@ const TabRow = styled.li<TabRowProps>`
         background: ${(p) => rgba(p.theme.primary, 0.05)};
     }
     transition: 0.25s all linear;
+
+    span {
+        margin-right: .5em;
+        position: absolute;
+        left: 15px;
+        svg{
+            width: 1.3rem;
+            height: 1.3rem;
+        }
+    }
 `;
 
 interface TabsProps {
@@ -39,9 +55,12 @@ interface TabsProps {
 }
 
 export const Tabs: React.FC<TabsProps> = ({ setSidebarOpen }) => {
-    const { setSelectedTab } = useSelectedTabValue();
+    // tabs and icons indices correspond to eachother
     const tabs = ["today", "apps", "games", "categories", "news"];
+    const icons = [[<AiOutlineHome />, <AiFillHome />], [<AiOutlineAppstore />, <AiFillAppstore />], [<IoGameControllerOutline />, <IoGameController />], [<RiStackLine />, <RiStackFill />], [<IoNewspaperOutline />, <IoNewspaper />]]
+
     const [active, setActive] = useState<string>(tabs[0]);
+    const { setSelectedTab } = useSelectedTabValue();
 
     const handleTabSwitch = (newActive: string) => {
         setActive(newActive)
@@ -52,16 +71,26 @@ export const Tabs: React.FC<TabsProps> = ({ setSidebarOpen }) => {
     return (
         <SidebarTabs>
             {tabs &&
-                tabs.map((tab, i) => (
+                tabs.map((tabName, i) => (
                     <TabRow
-                        selected={active === tab}
-                        onClick={() => handleTabSwitch(tab)}
-                        onKeyDown={() => handleTabSwitch(tab)}
+                        selected={active === tabName}
+                        onClick={() => handleTabSwitch(tabName)}
+                        onKeyDown={() => handleTabSwitch(tabName)}
                         key={i}
+                        icon={!!icons[i]}
                         role="button"
-                        aria-label={`Switch tab to ${tab}`}
+                        aria-label={`Switch tab to ${tabName}`}
                     >
-                        {tab}
+                        {active === tabName ? (
+                            <span>
+                                {icons[i][1]}
+                            </span>
+                        ) : (
+                                <span>
+                                    {icons[i][0]}
+                                </span>
+                            )}
+                        {tabName}
                     </TabRow>
                 ))}
         </SidebarTabs>
