@@ -21,7 +21,7 @@ const TabRow = styled.li<TabRowProps>`
     font-weight: bold;
     text-transform: capitalize;
     ${p => p.selected ? css`
-        color: ${p.theme.primary};
+        color: var(--primary);
         font-weight: bold;
         background: ${(p) => rgba(p.theme.primary, 0.1)};
     ` : css`
@@ -34,7 +34,11 @@ const TabRow = styled.li<TabRowProps>`
     transition: 0.25s all var(--easing);
 `;
 
-export const Tabs: React.FC = () => {
+interface TabsProps {
+    setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export const Tabs: React.FC<TabsProps> = ({ setSidebarOpen }) => {
     const { setSelectedTab } = useSelectedTabValue();
     const tabs = ["today", "apps", "games", "categories", "news"];
     const [active, setActive] = useState<string>(tabs[0]);
@@ -42,6 +46,7 @@ export const Tabs: React.FC = () => {
     const handleTabSwitch = (newActive: string) => {
         setActive(newActive)
         setSelectedTab(newActive);
+        setSidebarOpen(false)
     }
 
     return (
