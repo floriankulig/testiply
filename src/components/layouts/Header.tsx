@@ -1,11 +1,12 @@
 import { useIsMobile } from "hooks"
+import { useEffect, useState } from "react";
 import styled from "styled-components"
 
 interface StyledHeaderProps {
     sidebarOpen: boolean;
 }
 
-const StyledHeader = styled.div<StyledHeaderProps>`
+const StyledHeader = styled.header<StyledHeaderProps>`
     background-color: #f7f9ff;
     width: 100vw;
     position: fixed;
@@ -25,15 +26,30 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ sidebarOpen, setSidebarOpen }) => {
+    const [scrolled, setScrolled] = useState<boolean>(false);
     const isMobile = useIsMobile(1200)
 
     const handleSidebarToggle = () => {
-        if (!isMobile) {
+        if (!isMobile) {    // can be removed when rendering menu toggle button depending on screenwidth
             setSidebarOpen(true)
         } else {
             setSidebarOpen(!sidebarOpen)
         }
     }
+
+    const handleScroll = () => {
+        setScrolled(window.pageYOffset >= 50);
+    };
+
+    useEffect(() => {
+        if (sidebarOpen && isMobile) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = null;
+            document.addEventListener("scroll", handleScroll);
+        }
+        return () => document.removeEventListener("scroll", handleScroll);
+    }, [sidebarOpen]);
 
     return (
         <StyledHeader onClick={() => handleSidebarToggle()} className="inner-content" sidebarOpen={sidebarOpen}>Header</StyledHeader>
