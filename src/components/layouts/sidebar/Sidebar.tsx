@@ -24,9 +24,9 @@ const StyledSidebar = styled.div<StyledSidebarProps>`
         justify-content: center;
         height: calc(var(--header-height) - (var(--header-height)* 0.5 - 0.8rem));
         font-weight: bold;
-        font-size: 1.5rem; 
-        margin: 0 10px;
-        padding:0 5px;
+        font-size: 1.5rem;
+        width: max-content; 
+        margin: 0 50px;
         margin-top: calc(var(--header-height)* 0.5 - 0.8rem);
     }
 `
