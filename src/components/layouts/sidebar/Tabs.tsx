@@ -1,3 +1,4 @@
+import { useSelectedTabValue } from "context";
 import { rgba } from "polished";
 import { useState } from "react";
 import styled, { css } from "styled-components"
@@ -34,11 +35,13 @@ const TabRow = styled.li<TabRowProps>`
 `;
 
 export const Tabs: React.FC = () => {
+    const { setSelectedTab } = useSelectedTabValue();
     const tabs = ["today", "apps", "games", "categories", "news"];
     const [active, setActive] = useState<string>(tabs[0]);
 
     const handleTabSwitch = (newActive: string) => {
         setActive(newActive)
+        setSelectedTab(newActive);
     }
 
     return (
