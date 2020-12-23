@@ -12,6 +12,7 @@ interface StyledContentProps {
 
 const StyledContent = styled.div<StyledContentProps>`
     min-height: 100vh;
+    height: 150vh;
     width: 100vw;
     @media (${({ theme }) => theme.bp.big}){
         width: calc(100vw - var(--sidebar-width));
@@ -32,8 +33,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
     const isMobile = useIsMobile(1200)
 
     useEffect(() => {
-        if (!isMobile) setSidebarOpen(true)
-        else setSidebarOpen(false)
+        setSidebarOpen(false)
     }, [isMobile]);
 
     return (
