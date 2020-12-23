@@ -15,7 +15,8 @@ const StyledContent = styled.div<StyledContentProps>`
     width: 100vw;
     @media (${({ theme }) => theme.bp.big}){
         width: calc(100vw - var(--sidebar-width));
-        margin-left: var(--sidebar-width)
+        margin-left: var(--sidebar-width);
+        filter: none;
     }
     padding-top: calc(var(--header-height) + 2.5em);
     background: #f7f9ff;

@@ -13,6 +13,7 @@ const StyledHeader = styled.div<StyledHeaderProps>`
     @media (${({ theme }) => theme.bp.big}){
         width: calc(100vw - var(--sidebar-width));
         margin-left: var(--sidebar-width);
+        filter: none;
     }
     filter: ${p => p.sidebarOpen ? "blur(4px)" : "none"};
     height: var(--header-height);
