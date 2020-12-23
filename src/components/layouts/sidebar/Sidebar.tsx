@@ -21,13 +21,13 @@ const StyledSidebar = styled.div<StyledSidebarProps>`
     transition: 0.1s transform var(--easing);
 
     .logo{
-        justify-content: center;
-        height: calc(var(--header-height) - (var(--header-height)* 0.5 - 0.8rem));
+        display: inline-flex;
+        align-items: center; 
         font-weight: bold;
         font-size: 1.5rem;
         width: max-content; 
         margin: 0 50px;
-        margin-top: calc(var(--header-height)* 0.5 - 0.8rem);
+        height: var(--header-height);
     }
 `
 
