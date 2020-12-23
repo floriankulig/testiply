@@ -1,11 +1,11 @@
 import { createContext, useContext, useState } from "react";
 
 export type ContextType = {
-    selectedTab: string;
-    setSelectedTab: React.Dispatch<React.SetStateAction<string>>;
+    selectedTab?: string;
+    setSelectedTab?: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export const SelectedTabContext = createContext<Partial<ContextType>>({});
+export const SelectedTabContext = createContext<ContextType>({});
 
 export const SelectedTabProvider = ({ children }) => {
     const [selectedTab, setSelectedTab] = useState("today");
