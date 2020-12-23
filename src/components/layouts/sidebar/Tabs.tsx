@@ -29,7 +29,7 @@ const TabRow = styled.li<TabRowProps>`
         font-weight: normal;
     `};
     &:hover {
-        background: ${(p) => rgba(p.theme.primary, 0.1)};
+        background: ${(p) => rgba(p.theme.primary, 0.05)};
     }
     transition: 0.25s all var(--easing);
 `;
