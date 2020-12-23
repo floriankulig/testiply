@@ -28,7 +28,6 @@ const StyledSidebar = styled.div<StyledSidebarProps>`
         margin: 0 10px;
         padding:0 5px;
         margin-top: calc(var(--header-height)* 0.5 - 0.8rem);
-        border-bottom: 2px solid #c8c8c8;
     }
 `
 
@@ -43,7 +42,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
 
     return (
         <StyledSidebar ref={ref} open={open}>
-            <div className="logo">BetaStore</div>
+            <div className="logo">BetaStore </div>
             <Tabs setSidebarOpen={setOpen} />
         </StyledSidebar>
     )
