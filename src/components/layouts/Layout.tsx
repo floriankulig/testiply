@@ -17,8 +17,9 @@ const StyledContent = styled.div<StyledContentProps>`
         width: calc(100vw - var(--sidebar-width));
         margin-left: var(--sidebar-width)
     }
-    padding-top: var(--header-height);
-    background-color: red;
+    padding-top: calc(var(--header-height) + 2.5em);
+    background: #f7f9ff;
+    filter: ${p => p.sidebarOpen ? "blur(4px)" : "none"};
 `
 
 interface LayoutProps {
