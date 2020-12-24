@@ -1,4 +1,5 @@
 import { useSelectedTabValue } from "context";
+import Head from "next/head";
 import { rgba } from "polished";
 import { useState } from "react";
 import { AiOutlineHome, AiFillHome, AiOutlineAppstore, AiFillAppstore } from "react-icons/ai"
@@ -70,6 +71,9 @@ export const Tabs: React.FC<TabsProps> = ({ setSidebarOpen }) => {
 
     return (
         <SidebarTabs>
+            <Head>
+                <title>{active[0].toUpperCase() + active.slice(1)} | Beta App Store</title>
+            </Head>
             {tabs &&
                 tabs.map((tabName, i) => (
                     <TabRow
