@@ -37,8 +37,7 @@ const TabRow = styled.li<TabRowProps>`
     &:hover {
         background: ${(p) => rgba(p.theme.primary, 0.05)};
     }
-    transition: 0.25s background linear;
-    transition: 0.25s font-weight linear;
+    transition: 0.25s all linear;
 
     span {
         margin-right: .5em;
