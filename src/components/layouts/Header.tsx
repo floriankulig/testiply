@@ -1,9 +1,11 @@
 import { useIsMobile } from "hooks"
+import { rgba } from "polished";
 import { useEffect, useState } from "react";
 import styled from "styled-components"
 
 interface StyledHeaderProps {
     sidebarOpen: boolean;
+    scrolled: boolean;
 }
 
 const StyledHeader = styled.header<StyledHeaderProps>`
@@ -18,6 +20,8 @@ const StyledHeader = styled.header<StyledHeaderProps>`
     }
     filter: ${p => p.sidebarOpen ? "blur(4px)" : "none"};
     height: var(--header-height);
+    box-shadow: ${p => p.scrolled ? `0 10px 20px -10px ${rgba(2, 12, 27, 0.25)}` : "none"};
+    transition: 0.4s box-shadow var(--easing);
 `
 
 interface HeaderProps {
@@ -51,7 +55,11 @@ export const Header: React.FC<HeaderProps> = ({ sidebarOpen, setSidebarOpen }) =
         return () => document.removeEventListener("scroll", handleScroll);
     }, [sidebarOpen]);
 
+    useEffect(() => {
+        console.log(scrolled)
+    }, [scrolled]);
+
     return (
-        <StyledHeader onClick={() => handleSidebarToggle()} className="inner-content" sidebarOpen={sidebarOpen}>Header</StyledHeader>
+        <StyledHeader onClick={() => handleSidebarToggle()} className="inner-content" sidebarOpen={sidebarOpen} scrolled={scrolled}>Header</StyledHeader>
     )
 }
