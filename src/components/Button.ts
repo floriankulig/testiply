@@ -13,8 +13,9 @@ interface ButtonProps {
 
 export const Button = styled.button<ButtonProps>`
   border: none;
-  font-size: 1.1rem;
+  font-size: 1rem;
   cursor: pointer;
+  font-family: "Roboto";
   transition: 0.25s all;
   ${(p) => p.bold && "font-weight: bold"};
   ${(p) =>
