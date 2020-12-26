@@ -68,7 +68,7 @@ export const Hero: React.FC = () => {
             <Content>
                 <h1>Test Apps.</h1>
                 <h1>Give Feedback.</h1>
-                <Link href="/apps">
+                <Link href="/apps?tab=today">
                     <Button rounded bold color="white">View Apps</Button>
                 </Link>
             </Content>
