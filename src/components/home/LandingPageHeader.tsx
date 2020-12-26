@@ -31,7 +31,7 @@ export const LandingPageHeader: React.FC = () => {
             <div className="logo">BetaStore</div>
             <ul className="nav-links">
                 <li>Log In</li>
-                <li>Sign Up</li>
+                <li>Register</li>
             </ul>
         </Header>
     )
