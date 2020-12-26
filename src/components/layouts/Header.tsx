@@ -55,10 +55,6 @@ export const Header: React.FC<HeaderProps> = ({ sidebarOpen, setSidebarOpen }) =
         return () => document.removeEventListener("scroll", handleScroll);
     }, [sidebarOpen]);
 
-    useEffect(() => {
-        console.log(scrolled)
-    }, [scrolled]);
-
     return (
         <StyledHeader onClick={() => handleSidebarToggle()} className="inner-content" sidebarOpen={sidebarOpen} scrolled={scrolled}>Header</StyledHeader>
     )
