@@ -175,7 +175,7 @@ export const NewsLetter: React.FC = () => {
                     {isLoading ? (
                         <>
                             {"Loading"}
-                            <Loading size={45} style={{ marginLeft: "5px", transform: "translateY(2px)" }} />
+                            <Loading size={40} style={{ marginLeft: "5px", transform: "translateY(2px)" }} />
                         </>
                     ) : submitted ? "Submitted!" : "Join Now!"}
                 </Button>
