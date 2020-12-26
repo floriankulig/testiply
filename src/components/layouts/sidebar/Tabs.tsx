@@ -1,7 +1,7 @@
 import { useSelectedTabValue } from "context";
 import Head from "next/head";
 import { rgba } from "polished";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineHome, AiFillHome, AiOutlineAppstore, AiFillAppstore } from "react-icons/ai"
 import { IoGameControllerOutline, IoGameController, IoNewspaperOutline, IoNewspaper } from "react-icons/io5"
 import { RiStackLine, RiStackFill } from "react-icons/ri"
@@ -68,6 +68,19 @@ export const Tabs: React.FC<TabsProps> = ({ setSidebarOpen }) => {
         setSelectedTab(newActive);
         setSidebarOpen(false)
     }
+
+    useEffect(() => {
+        const urlString = (window.location.href).toLowerCase()
+        const urlTab = new URL(urlString).searchParams.get("tab")
+
+        if (tabs.includes(urlTab)) {
+            setSelectedTab(urlTab)
+        } else {
+            setSelectedTab("today")
+        }
+
+        console.log(urlTab)
+    }, []);
 
     return (
         <SidebarTabs>
