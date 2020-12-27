@@ -1,7 +1,8 @@
 import { Layout } from 'components/layouts'
+import { NextPage } from 'next'
 import Head from 'next/head'
 
-const Apps: React.FC = () => {
+const Apps: NextPage = () => {
     return (
         <>
             <Head>
@@ -13,5 +14,6 @@ const Apps: React.FC = () => {
         </>
     )
 }
+
 
 export default Apps
