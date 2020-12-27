@@ -1,5 +1,5 @@
 import { Sidebar } from "./sidebar/Sidebar"
-import { Header } from "./Header"
+import { Header } from "./header/Header"
 import styled from "styled-components"
 import { useEffect, useState } from "react"
 import { useIsMobile } from "hooks"
