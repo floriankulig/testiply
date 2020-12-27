@@ -4,11 +4,11 @@ import { NextPage } from 'next'
 import Head from 'next/head'
 import { useEffect } from 'react'
 
-const Today: NextPage = () => {
+const Games: NextPage = () => {
     const { setSelectedTab } = useSelectedTabValue()
 
     useEffect(() => {
-        setSelectedTab("today")
+        setSelectedTab("games")
     }, [])
 
     return (
@@ -17,10 +17,10 @@ const Today: NextPage = () => {
                 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
             </Head>
             <Layout>
-                Hello
+                Games
             </Layout>
         </>
     )
 }
 
-export default Today
+export default Games

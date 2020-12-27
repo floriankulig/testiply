@@ -8,7 +8,7 @@ const Today: NextPage = () => {
     const { setSelectedTab } = useSelectedTabValue()
 
     useEffect(() => {
-        setSelectedTab("today")
+        setSelectedTab("categories")
     }, [])
 
     return (
@@ -17,7 +17,7 @@ const Today: NextPage = () => {
                 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
             </Head>
             <Layout>
-                Hello
+                Categories
             </Layout>
         </>
     )
