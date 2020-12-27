@@ -1,3 +1,4 @@
+import { SelectedTabProvider } from 'context'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { ThemeProvider } from 'styled-components'
@@ -11,8 +12,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
       </Head>
       <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <Component {...pageProps} />
+        <SelectedTabProvider>
+          <GlobalStyle />
+          <Component {...pageProps} />
+        </SelectedTabProvider>
       </ThemeProvider>
     </>
   )
