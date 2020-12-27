@@ -10,10 +10,9 @@ const Apps: NextPage = () => {
                 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
             </Head>
             <SelectedTabProvider>
-
                 <Layout>
                     Hello
-            </Layout>
+                </Layout>
             </SelectedTabProvider>
         </>
     )
