@@ -1,5 +1,6 @@
 import { useSelectedTabValue } from "context";
 import Head from "next/head";
+import Link from "next/link";
 import { rgba } from "polished";
 import { useEffect, useState } from "react";
 import { AiOutlineHome, AiFillHome, AiOutlineAppstore, AiFillAppstore } from "react-icons/ai"
@@ -82,26 +83,27 @@ export const Tabs: React.FC<TabsProps> = ({ setSidebarOpen }) => {
             </Head>
             {tabs &&
                 tabs.map((tabName, i) => (
-                    <TabRow
-                        selected={active === tabName}
-                        onClick={() => handleTabSwitch(tabName)}
-                        onKeyDown={() => handleTabSwitch(tabName)}
-                        key={i}
-                        icon={!!icons[i]}
-                        role="button"
-                        aria-label={`Switch tab to ${tabName}`}
-                    >
-                        {active === tabName ? (
-                            <span>
-                                {icons[i][1]}
-                            </span>
-                        ) : (
+                    <Link href={tabName === "today" ? "/store" : `/store/${tabName}`} key={i}>
+                        <TabRow
+                            selected={active === tabName}
+                            onClick={() => handleTabSwitch(tabName)}
+                            onKeyDown={() => handleTabSwitch(tabName)}
+                            icon={!!icons[i]}
+                            role="button"
+                            aria-label={`Switch tab to ${tabName}`}
+                        >
+                            {active === tabName ? (
                                 <span>
-                                    {icons[i][0]}
+                                    {icons[i][1]}
                                 </span>
-                            )}
-                        {tabName}
-                    </TabRow>
+                            ) : (
+                                    <span>
+                                        {icons[i][0]}
+                                    </span>
+                                )}
+                            {tabName}
+                        </TabRow>
+                    </Link>
                 ))}
         </SidebarTabs>
     )
