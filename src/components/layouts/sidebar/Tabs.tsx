@@ -70,7 +70,9 @@ export const Tabs: React.FC<TabsProps> = ({ setSidebarOpen }) => {
     }
 
     useEffect(() => {
-        handleTabSwitch(selectedTab)
+        !tabs.includes(selectedTab)
+            ? handleTabSwitch("today")
+            : handleTabSwitch(selectedTab)
     }, [selectedTab]);
 
     return (
