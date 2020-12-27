@@ -3,7 +3,6 @@ import { Header } from "./Header"
 import styled from "styled-components"
 import { useEffect, useState } from "react"
 import { useIsMobile } from "hooks"
-import { SelectedTabProvider } from "context"
 
 
 interface StyledContentProps {
@@ -36,11 +35,10 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         setSidebarOpen(false)
     }, [isMobile]);
 
-    return (
-        <SelectedTabProvider>
-            <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
-            <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-            <StyledContent sidebarOpen={sidebarOpen} className="inner-content">{children}</StyledContent>
-        </SelectedTabProvider>
+    return (<>
+        <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
+        <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+        <StyledContent sidebarOpen={sidebarOpen} className="inner-content">{children}</StyledContent>
+    </>
     )
 }

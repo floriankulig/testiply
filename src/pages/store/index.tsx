@@ -1,4 +1,5 @@
 import { Layout } from 'components/layouts'
+import { SelectedTabProvider } from 'context'
 import { NextPage } from 'next'
 import Head from 'next/head'
 
@@ -8,9 +9,12 @@ const Apps: NextPage = () => {
             <Head>
                 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
             </Head>
-            <Layout>
-                Hello
+            <SelectedTabProvider>
+
+                <Layout>
+                    Hello
             </Layout>
+            </SelectedTabProvider>
         </>
     )
 }
