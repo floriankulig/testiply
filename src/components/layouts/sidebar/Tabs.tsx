@@ -60,8 +60,8 @@ export const Tabs: React.FC<TabsProps> = ({ setSidebarOpen }) => {
     const tabs = ["today", "apps", "games", "categories", "news"];
     const icons = [[<AiOutlineHome />, <AiFillHome />], [<AiOutlineAppstore />, <AiFillAppstore />], [<IoGameControllerOutline />, <IoGameController />], [<RiStackLine />, <RiStackFill />], [<IoNewspaperOutline />, <IoNewspaper />]]
 
-    const [active, setActive] = useState<string>(tabs[0]);
-    const { setSelectedTab } = useSelectedTabValue();
+    const { selectedTab, setSelectedTab } = useSelectedTabValue();
+    const [active, setActive] = useState<string>(selectedTab);
 
     const handleTabSwitch = (newActive: string) => {
         setActive(newActive)
@@ -70,17 +70,8 @@ export const Tabs: React.FC<TabsProps> = ({ setSidebarOpen }) => {
     }
 
     useEffect(() => {
-        const urlString = (window.location.href).toLowerCase()
-        const urlTab = new URL(urlString).searchParams.get("tab")
-
-        if (tabs.includes(urlTab)) {
-            setSelectedTab(urlTab)
-        } else {
-            setSelectedTab("today")
-        }
-
-        console.log(urlTab)
-    }, []);
+        handleTabSwitch(selectedTab)
+    }, [selectedTab]);
 
     return (
         <SidebarTabs>

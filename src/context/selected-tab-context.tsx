@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect, useLayoutEffect } from "react";
 
 export type ContextType = {
     selectedTab?: string;
@@ -11,8 +11,11 @@ export const SelectedTabProvider = ({ children }) => {
     const [selectedTab, setSelectedTab] = useState("today");
 
     useEffect(() => {
-        console.log(selectedTab)
-    }, [selectedTab]);
+        const urlString = (window.location.href).toLowerCase()
+        const urlTab = new URL(urlString).searchParams.get("tab")
+
+        setSelectedTab(urlTab)
+    }, []);
 
     return (
         <SelectedTabContext.Provider
