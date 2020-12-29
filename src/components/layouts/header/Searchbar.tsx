@@ -9,19 +9,24 @@ interface SearchbarProps {
 
 const StyledSearchbar = styled.div<SearchbarProps>`
     height: 50px;
-    width: 40%;
+    width: clamp(350px, 40%, 450px);
+    max-width: 100%;
     background: var(--layout-nav-background);
     border: 2px solid var(--layout-content-background);
     border-radius: 20px;
     display: flex;
     padding:5px 20px;
     align-items: center;
-    min-width: 300px;
     transition: 0.5s all ;
     box-shadow: ${p => p.hasInput ? `0px 2px 10px ${rgba(0, 0, 0, 0.05)}` : "none"};
 
-    &:hover, &:focus-within{
-        box-shadow: 0px 2px 10px ${rgba(0, 0, 0, 0.05)};
+    &:focus-within{
+        border-color: var(--navy);
+        box-shadow:none;
+
+        @media (${({ theme }) => theme.bp.big}){
+            width: calc(clamp(350px, 40%, 450px) + 20px);
+        }
     }
 
     svg{
