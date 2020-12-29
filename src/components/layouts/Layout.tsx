@@ -25,7 +25,7 @@ const StyledContent = styled.div<StyledContentProps>`
     transform: translateY(var(--header-height));
     background: var(--layout-content-background);
     filter: ${p => p.sidebarOpen ? "blur(4px)" : "none"};
-    transition: 0.3s all;
+    transition: 0.3s border;
     transition-delay: .1s;
 `
 
