@@ -10,7 +10,8 @@ interface SearchbarProps {
 const StyledSearchbar = styled.div<SearchbarProps>`
     height: 50px;
     width: 40%;
-    background-color: #fff;
+    background: var(--layout-nav-background);
+    border: 2px solid var(--layout-content-background);
     border-radius: 20px;
     display: flex;
     padding:5px 20px;
@@ -20,7 +21,7 @@ const StyledSearchbar = styled.div<SearchbarProps>`
     box-shadow: ${p => p.hasInput ? `0px 2px 10px ${rgba(0, 0, 0, 0.05)}` : "none"};
 
     &:hover, &:focus-within{
-        box-shadow: 0px 2px 10px ${rgba(0, 0, 0, 0.05)}
+        box-shadow: 0px 2px 10px ${rgba(0, 0, 0, 0.05)};
     }
 
     svg{
