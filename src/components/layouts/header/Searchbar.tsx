@@ -28,6 +28,7 @@ const StyledSearchbar = styled.div<SearchbarProps>`
         margin-right: 15px;
         width: 30px;
         height: 30px;
+        color:#535353;
     }
 `;
 
