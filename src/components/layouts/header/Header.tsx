@@ -1,5 +1,5 @@
 import { useIsMobile } from "hooks"
-import { rgba } from "polished";
+import { lighten } from "polished";
 import { useEffect, useState } from "react";
 import styled from "styled-components"
 import { Searchbar } from "./Searchbar";
@@ -23,8 +23,7 @@ const StyledHeader = styled.header<StyledHeaderProps>`
     }
     filter: ${p => p.sidebarOpen ? "blur(4px)" : "none"};
     height: var(--header-height);
-    box-shadow: ${p => p.scrolled ? `0 10px 20px -10px ${rgba(2, 12, 27, 0.25)}` : "none"};
-    transition: 0.4s box-shadow var(--easing);
+    border-bottom: 1px solid ${p => p.scrolled ? lighten(0.9, "black") : "none"};
 `
 
 interface HeaderProps {
