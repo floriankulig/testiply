@@ -17,7 +17,7 @@ const StyledSidebar = styled.div<StyledSidebarProps>`
     height: 100vh;
     position: fixed;
     z-index: 99999;
-    padding: 0 10px;
+    padding: 0 15px;
     transition: 0.1s transform var(--easing);
 
     .logo{
