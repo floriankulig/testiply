@@ -2,6 +2,7 @@ import { useIsMobile } from "hooks"
 import { rgba } from "polished";
 import { useEffect, useState } from "react";
 import styled from "styled-components"
+import { Searchbar } from "./Searchbar";
 
 interface StyledHeaderProps {
     sidebarOpen: boolean;
@@ -13,6 +14,8 @@ const StyledHeader = styled.header<StyledHeaderProps>`
     width: 100vw;
     position: fixed;
     z-index: 1000;
+    display: flex;
+    align-items: center;
     @media (${({ theme }) => theme.bp.big}){
         width: calc(100vw - var(--sidebar-width));
         margin-left: var(--sidebar-width);
@@ -56,6 +59,8 @@ export const Header: React.FC<HeaderProps> = ({ sidebarOpen, setSidebarOpen }) =
     }, [sidebarOpen]);
 
     return (
-        <StyledHeader onClick={() => handleSidebarToggle()} className="inner-content" sidebarOpen={sidebarOpen} scrolled={scrolled}>Header</StyledHeader>
+        <StyledHeader onClick={() => handleSidebarToggle()} className="inner-content" sidebarOpen={sidebarOpen} scrolled={scrolled}>
+            <Searchbar />
+        </StyledHeader>
     )
 }
