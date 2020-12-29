@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { IoSearch } from "react-icons/io5"
+import { MdClear } from "react-icons/md"
 import { useState } from "react";
 import { rgba } from "polished";
 
@@ -35,6 +36,20 @@ const StyledSearchbar = styled.div<SearchbarProps>`
         height: 30px;
         color:#535353;
     }
+
+    .search-cancel {
+        display: inline-flex;
+        cursor: pointer;
+        margin-left:5px;
+        svg{
+            align-self: center;
+            transform: translateX(5px);
+            margin: 0;
+            width: 20px;
+            height: 20px;
+            color:#797979;
+        }
+    }
 `;
 
 const SearchbarInput = styled.input`
@@ -53,7 +68,7 @@ const SearchbarInput = styled.input`
 export const Searchbar: React.FC = () => {
     const [search, setSearch] = useState<string>("");
 
-    const handleType = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleType = (event: React.ChangeEvent<HTMLInputElement>): void => {
         setSearch(event.target.value)
     }
 
@@ -61,6 +76,16 @@ export const Searchbar: React.FC = () => {
         <StyledSearchbar hasInput={!!search}>
             <IoSearch />
             <SearchbarInput placeholder="Type to search for apps ..." type="text" value={search} onChange={(e) => handleType(e)} />
+            {!!search && <div
+                className="search-cancel"
+                onClick={() => setSearch("")}
+                onKeyDown={() => setSearch("")}
+                role="button"
+                tabIndex={0}
+                aria-label="Clear Search"
+            >
+                <MdClear />
+            </div>}
         </StyledSearchbar>
     )
 }
