@@ -10,7 +10,7 @@ interface StyledHeaderProps {
 }
 
 const StyledHeader = styled.header<StyledHeaderProps>`
-    background-color: #f7f9ff;
+    background-color: var(--layout-nav-background);
     width: 100vw;
     position: fixed;
     z-index: 1000;
@@ -45,7 +45,7 @@ export const Header: React.FC<HeaderProps> = ({ sidebarOpen, setSidebarOpen }) =
     }
 
     const handleScroll = () => {
-        setScrolled(window.pageYOffset >= 50);
+        setScrolled(window.pageYOffset >= 80);
     };
 
     useEffect(() => {
