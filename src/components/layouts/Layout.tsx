@@ -43,6 +43,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
     };
 
     useEffect(() => {
+        document.body.style.backgroundColor = theme.layoutNavBg
         !sidebarOpen && !isMobile &&
             document.addEventListener("scroll", handleScroll);
         return () => document.removeEventListener("scroll", handleScroll);
@@ -52,9 +53,6 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         setSidebarOpen(false)
     }, [isMobile]);
 
-    useEffect(() => {
-        document.body.style.backgroundColor = theme.layoutNavBg
-    }, [])
 
     return (<>
         <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
