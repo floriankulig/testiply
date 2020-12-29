@@ -5,6 +5,8 @@ const theme = {
   borderRadius: `8px`,
   sidebarWidth: `240px`,
   headerHeight: `90px`,
+  layoutNavBg: `#ffffff`,
+  layoutContentBg: `#f7f9ff`,
   bp: {
     small: `min-width: 721px`,
     medium: `min-width: 1081px`,
