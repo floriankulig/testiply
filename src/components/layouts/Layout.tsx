@@ -1,7 +1,7 @@
 import { Sidebar } from "./sidebar/Sidebar"
 import { Header } from "./header/Header"
 import styled from "styled-components"
-import { useEffect, useLayoutEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useIsMobile } from "hooks"
 import { theme } from "styles"
 
@@ -52,7 +52,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         setSidebarOpen(false)
     }, [isMobile]);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         document.body.style.backgroundColor = theme.layoutNavBg
     }, [])
 
