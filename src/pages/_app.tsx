@@ -4,7 +4,16 @@ import Head from 'next/head'
 import { ThemeProvider } from 'styled-components'
 import { GlobalStyle, theme } from "styles"
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
+
+interface EmptyLayoutProps {
+  children: React.ReactNode;
+}
+const EmptyLayout: React.FC<EmptyLayoutProps> = ({ children }) => <>{children}</>
+
+const MyApp = ({ Component, pageProps }: any) => {
+
+  const Layout = Component.Layout || EmptyLayout
+
   return (
     <>
       <Head>
@@ -13,8 +22,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       </Head>
       <ThemeProvider theme={theme}>
         <SelectedTabProvider>
-          <GlobalStyle />
-          <Component {...pageProps} />
+          <Layout>
+            <GlobalStyle />
+            <Component {...pageProps} />
+          </Layout>
         </SelectedTabProvider>
       </ThemeProvider>
     </>
