@@ -1,7 +1,7 @@
 //All styles inherit from this file (Css variables too)
 const theme = {
   primary: `#2262b6`,
-  navy: `#2f2e41`,
+  navy: `#09192f`,
   borderRadius: `8px`,
   sidebarWidth: `250px`,
   headerHeight: `90px`,
