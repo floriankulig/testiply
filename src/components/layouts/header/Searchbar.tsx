@@ -21,9 +21,9 @@ const StyledSearchbar = styled.div<SearchbarProps>`
     transition: 0.5s all ;
     box-shadow: ${p => p.hasInput ? `0px 2px 10px ${rgba(0, 0, 0, 0.05)}` : "none"};
 
-    &:focus-within{
-        border-color: var(--navy);
-        box-shadow:none;
+    &:focus-within, &:hover{
+        box-shadow: 0px 2px 10px ${rgba(0, 0, 0, 0.05)};
+
 
         @media (${({ theme }) => theme.bp.big}){
             width: calc(clamp(350px, 40%, 450px) + 20px);
