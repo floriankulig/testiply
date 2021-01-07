@@ -2,6 +2,7 @@ import { useIsMobile } from "hooks"
 import { lighten, rgba } from "polished";
 import { useEffect, useState } from "react";
 import styled from "styled-components"
+import { Burger } from "./Burger";
 import { Searchbar } from "./Searchbar";
 
 interface StyledHeaderProps {
@@ -25,38 +26,6 @@ const StyledHeader = styled.header<StyledHeaderProps>`
     height: var(--header-height);
     box-shadow: ${p => p.scrolled ? `0px 25px 60px ${rgba(100, 100, 100, 0.05)}` : "none"};
     transition: var(--sidebarDuration) all var(--easing);
-
-    .burger{
-        min-width: 25px;
-        height: 25px;
-        cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        margin-right:var(--mobile-inner-padding);
-        @media (${({ theme }) => theme.bp.medium}) {
-            margin-right:var(--inner-padding);
-        }
-        opacity: .75;
-        z-index: 10000;
-
-        &:hover {
-            opacity: 1;
-            transition: 0.25s all var(--easing);
-
-            .burger-line{
-                transition: 0.25s all var(--easing);
-                background-color: var(--primary);
-            }
-        }
-
-        &-line{
-            background-color: var(--navy);
-            width: 100%;
-            height: 4px;
-            border-radius: 2px;
-        }
-    }
 `
 
 interface HeaderProps {
@@ -85,17 +54,7 @@ export const Header: React.FC<HeaderProps> = ({ sidebarOpen, setSidebarOpen }) =
     return (
         <StyledHeader className="inner-content" sidebarOpen={sidebarOpen} scrolled={scrolled}>
             {isMobile &&
-                <div
-                    className="burger"
-                    onClick={() => setSidebarOpen(true)}
-                    onKeyDown={() => setSidebarOpen(true)}
-                    role="button"
-                    tabIndex={0}
-                >
-                    <div className="burger-line"></div>
-                    <div className="burger-line"></div>
-                    <div className="burger-line"></div>
-                </div>}
+                <Burger setSidebarOpen={setSidebarOpen} />}
             <Searchbar />
         </StyledHeader>
     )
