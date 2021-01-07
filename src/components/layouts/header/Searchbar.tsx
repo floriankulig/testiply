@@ -23,13 +23,14 @@ const StyledSearchbar = styled.div<SearchbarProps>`
 
     &:focus-within, &:hover{
         box-shadow: 0px 2px 10px ${rgba(0, 0, 0, 0.05)};
-
-
-        @media (${({ theme }) => theme.bp.big}){
-            width: calc(clamp(300px, 40%, 450px) + 20px);
-        }
     }
 
+    &:focus-within{
+        @media (${({ theme }) => theme.bp.big}){
+                width: calc(clamp(300px, 40%, 450px) + 20px);
+        }
+    }
+    
     svg{
         margin-right: 15px;
         width: 30px;
