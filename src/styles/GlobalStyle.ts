@@ -13,6 +13,7 @@ const GlobalStyle = createGlobalStyle`
     --mobile-inner-padding: 25px;
     --layout-nav-background: ${theme.layoutNavBg};
     --layout-content-background: ${theme.layoutContentBg};
+    --sidebarDuration: 0.2s;
     --easing: cubic-bezier(0.645, 0.045, 0.355, 1);
     --btn-shadow: ${rgba(0, 0, 0, 0.2)} 0px 3px 1px -2px,
       ${rgba(0, 0, 0, 0.14)} 0px 2px 2px 0px,
