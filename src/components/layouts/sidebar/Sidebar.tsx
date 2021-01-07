@@ -18,7 +18,7 @@ const StyledSidebar = styled.div<StyledSidebarProps>`
     position: fixed;
     z-index: 99999;
     padding: 0 15px;
-    transition: 0.1s transform var(--easing);
+    transition: var(--sidebarDuration) transform var(--easing);
 
     .logo{
         display: inline-flex;

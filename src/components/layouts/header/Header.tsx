@@ -24,7 +24,7 @@ const StyledHeader = styled.header<StyledHeaderProps>`
     filter: ${p => p.sidebarOpen ? "blur(4px)" : "none"};
     height: var(--header-height);
     box-shadow: ${p => p.scrolled ? `0px 25px 60px ${rgba(100, 100, 100, 0.05)}` : "none"};
-    transition: 0.5s box-shadow var(--easing);
+    transition: var(--sidebarDuration) all var(--easing);
 
     .burger{
         min-width: 25px;
