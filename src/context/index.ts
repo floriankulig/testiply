@@ -1,7 +1,8 @@
 import {
-  SelectedTabContext,
   SelectedTabProvider,
   useSelectedTabValue,
 } from "./selected-tab-context";
 
-export { SelectedTabContext, SelectedTabProvider, useSelectedTabValue };
+import { AuthProvider, useAuthValue } from "./user-context";
+
+export { SelectedTabProvider, useSelectedTabValue, AuthProvider, useAuthValue };
