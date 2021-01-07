@@ -10,7 +10,7 @@ interface SearchbarProps {
 
 const StyledSearchbar = styled.div<SearchbarProps>`
     height: 50px;
-    width: clamp(350px, 40%, 450px);
+    width: clamp(300px, 40%, 450px);
     max-width: 100%;
     background: var(--layout-nav-background);
     border: 2px solid var(--layout-content-background);
@@ -26,7 +26,7 @@ const StyledSearchbar = styled.div<SearchbarProps>`
 
 
         @media (${({ theme }) => theme.bp.big}){
-            width: calc(clamp(350px, 40%, 450px) + 20px);
+            width: calc(clamp(300px, 40%, 450px) + 20px);
         }
     }
 
