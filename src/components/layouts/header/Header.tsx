@@ -1,5 +1,5 @@
 import { useIsMobile } from "hooks"
-import { lighten } from "polished";
+import { lighten, rgba } from "polished";
 import { useEffect, useState } from "react";
 import styled from "styled-components"
 import { Searchbar } from "./Searchbar";
@@ -23,7 +23,40 @@ const StyledHeader = styled.header<StyledHeaderProps>`
     }
     filter: ${p => p.sidebarOpen ? "blur(4px)" : "none"};
     height: var(--header-height);
-    border-bottom: 1px solid ${p => p.scrolled ? lighten(0.9, "black") : "none"};
+    box-shadow: ${p => p.scrolled ? `0px 25px 60px ${rgba(100, 100, 100, 0.05)}` : "none"};
+    transition: 0.5s box-shadow var(--easing);
+
+    .burger{
+        min-width: 25px;
+        height: 25px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        margin-right:var(--mobile-inner-padding);
+        @media (${({ theme }) => theme.bp.medium}) {
+            margin-right:var(--inner-padding);
+        }
+        opacity: .75;
+        z-index: 10000;
+
+        &:hover {
+            opacity: 1;
+            transition: 0.25s all var(--easing);
+
+            .burger-line{
+                transition: 0.25s all var(--easing);
+                background-color: var(--primary);
+            }
+        }
+
+        &-line{
+            background-color: var(--navy);
+            width: 100%;
+            height: 4px;
+            border-radius: 2px;
+        }
+    }
 `
 
 interface HeaderProps {
@@ -34,14 +67,6 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ sidebarOpen, setSidebarOpen }) => {
     const [scrolled, setScrolled] = useState<boolean>(false);
     const isMobile = useIsMobile(1200)
-
-    const handleSidebarToggle = () => {
-        if (!isMobile) {    // can be removed when rendering menu toggle button depending on screenwidth
-            setSidebarOpen(true)
-        } else {
-            setSidebarOpen(!sidebarOpen)
-        }
-    }
 
     const handleScroll = () => {
         setScrolled(window.pageYOffset >= 80);
@@ -58,7 +83,19 @@ export const Header: React.FC<HeaderProps> = ({ sidebarOpen, setSidebarOpen }) =
     }, [sidebarOpen]);
 
     return (
-        <StyledHeader onClick={() => handleSidebarToggle()} className="inner-content" sidebarOpen={sidebarOpen} scrolled={scrolled}>
+        <StyledHeader className="inner-content" sidebarOpen={sidebarOpen} scrolled={scrolled}>
+            {isMobile &&
+                <div
+                    className="burger"
+                    onClick={() => setSidebarOpen(true)}
+                    onKeyDown={() => setSidebarOpen(true)}
+                    role="button"
+                    tabIndex={0}
+                >
+                    <div className="burger-line"></div>
+                    <div className="burger-line"></div>
+                    <div className="burger-line"></div>
+                </div>}
             <Searchbar />
         </StyledHeader>
     )
