@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
     --sidebar-width: ${theme.sidebarWidth};
     --header-height: ${theme.headerHeight};
     --inner-padding: 50px;
-    --mobile-inner-padding: 20px;
+    --mobile-inner-padding: 25px;
     --layout-nav-background: ${theme.layoutNavBg};
     --layout-content-background: ${theme.layoutContentBg};
     --easing: cubic-bezier(0.645, 0.045, 0.355, 1);
