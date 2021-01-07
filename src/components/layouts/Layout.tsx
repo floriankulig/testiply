@@ -26,7 +26,6 @@ const StyledContent = styled.div<StyledContentProps>`
     background: var(--layout-content-background);
     filter: ${p => p.sidebarOpen ? "blur(4px)" : "none"};
     transition: 0.3s border;
-    transition-delay: .1s;
 `
 
 interface LayoutProps {
