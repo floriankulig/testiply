@@ -42,6 +42,10 @@ const StyledSearchbar = styled.div<SearchbarProps>`
         display: inline-flex;
         cursor: pointer;
         margin-left:5px;
+        &:hover{
+            transform: scale(1.25);
+        }
+        transition: transform 0.1s var(--easing);
         svg{
             align-self: center;
             transform: translateX(5px);
