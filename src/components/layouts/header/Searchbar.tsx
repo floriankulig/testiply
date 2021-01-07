@@ -27,7 +27,7 @@ const StyledSearchbar = styled.div<SearchbarProps>`
 
     &:focus-within{
         @media (${({ theme }) => theme.bp.big}){
-                width: calc(clamp(300px, 40%, 450px) + 20px);
+            width: calc(clamp(300px, 40%, 450px) + 20px);
         }
     }
     
