@@ -8,15 +8,11 @@ import { IoGameControllerOutline, IoGameController, IoNewspaperOutline, IoNewspa
 import { RiStackLine, RiStackFill } from "react-icons/ri"
 import styled, { css } from "styled-components"
 
-const SidebarTabs = styled.ul`
-    margin: 2em 0;
-`;
-
 interface TabRowProps {
     selected: boolean;
     icon: boolean;
 };
-const TabRow = styled.li<TabRowProps>`
+export const TabRow = styled.li<TabRowProps>`
     width: 100%;
     padding: 15px ${p => p.icon && "50px"};
     margin-bottom: .25em;
@@ -77,7 +73,7 @@ export const Tabs: React.FC<TabsProps> = ({ setSidebarOpen }) => {
     }, [selectedTab]);
 
     return (
-        <SidebarTabs>
+        <ul>
             <Head>
                 <title>{active[0].toUpperCase() + active.slice(1)} | Beta App Store</title>
             </Head>
@@ -105,6 +101,6 @@ export const Tabs: React.FC<TabsProps> = ({ setSidebarOpen }) => {
                         </TabRow>
                     </Link>
                 ))}
-        </SidebarTabs>
+        </ul>
     )
 }

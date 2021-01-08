@@ -1,7 +1,9 @@
 import { useOnClickOutside } from "hooks"
 import { useRef } from "react";
 import styled from "styled-components"
-import { Tabs } from "./Tabs";
+import { TabRow, Tabs } from "./Tabs";
+import { BiLogOut } from "react-icons/bi"
+import { useAuthValue } from "context";
 
 interface StyledSidebarProps {
     open: boolean;
@@ -31,6 +33,14 @@ const StyledSidebar = styled.div<StyledSidebarProps>`
     }
 `
 
+const SidebarContent = styled.div`
+    min-height: calc(100vh - var(--header-height));
+    padding: 3em 0 5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+`;
+
 interface SidebarProps {
     open: boolean;
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -38,12 +48,23 @@ interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
     const ref = useRef<HTMLDivElement>();
+    const { currentUser } = useAuthValue();
     useOnClickOutside(ref, () => setOpen(false))
 
     return (
         <StyledSidebar ref={ref} open={open}>
             <div className="logo">BetaStore </div>
-            <Tabs setSidebarOpen={setOpen} />
+            <SidebarContent>
+                <Tabs setSidebarOpen={setOpen} />
+                {currentUser && (
+                    <TabRow selected={false} icon>
+                        <span>
+                            <BiLogOut />
+                        </span>
+                    Logout
+                    </TabRow>
+                )}
+            </SidebarContent>
         </StyledSidebar>
     )
 }
