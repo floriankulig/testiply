@@ -3,6 +3,8 @@ import { IoSearch } from "react-icons/io5"
 import { MdClear } from "react-icons/md"
 import { useState } from "react";
 import { rgba } from "polished";
+import { Button } from "components/Button";
+import { theme } from "styles";
 
 interface SearchbarProps {
     hasInput: boolean;
@@ -12,6 +14,7 @@ const StyledSearchbar = styled.div<SearchbarProps>`
     height: 50px;
     width: clamp(300px, 40%, 450px);
     max-width: 100%;
+    margin-right: 1.5em;
     background: var(--layout-nav-background);
     border: 2px solid var(--layout-content-background);
     border-radius: 20px;
@@ -71,26 +74,29 @@ const SearchbarInput = styled.input`
 `
 
 export const Searchbar: React.FC = () => {
-    const [search, setSearch] = useState<string>("");
+    const [query, setQuery] = useState<string>("");
 
     const handleType = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        setSearch(event.target.value)
+        setQuery(event.target.value)
     }
 
     return (
-        <StyledSearchbar hasInput={!!search}>
-            <IoSearch />
-            <SearchbarInput placeholder="Type to search for apps ..." type="text" value={search} onChange={(e) => handleType(e)} />
-            {!!search && <div
-                className="search-cancel"
-                onClick={() => setSearch("")}
-                onKeyDown={() => setSearch("")}
-                role="button"
-                tabIndex={0}
-                aria-label="Clear Search"
-            >
-                <MdClear />
-            </div>}
-        </StyledSearchbar>
+        <>
+            <StyledSearchbar hasInput={!!query}>
+                <IoSearch />
+                <SearchbarInput placeholder="Type to search for apps ..." type="text" value={query} onChange={(e) => handleType(e)} />
+                {!!query && <div
+                    className="search-cancel"
+                    onClick={() => setQuery("")}
+                    onKeyDown={() => setQuery("")}
+                    role="button"
+                    tabIndex={0}
+                    aria-label="Clear Search"
+                >
+                    <MdClear />
+                </div>}
+            </StyledSearchbar>
+            <Button disabled={!query} disableElevation bold={!!query} color={theme.layoutContentBg}>Search all categories</Button>
+        </>
     )
 }
