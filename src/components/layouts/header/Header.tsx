@@ -1,5 +1,5 @@
 import { useIsMobile } from "hooks"
-import { lighten, rgba } from "polished";
+import { rgba } from "polished";
 import { useEffect, useState } from "react";
 import styled from "styled-components"
 import { Burger } from "./Burger";
