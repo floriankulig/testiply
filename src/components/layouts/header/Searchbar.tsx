@@ -4,7 +4,6 @@ import { MdClear } from "react-icons/md"
 import { useState } from "react";
 import { rgba } from "polished";
 import { Button } from "components/Button";
-import { theme } from "styles";
 
 interface SearchbarProps {
     hasInput: boolean;
