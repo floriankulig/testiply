@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import { getTextColor } from 'helpers';
 
 interface ButtonProps {
+  big?: boolean;
   basic?: boolean;
   transparent?: boolean;
   rounded?: boolean;
@@ -13,11 +14,20 @@ interface ButtonProps {
 
 export const Button = styled.button<ButtonProps>`
   border: none;
-  font-size: 1rem;
   cursor: pointer;
   font-family: 'Roboto';
   transition: 0.25s all;
   ${(p) => p.bold && 'font-weight: bold'};
+  ${(p) =>
+    p.big
+      ? css`
+          padding: 1em 1.8em;
+          font-size: 1rem;
+        `
+      : css`
+          padding: 0.8em 1.3em;
+          font-size: 1rem;
+        `};
   ${(p) =>
     p.rounded
       ? css`
@@ -25,7 +35,6 @@ export const Button = styled.button<ButtonProps>`
           border-radius: 3em;
         `
       : css`
-          padding: 1em 1.8em;
           border-radius: var(--border-radius);
         `};
 
