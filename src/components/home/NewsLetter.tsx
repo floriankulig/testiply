@@ -171,6 +171,7 @@ export const NewsLetter: React.FC = () => {
                     disabled={submitted || isLoading}
                     aria-label="Sign Up for our newsletter."
                     bold
+                    big
                 >
                     {isLoading ? (
                         <>
