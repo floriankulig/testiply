@@ -1,13 +1,15 @@
+import { theme } from 'styles';
+
 const getTextColor = (initialColor: string): string => {
   let r, g, b;
 
   //Check if color is white
   if (
-    initialColor === "white" ||
-    initialColor === "#ffffff" ||
-    initialColor === "white"
+    initialColor === 'white' ||
+    initialColor === '#ffffff' ||
+    initialColor === 'white'
   ) {
-    return "#000000";
+    return '#000000';
   }
 
   // Check the format of the color, HEX or RGB?
@@ -23,8 +25,8 @@ const getTextColor = (initialColor: string): string => {
   } else {
     // If RGB --> Convert it to HEX: http://gist.github.com/983661
     const convertedColor = +(
-      "0x" +
-      initialColor.slice(1).replace(initialColor.length < 5 && /./g, "$&$&")
+      '0x' +
+      initialColor.slice(1).replace(initialColor.length < 5 && /./g, '$&$&')
     );
 
     r = convertedColor >> 16;
@@ -37,9 +39,9 @@ const getTextColor = (initialColor: string): string => {
 
   // Using the HSP value, determine whether the color is light or dark
   if (hsp > 200) {
-    return "#000000";
+    return theme.navy;
   } else {
-    return "#ffffff";
+    return '#ffffff';
   }
 };
 
