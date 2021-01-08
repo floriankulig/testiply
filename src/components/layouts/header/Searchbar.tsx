@@ -4,6 +4,7 @@ import { MdClear } from "react-icons/md"
 import { useState } from "react";
 import { rgba } from "polished";
 import { Button } from "components/Button";
+import { useSelectedTabValue } from "context";
 
 interface SearchbarProps {
     hasInput: boolean;
@@ -74,6 +75,7 @@ const SearchbarInput = styled.input`
 
 export const Searchbar: React.FC = () => {
     const [query, setQuery] = useState<string>("");
+    const { selectedTab } = useSelectedTabValue()
 
     const handleType = (event: React.ChangeEvent<HTMLInputElement>): void => {
         setQuery(event.target.value)
@@ -83,7 +85,7 @@ export const Searchbar: React.FC = () => {
         <>
             <StyledSearchbar hasInput={!!query}>
                 <IoSearch />
-                <SearchbarInput placeholder="Type to search for apps ..." type="text" value={query} onChange={(e) => handleType(e)} />
+                <SearchbarInput placeholder={`Type to search in ${selectedTab[0].toUpperCase() + selectedTab.slice(1)}`} type="text" value={query} onChange={(e) => handleType(e)} />
                 {!!query && <div
                     className="search-cancel"
                     onClick={() => setQuery("")}
