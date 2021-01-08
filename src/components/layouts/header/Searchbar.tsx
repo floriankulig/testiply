@@ -96,7 +96,7 @@ export const Searchbar: React.FC = () => {
                     <MdClear />
                 </div>}
             </StyledSearchbar>
-            <Button style={{ height: "46px" }} disabled={!query} bold={!!query}>Search all categories</Button>
+            <Button style={{ minHeight: "46px" }} disabled={!query} bold={!!query}>Search all categories</Button>
         </>
     )
 }
