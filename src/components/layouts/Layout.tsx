@@ -25,7 +25,8 @@ const StyledContent = styled.div<StyledContentProps>`
     transform: translateY(var(--header-height));
     background: var(--layout-content-background);
     filter: ${p => p.sidebarOpen ? "blur(4px)" : "none"};
-    transition: 0.3s border;
+    transition: 0.3s border-radius;
+    transition-delay: 0.1s;
 `
 
 interface LayoutProps {
@@ -38,7 +39,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
     const isMobile = useIsMobile(1200)
 
     const handleScroll = () => {
-        setScrolled(window.pageYOffset >= 80);
+        setScrolled(window.pageYOffset >= 1);
     };
 
     useEffect(() => {
