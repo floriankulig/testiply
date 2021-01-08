@@ -25,8 +25,8 @@ export const Button = styled.button<ButtonProps>`
           font-size: 1rem;
         `
       : css`
-          padding: 0.8em 1.3em;
-          font-size: 1rem;
+          padding: 0.9em 1.3em;
+          font-size: 0.9rem;
         `};
   ${(p) =>
     p.rounded
