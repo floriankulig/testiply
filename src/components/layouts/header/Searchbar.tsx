@@ -12,9 +12,9 @@ interface SearchbarProps {
 
 const StyledSearchbar = styled.div<SearchbarProps>`
     height: 50px;
-    width: clamp(300px, 40%, 450px);
+    width: clamp(300px, 40%, 420px);
     max-width: 100%;
-    margin-right: 1.5em;
+    margin-right: .5em;
     background: var(--layout-nav-background);
     border: 2px solid var(--layout-content-background);
     border-radius: 20px;
@@ -28,9 +28,9 @@ const StyledSearchbar = styled.div<SearchbarProps>`
         box-shadow: 0px 2px 10px ${rgba(0, 0, 0, 0.05)};
     }
 
-    &:focus-within{
+    &:focus-within {
         @media (${({ theme }) => theme.bp.big}){
-            width: calc(clamp(300px, 40%, 450px) + 20px);
+            width: calc(clamp(300px, 40%, 420px) + 20px);
         }
     }
     
@@ -96,7 +96,7 @@ export const Searchbar: React.FC = () => {
                     <MdClear />
                 </div>}
             </StyledSearchbar>
-            <Button disabled={!query} disableElevation bold={!!query} color={theme.layoutContentBg}>Search all categories</Button>
+            <Button style={{ height: "47px" }} disabled={!query} disableElevation bold={!!query}>Search all categories</Button>
         </>
     )
 }
