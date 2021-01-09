@@ -5,7 +5,7 @@ import { NextPage } from "next";
 const Register: NextPage = () => {
     return (
         <AuthLayout formType="register" >
-            <AuthForm formType="login" />
+            <AuthForm formType="register" />
         </AuthLayout>
     )
 }
