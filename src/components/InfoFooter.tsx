@@ -42,7 +42,7 @@ const FooterContentGrid = styled.div`
     }
 `
 
-const Socials = styled.div`
+const StyledSocials = styled.div`
     text-align: center;
     letter-spacing: 1.5px;
     width: 200px;
@@ -72,7 +72,7 @@ const Socials = styled.div`
     }
 `
 
-const Policies = styled.div`
+const StyledPolicies = styled.div`
     text-align: center;
     letter-spacing: 1.5px;
     width: 200px;
@@ -83,38 +83,51 @@ const Policies = styled.div`
     }
 `
 
+export const Socials: React.FC = () => {
+    return (
+        <StyledSocials>
+            <h3>
+                Socials
+                        </h3>
+            <div className="social-icons">
+                <a href="https://www.instagram.com/betappstore/" target="_blank" rel="noopener noreferrer">
+                    <FaInstagram />
+                </a>
+                <a href="https://www.facebook.com/betaappstoree" target="_blank" rel="noopener noreferrer">
+                    <FaFacebook />
+                </a>
+                <a href="https://twitter.com/betaAppStoree" target="_blank" rel="noopener noreferrer">
+                    <FaTwitter />
+                </a>
+                <a href="https://discord.com/invite/6Buy9FdC" target="_blank" rel="noopener noreferrer">
+                    <FaDiscord />
+                </a>
+            </div>
+        </StyledSocials>
+    )
+}
+
+
+export const Policies: React.FC = () => {
+    return (
+        <StyledPolicies>
+            <h3>
+                Imprint
+            </h3>
+            <h3>
+                Privacy Policy
+            </h3>
+        </StyledPolicies>
+    )
+}
+
 export const InfoFooter: React.FC = () => {
     return (
         <StyledFooter>
             <div className="container">
                 <FooterContentGrid>
-                    <Socials>
-                        <h3>
-                            Socials
-                        </h3>
-                        <div className="social-icons">
-                            <a href="https://www.instagram.com/betappstore/" target="_blank" rel="noopener noreferrer">
-                                <FaInstagram />
-                            </a>
-                            <a href="https://www.facebook.com/betaappstoree" target="_blank" rel="noopener noreferrer">
-                                <FaFacebook />
-                            </a>
-                            <a href="https://twitter.com/betaAppStoree" target="_blank" rel="noopener noreferrer">
-                                <FaTwitter />
-                            </a>
-                            <a href="https://discord.com/invite/6Buy9FdC" target="_blank" rel="noopener noreferrer">
-                                <FaDiscord />
-                            </a>
-                        </div>
-                    </Socials>
-                    <Policies>
-                        <h3>
-                            Imprint
-                        </h3>
-                        <h3>
-                            Privacy Policy
-                        </h3>
-                    </Policies>
+                    <Socials />
+                    <Policies />
                 </FooterContentGrid>
                 <p>© {new Date().getFullYear()} Beta App Store</p>
             </div>
