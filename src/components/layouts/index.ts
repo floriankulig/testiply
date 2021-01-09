@@ -1,3 +1,4 @@
-import { Layout } from "./Layout";
+import { Layout } from './Layout';
+import { AuthLayout } from './AuthLayout';
 
-export { Layout };
+export { Layout, AuthLayout };
