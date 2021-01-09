@@ -6,7 +6,6 @@ const StyledAuthLayout = styled.div`
     max-height: 100vh;
     height: 100vh;
     display: flex;
-    justify-content: space-between;
 `;
 
 
