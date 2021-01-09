@@ -1,4 +1,5 @@
 type Gender = 'male' | 'female' | 'nonbinary';
+export type FormType = 'login' | 'register';
 
 export interface User {
   firstName: string;
