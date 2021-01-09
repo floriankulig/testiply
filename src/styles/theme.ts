@@ -4,6 +4,7 @@ const theme = {
   navy: `#09192f`,
   borderRadius: `8px`,
   sidebarWidth: `250px`,
+  authSidebarWidth: `30vw`,
   headerHeight: `90px`,
   layoutNavBg: `#ffffff`,
   layoutContentBg: `#f7f9ff`,

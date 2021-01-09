@@ -1,6 +1,6 @@
-import { createGlobalStyle } from "styled-components";
-import theme from "./theme";
-import { rgba } from "polished";
+import { createGlobalStyle } from 'styled-components';
+import theme from './theme';
+import { rgba } from 'polished';
 
 const GlobalStyle = createGlobalStyle`
   :root{
@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
     --navy: ${theme.navy};
     --border-radius: ${theme.borderRadius};
     --sidebar-width: ${theme.sidebarWidth};
+    --auth-sidebar-width: ${theme.authSidebarWidth};
     --header-height: ${theme.headerHeight};
     --inner-padding: 50px;
     --mobile-inner-padding: 25px;
