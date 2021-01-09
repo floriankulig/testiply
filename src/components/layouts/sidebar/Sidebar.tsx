@@ -61,7 +61,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
                         <span>
                             <BiLogOut />
                         </span>
-                    Logout
+                        Logout
                     </TabRow>
                 )}
             </SidebarContent>
