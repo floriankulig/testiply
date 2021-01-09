@@ -30,7 +30,7 @@ const Header = styled.header`
             transition: background 0.5s;
             &:hover{
                 cursor: pointer;
-                background: ${rgba(0, 0, 0, 0.3)}
+                background: ${rgba(0, 0, 0, 0.35)}
             }
         }
   }
