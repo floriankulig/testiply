@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import { Header, Hero, Features, Benefits, Footer, NewsLetter } from "components/home"
+import { NextPage } from 'next'
 
-const Home: React.FC = () => {
+const Home: NextPage = () => {
   return (
     <>
       <Head>
