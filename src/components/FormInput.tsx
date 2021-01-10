@@ -1,4 +1,4 @@
-import { darken } from "polished";
+import { darken, lighten } from "polished";
 import { InputType } from "ts";
 import styled, { css } from "styled-components";
 
@@ -50,7 +50,6 @@ export const TextField = styled.div`
         }
         transition: margin 0.3s ease;
     }
-    
 `;
 
 interface SVGWrapperProps {
@@ -65,6 +64,7 @@ export const SVGWrapper = styled.div<SVGWrapperProps>`
         height: 100%;
         padding: 5px;
         transition: all 0.25s ease;
+        color: ${p => lighten(0.1, p.theme.navy)};
 
         svg{
             width: 100%;
