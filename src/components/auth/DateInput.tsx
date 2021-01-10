@@ -120,13 +120,15 @@ const CalendarWrapper = styled.div`
 interface DateInputProps {
     date: Date;
     setDate: React.Dispatch<React.SetStateAction<Date>>;
+    minDate: Date;
+    maxDate: Date;
 }
 
-export const DateInput: React.FC<DateInputProps> = ({ date, setDate }) => {
+export const DateInput: React.FC<DateInputProps> = ({ date, setDate, minDate, maxDate }) => {
     const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
     const [hasInitialDate, setHasInitialDate] = useState<boolean>(true);
     const ref = useRef<HTMLDivElement>()
-    useOnClickOutside(ref, () => setCalendarOpen(false))
+    useOnClickOutside(ref, () => setCalendarOpen(false));
 
     return (
         <FormInput style={{ position: "relative" }}>
@@ -152,8 +154,8 @@ export const DateInput: React.FC<DateInputProps> = ({ date, setDate }) => {
                         inline
                         selected={date}
                         showYearDropdown
-                        minDate={new Date("1900-01-01")}
-                        maxDate={new Date()}
+                        minDate={minDate}
+                        maxDate={maxDate}
                         onChange={(newdate) => {
                             setDate(newdate);
                             setCalendarOpen(false)

@@ -43,7 +43,12 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType }) => {
     const [password, setPassword] = useState<string>("");
     const [confirmPassword, setConfirmPassword] = useState<string>("");
     const [showPasswords, setShowPasswords] = useState<boolean>(false);
-    const [dateOfBirth, setDateOfBirth] = useState<Date>(new Date());
+
+    const minBirthDate = new Date("1900-01-01")
+    let maxBirthDate = new Date()
+    maxBirthDate.setFullYear(maxBirthDate.getFullYear() - 10)
+    const [dateOfBirth, setDateOfBirth] = useState<Date>(maxBirthDate);
+
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -108,7 +113,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType }) => {
                             </SVGWrapper>
                         </TextField>
                     </FormInput>
-                    <DateInput date={dateOfBirth} setDate={setDateOfBirth} />
+                    <DateInput minDate={minBirthDate} maxDate={maxBirthDate} date={dateOfBirth} setDate={setDateOfBirth} />
                 </>
                 )}
                 <Button bold>{formType === "register" ? "Register" : "Log In"}</Button>
