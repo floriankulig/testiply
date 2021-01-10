@@ -122,23 +122,25 @@ interface DateInputProps {
     setDate: React.Dispatch<React.SetStateAction<Date>>;
     minDate: Date;
     maxDate: Date;
+    style?: Object;
+    className?: string;
 }
 
-export const DateInput: React.FC<DateInputProps> = ({ date, setDate, minDate, maxDate }) => {
+export const DateInput: React.FC<DateInputProps> = ({ date, setDate, minDate, maxDate, style, className }) => {
     const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
     const [hasInitialDate, setHasInitialDate] = useState<boolean>(true);
     const ref = useRef<HTMLDivElement>()
     useOnClickOutside(ref, () => setCalendarOpen(false));
 
     return (
-        <FormInput style={{ position: "relative" }}>
-            Date Of Birth
+        <FormInput style={{ position: "relative", ...style }} className={className}>
+            Date Of Birth (optional)
             <TextField>
                 <span
                     onClick={() => setCalendarOpen(!calendarOpen)}
                     onKeyDown={() => setCalendarOpen(!calendarOpen)}
                 >
-                    {hasInitialDate ? "Select Your Birthday" : date.toString().slice(4, 15)}
+                    {hasInitialDate ? "Select Your Birthday ➜" : date.toString().slice(4, 15)}
                 </span>
                 <SVGWrapper
                     clickable
