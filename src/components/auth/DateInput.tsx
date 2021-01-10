@@ -8,6 +8,7 @@ import { useOnClickOutside } from "hooks";
 import { rgba } from "polished";
 import { getTextColor } from "helpers";
 import { FaCalendarAlt } from "react-icons/fa";
+import { placeholderDate } from "ts";
 
 const CalendarWrapper = styled.div`
     position: absolute;
@@ -118,7 +119,7 @@ const CalendarWrapper = styled.div`
 `;
 
 interface DateInputProps {
-    date: Date | null;
+    date: Date;
     setDate: React.Dispatch<React.SetStateAction<Date>>;
 }
 
@@ -135,7 +136,8 @@ export const DateInput: React.FC<DateInputProps> = ({ date, setDate }) => {
                     onClick={() => setCalendarOpen(!calendarOpen)}
                     onKeyDown={() => setCalendarOpen(!calendarOpen)}
                 >
-                    {date ? date.toString().slice(4, 15) : "Select a date"}
+                    {/* If date as string equals placeholder date (as initial value) tell user to select their birthday*/}
+                    {JSON.stringify(date).includes(placeholderDate) ? "Select a date" : date.toString().slice(4, 15)}
                 </span>
                 <SVGWrapper
                     clickable
