@@ -1,6 +1,5 @@
 import { FormInput, SVGWrapper, TextField } from "components/FormInput"
-import { useEffect, useRef, useState } from "react";
-import { IoCalendarClear } from "react-icons/io5"
+import { useRef, useState } from "react";
 import styled from "styled-components";
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
@@ -8,7 +7,6 @@ import { useOnClickOutside } from "hooks";
 import { rgba } from "polished";
 import { getTextColor } from "helpers";
 import { FaCalendarAlt } from "react-icons/fa";
-import { placeholderDate } from "ts";
 
 const CalendarWrapper = styled.div`
     position: absolute;
@@ -125,6 +123,7 @@ interface DateInputProps {
 
 export const DateInput: React.FC<DateInputProps> = ({ date, setDate }) => {
     const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
+    const [hasInitialDate, setHasInitialDate] = useState<boolean>(true);
     const ref = useRef<HTMLDivElement>()
     useOnClickOutside(ref, () => setCalendarOpen(false))
 
@@ -136,8 +135,7 @@ export const DateInput: React.FC<DateInputProps> = ({ date, setDate }) => {
                     onClick={() => setCalendarOpen(!calendarOpen)}
                     onKeyDown={() => setCalendarOpen(!calendarOpen)}
                 >
-                    {/* If date as string equals placeholder date (as initial value) tell user to select their birthday*/}
-                    {JSON.stringify(date).includes(placeholderDate) ? "Select a date" : date.toString().slice(4, 15)}
+                    {hasInitialDate ? "Select your date of birth" : date.toString().slice(4, 15)}
                 </span>
                 <SVGWrapper
                     clickable
@@ -158,6 +156,7 @@ export const DateInput: React.FC<DateInputProps> = ({ date, setDate }) => {
                         onChange={(newdate) => {
                             setDate(newdate);
                             setCalendarOpen(false)
+                            setHasInitialDate(false)
                         }}
                     />
                 </CalendarWrapper>}
