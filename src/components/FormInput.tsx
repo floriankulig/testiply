@@ -27,13 +27,15 @@ export const TextField = styled.div`
     transition: border 0.3s var(--easing);
 
 
-    input{
+    input, span{
         background: none;
         border: none;
         font-family: "Roboto";
         font-size: 1rem;
         width: 95%;
         height: 100%;
+        display: inline-flex;
+        align-items: center;
         &:focus-within{
             margin-left: .5em;
         }
