@@ -57,6 +57,7 @@ const CalendarWrapper = styled.div`
         border-radius: .5em;
         border: 2px solid ${({ theme }) => rgba(theme.navy, 0.15)};
         background-color: var(--layout-content-background); 
+        box-shadow: 0px 3px 10px ${rgba(0, 0, 0, 0.1)};
     }
 
     & .react-datepicker__year-read-view--down-arrow {
@@ -151,7 +152,7 @@ export const DateInput: React.FC<DateInputProps> = ({ date, setDate }) => {
                         inline
                         selected={date}
                         showYearDropdown
-                        minDate={new Date("01-01-1900")}
+                        minDate={new Date("1900-01-01")}
                         maxDate={new Date()}
                         onChange={(newdate) => {
                             setDate(newdate);
