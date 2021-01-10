@@ -20,7 +20,6 @@ export const TextField = styled.div`
     padding: .5em 1em;
     align-items: center;
     font-size: 1rem;
-    cursor: text;
     font-family: "Roboto";
     background: var(--layout-content-background);
     border: 2px ${p => darken(0.1, p.theme.layoutContentBg)} solid; 
@@ -34,6 +33,7 @@ export const TextField = styled.div`
         font-family: "Roboto";
         font-size: 1rem;
         width: 95%;
+        height: 100%;
         &:focus-within{
             margin-left: .5em;
         }
@@ -59,8 +59,7 @@ export const SVGWrapper = styled.div<SVGWrapperProps>`
         height: 100%;
         padding: 5px;
         transition: all 0.25s ease;
-        cursor: default; 
-        
+
         svg{
             width: 100%;
             height: 100%;
