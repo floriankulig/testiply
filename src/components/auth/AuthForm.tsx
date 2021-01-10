@@ -1,5 +1,5 @@
 import { Button } from "components/Button";
-import { FormInput, SVGWrapper, TextField } from "components/FormInput";
+import { FormInput, StyledFormInput, SVGWrapper, TextField } from "components/FormInput";
 import { rgba } from "polished";
 import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
@@ -26,6 +26,12 @@ const Form = styled.form`
     h1{
         margin: 0;
         margin-bottom: 1.5em;
+    }
+
+   .optionals {
+       width: 100%;
+       display: flex;
+       justify-content: space-between;
     }
 
     ${Button} {
@@ -113,7 +119,9 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType }) => {
                             </SVGWrapper>
                         </TextField>
                     </FormInput>
-                    <DateInput minDate={minBirthDate} maxDate={maxBirthDate} date={dateOfBirth} setDate={setDateOfBirth} />
+                    <div className="optionals">
+                        <DateInput style={{ width: "60%" }} minDate={minBirthDate} maxDate={maxBirthDate} date={dateOfBirth} setDate={setDateOfBirth} />
+                    </div>
                 </>
                 )}
                 <Button bold>{formType === "register" ? "Register" : "Log In"}</Button>
