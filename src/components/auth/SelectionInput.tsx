@@ -36,17 +36,26 @@ interface SelectionInputProps {
     style?: Object;
     className?: string;
     selection: any;
+    optional?: boolean;
     setSelection: React.Dispatch<React.SetStateAction<any>>;
     values: any[]
 }
 
-export const SelectionInput: React.FC<SelectionInputProps> = ({ style, className, selection, setSelection, values }) => {
+export const SelectionInput: React.FC<SelectionInputProps> = ({ style, className, selection, optional, setSelection, values }) => {
     const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
+    const [active, setActive] = useState<string>(optional ? "No Selection" : selection);
     const ref = useRef<HTMLUListElement>()
     useOnClickOutside(ref, () => setDropdownOpen(false));
 
-    const handleSeletionChange = (newSelection: any) => {
-        setSelection(newSelection)
+    const handleSelectionChange = (newSelection: any) => {
+        if (newSelection) {
+            setActive(newSelection)
+            setSelection(newSelection)
+        } else {
+            setActive("No Selection")
+            setSelection(null)
+        }
+
         setDropdownOpen(false)
     }
 
@@ -55,7 +64,7 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({ style, className
             Gender (optional)
             <TextField>
                 <span>
-                    {capitalized(selection)}
+                    {capitalized(active)}
                 </span>
                 <SVGWrapper
                     clickable
@@ -69,17 +78,23 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({ style, className
                     <FaChevronDown />
                 </SVGWrapper>
             </TextField>
-            {dropdownOpen && (
+            {dropdownOpen && values.filter(value => value !== active) && (
                 <Dropdown ref={ref}>
-                    {values && values.filter(value => value !== selection).map(value => (
+                    {values && values.filter(value => value !== active).map(value => (
                         <li
                             key={value}
-                            onClick={() => handleSeletionChange(value)}
-                            onKeyDown={() => handleSeletionChange(value)}
+                            onClick={() => handleSelectionChange(value)}
+                            onKeyDown={() => handleSelectionChange(value)}
                         >
                             {capitalized(value)}
                         </li>
                     ))}
+                    {optional && active !== "No Selection" && <li
+                        onClick={() => handleSelectionChange(null)}
+                        onKeyDown={() => handleSelectionChange(null)}
+                    >
+                        {capitalized("No Selection")}
+                    </li>}
                 </Dropdown>
             )}
         </FormInput>
