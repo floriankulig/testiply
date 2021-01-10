@@ -1,11 +1,12 @@
 import { Button } from "components/Button";
-import { FormInput, StyledFormInput, SVGWrapper, TextField } from "components/FormInput";
+import { FormInput, SVGWrapper, TextField } from "components/FormInput";
+import { SelectionInput } from "components/auth/SelectionInput";
 import { rgba } from "polished";
 import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { MdEmail } from "react-icons/md";
 import styled from "styled-components"
-import { FormType } from "ts"
+import { FormType, Gender, genders } from "ts"
 import { DateInput } from "./DateInput";
 
 const Container = styled.div`
@@ -49,6 +50,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType }) => {
     const [password, setPassword] = useState<string>("");
     const [confirmPassword, setConfirmPassword] = useState<string>("");
     const [showPasswords, setShowPasswords] = useState<boolean>(false);
+    const [gender, setGender] = useState<Gender>("male");
 
     const minBirthDate = new Date("1900-01-01")
     let maxBirthDate = new Date()
@@ -121,6 +123,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType }) => {
                     </FormInput>
                     <div className="optionals">
                         <DateInput style={{ width: "60%" }} minDate={minBirthDate} maxDate={maxBirthDate} date={dateOfBirth} setDate={setDateOfBirth} />
+                        <SelectionInput style={{ width: "35%" }} selection={gender} setSelection={setGender} values={genders} />
                     </div>
                 </>
                 )}
