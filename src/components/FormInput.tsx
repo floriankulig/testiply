@@ -10,6 +10,8 @@ export const FormInput = styled.div<FormInputProps>`
     margin-top: 1em;
     display: flex;
     flex-direction: column;
+    font-size: 0.9rem;
+    font-weight: bold;
 `;
 
 export const TextField = styled.div`
@@ -35,16 +37,17 @@ export const TextField = styled.div`
         width: 95%;
         height: 100%;
         display: inline-flex;
+        font-weight: normal;
         align-items: center;
         &:focus-within{
-            margin-left: .5em;
+            margin-left: .4em;
         }
 
         // remove default styling for browser validation
         &:invalid {
             box-shadow: none;
         }
-        transition: margin 0.2s ease;
+        transition: margin 0.3s ease;
     }
     
 `;
