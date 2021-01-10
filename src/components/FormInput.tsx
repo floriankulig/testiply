@@ -1,5 +1,5 @@
 import { darken } from "polished";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 interface FormInputProps {
     hasValidInput?: boolean;
@@ -47,23 +47,31 @@ export const TextField = styled.div`
     
 `;
 
+interface SVGWrapperProps {
+    clickable?: boolean;
+}
+
 // for wrapping svgs in inputs if there are any
-export const SVGWrapper = styled.div`
+export const SVGWrapper = styled.div<SVGWrapperProps>`
         border-radius: 30%;
         justify-content: center;
         align-items: center;
         height: 100%;
         padding: 5px;
-        cursor: pointer;
         transition: all 0.25s ease;
-        
         &:hover{
-            background: var(--layout-nav-background);
-            color: var(--primary);
+                background: var(--layout-nav-background);
         }
-
+        
         svg{
             width: 100%;
             height: 100%;
         }
+
+        ${p => p.clickable && css`
+            cursor: pointer;
+            &:hover{
+                color: var(--primary);
+            }
+        `}
 `
