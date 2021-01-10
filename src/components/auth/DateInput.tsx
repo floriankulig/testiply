@@ -136,10 +136,7 @@ export const DateInput: React.FC<DateInputProps> = ({ date, setDate, minDate, ma
         <FormInput style={{ position: "relative", ...style }} className={className}>
             Date Of Birth (optional)
             <TextField>
-                <span
-                    onClick={() => setCalendarOpen(!calendarOpen)}
-                    onKeyDown={() => setCalendarOpen(!calendarOpen)}
-                >
+                <span>
                     {hasInitialDate ? "Select Your Birthday ➜" : date.toString().slice(4, 15)}
                 </span>
                 <SVGWrapper
@@ -158,7 +155,7 @@ export const DateInput: React.FC<DateInputProps> = ({ date, setDate, minDate, ma
                         showYearDropdown
                         minDate={minDate}
                         maxDate={maxDate}
-                        onChange={(newdate) => {
+                        onChange={(newdate: Date) => {
                             setDate(newdate);
                             setCalendarOpen(false)
                             setHasInitialDate(false)
