@@ -47,7 +47,7 @@ export const AuthInfoSidebar: React.FC<AuthInfoSidebarProps> = ({ type }) => {
             <div className="cta-change-formtype">
                 {type === "register" ? (
                     <>
-                        <h2>Already have an Account?</h2>
+                        <h2>Already have an account?</h2>
                         <Link href="/login">
                             <Button color="white" big bold >Go to Log In</Button>
                         </Link>
