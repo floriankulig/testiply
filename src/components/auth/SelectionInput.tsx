@@ -1,7 +1,7 @@
 import { capitalized } from "helpers";
 import { useOnClickOutside } from "hooks";
-import { darken, rgba } from "polished";
-import { useRef, useState } from "react";
+import { darken } from "polished";
+import { useLayoutEffect, useRef, useState } from "react";
 import { FaChevronDown } from "react-icons/fa"
 import styled from "styled-components";
 import { FormInput, SVGWrapper, TextField } from "../FormInput"
@@ -42,12 +42,14 @@ interface SelectionInputProps {
 }
 
 export const SelectionInput: React.FC<SelectionInputProps> = ({ style, className, selection, optional, setSelection, values }) => {
-    const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
-    const [active, setActive] = useState<string>(optional ? "No Selection" : selection);
-    const ref = useRef<HTMLUListElement>()
-    useOnClickOutside(ref, () => setDropdownOpen(false));
+    const [dropdownOpens, setDropdownOpens] = useState<boolean>(false);
+    const dropdownAllowedToOpen: boolean = dropdownOpens && !!values[1] && !optional || dropdownOpens && !!values && optional
 
-    const handleSelectionChange = (newSelection: any) => {
+    const [active, setActive] = useState<typeof selection>(optional ? "No Selection" : selection);
+    const ref = useRef<HTMLUListElement>()
+    useOnClickOutside(ref, () => setDropdownOpens(false));
+
+    const handleSelectionChange = (newSelection: typeof selection) => {
         if (newSelection) {
             setActive(newSelection)
             setSelection(newSelection)
@@ -56,8 +58,12 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({ style, className
             setSelection(null)
         }
 
-        setDropdownOpen(false)
+        setDropdownOpens(false)
     }
+
+    useLayoutEffect(() => {
+        optional && setSelection(null)
+    }, []);
 
     return (
         <FormInput style={{ position: "relative", ...style }} className={className}>
@@ -68,9 +74,9 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({ style, className
                 </span>
                 <SVGWrapper
                     clickable
-                    onClick={() => setDropdownOpen(!dropdownOpen)}
-                    onKeyDown={() => setDropdownOpen(!dropdownOpen)}
-                    style={dropdownOpen ? {
+                    onClick={() => setDropdownOpens(!dropdownOpens)}
+                    onKeyDown={() => setDropdownOpens(!dropdownOpens)}
+                    style={dropdownOpens ? {
                         transform: "rotate(180deg)",
                         background: "transparent"
                     } : { background: "transparent" }}
@@ -78,7 +84,7 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({ style, className
                     <FaChevronDown />
                 </SVGWrapper>
             </TextField>
-            {dropdownOpen && values.filter(value => value !== active) && (
+            {dropdownAllowedToOpen && (
                 <Dropdown ref={ref}>
                     {values && values.filter(value => value !== active).map(value => (
                         <li
