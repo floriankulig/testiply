@@ -1,4 +1,4 @@
-type Gender = 'male' | 'female' | 'nonbinary';
+export type Gender = 'male' | 'female' | 'nonbinary';
 export type InputType = 'email' | 'password';
 export type FormType = 'login' | 'register';
 
