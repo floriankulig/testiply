@@ -1,6 +1,7 @@
 import { capitalized } from "helpers";
+import { useOnClickOutside } from "hooks";
 import { darken, rgba } from "polished";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { FaChevronDown } from "react-icons/fa"
 import styled from "styled-components";
 import { FormInput, SVGWrapper, TextField } from "../FormInput"
@@ -41,6 +42,13 @@ interface SelectionInputProps {
 
 export const SelectionInput: React.FC<SelectionInputProps> = ({ style, className, selection, setSelection, values }) => {
     const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
+    const ref = useRef<HTMLUListElement>()
+    useOnClickOutside(ref, () => setDropdownOpen(false));
+
+    const handleSeletionChange = (newSelection: any) => {
+        setSelection(newSelection)
+        setDropdownOpen(false)
+    }
 
     return (
         <FormInput style={{ position: "relative", ...style }} className={className}>
@@ -62,12 +70,12 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({ style, className
                 </SVGWrapper>
             </TextField>
             {dropdownOpen && (
-                <Dropdown>
+                <Dropdown ref={ref}>
                     {values && values.filter(value => value !== selection).map(value => (
                         <li
                             key={value}
-                            onClick={() => setSelection(value)}
-                            onKeyDown={() => setSelection(value)}
+                            onClick={() => handleSeletionChange(value)}
+                            onKeyDown={() => handleSeletionChange(value)}
                         >
                             {capitalized(value)}
                         </li>
