@@ -6,6 +6,7 @@ import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { MdEmail } from "react-icons/md";
 import styled from "styled-components"
 import { FormType } from "ts"
+import { DateInput } from "./DateInput";
 
 const Container = styled.div`
     width: calc(100vw - var(--auth-sidebar-width));
@@ -42,6 +43,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType }) => {
     const [password, setPassword] = useState<string>("");
     const [confirmPassword, setConfirmPassword] = useState<string>("");
     const [showPasswords, setShowPasswords] = useState<boolean>(false);
+    const [dateOfBirth, setDateOfBirth] = useState<Date | null>(null);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -87,10 +89,10 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType }) => {
                         </SVGWrapper>
                     </TextField>
                 </FormInput>
-                {formType === "register" && (
+                {formType === "register" && (<>
                     <FormInput>
                         Confirm Password
-                        <TextField>
+                    <TextField>
                             <input
                                 type={showPasswords ? "text" : "password"}
                                 placeholder="Confirm Password"
@@ -106,6 +108,8 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType }) => {
                             </SVGWrapper>
                         </TextField>
                     </FormInput>
+                    <DateInput date={dateOfBirth} setDate={setDateOfBirth} />
+                </>
                 )}
                 <Button bold>{formType === "register" ? "Register" : "Log In"}</Button>
             </Form>
