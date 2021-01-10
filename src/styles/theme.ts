@@ -2,7 +2,7 @@
 const theme = {
   primary: `#2262b6`,
   navy: `#09192f`,
-  borderRadius: `10px`,
+  borderRadius: `8px`,
   sidebarWidth: `250px`,
   authSidebarWidth: `30vw`,
   headerHeight: `90px`,
