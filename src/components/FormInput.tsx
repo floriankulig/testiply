@@ -8,17 +8,17 @@ interface FormInputProps {
 //support for label above input
 export const FormInput = styled.div<FormInputProps>`
     margin-top: 1em;
-    label{
-        font-size: 0.9rem;
-        font-weight: bold;
-    }
+    display: flex;
+    flex-direction: column;
 `;
 
 export const TextField = styled.div`
-    display: block;
-    width: clamp(250px, 100%, 400px);
+    display: inline-flex;
+    width: clamp(1px, 100%, 500px);
     margin-top: .2em;
-    padding: .8em 1em;
+    height: 3.5em;
+    padding: .5em 1em;
+    align-items: center;
     font-size: 1rem;
     cursor: text;
     font-family: "Roboto";
@@ -33,14 +33,37 @@ export const TextField = styled.div`
         border: none;
         font-family: "Roboto";
         font-size: 1rem;
+        width: 95%;
         &:focus-within{
-            transform: translateX(5px);
+            margin-left: .5em;
         }
 
         // remove default styling for browser validation
         &:invalid {
             box-shadow: none;
         }
-        transition: transform 0.2s ease;
+        transition: margin 0.2s ease;
     }
+    
 `;
+
+// for wrapping svgs in inputs if there are any
+export const SVGWrapper = styled.div`
+        border-radius: 30%;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        padding: 5px;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        
+        &:hover{
+            background: var(--layout-nav-background);
+            color: var(--primary);
+        }
+
+        svg{
+            width: 100%;
+            height: 100%;
+        }
+`
