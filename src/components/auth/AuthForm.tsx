@@ -50,13 +50,12 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType }) => {
     const [password, setPassword] = useState<string>("");
     const [confirmPassword, setConfirmPassword] = useState<string>("");
     const [showPasswords, setShowPasswords] = useState<boolean>(false);
-    const [gender, setGender] = useState<Gender>("male");
+    const [gender, setGender] = useState<Gender | null>(null);
 
     const minBirthDate = new Date("1900-01-01")
     let maxBirthDate = new Date()
     maxBirthDate.setFullYear(maxBirthDate.getFullYear() - 10)
     const [dateOfBirth, setDateOfBirth] = useState<Date>(maxBirthDate);
-
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -123,7 +122,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType }) => {
                     </FormInput>
                     <div className="optionals">
                         <DateInput style={{ width: "60%" }} minDate={minBirthDate} maxDate={maxBirthDate} date={dateOfBirth} setDate={setDateOfBirth} />
-                        <SelectionInput style={{ width: "35%" }} selection={gender} setSelection={setGender} values={genders} />
+                        <SelectionInput style={{ width: "35%" }} selection={gender} setSelection={setGender} values={genders} optional />
                     </div>
                 </>
                 )}
