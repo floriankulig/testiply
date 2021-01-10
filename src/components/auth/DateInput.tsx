@@ -138,7 +138,7 @@ export const DateInput: React.FC<DateInputProps> = ({ date, setDate, minDate, ma
                     onClick={() => setCalendarOpen(!calendarOpen)}
                     onKeyDown={() => setCalendarOpen(!calendarOpen)}
                 >
-                    {hasInitialDate ? "Select your date of birth" : date.toString().slice(4, 15)}
+                    {hasInitialDate ? "Select Your Birthday" : date.toString().slice(4, 15)}
                 </span>
                 <SVGWrapper
                     clickable
