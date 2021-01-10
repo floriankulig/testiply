@@ -3,6 +3,7 @@ import { FormInput, SVGWrapper, TextField } from "components/FormInput";
 import { rgba } from "polished";
 import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { MdEmail } from "react-icons/md";
 import styled from "styled-components"
 import { FormType } from "ts"
 
@@ -63,6 +64,9 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType }) => {
                             placeholder="E-Mail Address"
                             onChange={(e) => setEmail(e.target.value)}
                         />
+                        <SVGWrapper>
+                            <MdEmail />
+                        </SVGWrapper>
                     </TextField>
                 </FormInput>
                 <FormInput>
@@ -74,7 +78,11 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType }) => {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        <SVGWrapper>
+                        <SVGWrapper
+                            onClick={() => setShowPasswords(prev => !prev)}
+                            onKeyDown={() => setShowPasswords(prev => !prev)}
+                            clickable
+                        >
                             {showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
                         </SVGWrapper>
                     </TextField>
@@ -89,7 +97,11 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType }) => {
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                             />
-                            <SVGWrapper>
+                            <SVGWrapper
+                                onClick={() => setShowPasswords(prev => !prev)}
+                                onKeyDown={() => setShowPasswords(prev => !prev)}
+                                clickable
+                            >
                                 {showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
                             </SVGWrapper>
                         </TextField>
