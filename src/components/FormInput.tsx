@@ -59,9 +59,7 @@ export const SVGWrapper = styled.div<SVGWrapperProps>`
         height: 100%;
         padding: 5px;
         transition: all 0.25s ease;
-        &:hover{
-                background: var(--layout-nav-background);
-        }
+        cursor: default; 
         
         svg{
             width: 100%;
@@ -71,6 +69,7 @@ export const SVGWrapper = styled.div<SVGWrapperProps>`
         ${p => p.clickable && css`
             cursor: pointer;
             &:hover{
+                background: var(--layout-nav-background);
                 color: var(--primary);
             }
         `}
