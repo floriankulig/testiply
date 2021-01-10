@@ -5,7 +5,7 @@ import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { MdEmail } from "react-icons/md";
 import styled from "styled-components"
-import { FormType } from "ts"
+import { FormType, placeholderDate } from "ts"
 import { DateInput } from "./DateInput";
 
 const Container = styled.div`
@@ -43,7 +43,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType }) => {
     const [password, setPassword] = useState<string>("");
     const [confirmPassword, setConfirmPassword] = useState<string>("");
     const [showPasswords, setShowPasswords] = useState<boolean>(false);
-    const [dateOfBirth, setDateOfBirth] = useState<Date | null>(null);
+    const [dateOfBirth, setDateOfBirth] = useState<Date>(new Date(placeholderDate));
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
