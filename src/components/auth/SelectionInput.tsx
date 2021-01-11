@@ -35,9 +35,9 @@ const Dropdown = styled.ul`
 interface SelectionInputProps {
     style?: Object;
     className?: string;
-    selection: any;
+    selection: string;
+    setSelection: React.Dispatch<React.SetStateAction<string>>;
     optional?: boolean;
-    setSelection: React.Dispatch<React.SetStateAction<any>>;
     values: any[]
 }
 
@@ -45,11 +45,11 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({ style, className
     const [dropdownOpens, setDropdownOpens] = useState<boolean>(false);
     const dropdownShouldOpen: boolean = dropdownOpens && !!values[1] && !optional || dropdownOpens && !!values && optional
 
-    const [active, setActive] = useState<typeof selection>(optional ? "No Selection" : selection);
+    const [active, setActive] = useState<string>(optional ? "No Selection" : selection);
     const ref = useRef<HTMLUListElement>()
     useOnClickOutside(ref, () => setDropdownOpens(false));
 
-    const handleSelectionChange = (newSelection: typeof selection) => {
+    const handleSelectionChange = (newSelection: string) => {
         if (newSelection) {
             setActive(newSelection)
             setSelection(newSelection)
