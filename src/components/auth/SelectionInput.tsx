@@ -46,7 +46,7 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({ style, className
     const dropdownShouldOpen: boolean = dropdownOpens && !!values[1] && !optional || dropdownOpens && !!values && optional
 
     const [active, setActive] = useState<string>(optional ? "No Selection" : selection);
-    const ref = useRef<HTMLUListElement>()
+    const ref = useRef<HTMLDivElement>()
     useOnClickOutside(ref, () => setDropdownOpens(false));
 
     const handleSelectionChange = (newSelection: string) => {
@@ -68,41 +68,43 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({ style, className
     return (
         <FormInput style={{ position: "relative", ...style }} className={className}>
             Gender (optional)
-            <TextField>
-                <span>
-                    {capitalized(active)}
-                </span>
-                <SVGWrapper
-                    clickable
-                    onClick={() => setDropdownOpens(!dropdownOpens)}
-                    onKeyDown={() => setDropdownOpens(!dropdownOpens)}
-                    style={dropdownOpens && dropdownShouldOpen ? {
-                        transform: "rotate(180deg)",
-                        background: "transparent"
-                    } : { background: "transparent" }}
-                >
-                    <FaChevronDown />
-                </SVGWrapper>
-            </TextField>
-            {dropdownShouldOpen && (
-                <Dropdown ref={ref}>
-                    {values && values.filter(value => value !== active).map(value => (
-                        <li
-                            key={value}
-                            onClick={() => handleSelectionChange(value)}
-                            onKeyDown={() => handleSelectionChange(value)}
-                        >
-                            {capitalized(value)}
-                        </li>
-                    ))}
-                    {optional && active !== "No Selection" && <li
-                        onClick={() => handleSelectionChange(null)}
-                        onKeyDown={() => handleSelectionChange(null)}
+            <div ref={ref}>
+                <TextField>
+                    <span>
+                        {capitalized(active)}
+                    </span>
+                    <SVGWrapper
+                        clickable
+                        onClick={() => setDropdownOpens(!dropdownOpens)}
+                        onKeyDown={() => setDropdownOpens(!dropdownOpens)}
+                        style={dropdownOpens && dropdownShouldOpen ? {
+                            transform: "rotate(180deg)",
+                            background: "transparent"
+                        } : { background: "transparent" }}
                     >
-                        {capitalized("No Selection")}
-                    </li>}
-                </Dropdown>
-            )}
+                        <FaChevronDown />
+                    </SVGWrapper>
+                </TextField>
+                {dropdownShouldOpen && (
+                    <Dropdown>
+                        {values && values.filter(value => value !== active).map(value => (
+                            <li
+                                key={value}
+                                onClick={() => handleSelectionChange(value)}
+                                onKeyDown={() => handleSelectionChange(value)}
+                            >
+                                {capitalized(value)}
+                            </li>
+                        ))}
+                        {optional && active !== "No Selection" && <li
+                            onClick={() => handleSelectionChange(null)}
+                            onKeyDown={() => handleSelectionChange(null)}
+                        >
+                            {capitalized("No Selection")}
+                        </li>}
+                    </Dropdown>
+                )}
+            </div>
         </FormInput>
     )
 }
