@@ -43,7 +43,7 @@ interface SelectionInputProps {
 
 export const SelectionInput: React.FC<SelectionInputProps> = ({ style, className, selection, optional, setSelection, values }) => {
     const [dropdownOpens, setDropdownOpens] = useState<boolean>(false);
-    const dropdownAllowedToOpen: boolean = dropdownOpens && !!values[1] && !optional || dropdownOpens && !!values && optional
+    const dropdownShouldOpen: boolean = dropdownOpens && !!values[1] && !optional || dropdownOpens && !!values && optional
 
     const [active, setActive] = useState<typeof selection>(optional ? "No Selection" : selection);
     const ref = useRef<HTMLUListElement>()
@@ -76,7 +76,7 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({ style, className
                     clickable
                     onClick={() => setDropdownOpens(!dropdownOpens)}
                     onKeyDown={() => setDropdownOpens(!dropdownOpens)}
-                    style={dropdownOpens ? {
+                    style={dropdownOpens && dropdownShouldOpen ? {
                         transform: "rotate(180deg)",
                         background: "transparent"
                     } : { background: "transparent" }}
@@ -84,7 +84,7 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({ style, className
                     <FaChevronDown />
                 </SVGWrapper>
             </TextField>
-            {dropdownAllowedToOpen && (
+            {dropdownShouldOpen && (
                 <Dropdown ref={ref}>
                     {values && values.filter(value => value !== active).map(value => (
                         <li
