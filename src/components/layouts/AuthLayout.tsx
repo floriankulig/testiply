@@ -1,5 +1,6 @@
 import { AuthInfoSidebar } from "components/auth"
 import { AuthLayoutHeader } from "components/auth/AuthLayoutHeader";
+import { InfoFooter } from "components/InfoFooter";
 import { useIsMobile } from "hooks";
 import styled from "styled-components"
 import { FormType } from "ts"
@@ -32,6 +33,9 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children, formType }) =>
             {children}
             {formType === "login" && !isMobile && (
                 <AuthInfoSidebar type={formType} />
+            )}
+            {isMobile && (
+                <InfoFooter />
             )}
         </StyledAuthLayout>
     )
