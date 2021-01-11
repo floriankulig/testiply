@@ -1,11 +1,17 @@
 import { AuthInfoSidebar } from "components/auth"
+import { AuthLayoutHeader } from "components/auth/AuthLayoutHeader";
+import { useIsMobile } from "hooks";
 import styled from "styled-components"
 import { FormType } from "ts"
 
 const StyledAuthLayout = styled.div`
-    max-height: 100vh;
-    height: 100vh;
+    background-color: var(--layout-content-background);
     display: flex;
+    flex-direction: column;
+
+    @media (${({ theme }) => theme.bp.big}){
+        flex-direction: row;
+    }
 `;
 
 
@@ -15,13 +21,16 @@ interface AuthLayoutProps {
 }
 
 export const AuthLayout: React.FC<AuthLayoutProps> = ({ children, formType }) => {
+    const isMobile = useIsMobile(1200);
+
     return (
-        <StyledAuthLayout style={{ maxHeight: "100vh", height: "100vh" }}>
-            {formType === "register" && (
+        <StyledAuthLayout style={{ minHeight: "100vh" }}>
+            <AuthLayoutHeader formType={formType} />
+            {formType === "register" && !isMobile && (
                 <AuthInfoSidebar type={formType} />
             )}
             {children}
-            {formType === "login" && (
+            {formType === "login" && !isMobile && (
                 <AuthInfoSidebar type={formType} />
             )}
         </StyledAuthLayout>

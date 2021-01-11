@@ -15,6 +15,7 @@ const CalendarWrapper = styled.div`
     border: 2px solid ${({ theme }) => rgba(theme.navy, 0.15)};
     background-color: var(--layout-content-background); 
     box-shadow: 0px 10px 35px ${rgba(0, 0, 0, 0.15)};
+    z-index: 99999;
 
     & .react-datepicker {
         border: 0;

@@ -8,21 +8,32 @@ import { MdEmail } from "react-icons/md";
 import styled from "styled-components"
 import { FormType, Gender, genders } from "ts"
 import { DateInput } from "./DateInput";
+import { useIsMobile } from "hooks";
 
 const Container = styled.div`
-    width: calc(100vw - var(--auth-sidebar-width));
-    background-color: var(--layout-content-background);
-    display: grid;
-    place-items: center; 
+    width: 100%;
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    min-height: calc(100vh - var(--header-height));
+    @media (${({ theme }) => theme.bp.big}){
+        height: 100vh;
+        max-height: 100vh;
+        width: calc(100vw - var(--auth-sidebar-width));
+    }
 `;
 
 const Form = styled.form`
     min-height: 50vh;
-    width: 50%;
-    padding: 4em 6em;
+    width: clamp(1px, 90%, 650px);
     border-radius: 4em;
+    padding: 4em 3em;
+    margin: 5em 0;
     background-color: var(--layout-nav-background);
     box-shadow: 10px 30px 80px ${p => rgba(p.theme.navy, 0.1)};
+    @media (${({ theme }) => theme.bp.small}){
+            padding: 4em 6em;
+    }
 
     h1{
         margin: 0;
@@ -30,13 +41,22 @@ const Form = styled.form`
     }
 
    .optionals {
-       width: 100%;
-       display: flex;
-       justify-content: space-between;
+        width: 100%;
+        // same as FormInputs
+        max-width: 600px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        @media (${({ theme }) => theme.bp.small}){
+            flex-direction: row;
+        }
     }
 
     ${Button} {
-        margin-top: 3em;
+        margin-top: 2em;
+        @media (${({ theme }) => theme.bp.small}){
+            margin-top: 3em;
+        }
     }
 `;
 
@@ -56,6 +76,8 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType }) => {
     let maxBirthDate = new Date()
     maxBirthDate.setFullYear(maxBirthDate.getFullYear() - 10)
     const [dateOfBirth, setDateOfBirth] = useState<Date>(maxBirthDate);
+
+    const inputsStacked = useIsMobile(720);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -121,8 +143,8 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType }) => {
                         </TextField>
                     </FormInput>
                     <div className="optionals">
-                        <DateInput style={{ width: "60%" }} minDate={minBirthDate} maxDate={maxBirthDate} date={dateOfBirth} setDate={setDateOfBirth} />
-                        <SelectionInput style={{ width: "35%" }} selection={gender} setSelection={setGender} values={genders} optional />
+                        <DateInput style={inputsStacked ? { width: "100%" } : { width: "60%" }} minDate={minBirthDate} maxDate={maxBirthDate} date={dateOfBirth} setDate={setDateOfBirth} />
+                        <SelectionInput style={inputsStacked ? { width: "100%" } : { width: "35%" }} selection={gender} setSelection={setGender} values={genders} optional />
                     </div>
                 </>
                 )}

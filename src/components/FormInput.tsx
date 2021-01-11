@@ -17,7 +17,7 @@ export const StyledFormInput = styled.div<StyledFormInputProps>`
 
 export const TextField = styled.div`
     display: inline-flex;
-    width: clamp(1px, 100%, 500px);
+    width: clamp(1px, 100%, 600px);
     margin-top: .2em;
     height: 3.5em;
     padding: .5em 1em;
