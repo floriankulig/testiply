@@ -1,7 +1,7 @@
 import { capitalized } from "helpers";
 import { useOnClickOutside } from "hooks";
 import { darken } from "polished";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaChevronDown } from "react-icons/fa"
 import styled from "styled-components";
 import { FormInput, SVGWrapper, TextField } from "../FormInput"
@@ -61,7 +61,7 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({ style, className
         setDropdownOpens(false)
     }
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         optional && setSelection(null)
     }, []);
 
