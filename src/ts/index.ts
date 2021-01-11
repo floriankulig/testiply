@@ -1,5 +1,5 @@
-export type Gender = 'male' | 'female' | 'non-binary';
-export const genders: Gender[] = ['male', 'female', 'non-binary'];
+export type Gender = 'male' | 'female' | 'other';
+export const genders: Gender[] = ['male', 'female', 'other'];
 
 export type InputType = 'email' | 'password';
 export type FormType = 'login' | 'register';
