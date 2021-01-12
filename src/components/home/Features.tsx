@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-const FeaturesContainer = styled("ul")`
+const FeaturesContainer = styled.ul`
     display: flex;
     justify-content: space-between;
     flex-direction: column;
