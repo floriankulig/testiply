@@ -12,6 +12,7 @@ const FeaturesContainer = styled("ul")`
 
 const Feature = styled.li`
     width: 350px;
+    max-width: 100%;
     margin: 0 auto;
     margin-bottom: 4em;
 
