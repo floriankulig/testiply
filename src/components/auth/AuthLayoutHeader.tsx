@@ -17,6 +17,7 @@ const StyledAuthLayoutHeader = styled.header<StyledAuthLayoutHeaderProps>`
     justify-content: space-between;
     height: var(--header-height);
     color: ${p => getTextColor(p.theme.layoutContentBg)};
+    z-index: 99;
     @media (${({ theme }) => theme.bp.big}) {
         position: absolute;
         right: ${p => p.reversed && "0"};
