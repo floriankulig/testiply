@@ -41,7 +41,7 @@ const getTextColor = (initialColor: string): string => {
   if (hsp > 200) {
     return theme.navy;
   } else {
-    return '#ffffff';
+    return theme.layoutContentBg;
   }
 };
 
