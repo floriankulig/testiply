@@ -3,9 +3,15 @@ import { FormType } from "ts"
 import { getTextColor } from "helpers";
 import { Policies, Socials } from "components/InfoFooter";
 import { Button } from "components/Button";
-import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router"
 
-const StyledAuthInfoSidebar = styled.div`
+interface StyledAuthInfoSidebarProps {
+    shows: boolean;
+    isRight: boolean;
+}
+
+const StyledAuthInfoSidebar = styled.div<StyledAuthInfoSidebarProps>`
     width: var(--auth-sidebar-width);
     height: 100vh;
     background-color: #6B1EF1;
@@ -13,6 +19,8 @@ const StyledAuthInfoSidebar = styled.div`
     flex-direction: column;
     justify-content: space-between;
     padding: 15em 0 3em;
+    transform: translateX(${p => p.shows ? "0" : p.isRight ? "100%" : "-100%"});
+    transition: transform .8s var(--easing);
 
     .cta-change-formtype{
         h2{
@@ -42,25 +50,25 @@ interface AuthInfoSidebarProps {
 }
 
 export const AuthInfoSidebar: React.FC<AuthInfoSidebarProps> = ({ type }) => {
+    const router = useRouter();
+    const [shows, setShows] = useState<boolean>(false);
+
+    useEffect(() => {
+        setShows(true);
+    }, []);
+
+    const handleFormToggle = () => {
+        setShows(false);
+        const timeout = setTimeout(() => router.push(`/${type === "register" ? "login" : "register"}`), 800)
+
+        return () => clearTimeout(timeout)
+    }
+
     return (
-        <StyledAuthInfoSidebar>
+        <StyledAuthInfoSidebar shows={shows} isRight={type === "login"}>
             <div className="cta-change-formtype">
-                {type === "register" ? (
-                    <>
-                        <h2>Already have an account?</h2>
-                        <Link href="/login">
-                            <Button color="white" big bold >Go to Log In</Button>
-                        </Link>
-                    </>
-                ) : (
-                        <>
-                            <h2>Don't have an account yet?</h2>
-                            <Link href="/register">
-                                <Button color="white" big bold>Go to Register</Button>
-                            </Link>
-                        </>
-                    )
-                }
+                <h2>Already have an account?</h2>
+                <Button color="white" big bold onClick={() => handleFormToggle()}>{type === "register" ? "Go to Login" : "Go to Register"}</Button>
             </div>
             <Info>
                 <div className="info-group">
