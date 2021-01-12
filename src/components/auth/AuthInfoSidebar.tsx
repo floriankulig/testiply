@@ -20,7 +20,7 @@ const StyledAuthInfoSidebar = styled.div<StyledAuthInfoSidebarProps>`
     justify-content: space-between;
     padding: 15em 0 3em;
     transform: translateX(${p => p.shows ? "0" : p.isRight ? "100%" : "-100%"});
-    transition: transform .8s var(--easing);
+    transition: transform .5s var(--easing);
 
     .cta-change-formtype{
         h2{
@@ -54,12 +54,14 @@ export const AuthInfoSidebar: React.FC<AuthInfoSidebarProps> = ({ type }) => {
     const [shows, setShows] = useState<boolean>(false);
 
     useEffect(() => {
-        setShows(true);
+        const timeout = setTimeout(() => setShows(true), 50)
+
+        return () => clearTimeout(timeout)
     }, []);
 
     const handleFormToggle = () => {
         setShows(false);
-        const timeout = setTimeout(() => router.push(`/${type === "register" ? "login" : "register"}`), 800)
+        const timeout = setTimeout(() => router.push(`/${type === "register" ? "login" : "register"}`), 550)
 
         return () => clearTimeout(timeout)
     }
