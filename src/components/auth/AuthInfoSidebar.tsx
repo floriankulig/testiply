@@ -5,6 +5,7 @@ import { Policies, Socials } from "components/InfoFooter";
 import { Button } from "components/Button";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router"
+import Link from "next/link";
 
 interface StyledAuthInfoSidebarProps {
     shows: boolean;
@@ -61,7 +62,7 @@ export const AuthInfoSidebar: React.FC<AuthInfoSidebarProps> = ({ type }) => {
 
     const handleFormToggle = () => {
         setShows(false);
-        const timeout = setTimeout(() => router.push(`/${type === "register" ? "login" : "register"}`), 550)
+        const timeout = setTimeout(() => router.push(`/${type.includes("register") ? "login" : "register"}`), 550)
 
         return () => clearTimeout(timeout)
     }
@@ -69,9 +70,15 @@ export const AuthInfoSidebar: React.FC<AuthInfoSidebarProps> = ({ type }) => {
     return (
         <StyledAuthInfoSidebar shows={shows} isRight={type === "login"}>
             <div className="cta-change-formtype">
-                <h2>Already have an account?</h2>
-                <Button color="white" big bold onClick={() => handleFormToggle()}>{type === "register" ? "Go to Login" : "Go to Register"}</Button>
+                <h2>{type.includes("register") ? "Already have an account?" : "Don't have an account yet?"}</h2>
+                <Button color="white" big bold onClick={() => handleFormToggle()} onKeyDown={() => handleFormToggle()}>{type !== "login" ? "Go to Login" : "Go to Register"}</Button>
             </div>
+            {type !== "dev_register" && (<div className="cta-change-formtype">
+                <h2>Want to publish your own apps?</h2>
+                <Link href="/dev_register">
+                    <Button transparent color="white" big bold>Register as a Developer</Button>
+                </Link>
+            </div>)}
             <Info>
                 <div className="info-group">
                     <Socials />
