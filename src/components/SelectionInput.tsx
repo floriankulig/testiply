@@ -4,7 +4,7 @@ import { darken } from "polished";
 import { useEffect, useRef, useState } from "react";
 import { FaChevronDown } from "react-icons/fa"
 import styled from "styled-components";
-import { FormInput, SVGWrapper, TextField } from "../FormInput"
+import { FormInput, SVGWrapper, TextField } from "./FormInput"
 
 const Dropdown = styled.ul`
     position: absolute;
