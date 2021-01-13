@@ -40,7 +40,7 @@ const Form = styled.form`
         margin-bottom: 1.5em;
     }
 
-   .optionals {
+   .meta-inputs {
         width: 100%;
         // same as FormInputs
         max-width: 600px;
@@ -142,7 +142,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType }) => {
                             </SVGWrapper>
                         </TextField>
                     </FormInput>
-                    <div className="optionals">
+                    <div className="meta-inputs">
                         <DateInput style={inputsStacked ? { width: "100%" } : { width: "60%" }} minDate={minBirthDate} maxDate={maxBirthDate} date={dateOfBirth} setDate={setDateOfBirth} />
                         <SelectionInput style={inputsStacked ? { width: "100%" } : { width: "35%" }} selection={gender} setSelection={setGender} values={genders} optional />
                     </div>
