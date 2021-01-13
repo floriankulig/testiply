@@ -2,7 +2,7 @@ export type Gender = 'male' | 'female' | 'other';
 export const genders: Gender[] = ['male', 'female', 'other'];
 
 export type InputType = 'email' | 'password';
-export type FormType = 'login' | 'register';
+export type FormType = 'login' | 'register' | 'dev_register';
 
 export interface User {
   firstName: string;
