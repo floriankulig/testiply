@@ -1,6 +1,6 @@
 import { Button } from "components/Button";
 import { FormInput, SVGWrapper, TextField } from "components/FormInput";
-import { SelectionInput } from "components/auth/SelectionInput";
+import { SelectionInput } from "components/SelectionInput";
 import { rgba } from "polished";
 import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
@@ -11,7 +11,7 @@ import { DateInput } from "./DateInput";
 import { useIsMobile } from "hooks";
 import Link from "next/link";
 
-const Container = styled.div`
+export const Container = styled.div`
     width: 100%;
     display: flex;
     align-items: center; 
@@ -24,7 +24,7 @@ const Container = styled.div`
     }
 `;
 
-const Form = styled.form`
+export const Form = styled.form`
     min-height: 50vh;
     width: clamp(1px, 90%, 650px);
     border-radius: 4em;
@@ -154,7 +154,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType }) => {
                     <Button bold>{formType === "register" ? "Register" : "Log In"}</Button>
                 </Form>
             </Container>
-            {formType !== "dev_register" && isFullscreen && (
+            {isFullscreen && (
                 <div style={{ textAlign: "center" }}>
                     <h2>Want to publish your own apps?</h2>
                     <Link href="/dev_register">
