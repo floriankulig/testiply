@@ -119,6 +119,7 @@ const CalendarWrapper = styled.div`
 `;
 
 interface DateInputProps {
+    label: string;
     date: Date;
     setDate: React.Dispatch<React.SetStateAction<Date>>;
     minDate: Date;
@@ -127,7 +128,7 @@ interface DateInputProps {
     className?: string;
 }
 
-export const DateInput: React.FC<DateInputProps> = ({ date, setDate, minDate, maxDate, style, className }) => {
+export const DateInput: React.FC<DateInputProps> = ({ label, date, setDate, minDate, maxDate, style, className }) => {
     const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
     const [hasInitialDate, setHasInitialDate] = useState<boolean>(true);
     const ref = useRef<HTMLDivElement>()
@@ -135,7 +136,7 @@ export const DateInput: React.FC<DateInputProps> = ({ date, setDate, minDate, ma
 
     return (
         <FormInput style={{ position: "relative", ...style }} className={className}>
-            Date Of Birth (optional)
+            {label}
             <TextField>
                 <span>
                     {hasInitialDate ? "Select Your Birthday ➜" : date.toString().slice(4, 15)}
