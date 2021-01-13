@@ -33,6 +33,7 @@ const Dropdown = styled.ul`
 `;
 
 interface SelectionInputProps {
+    label?: string;
     style?: Object;
     className?: string;
     selection: string;
@@ -41,7 +42,7 @@ interface SelectionInputProps {
     values: any[]
 }
 
-export const SelectionInput: React.FC<SelectionInputProps> = ({ style, className, selection, optional, setSelection, values }) => {
+export const SelectionInput: React.FC<SelectionInputProps> = ({ label, style, className, selection, optional, setSelection, values }) => {
     const [dropdownOpens, setDropdownOpens] = useState<boolean>(false);
     const dropdownShouldOpen: boolean = dropdownOpens && !!values[1] && !optional || dropdownOpens && !!values && optional
 
@@ -67,7 +68,7 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({ style, className
 
     return (
         <FormInput style={{ position: "relative", ...style }} className={className}>
-            Gender (optional)
+            {label && label}{optional && " (optional)"}
             <div ref={ref}>
                 <TextField>
                     <span>
