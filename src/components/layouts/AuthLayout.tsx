@@ -27,7 +27,7 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children, formType }) =>
     return (
         <StyledAuthLayout style={{ minHeight: "100vh" }}>
             <AuthLayoutHeader formType={formType} />
-            {formType === "register" && !isMobile && (
+            {formType.includes("register") && !isMobile && (
                 <AuthInfoSidebar type={formType} />
             )}
             {children}
