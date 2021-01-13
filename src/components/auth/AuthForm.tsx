@@ -10,9 +10,6 @@ import { DateInput } from "./DateInput";
 import { useIsMobile } from "hooks";
 import Link from "next/link";
 
-
-
-
 interface AuthFormProps {
     formType: FormType;
 }
