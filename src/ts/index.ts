@@ -33,5 +33,3 @@ interface TodayAppWidgets {
   _id: number;
   apps: App[];
 }
-
-const apps: TodayAppWidgets[] = [];
