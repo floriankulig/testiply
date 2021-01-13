@@ -11,3 +11,27 @@ export interface User {
   dateOfBirth?: string;
   gender?: Gender;
 }
+
+type Platform = 'iOS' | 'Android' | 'Windows' | 'MacOS' | 'Linux';
+
+interface App {
+  name: string;
+  desc: string;
+  websiteUrl: string; //Website oder Github oder FaceBook
+  platform: Platform;
+  imageUrl: string[];
+  rating: number;
+  downloads: number;
+  developer_id: number; // dev/dev_id
+  developer_name: string;
+  _id: number;
+}
+
+interface TodayAppWidgets {
+  heading: string;
+  opensLongDescription: boolean;
+  _id: number;
+  apps: App[];
+}
+
+const apps: TodayAppWidgets[] = [];
