@@ -146,8 +146,8 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType }) => {
                             </TextField>
                         </FormInput>
                         <div className="meta-inputs">
-                            <DateInput style={inputsStacked ? { width: "100%" } : { width: "60%" }} minDate={minBirthDate} maxDate={maxBirthDate} date={dateOfBirth} setDate={setDateOfBirth} />
-                            <SelectionInput style={inputsStacked ? { width: "100%" } : { width: "35%" }} selection={gender} setSelection={setGender} values={genders} optional />
+                            <DateInput label="Date Of Birth (optional)" style={inputsStacked ? { width: "100%" } : { width: "60%" }} minDate={minBirthDate} maxDate={maxBirthDate} date={dateOfBirth} setDate={setDateOfBirth} />
+                            <SelectionInput label="Gender" style={inputsStacked ? { width: "100%" } : { width: "35%" }} selection={gender} setSelection={setGender} values={genders} optional />
                         </div>
                     </>
                     )}
