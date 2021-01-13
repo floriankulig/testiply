@@ -9,6 +9,7 @@ import styled from "styled-components"
 import { FormType, Gender, genders } from "ts"
 import { DateInput } from "./DateInput";
 import { useIsMobile } from "hooks";
+import Link from "next/link";
 
 const Container = styled.div`
     width: 100%;
@@ -78,60 +79,43 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType }) => {
     const [dateOfBirth, setDateOfBirth] = useState<Date>(maxBirthDate);
 
     const inputsStacked = useIsMobile(720);
+    const isFullscreen = useIsMobile(1200);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
     }
 
     return (
-        <Container>
-            <Form onSubmit={(e) => handleSubmit(e)}>
-                {formType === "register" ? (
-                    <h1>Register</h1>
-                ) : (
-                        <h1>Login</h1>
-                    )}
-                <FormInput>
-                    Email
-                        <TextField>
-                        <input
-                            type="email"
-                            value={email}
-                            placeholder="E-Mail Address"
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                        <SVGWrapper>
-                            <MdEmail />
-                        </SVGWrapper>
-                    </TextField>
-                </FormInput>
-                <FormInput>
-                    Password
-                        <TextField>
-                        <input
-                            type={showPasswords ? "text" : "password"}
-                            placeholder="Password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                        <SVGWrapper
-                            onClick={() => setShowPasswords(prev => !prev)}
-                            onKeyDown={() => setShowPasswords(prev => !prev)}
-                            clickable
-                        >
-                            {showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
-                        </SVGWrapper>
-                    </TextField>
-                </FormInput>
-                {formType === "register" && (<>
+        <>
+            <Container>
+                <Form onSubmit={(e) => handleSubmit(e)}>
+                    {formType === "register" ? (
+                        <h1>Register</h1>
+                    ) : (
+                            <h1>Login</h1>
+                        )}
                     <FormInput>
-                        Confirm Password
-                    <TextField>
+                        Email
+                        <TextField>
+                            <input
+                                type="email"
+                                value={email}
+                                placeholder="E-Mail Address"
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                            <SVGWrapper>
+                                <MdEmail />
+                            </SVGWrapper>
+                        </TextField>
+                    </FormInput>
+                    <FormInput>
+                        Password
+                        <TextField>
                             <input
                                 type={showPasswords ? "text" : "password"}
-                                placeholder="Confirm Password"
-                                value={confirmPassword}
-                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                placeholder="Password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                             <SVGWrapper
                                 onClick={() => setShowPasswords(prev => !prev)}
@@ -142,14 +126,42 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType }) => {
                             </SVGWrapper>
                         </TextField>
                     </FormInput>
-                    <div className="meta-inputs">
-                        <DateInput style={inputsStacked ? { width: "100%" } : { width: "60%" }} minDate={minBirthDate} maxDate={maxBirthDate} date={dateOfBirth} setDate={setDateOfBirth} />
-                        <SelectionInput style={inputsStacked ? { width: "100%" } : { width: "35%" }} selection={gender} setSelection={setGender} values={genders} optional />
-                    </div>
-                </>
-                )}
-                <Button bold>{formType === "register" ? "Register" : "Log In"}</Button>
-            </Form>
-        </Container>
+                    {formType === "register" && (<>
+                        <FormInput>
+                            Confirm Password
+                    <TextField>
+                                <input
+                                    type={showPasswords ? "text" : "password"}
+                                    placeholder="Confirm Password"
+                                    value={confirmPassword}
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                />
+                                <SVGWrapper
+                                    onClick={() => setShowPasswords(prev => !prev)}
+                                    onKeyDown={() => setShowPasswords(prev => !prev)}
+                                    clickable
+                                >
+                                    {showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
+                                </SVGWrapper>
+                            </TextField>
+                        </FormInput>
+                        <div className="meta-inputs">
+                            <DateInput style={inputsStacked ? { width: "100%" } : { width: "60%" }} minDate={minBirthDate} maxDate={maxBirthDate} date={dateOfBirth} setDate={setDateOfBirth} />
+                            <SelectionInput style={inputsStacked ? { width: "100%" } : { width: "35%" }} selection={gender} setSelection={setGender} values={genders} optional />
+                        </div>
+                    </>
+                    )}
+                    <Button bold>{formType === "register" ? "Register" : "Log In"}</Button>
+                </Form>
+            </Container>
+            {formType !== "dev_register" && isFullscreen && (
+                <div style={{ textAlign: "center" }}>
+                    <h2>Want to publish your own apps?</h2>
+                    <Link href="/dev_register">
+                        <Button basic big bold>Register as a Developer</Button>
+                    </Link>
+                </div>
+            )}
+        </>
     )
 }
