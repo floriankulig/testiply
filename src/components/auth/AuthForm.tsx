@@ -105,7 +105,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formType }) => {
             {isFullscreen && (
                 <div style={{ textAlign: "center" }}>
                     <h2>Want to publish your own apps?</h2>
-                    <Link href="/dev_register">
+                    <Link href="/dev/register">
                         <Button basic big bold>Register as a Developer</Button>
                     </Link>
                 </div>
