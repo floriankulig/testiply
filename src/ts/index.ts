@@ -1,6 +1,22 @@
 export type Gender = 'male' | 'female' | 'other';
 export const genders: Gender[] = ['male', 'female', 'other'];
 
+export type Platform =
+  | 'ios'
+  | 'android'
+  | 'windows'
+  | 'macOS'
+  | 'linux'
+  | 'all';
+export const platforms: Platform[] = [
+  'ios',
+  'android',
+  'windows',
+  'macOS',
+  'linux',
+  'all',
+];
+
 export type InputType = 'email' | 'password';
 export type FormType = 'login' | 'register' | 'dev_register';
 
@@ -11,8 +27,6 @@ export interface User {
   dateOfBirth?: string;
   gender?: Gender;
 }
-
-type Platform = 'iOS' | 'Android' | 'Windows' | 'MacOS' | 'Linux';
 
 interface App {
   name: string;
