@@ -118,10 +118,10 @@ const CalendarWrapper = styled.div`
         background: transparent;
     }    
 
-    &.dropdown-enter {opacity: 0; transform: scale(0.1) translate(150px,-150px);}
-    &.dropdown-enter-active {opacity: 1; transform: scale(1) translate(0,0); transition: .3s all var(--easing);}
-    &.dropdown-exit {opacity: 1; transform: scale(1)  translate(0,0);}
-    &.dropdown-exit-active {opacity: 0; transform: scale(0.1) translate(150px,-150px); transition: .3s all var(--easing);}
+    &.calendar-enter {opacity: 0; transform: scale(0.1) translate(150px,-150px);}
+    &.calendar-enter-active {opacity: 1; transform: scale(1) translate(0,0); transition: .25s all var(--easing);}
+    &.calendar-exit {opacity: 1; transform: scale(1)  translate(0,0);}
+    &.calendar-exit-active {opacity: 0; transform: scale(0.1) translate(150px,-150px); transition: .25s all var(--easing);}
 `;
 
 interface DateInputProps {
@@ -155,7 +155,7 @@ export const DateInput: React.FC<DateInputProps> = ({ label, date, setDate, minD
                     <FaCalendarAlt />
                 </SVGWrapper>
             </TextField>
-            <CSSTransition in={calendarOpen} classNames="dropdown" timeout={300} unmountOnExit>
+            <CSSTransition in={calendarOpen} classNames="calendar" timeout={250} unmountOnExit>
                 <CalendarWrapper ref={ref}>
                     <DatePicker
                         inline
