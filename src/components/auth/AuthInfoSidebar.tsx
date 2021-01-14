@@ -75,7 +75,7 @@ export const AuthInfoSidebar: React.FC<AuthInfoSidebarProps> = ({ type }) => {
             </div>
             {type !== "dev_register" && (<div className="cta-change-formtype">
                 <h2>Want to publish your own apps?</h2>
-                <Link href="/dev_register">
+                <Link href="/dev/register">
                     <Button transparent color="white" big bold>Register as a Developer</Button>
                 </Link>
             </div>)}
