@@ -7,6 +7,7 @@ import { useOnClickOutside } from "hooks";
 import { rgba } from "polished";
 import { getTextColor } from "helpers";
 import { FaCalendarAlt } from "react-icons/fa";
+import { CSSTransition } from "react-transition-group";
 
 const CalendarWrapper = styled.div`
     position: absolute;
@@ -116,6 +117,11 @@ const CalendarWrapper = styled.div`
         color: ${({ theme }) => rgba(getTextColor(theme.layoutContentBg), 0.7)};
         background: transparent;
     }    
+
+    &.dropdown-enter {opacity: 0; transform: scale(0.1) translate(150px,-150px);}
+    &.dropdown-enter-active {opacity: 1; transform: scale(1) translate(0,0); transition: .3s all var(--easing);}
+    &.dropdown-exit {opacity: 1; transform: scale(1)  translate(0,0);}
+    &.dropdown-exit-active {opacity: 0; transform: scale(0.1) translate(150px,-150px); transition: .3s all var(--easing);}
 `;
 
 interface DateInputProps {
@@ -149,7 +155,7 @@ export const DateInput: React.FC<DateInputProps> = ({ label, date, setDate, minD
                     <FaCalendarAlt />
                 </SVGWrapper>
             </TextField>
-            {calendarOpen &&
+            <CSSTransition in={calendarOpen} classNames="dropdown" timeout={300} unmountOnExit>
                 <CalendarWrapper ref={ref}>
                     <DatePicker
                         inline
@@ -163,7 +169,8 @@ export const DateInput: React.FC<DateInputProps> = ({ label, date, setDate, minD
                             setHasInitialDate(false)
                         }}
                     />
-                </CalendarWrapper>}
+                </CalendarWrapper>
+            </CSSTransition>
         </FormInput>
     )
 }
