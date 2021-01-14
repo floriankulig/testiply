@@ -3,7 +3,9 @@ import { useRef } from "react";
 import styled from "styled-components"
 import { TabRow, Tabs } from "./Tabs";
 import { BiLogOut } from "react-icons/bi"
-import { useAuthValue } from "context";
+import { useAuthValue, useSelectedPlatformValue } from "context";
+import { SelectionInput } from "components/SelectionInput";
+import { platforms } from "ts";
 
 interface StyledSidebarProps {
     open: boolean;
@@ -47,6 +49,8 @@ interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
+    const { selectedPlatform, setSelectedPlatform } = useSelectedPlatformValue()
+
     const ref = useRef<HTMLDivElement>();
     const { currentUser } = useAuthValue();
     useOnClickOutside(ref, () => setOpen(false))
@@ -55,7 +59,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
         <StyledSidebar ref={ref} open={open}>
             <div className="logo">BetaStore </div>
             <SidebarContent>
-                <Tabs setSidebarOpen={setOpen} />
+                <div>
+                    <Tabs setSidebarOpen={setOpen} />
+                    <SelectionInput selection={selectedPlatform} setSelection={setSelectedPlatform} label="Platform" values={platforms} />
+                </div>
                 {currentUser && (
                     <TabRow selected={false} icon>
                         <span>
