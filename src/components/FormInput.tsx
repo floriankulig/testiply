@@ -50,6 +50,10 @@ export const TextField = styled.div`
         }
         transition: margin 0.3s ease;
     }
+
+    span {
+        opacity: .8;
+    }
 `;
 
 interface SVGWrapperProps {
