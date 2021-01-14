@@ -6,7 +6,6 @@ import { Button } from "components/Button";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router"
 import Link from "next/link";
-import { useIsMobile } from "hooks";
 import { InfoPageHeader } from "components/InfoPageHeader";
 
 interface StyledAuthInfoSidebarProps {
@@ -21,7 +20,7 @@ const StyledAuthInfoSidebar = styled.div<StyledAuthInfoSidebarProps>`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding:  1em 2em 3em;
+    padding:  2em;
     transform: translateX(${p => p.shows ? "0" : p.isRight ? "100%" : "-100%"});
     transition: transform .5s var(--easing);
 
