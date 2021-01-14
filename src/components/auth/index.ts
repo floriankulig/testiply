@@ -1,5 +1,4 @@
-import { AuthForm } from './AuthForm';
+import { TesterAuthForm } from './TesterAuthForm';
 import { AuthInfoSidebar } from './AuthInfoSidebar';
-import { DevRegisterForm } from './DevRegisterForm';
 
-export { AuthForm, AuthInfoSidebar, DevRegisterForm };
+export { TesterAuthForm, AuthInfoSidebar };

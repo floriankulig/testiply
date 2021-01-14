@@ -10,11 +10,11 @@ import { DateInput } from "./DateInput";
 import { useIsMobile } from "hooks";
 import Link from "next/link";
 
-interface AuthFormProps {
+interface TesterAuthFormProps {
     formType: FormType;
 }
 
-export const AuthForm: React.FC<AuthFormProps> = ({ formType }) => {
+export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [confirmPassword, setConfirmPassword] = useState<string>("");
