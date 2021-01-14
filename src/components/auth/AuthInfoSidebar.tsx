@@ -6,6 +6,8 @@ import { Button } from "components/Button";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router"
 import Link from "next/link";
+import { useIsMobile } from "hooks";
+import { InfoPageHeader } from "components/InfoPageHeader";
 
 interface StyledAuthInfoSidebarProps {
     shows: boolean;
@@ -19,14 +21,14 @@ const StyledAuthInfoSidebar = styled.div<StyledAuthInfoSidebarProps>`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 3em 0;
+    padding:  1em 0 3em;
     transform: translateX(${p => p.shows ? "0" : p.isRight ? "100%" : "-100%"});
     transition: transform .5s var(--easing);
 
     .cta-change-formtype{
         h2{
             color: ${getTextColor("#6B1EF1")};
-            margin: 4em 0 1em;
+            margin: 3em 0 1em;
         }
         text-align: center;
     }
@@ -69,6 +71,7 @@ export const AuthInfoSidebar: React.FC<AuthInfoSidebarProps> = ({ type }) => {
 
     return (
         <StyledAuthInfoSidebar shows={shows} isRight={type === "login"}>
+            <InfoPageHeader style={{ padding: "0 2em" }} />
             <div className="cta-change-formtype">
                 <h2>{type.includes("register") ? "Already have an account?" : "Don't have an account yet?"}</h2>
                 <Button color="white" big bold onClick={() => handleFormToggle()} onKeyDown={() => handleFormToggle()}>{type !== "login" ? "Go to Login" : "Go to Register"}</Button>
@@ -80,7 +83,6 @@ export const AuthInfoSidebar: React.FC<AuthInfoSidebarProps> = ({ type }) => {
                         </Link>
                     </>)}
             </div>
-
             <Info>
                 <div className="info-group">
                     <Socials />

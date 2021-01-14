@@ -31,8 +31,8 @@ const FormContainer = styled.div`
   flex-direction: column;
   min-height: calc(100vh - var(--header-height));
   @media (${({ theme }) => theme.bp.big}) {
-    /* height: 100vh;
-    max-height: 100vh; */
+    height: 100vh;
+    max-height: 100vh;
     width: calc(100vw - var(--auth-sidebar-width));
   }
 `;
@@ -53,10 +53,10 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children, formType }) =>
                 <AuthInfoSidebar type={formType} />
             )}
             <ContentContainer>
-                <InfoPageHeader style={{
+                {isMobile && <InfoPageHeader style={{
                     color: getTextColor(theme.layoutContentBg),
                     padding: `0 ${isMobile ? "5%" : "4em"}`
-                }} />
+                }} />}
                 <FormContainer>
                     {children}
                 </FormContainer>
