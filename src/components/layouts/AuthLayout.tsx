@@ -1,6 +1,5 @@
 import { AuthInfoSidebar } from "components/auth"
 import { AuthLayoutHeader } from "components/auth/AuthLayoutHeader";
-import { Container } from "components/auth/FormComponents";
 import { InfoFooter } from "components/InfoFooter";
 import { useIsMobile } from "hooks";
 import styled from "styled-components"
@@ -15,6 +14,20 @@ const StyledAuthLayout = styled.div`
         flex-direction: row;
     }
 `;
+
+const Container = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - var(--header-height));
+  @media (${({ theme }) => theme.bp.big}) {
+    height: 100vh;
+    max-height: 100vh;
+    width: calc(100vw - var(--auth-sidebar-width));
+  }
+`;
+
 
 
 interface AuthLayoutProps {
