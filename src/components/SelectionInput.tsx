@@ -33,10 +33,10 @@ const Dropdown = styled.ul`
         }
     }
 
-    &.dropdown-enter {opacity: 0; transform: translateY(-50px);}
-    &.dropdown-enter-active {opacity: 1; transform: translateY(0); transition: .25s all var(--easing);}
-    &.dropdown-exit {opacity: 1; transform: translateY(0);}
-    &.dropdown-exit-active {opacity: 0; transform: translateY(-50px); transition: .25s all var(--easing);}
+    &.dropdown-enter {opacity: 0; transform: translateY(-50%) scaleY(0.1);}
+    &.dropdown-enter-active {opacity: 1; transform: translateY(0) scaleY(1); transition: .25s all var(--easing);}
+    &.dropdown-exit {opacity: 1; transform: translateY(0) scaleY(1);}
+    &.dropdown-exit-active {opacity: 0; transform: translateY(-50%) scaleY(0.1); transition: .25s all var(--easing);}
 `;
 
 interface SelectionInputProps {
