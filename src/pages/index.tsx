@@ -10,7 +10,7 @@ const Home: NextPage = () => {
         <title>Beta App Store</title>
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
       </Head>
-      <InfoPageHeader />
+      <InfoPageHeader className="container" />
       <Hero />
       <Features />
       <Benefits />
