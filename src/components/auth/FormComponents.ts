@@ -2,19 +2,6 @@ import { Button } from 'components/Button';
 import { rgba } from 'polished';
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: calc(100vh - var(--header-height));
-  @media (${({ theme }) => theme.bp.big}) {
-    height: 100vh;
-    max-height: 100vh;
-    width: calc(100vw - var(--auth-sidebar-width));
-  }
-`;
-
 export const Form = styled.form`
   min-height: 50vh;
   width: clamp(1px, 90%, 650px);
