@@ -19,14 +19,14 @@ const StyledAuthInfoSidebar = styled.div<StyledAuthInfoSidebarProps>`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 15em 0 3em;
+    padding: 3em 0;
     transform: translateX(${p => p.shows ? "0" : p.isRight ? "100%" : "-100%"});
     transition: transform .5s var(--easing);
 
     .cta-change-formtype{
         h2{
             color: ${getTextColor("#6B1EF1")};
-            margin-bottom: 1.5em;
+            margin: 4em 0 1em;
         }
         text-align: center;
     }
@@ -72,13 +72,15 @@ export const AuthInfoSidebar: React.FC<AuthInfoSidebarProps> = ({ type }) => {
             <div className="cta-change-formtype">
                 <h2>{type.includes("register") ? "Already have an account?" : "Don't have an account yet?"}</h2>
                 <Button color="white" big bold onClick={() => handleFormToggle()} onKeyDown={() => handleFormToggle()}>{type !== "login" ? "Go to Login" : "Go to Register"}</Button>
+                {type !== "dev_register" && (
+                    <>
+                        <h2>Want to publish your own apps?</h2>
+                        <Link href="/dev/register">
+                            <Button transparent color="white" big bold>Register as a Developer</Button>
+                        </Link>
+                    </>)}
             </div>
-            {type !== "dev_register" && (<div className="cta-change-formtype">
-                <h2>Want to publish your own apps?</h2>
-                <Link href="/dev/register">
-                    <Button transparent color="white" big bold>Register as a Developer</Button>
-                </Link>
-            </div>)}
+
             <Info>
                 <div className="info-group">
                     <Socials />
