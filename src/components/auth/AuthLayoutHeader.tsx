@@ -47,7 +47,6 @@ const StyledAuthLayoutHeader = styled.header<StyledAuthLayoutHeaderProps>`
                 color: var(--layout-content-background)
             }
         }
-        
     }
 
     .nav-links {
@@ -105,7 +104,6 @@ export const AuthLayoutHeader: React.FC<AuthLayoutHeaderProps> = ({ style, class
                             </Link>
                         )
                     : null}
-
             </ul>
         </StyledAuthLayoutHeader>
     )
