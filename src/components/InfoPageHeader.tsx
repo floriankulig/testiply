@@ -7,7 +7,7 @@ const Header = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 80px;
+    height: var(--header-height);
     color: ${p => getTextColor(p.theme.primary)};
 
     .logo {
@@ -37,7 +37,7 @@ const Header = styled.header`
 `
 
 
-export const LandingPageHeader: React.FC = () => {
+export const InfoPageHeader: React.FC = () => {
     return (
         <Header className="container">
             <div className="logo">BetaStore</div>
