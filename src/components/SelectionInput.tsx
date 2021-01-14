@@ -31,6 +31,7 @@ const Dropdown = styled.ul`
         &:hover{
             background: ${({ theme }) => darken(0.05, theme.layoutContentBg)};
         }
+        transition: 0.5s background;
     }
 
     &.dropdown-enter {opacity: 0; transform: translateY(-50%) scaleY(0.1);}
