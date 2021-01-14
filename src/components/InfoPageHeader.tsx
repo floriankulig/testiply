@@ -27,6 +27,9 @@ const Header = styled.header`
             @media (${({ theme }) => theme.bp.medium}) {
                 margin-left: 1.5em;
             }
+            :first-of-type{
+                margin: 0;
+            }
             a{
                 padding: .7em 1em;
                 border-radius: var(--border-radius);
