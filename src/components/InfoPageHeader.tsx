@@ -52,9 +52,6 @@ interface InfoPageHeaderProps {
 export const InfoPageHeader: React.FC<InfoPageHeaderProps> = ({ style, className }) => {
     const router = useRouter()
 
-    console.log(router.pathname.split("/")[0])
-    console.log(router.pathname)
-
     return (
         <Header className={className} style={style}>
             {!router.pathname.endsWith("/") ? (
