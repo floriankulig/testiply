@@ -12,6 +12,11 @@ interface TabRowProps {
     selected: boolean;
     icon: boolean;
 };
+
+const TabsContainer = styled.ul`
+    margin-bottom: 3em;
+`;
+
 export const TabRow = styled.li<TabRowProps>`
     width: 100%;
     padding: 15px ${p => p.icon && "50px"};
@@ -54,6 +59,7 @@ interface TabsProps {
 
 export const Tabs: React.FC<TabsProps> = ({ setSidebarOpen }) => {
     // tabs and icons indices correspond to eachother
+    // make constants file and put every tab in object with icon; differ between dev and tester tabs
     const tabs = ["today", "apps", "games", "categories", "news"];
     const icons = [[<AiOutlineHome />, <AiFillHome />], [<AiOutlineAppstore />, <AiFillAppstore />], [<IoGameControllerOutline />, <IoGameController />], [<RiStackLine />, <RiStackFill />], [<IoNewspaperOutline />, <IoNewspaper />]]
 
@@ -73,7 +79,7 @@ export const Tabs: React.FC<TabsProps> = ({ setSidebarOpen }) => {
     }, [selectedTab]);
 
     return (
-        <ul>
+        <TabsContainer>
             <Head>
                 <title>{active[0].toUpperCase() + active.slice(1)} | Beta App Store</title>
             </Head>
@@ -101,6 +107,6 @@ export const Tabs: React.FC<TabsProps> = ({ setSidebarOpen }) => {
                         </TabRow>
                     </Link>
                 ))}
-        </ul>
+        </TabsContainer>
     )
 }
