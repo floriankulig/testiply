@@ -13,6 +13,7 @@ const Dropdown = styled.ul`
     top: 66px;
     font-weight: normal;
     font-size: 1rem;
+    z-index: 99;
     border-radius:  0 0 var(--border-radius) var(--border-radius);
     background: var(--layout-content-background);
     border: 2px ${p => darken(0.1, p.theme.layoutContentBg)} solid;
