@@ -9,6 +9,7 @@ import { FormType, Gender, genders } from "ts"
 import { DateInput } from "./DateInput";
 import { useIsMobile } from "hooks";
 import Link from "next/link";
+import { theme } from "styles";
 
 interface TesterAuthFormProps {
     formType: FormType;
@@ -104,7 +105,7 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
                 <div style={{ textAlign: "center" }}>
                     <h2>Want to publish your own apps?</h2>
                     <Link href="/dev/register">
-                        <Button basic big bold>Register as a Developer</Button>
+                        <Button big bold color={theme.navy}>Register as a Developer</Button>
                     </Link>
                 </div>
             )}
