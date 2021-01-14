@@ -1,5 +1,6 @@
 import Head from 'next/head'
-import { Header, Hero, Features, Benefits, Footer, NewsLetter } from "components/home"
+import { Hero, Features, Benefits, Footer, NewsLetter } from "components/home"
+import { InfoPageHeader } from "components/InfoPageHeader"
 import { NextPage } from 'next'
 
 const Home: NextPage = () => {
@@ -9,7 +10,7 @@ const Home: NextPage = () => {
         <title>Beta App Store</title>
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
       </Head>
-      <Header />
+      <InfoPageHeader />
       <Hero />
       <Features />
       <Benefits />
