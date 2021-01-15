@@ -34,7 +34,8 @@ interface App {
   desc: string;
   websiteUrl: string; //Website oder Github oder FaceBook
   platform: Platform;
-  imageUrl: string[];
+  icon: string;
+  screenshots: string[];
   rating: number;
   downloads: number;
   developer_id: number; // dev/dev_id
