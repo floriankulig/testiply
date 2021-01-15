@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { FaChevronDown } from "react-icons/fa"
 import { CSSTransition } from "react-transition-group";
 import styled from "styled-components";
-import { FormInput, SVGWrapper, TextField } from "./FormInput"
+import { FormInput, SVGWrapper, TextField } from "components/forms"
 
 const Dropdown = styled.ul`
     position: absolute;

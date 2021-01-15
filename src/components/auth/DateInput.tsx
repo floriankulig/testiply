@@ -1,4 +1,4 @@
-import { FormInput, SVGWrapper, TextField } from "components/FormInput"
+import { FormInput, SVGWrapper, TextField } from "components/forms"
 import { useRef, useState } from "react";
 import styled from "styled-components";
 import DatePicker from "react-datepicker"

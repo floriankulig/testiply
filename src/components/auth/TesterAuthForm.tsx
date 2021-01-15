@@ -1,5 +1,5 @@
 import { Button } from "components/Button";
-import { FormInput, SVGWrapper, TextField } from "components/FormInput";
+import { FormInput, SVGWrapper, TextField } from "components/forms";
 import { SelectionInput } from "components/SelectionInput";
 import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
