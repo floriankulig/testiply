@@ -21,12 +21,12 @@ export const Button = styled.button<ButtonProps>`
   ${(p) =>
     p.big
       ? css`
-          padding: 1em 1.8em;
-          font-size: 1rem;
+          padding: 18px 32px;
+          font-size: 16px;
         `
       : css`
-          padding: 0.9em 1.8em;
-          font-size: 0.9rem;
+          padding: 16px 32px;
+          font-size: 14px;
         `};
   ${(p) =>
     p.rounded
