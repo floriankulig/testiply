@@ -5,6 +5,7 @@ import { useState } from "react";
 import { rgba } from "polished";
 import { Button } from "components/Button";
 import { useSelectedTabValue } from "context";
+import { CSSTransition } from "react-transition-group";
 
 interface SearchbarProps {
     hasInput: boolean;
@@ -97,7 +98,9 @@ export const Searchbar: React.FC = () => {
                     <MdClear />
                 </div>}
             </StyledSearchbar>
-            {!!query && (<Button style={{ minHeight: "46px" }}>Search all categories</Button>)}
+            <CSSTransition in={!!query} timeout={300} classNames="button" unmountOnExit>
+                <Button style={{ minHeight: "46px" }}>Search all categories</Button>
+            </CSSTransition>
         </>
     )
 }
