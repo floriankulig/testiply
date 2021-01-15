@@ -9,6 +9,7 @@ import { SectionHeader } from "./Benefits";
 import { postData } from "api";
 import { evaluateEmailRes } from "helpers";
 import { Loading } from "components/Loading";
+import { CSSTransition } from "react-transition-group";
 
 const StyledInput = styled.div`
     background-color: #f5f5f5;
@@ -165,21 +166,23 @@ export const NewsLetter: React.FC = () => {
                     <div className="bg" />
                 </StyledInput>
                 {errorMessage && <ErrorMessage><MdError />{errorMessage}</ErrorMessage>}
-                <Button
-                    onClick={(e) => onSubmit(e)}
-                    onKeyDown={(e) => onSubmit(e)}
-                    disabled={submitted || isLoading}
-                    aria-label="Sign Up for our newsletter."
-                    bold
-                    big
-                >
-                    {isLoading ? (
-                        <>
-                            {"Loading"}
-                            <Loading size={40} style={{ marginLeft: "5px", transform: "translateY(2px)" }} />
-                        </>
-                    ) : submitted ? "Submitted!" : "Join Now!"}
-                </Button>
+                <CSSTransition timeout={300} classNames="button" appear in={true}>
+                    <Button
+                        onClick={(e) => onSubmit(e)}
+                        onKeyDown={(e) => onSubmit(e)}
+                        disabled={submitted || isLoading}
+                        aria-label="Sign Up for our newsletter."
+                        bold
+                        big
+                    >
+                        {isLoading ? (
+                            <>
+                                {"Loading"}
+                                <Loading size={40} style={{ marginLeft: "5px", transform: "translateY(2px)" }} />
+                            </>
+                        ) : submitted ? "Submitted!" : "Join Now!"}
+                    </Button>
+                </CSSTransition>
             </div>
         </NewsletterSection>
     )
