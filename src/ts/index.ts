@@ -26,6 +26,7 @@ export interface User {
   email: string;
   dateOfBirth?: string;
   gender?: Gender;
+  _id: string;
 }
 
 interface App {
@@ -38,12 +39,12 @@ interface App {
   downloads: number;
   developer_id: number; // dev/dev_id
   developer_name: string;
-  _id: number;
+  _id: string;
 }
 
 interface TodayAppWidgets {
   heading: string;
   opensLongDescription: boolean;
-  _id: number;
+  _id: string;
   apps: App[];
 }
