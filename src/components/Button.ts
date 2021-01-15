@@ -84,4 +84,23 @@ export const Button = styled.button<ButtonProps>`
       box-shadow: none;
     }
   }
+
+  &.button-enter {
+    opacity: 0;
+    transform: scale(0.1);
+  }
+  &.button-enter-active {
+    transition: 300ms all var(--easing);
+    transform: scale(1);
+    opacity: 1;
+  }
+  &.button-exit {
+    transform: scale(1);
+    opacity: 1;
+  }
+  &.button-exit-active {
+    transition: 300ms all var(--easing);
+    opacity: 0;
+    transform: scale(0.1);
+  }
 `;
