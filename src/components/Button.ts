@@ -85,6 +85,15 @@ export const Button = styled.button<ButtonProps>`
     }
   }
 
+  &.button-appear {
+    opacity: 0;
+    transform: scale(0.1);
+  }
+  &.button-appear-active {
+    transition: 300ms all var(--easing);
+    transform: scale(1);
+    opacity: 1;
+  }
   &.button-enter {
     opacity: 0;
     transform: scale(0.1);
