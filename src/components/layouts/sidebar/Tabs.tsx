@@ -7,6 +7,8 @@ import { AiOutlineHome, AiFillHome, AiOutlineAppstore, AiFillAppstore } from "re
 import { IoGameControllerOutline, IoGameController, IoNewspaperOutline, IoNewspaper } from "react-icons/io5"
 import { RiStackLine, RiStackFill } from "react-icons/ri"
 import styled, { css } from "styled-components"
+import { UserType } from "ts";
+import { devTabIcons, devTabNames, testerTabIcons, testerTabNames } from "ts/constants";
 
 interface TabRowProps {
     selected: boolean;
@@ -55,13 +57,14 @@ export const TabRow = styled.li<TabRowProps>`
 
 interface TabsProps {
     setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>
+    tabTypes: UserType
 }
 
-export const Tabs: React.FC<TabsProps> = ({ setSidebarOpen }) => {
+export const Tabs: React.FC<TabsProps> = ({ setSidebarOpen, tabTypes }) => {
     // tabs and icons indices correspond to eachother
     // make constants file and put every tab in object with icon; differ between dev and tester tabs
-    const tabs = ["today", "apps", "games", "categories", "news"];
-    const icons = [[<AiOutlineHome />, <AiFillHome />], [<AiOutlineAppstore />, <AiFillAppstore />], [<IoGameControllerOutline />, <IoGameController />], [<RiStackLine />, <RiStackFill />], [<IoNewspaperOutline />, <IoNewspaper />]]
+    const tabs = tabTypes === "tester" ? testerTabNames : devTabNames;
+    const icons = tabTypes === "tester" ? testerTabIcons : devTabIcons;
 
     const { selectedTab, setSelectedTab } = useSelectedTabValue();
     const [active, setActive] = useState<string>(selectedTab);
