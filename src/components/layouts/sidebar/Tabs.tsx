@@ -3,9 +3,6 @@ import Head from "next/head";
 import Link from "next/link";
 import { rgba } from "polished";
 import { useEffect, useState } from "react";
-import { AiOutlineHome, AiFillHome, AiOutlineAppstore, AiFillAppstore } from "react-icons/ai"
-import { IoGameControllerOutline, IoGameController, IoNewspaperOutline, IoNewspaper } from "react-icons/io5"
-import { RiStackLine, RiStackFill } from "react-icons/ri"
 import styled, { css } from "styled-components"
 import { UserType } from "ts";
 import { devTabIcons, devTabNames, testerTabIcons, testerTabNames } from "ts/constants";
