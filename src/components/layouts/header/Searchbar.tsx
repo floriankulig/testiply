@@ -6,12 +6,14 @@ import { rgba } from "polished";
 import { Button } from "components/Button";
 import { useSelectedTabValue } from "context";
 import { CSSTransition } from "react-transition-group";
+import { useIsMobile } from "hooks";
+import { SVGWrapper } from "components/forms";
 
 interface SearchbarProps {
     hasInput: boolean;
 }
 
-const StyledSearchbar = styled.div<SearchbarProps>`
+const StyledSearchbar = styled.form<SearchbarProps>`
     height: 50px;
     width: clamp(300px, 40%, 420px);
     max-width: 100%;
@@ -35,11 +37,11 @@ const StyledSearchbar = styled.div<SearchbarProps>`
         }
     }
     
-    svg{
+    ${SVGWrapper}{
         margin-right: 15px;
+        padding: 0; 
         width: 30px;
         height: 30px;
-        color:#535353;
     }
 
     .search-cancel {
@@ -77,6 +79,12 @@ const SearchbarInput = styled.input`
 export const Searchbar: React.FC = () => {
     const [query, setQuery] = useState<string>("");
     const { selectedTab } = useSelectedTabValue()
+    const isMobile = useIsMobile(1200)
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log("submitted")
+    }
 
     const handleType = (event: React.ChangeEvent<HTMLInputElement>): void => {
         setQuery(event.target.value)
@@ -84,8 +92,14 @@ export const Searchbar: React.FC = () => {
 
     return (
         <>
-            <StyledSearchbar hasInput={!!query}>
-                <IoSearch />
+            <StyledSearchbar hasInput={!!query} onSubmit={(e) => handleSubmit(e)}>
+                <SVGWrapper
+                    clickable
+                    onClick={(e) => handleSubmit(e)}
+                    onKeyDown={(e) => handleSubmit(e)}
+                >
+                    <IoSearch />
+                </SVGWrapper>
                 <SearchbarInput placeholder={`Type to search in ${selectedTab[0].toUpperCase() + selectedTab.slice(1)}`} type="text" value={query} onChange={(e) => handleType(e)} />
                 {!!query && <div
                     className="search-cancel"
@@ -98,8 +112,14 @@ export const Searchbar: React.FC = () => {
                     <MdClear />
                 </div>}
             </StyledSearchbar>
-            <CSSTransition in={!!query} timeout={300} classNames="button" unmountOnExit>
-                <Button style={{ minHeight: "46px" }}>Search all categories</Button>
+            <CSSTransition in={!!query && !isMobile} timeout={300} classNames="button" unmountOnExit>
+                <Button
+                    bold
+                    onClick={(e) => handleSubmit(e)}
+                    onKeyDown={(e) => handleSubmit(e)}
+                >
+                    Search all categories
+                </Button>
             </CSSTransition>
         </>
     )
