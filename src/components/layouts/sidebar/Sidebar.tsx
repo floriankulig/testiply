@@ -61,10 +61,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
             <SidebarContent>
                 <div>
                     <Tabs setSidebarOpen={setOpen} />
-                    <SelectionInput selection={selectedPlatform} setSelection={setSelectedPlatform} values={platforms} />
+                    <SelectionInput selection={selectedPlatform} setSelection={setSelectedPlatform} label="Platform" values={platforms} />
                 </div>
                 {currentUser && (
-                    <TabRow selected={false} icon>
+                    <TabRow selected={false} icon style={{ marginTop: "3em" }}>
                         <span>
                             <BiLogOut />
                         </span>
