@@ -7,10 +7,6 @@ import { useEffect } from 'react'
 const Apps = () => {
     const { setSelectedTab } = useSelectedTabValue()
 
-    useEffect(() => {
-        setSelectedTab("apps")
-    }, [])
-
     return (
         <>
             <Head>
