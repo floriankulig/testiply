@@ -20,6 +20,8 @@ export const platforms: Platform[] = [
 export type InputType = 'email' | 'password';
 export type FormType = 'login' | 'register' | 'dev_register';
 
+export type UserType = 'tester' | 'dev';
+
 export interface User {
   firstName: string;
   lastName: string;
