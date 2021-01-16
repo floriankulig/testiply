@@ -1,3 +1,4 @@
+import { getCurrentTabFromRoute } from "helpers";
 import { createContext, useContext, useState, useEffect } from "react";
 
 export type ContextType = {
@@ -8,7 +9,7 @@ export type ContextType = {
 export const SelectedTabContext = createContext<Partial<ContextType>>({});
 
 export const SelectedTabProvider = ({ children }) => {
-    const [selectedTab, setSelectedTab] = useState("today");
+    const [selectedTab, setSelectedTab] = useState<string>(getCurrentTabFromRoute());
 
     useEffect(() => {
         console.log(selectedTab)
