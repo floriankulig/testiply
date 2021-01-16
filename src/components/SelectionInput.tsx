@@ -75,13 +75,7 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({ label, style, cl
     }, []);
 
     return (
-        <FormInput
-            style={
-                !label ? { position: "relative", marginTop: 0, ...style }
-                    : { position: "relative", ...style }
-            }
-            className={className}
-        >
+        <FormInput style={{ position: "relative", ...style }} className={className}>
             {label && label}{optional && " (optional)"}
             <div ref={ref}>
                 <TextField>
