@@ -7,10 +7,6 @@ import { useEffect } from 'react'
 const Today = () => {
     const { setSelectedTab } = useSelectedTabValue()
 
-    useEffect(() => {
-        setSelectedTab("today")
-    }, [])
-
     return (
         <>
             <Head>
