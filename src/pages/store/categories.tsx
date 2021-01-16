@@ -7,10 +7,6 @@ import { useEffect } from 'react'
 const Categories = () => {
     const { setSelectedTab } = useSelectedTabValue()
 
-    useEffect(() => {
-        setSelectedTab("categories")
-    }, [])
-
     return (
         <>
             <Head>
