@@ -21,8 +21,8 @@ const StyledSidebar = styled.div<StyledSidebarProps>`
     height: 100vh;
     position: fixed;
     z-index: 99999;
-    padding: 0 15px;
     transition: var(--sidebarDuration) transform var(--easing);
+    overflow-y: auto;
 
     .logo{
         display: inline-flex;
@@ -37,7 +37,7 @@ const StyledSidebar = styled.div<StyledSidebarProps>`
 
 const SidebarContent = styled.div`
     min-height: calc(100vh - var(--header-height));
-    padding: 3em 0 5em;
+    padding: 3em 15px 5em;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -61,7 +61,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
             <SidebarContent>
                 <div>
                     <Tabs setSidebarOpen={setOpen} />
-                    <SelectionInput selection={selectedPlatform} setSelection={setSelectedPlatform} label="Platform" values={platforms} />
+                    <SelectionInput selection={selectedPlatform} setSelection={setSelectedPlatform} values={platforms} />
                 </div>
                 {currentUser && (
                     <TabRow selected={false} icon>
