@@ -52,6 +52,7 @@ interface SidebarProps {
 export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
     const { selectedPlatform, setSelectedPlatform } = useSelectedPlatformValue()
     const { pathname } = useRouter()
+    const isDevRoute = pathname.split("/")[1] === "dev"
 
     const ref = useRef<HTMLDivElement>();
     const { currentUser } = useAuthValue();
@@ -63,10 +64,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
             <SidebarContent>
                 <div>
                     <Tabs
-                        tabTypes={pathname.split("/")[1] === "dev" ? "dev" : "tester"}
+                        tabTypes={isDevRoute ? "dev" : "tester"}
                         setSidebarOpen={setOpen}
                     />
-                    <SelectionInput selection={selectedPlatform} setSelection={setSelectedPlatform} label="Platform" values={platforms} />
+                    {!isDevRoute && (
+                        <SelectionInput selection={selectedPlatform} setSelection={setSelectedPlatform} label="Platform" values={platforms} />
+                    )}
                 </div>
                 {currentUser && (
                     <TabRow selected={false} icon style={{ marginTop: "3em" }}>
