@@ -6,6 +6,7 @@ import { BiLogOut } from "react-icons/bi"
 import { useAuthValue, useSelectedPlatformValue } from "context";
 import { SelectionInput } from "components/SelectionInput";
 import { platforms } from "ts";
+import { useRouter } from "next/router";
 
 interface StyledSidebarProps {
     open: boolean;
@@ -50,6 +51,7 @@ interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
     const { selectedPlatform, setSelectedPlatform } = useSelectedPlatformValue()
+    const { pathname } = useRouter()
 
     const ref = useRef<HTMLDivElement>();
     const { currentUser } = useAuthValue();
@@ -60,7 +62,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
             <div className="logo">BetaStore </div>
             <SidebarContent>
                 <div>
-                    <Tabs tabTypes="tester" setSidebarOpen={setOpen} />
+                    <Tabs
+                        tabTypes={pathname.split("/")[1] === "dev" ? "dev" : "tester"}
+                        setSidebarOpen={setOpen}
+                    />
                     <SelectionInput selection={selectedPlatform} setSelection={setSelectedPlatform} label="Platform" values={platforms} />
                 </div>
                 {currentUser && (
