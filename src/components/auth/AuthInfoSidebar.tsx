@@ -25,11 +25,19 @@ const StyledAuthInfoSidebar = styled.div<StyledAuthInfoSidebarProps>`
     transition: transform .5s var(--easing);
     overflow-y: auto;
 
+    & .nav-links li {
+        padding-top: 2em;
+    }
+
     .cta-change-formtype{
         h2{
             color: ${getTextColor("#6B1EF1")};
             margin: 3em 0 1em;
+            &:last-of-type{
+                margin-top: clamp(1em, 10vh, 3em);
+            }
         }
+        margin-bottom: 4em;
         text-align: center;
     }
 `;
