@@ -14,27 +14,30 @@ const StyledAuthLayout = styled.div`
 
     @media (${({ theme }) => theme.bp.big}){
         flex-direction: row;
+        max-height: 100vh;
     }
 `;
 
 const ContentContainer = styled.div`
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
 `;
 
 
 const FormContainer = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  min-height: calc(100vh - var(--header-height));
-  @media (${({ theme }) => theme.bp.big}) {
-    height: 100vh;
-    max-height: 100vh;
-    width: calc(100vw - var(--auth-sidebar-width));
-  }
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items:center;
+    flex-direction: column;
+    min-height: calc(100vh - var(--header-height));
+    overflow-x: hidden;
+    @media (${({ theme }) => theme.bp.big}) {
+        height: 100vh;
+        max-height: 100vh;
+        width: calc(100vw - var(--auth-sidebar-width));
+    }
 `;
 
 
