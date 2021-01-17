@@ -13,7 +13,6 @@ import styled from "styled-components";
 import { rgba } from "polished";
 
 const Form = styled.form`
-  min-height: 50vh;
   width: clamp(1px, 90%, 650px);
   border-radius: 4em;
   padding: 4em 3em;
