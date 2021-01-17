@@ -7,8 +7,6 @@ const getCurrentTabFromRoute = (): string => {
   const pathArray = router.pathname.split('/');
   let tab: string;
 
-  console.log(pathArray);
-
   if (!pathArray[2] && pathArray[1] === 'store') {
     tab = 'today';
   } else if (
