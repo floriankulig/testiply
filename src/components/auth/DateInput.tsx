@@ -4,7 +4,7 @@ import styled from "styled-components";
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 import { useOnClickOutside } from "hooks";
-import { rgba } from "polished";
+import { darken, rgba } from "polished";
 import { getTextColor } from "helpers";
 import { FaCalendarAlt } from "react-icons/fa";
 import { CSSTransition } from "react-transition-group";
@@ -13,7 +13,7 @@ const CalendarWrapper = styled.div`
     position: absolute;
     right: 0;
     border-radius: 1.5em;
-    border: 2px solid ${({ theme }) => rgba(theme.navy, 0.15)};
+    border: 2px ${p => darken(0.1, p.theme.layoutContentBg)} solid; 
     background-color: var(--layout-content-background); 
     box-shadow: 0px 10px 35px ${rgba(0, 0, 0, 0.15)};
     z-index: 99999;
