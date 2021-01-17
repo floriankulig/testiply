@@ -23,6 +23,7 @@ const StyledAuthInfoSidebar = styled.div<StyledAuthInfoSidebarProps>`
     padding:  2em;
     transform: translateX(${p => p.shows ? "0" : p.isRight ? "100%" : "-100%"});
     transition: transform .5s var(--easing);
+    overflow-y: auto;
 
     .cta-change-formtype{
         h2{
