@@ -1,4 +1,5 @@
 import { AuthProvider, SelectedTabProvider } from 'context'
+import { Layout as StoreLayout } from "components/layouts/Layout"
 import Head from 'next/head'
 import { ThemeProvider } from 'styled-components'
 import { GlobalStyle, theme } from "styles"
@@ -21,12 +22,19 @@ const MyApp = ({ Component, pageProps }: any) => {
       </Head>
       <ThemeProvider theme={theme}>
         <AuthProvider>
-          <SelectedTabProvider>
-            <Layout>
-              <GlobalStyle />
-              <Component {...pageProps} />
-            </Layout>
-          </SelectedTabProvider>
+          {Layout === StoreLayout ? (
+            <SelectedTabProvider>
+              <Layout>
+                <GlobalStyle />
+                <Component {...pageProps} />
+              </Layout>
+            </SelectedTabProvider>
+          ) : (
+              <Layout>
+                <GlobalStyle />
+                <Component {...pageProps} />
+              </Layout>
+            )}
         </AuthProvider>
       </ThemeProvider>
     </>

@@ -60,7 +60,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
             <div className="logo">BetaStore </div>
             <SidebarContent>
                 <div>
-                    <Tabs setSidebarOpen={setOpen} />
+                    <Tabs tabTypes="tester" setSidebarOpen={setOpen} />
                     <SelectionInput selection={selectedPlatform} setSelection={setSelectedPlatform} label="Platform" values={platforms} />
                 </div>
                 {currentUser && (

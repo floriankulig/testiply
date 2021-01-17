@@ -4,7 +4,7 @@ import styled from "styled-components"
 import { useEffect, useState } from "react"
 import { useIsMobile } from "hooks"
 import { theme } from "styles"
-import { SelectedPlatformProvider } from "context"
+import { SelectedPlatformProvider, SelectedTabProvider } from "context"
 
 
 interface StyledContentProps {
@@ -56,10 +56,13 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
 
     return (
-        <SelectedPlatformProvider>
-            <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
-            <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-            <StyledContent sidebarOpen={sidebarOpen} className="inner-content" scrolled={scrolled}>{children}</StyledContent>
-        </SelectedPlatformProvider>
+        <SelectedTabProvider>
+            <SelectedPlatformProvider>
+                <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
+                <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+                <StyledContent sidebarOpen={sidebarOpen} className="inner-content" scrolled={scrolled}>{children}</StyledContent>
+            </SelectedPlatformProvider>
+        </SelectedTabProvider>
+
     )
 }
