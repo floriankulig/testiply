@@ -1,14 +1,14 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { User } from "ts"
 
-const testUser: User = { firstName: "Max", lastName: "Mustermann", email: "muster@mail.com" }
+const testUser: User = { firstName: "Max", lastName: "Mustermann", email: "muster@mail.com", _id: "tgg51cfgfdt8" }
 
-export type ContextType = {
+type ContextType = {
     currentUser?: User | null;
     setCurrentUser?: React.Dispatch<React.SetStateAction<User>>;
 }
 
-export const AuthContext = createContext<Partial<ContextType>>({});
+const AuthContext = createContext<Partial<ContextType>>({});
 
 export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState<User | null>(testUser);
