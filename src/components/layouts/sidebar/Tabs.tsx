@@ -85,7 +85,7 @@ export const Tabs: React.FC<TabsProps> = ({ setSidebarOpen, tabTypes }) => {
             </Head>
             {tabs &&
                 tabs.map((tabName, i) => (
-                    <Link href={tabName === "today" ? "/store" : `/store/${tabName}`} key={i}>
+                    <Link href={tabName === "today" ? "/store" : tabTypes === "tester" ? `/store/${tabName}` : `/dev/${tabName}`} key={i}>
                         <TabRow
                             selected={active === tabName}
                             onClick={() => handleTabSwitch(tabName)}
