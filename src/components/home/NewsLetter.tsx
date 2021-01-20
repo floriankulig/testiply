@@ -111,8 +111,9 @@ export const NewsLetter: React.FC = () => {
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         event.preventDefault();
-        setEmail(event.target.value);
         setErrorMessage("")
+        if (submitted || isLoading) return
+        setEmail(event.target.value);
     }
 
     const onSubmit = (event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>): void => {
