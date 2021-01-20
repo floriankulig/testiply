@@ -19,6 +19,7 @@ const MyApp = ({ Component, pageProps }: any) => {
       <Head>
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
       </Head>
       <ThemeProvider theme={theme}>
         <AuthProvider>
