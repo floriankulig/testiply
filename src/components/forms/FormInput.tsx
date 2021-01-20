@@ -2,12 +2,12 @@ import { darken, lighten } from "polished";
 import { InputType } from "ts";
 import styled, { css } from "styled-components";
 
-interface StyledFormInputProps {
+interface FormInputProps {
     hasValidInput?: boolean;
 }
 
 //support for label above input
-export const StyledFormInput = styled.div<StyledFormInputProps>`
+export const FormInput = styled.div<FormInputProps>`
     margin-top: 1em;
     display: flex;
     flex-direction: column;
@@ -84,16 +84,3 @@ export const SVGWrapper = styled.div<SVGWrapperProps>`
         `}
 `
 
-interface FormInputProps {
-    children: React.ReactNode;
-    style?: Object;
-    className?: string;
-}
-
-export const FormInput: React.FC<FormInputProps> = ({ children, style, className }) => {
-    return (
-        <StyledFormInput style={style} className={className}>
-            {children}
-        </StyledFormInput>
-    )
-}
