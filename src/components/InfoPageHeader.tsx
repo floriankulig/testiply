@@ -61,7 +61,7 @@ export const InfoPageHeader: React.FC<InfoPageHeaderProps> = ({ style, className
             ) : (
                     <div className="logo">BetaStore</div>
                 )}
-            <ul className="nav-links">
+            {/* <ul className="nav-links">
                 {!router.pathname.endsWith("/") && <Link href="/store">
                     <li>
                         <a>Store</a>
@@ -82,7 +82,7 @@ export const InfoPageHeader: React.FC<InfoPageHeaderProps> = ({ style, className
                         <a>Register</a>
                     </li>
                 </Link>}
-            </ul>
+            </ul> */}
         </Header>
     )
 }

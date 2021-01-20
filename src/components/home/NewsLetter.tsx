@@ -146,7 +146,7 @@ export const NewsLetter: React.FC = () => {
     }
 
     return (
-        <NewsletterSection className="container">
+        <NewsletterSection className="container" id="newsletter">
             <SectionHeader>Subscribe To Our Newsletter</SectionHeader>
             <div className="content">
                 <InfoCard>
