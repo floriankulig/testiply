@@ -88,10 +88,9 @@ interface FormInputProps {
     children: React.ReactNode;
     style?: Object;
     className?: string;
-    inputType?: InputType;
 }
 
-export const FormInput: React.FC<FormInputProps> = ({ children, style, className, inputType }) => {
+export const FormInput: React.FC<FormInputProps> = ({ children, style, className }) => {
     return (
         <StyledFormInput style={style} className={className}>
             {children}
