@@ -1,5 +1,6 @@
 import { SVGWrapper, FormInput, TextField } from './FormInput';
-import { MultilevelForm } from './MultilevelForm';
+import { FormikStepper } from './FormikStepper';
+import { FormikStep } from './FormikStep';
 import { AuthForm } from './AuthForm';
 import { TextInput } from './TextInput';
 
@@ -7,7 +8,8 @@ export {
   SVGWrapper,
   FormInput,
   TextField,
-  MultilevelForm,
+  FormikStepper,
+  FormikStep,
   AuthForm,
   TextInput,
 };
