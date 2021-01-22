@@ -2,7 +2,7 @@ import { Button } from 'components/Button';
 import { rgba } from 'polished';
 import styled from 'styled-components';
 
-export const AuthForm = styled.form`
+export const AuthForm = styled.div`
   width: clamp(1px, 90%, 650px);
   border-radius: 4em;
   padding: 4em 3em;
