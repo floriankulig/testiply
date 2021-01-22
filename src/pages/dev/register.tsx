@@ -1,12 +1,15 @@
-import { AuthForm, FormikStep, TextField } from "components/forms";
+import { AuthForm, FormikStep, TextField, TextInput } from "components/forms";
 import { FormikStepper } from "components/forms";
 import { AuthLayout } from "components/layouts";
 import { Field, FormikHelpers, FormikValues } from "formik";
 import { useIsMobile } from "hooks";
 import { NextPage } from "next";
 import Head from "next/head";
+import { useState } from "react";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { MdEmail } from "react-icons/md";
 import { Gender, genders } from "ts";
-import { object, string } from "yup";
+import * as Yup from 'yup';
 
 interface FormValues {
     email: string;
@@ -17,6 +20,7 @@ interface FormValues {
 }
 
 const DevRegister: NextPage = () => {
+    const [showPasswords, setShowPasswords] = useState<boolean>(false);
     const inputsStacked = useIsMobile(720);
 
     const initialValues: FormValues = {
@@ -38,27 +42,50 @@ const DevRegister: NextPage = () => {
             </Head>
             <AuthLayout formType="dev_register">
                 <AuthForm>
-                    <h1>Sign Up As A Dev</h1>
+                    <h1>Sign Up as a Dev</h1>
                     <FormikStepper
                         initialValues={initialValues}
                         onSubmit={(values, helpers) => handleSubmit(values, helpers)}
                     >
                         <FormikStep
-                            validationSchema={object({
-                                email: string().required().min(2).max(5)
+                            validationSchema={Yup.object({
+                                email: Yup.string().required().min(3),
+                                password: Yup.string().required('Password is required'),
+                                confirmPassword: Yup.string()
+                                    .oneOf([Yup.ref('password'), null], 'Passwords must match')
                             })}
                         >
-                            <Field name="email" placeholder="Email" />
+                            <TextInput
+                                svg={<MdEmail />}
+                                name="email"
+                                label="E-Mail Address"
+                                placeholder="Enter your E-Mail Address"
+                            />
+                            <TextInput
+                                name="password"
+                                label="Password"
+                                placeholder="Must be at least 8 characters"
+                                type={showPasswords ? "text" : "password"}
+                                svg={showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
+                                svgClickHandler={() => setShowPasswords(prev => !prev)}
+                            />
+                            <TextInput
+                                name="confirmPassword"
+                                label="Confirm Password"
+                                placeholder="Must be at least 8 characters"
+                                type={showPasswords ? "text" : "password"}
+                                svg={showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
+                                svgClickHandler={() => setShowPasswords(prev => !prev)}
+                            />
                         </FormikStep>
                         <FormikStep
-                            validationSchema={object({
-                                password: string().required().min(4).max(5)
-                            })}
                         >
-                            <Field name="password" placeholder="password" />
-                        </FormikStep>
-                        <FormikStep>
-                            <Field name="confirmPassword" placeholder="confirm password" />
+                            <TextInput
+                                svg={<MdEmail />}
+                                name="gender"
+                                label="gender"
+                                placeholder="Enter your gender"
+                            />
                         </FormikStep>
                     </FormikStepper>
                 </AuthForm>
