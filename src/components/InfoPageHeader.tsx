@@ -10,19 +10,16 @@ const Header = styled.header`
     align-items: center;
     height: var(--header-height);
     color: ${p => getTextColor(p.theme.primary)};
-
     .logo {
         font-size:clamp(1.3rem, 5vw ,1.8rem);
         font-weight: bold;
         user-select: none;
         cursor: pointer;
     }
-
     .nav-links {
         display: flex;
         justify-content: space-between;
         align-items: center;
-
         li {
             @media (${({ theme }) => theme.bp.medium}) {
                 margin-left: 1.5em;
@@ -61,7 +58,7 @@ export const InfoPageHeader: React.FC<InfoPageHeaderProps> = ({ style, className
             ) : (
                     <div className="logo">BetaStore</div>
                 )}
-            {/* <ul className="nav-links">
+            <ul className="nav-links">
                 {!router.pathname.endsWith("/") && <Link href="/store">
                     <li>
                         <a>Store</a>
@@ -82,7 +79,7 @@ export const InfoPageHeader: React.FC<InfoPageHeaderProps> = ({ style, className
                         <a>Register</a>
                     </li>
                 </Link>}
-            </ul> */}
+            </ul>
         </Header>
     )
 }

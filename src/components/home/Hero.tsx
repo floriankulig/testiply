@@ -13,7 +13,6 @@ const HeroSection = styled.section`
     align-items: center;
     display: flex;
     justify-content: space-between;
-
     .hero__svg {
         margin: 0;
         height: clamp(200px, 40vw, 600px);
@@ -27,7 +26,6 @@ const BackgroundImage = styled.img`
     left: 0;
     width: 100%;
     z-index: -9000;
-
     &.mobile {
         width: 100%;
         height: auto;
@@ -38,11 +36,9 @@ const BackgroundImage = styled.img`
 
 const Content = styled.div`
     user-select: none;
-
     @media (${({ theme }) => theme.bp.medium}){
         margin: 0;
     }
-
     h1 {
         color: white;
         font-size: clamp(3.3rem, 6.3vw, 5rem);
@@ -52,7 +48,6 @@ const Content = styled.div`
             margin-bottom: .5em;
         }
     }
-
     button{
         box-shadow: 4px 5px 15px rgba(110, 127, 218, 0.25);
         font-size: clamp(1rem, 2vw, 1.2rem);
@@ -62,15 +57,15 @@ const Content = styled.div`
 export const Hero: React.FC = () => {
     const isMobile = useIsMobile(1080);
 
-    const handleClick = () => document.querySelector("#newsletter").scrollIntoView({ behavior: "smooth" })
-
     return (
         <HeroSection className="container">
             <BackgroundImage className={`${isMobile && "mobile"}`} src={`/images/hero_bg${isMobile ? "-mobile" : ""}.svg`} alt="" />
             <Content>
                 <h1>Test Apps.</h1>
                 <h1>Give Feedback.</h1>
-                <Button rounded bold color="white" onClick={() => handleClick()} onKeyDown={() => handleClick()}>More Information</Button>
+                <Link href="/store">
+                    <Button rounded bold color="white">View Apps</Button>
+                </Link>
             </Content>
             {!isMobile && <img className="hero__svg" src="/images/app_phone.svg" alt="" />}
         </HeroSection>

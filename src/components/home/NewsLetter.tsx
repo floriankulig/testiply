@@ -23,7 +23,6 @@ const StyledInput = styled.div`
     @media (${({ theme }) => theme.bp.small}){
         width: 400px;
     }
-
     input {
         border: 0;
         border-radius: 5px;
@@ -33,7 +32,6 @@ const StyledInput = styled.div`
         margin-left: 8px;
         transition: all 0.25s ease;
         width: 90%;
-
         &:focus {
             padding-left: 5px;
             padding-right: 0px;
@@ -46,7 +44,6 @@ const StyledInput = styled.div`
             box-shadow: none;
         }
     }
-
     svg {
         order: -1;
         background: #ffffff;
@@ -58,7 +55,6 @@ const StyledInput = styled.div`
         padding: 5px;
         transition: all 0.25s ease;
     }
-
     .bg {
         width: 100%;
         height: 100%;
@@ -77,14 +73,12 @@ const StyledInput = styled.div`
 const NewsletterSection = styled.div`
     margin-top: 15em;
     height: 20em;
-
     // Media query corresponds to InfoCard styles, where card is open
     @media (min-width: 450px){
         h1 {
             margin-bottom: 1em;
         }
     }
-
     div.content{
         width: 100%;
         margin: 0 auto;
@@ -92,7 +86,6 @@ const NewsletterSection = styled.div`
         @media (${({ theme }) => theme.bp.small}){
             width: 400px;
         }
-
         button{
             margin-top: 1em;
             width: 100%;
@@ -113,8 +106,6 @@ export const NewsLetter: React.FC = () => {
         event.preventDefault();
         setEmail(event.target.value);
         setErrorMessage("")
-        if (submitted || isLoading) return
-        setEmail(event.target.value);
     }
 
     const onSubmit = (event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLButtonElement>): void => {
@@ -148,7 +139,7 @@ export const NewsLetter: React.FC = () => {
     }
 
     return (
-        <NewsletterSection className="container" id="newsletter">
+        <NewsletterSection className="container">
             <SectionHeader>Subscribe To Our Newsletter</SectionHeader>
             <div className="content">
                 <InfoCard>
