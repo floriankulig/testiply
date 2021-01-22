@@ -15,9 +15,6 @@ interface TesterAuthFormProps {
 }
 
 export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
-    const [confirmPassword, setConfirmPassword] = useState<string>("");
     const [showPasswords, setShowPasswords] = useState<boolean>(false);
     const [gender, setGender] = useState<Gender | null>(null);
 
@@ -36,42 +33,13 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
 
     return (
         <>
-            <AuthForm onSubmit={(e) => handleSubmit(e)}>
+            <AuthForm>
                 {formType === "register" ? (
                     <h1>Register</h1>
                 ) : (
                         <h1>Login</h1>
                     )}
-                <TextInput
-                    inputType="text"
-                    value={email}
-                    setValue={setEmail}
-                    svg={<MdEmail />}
-                    placeholder="Enter your E-Mail Address"
-                >
-                    E-Mail Address
-                </TextInput>
-                <TextInput
-                    inputType={showPasswords ? "text" : "password"}
-                    value={password}
-                    setValue={setPassword}
-                    svg={showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
-                    placeholder="Must be at least 8 characters"
-                    svgClickHandler={() => setShowPasswords(prev => !prev)}
-                >
-                    Password
-                </TextInput>
                 {formType === "register" && (<>
-                    <TextInput
-                        inputType={showPasswords ? "text" : "password"}
-                        value={confirmPassword}
-                        setValue={setConfirmPassword}
-                        svg={showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
-                        placeholder="Must be at least 8 characters"
-                        svgClickHandler={() => setShowPasswords(prev => !prev)}
-                    >
-                        Confirm Password
-                    </TextInput>
                     <div className="meta-inputs">
                         <DateInput label="Date Of Birth (optional)" style={inputsStacked ? { width: "100%" } : { width: "60%" }} minDate={minBirthDate} maxDate={maxBirthDate} date={dateOfBirth} setDate={setDateOfBirth} />
                         <SelectionInput label="Gender" style={inputsStacked ? { width: "100%" } : { width: "35%" }} selection={gender} setSelection={setGender} values={genders} optional />
