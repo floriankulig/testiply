@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { FaChevronDown } from "react-icons/fa"
 import { CSSTransition } from "react-transition-group";
 import styled from "styled-components";
-import { FormInput, SVGWrapper, TextField } from "components/forms"
+import { StyledFormInput, SVGWrapper, StyledTextField } from "components/forms"
 
 const Dropdown = styled.ul`
     position: absolute;
@@ -75,10 +75,10 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({ label, style, cl
     }, []);
 
     return (
-        <FormInput style={{ position: "relative", ...style }} className={className}>
+        <StyledFormInput style={{ position: "relative", ...style }} className={className}>
             {label && label}{optional && " (optional)"}
             <div ref={ref}>
-                <TextField>
+                <StyledTextField>
                     <span>
                         {capitalized(active)}
                     </span>
@@ -93,7 +93,7 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({ label, style, cl
                     >
                         <FaChevronDown />
                     </SVGWrapper>
-                </TextField>
+                </StyledTextField>
                 <CSSTransition in={dropdownShouldOpen} classNames="dropdown" timeout={300} unmountOnExit>
                     <Dropdown>
                         {values && values.filter(value => value !== active).map(value => (
@@ -114,6 +114,6 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({ label, style, cl
                     </Dropdown>
                 </CSSTransition>
             </div>
-        </FormInput>
+        </StyledFormInput>
     )
 }
