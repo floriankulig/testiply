@@ -1,19 +1,23 @@
-import { Field, FieldAttributes } from 'formik'
+import { useField } from 'formik'
 import React from 'react'
-import { FormInput, SVGWrapper, TextField } from './FormInput'
+import { StyledFormInput, StyledMetaInputInfo, SVGWrapper, StyledTextField } from './FormInput'
 
-interface TextInputProps extends FieldAttributes<any> {
-    svg: JSX.Element;
-    svgClickHandler?: Function;
-}
 
-export const TextInput: React.FC<TextInputProps> = ({ svg, svgClickHandler, label, ...restProps }) => {
+export const TextInput = ({ svg, svgClickHandler, label, ...restProps }: any) => {
+    const [field, meta] = useField(restProps);
+    const showsError: boolean = meta.touched && meta.error ? true : false
+
     return (
-        <FormInput>
-            {label}
-            <TextField>
-                <Field
-                    {...restProps}
+        <StyledFormInput>
+            <StyledMetaInputInfo>
+                {label}
+                {showsError && (
+                    <span className="error">{meta.error}</span>
+                )}
+            </StyledMetaInputInfo>
+            <StyledTextField hasError={showsError}>
+                <input
+                    {...field} {...restProps}
                 />
                 <SVGWrapper
                     onClick={() => { !!svgClickHandler && svgClickHandler() }}
@@ -22,7 +26,7 @@ export const TextInput: React.FC<TextInputProps> = ({ svg, svgClickHandler, labe
                 >
                     {svg}
                 </SVGWrapper>
-            </TextField>
-        </FormInput>
+            </StyledTextField>
+        </StyledFormInput>
     )
 }
