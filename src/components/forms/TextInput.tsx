@@ -1,5 +1,6 @@
 import { useField } from 'formik'
 import React from 'react'
+import { CSSTransition } from 'react-transition-group';
 import { StyledFormInput, StyledMetaInputInfo, SVGWrapper, StyledTextField } from './FormInput'
 
 
@@ -11,9 +12,9 @@ export const TextInput = ({ svg, svgClickHandler, label, ...restProps }: any) =>
         <StyledFormInput>
             <StyledMetaInputInfo>
                 {label}
-                {showsError && (
-                    <span className="error">{meta.error}</span>
-                )}
+                <CSSTransition in={showsError} classNames="error" timeout={250} unmountOnExit>
+                    <span>{meta.error}</span>
+                </CSSTransition>
             </StyledMetaInputInfo>
             <StyledTextField hasError={showsError}>
                 <input
