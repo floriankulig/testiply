@@ -31,7 +31,7 @@ const DevRegister: NextPage = () => {
         gender: "male",
     }
 
-    const handleSubmit = async (values: FormikValues, helpers: FormikHelpers<FormikValues>) => {
+    const handleSubmit = (values: FormikValues, helpers: FormikHelpers<FormikValues>): boolean => {
         console.log(values)
     }
 
