@@ -3,13 +3,16 @@ import React, { useState } from "react"
 import styled from "styled-components";
 import { theme } from "styles";
 import { FormikStepProps } from "./FormikStep"
-import { FormikValues, FormikConfig, Formik, Form } from "formik";
+import { FormikValues, FormikConfig, Formik, Form, FormikProps } from "formik";
 
+interface FormikStepperProps extends FormikConfig<FormikValues> {
+    minLevel?: number
+}
 
-
-export const FormikStepper = ({ children, ...props }: FormikConfig<FormikValues>) => {
+export const FormikStepper = ({ children, minLevel, ...props }: FormikStepperProps) => {
     const childrenArray = React.Children.toArray(children) as React.ReactElement<FormikStepProps>[];
-    const [step, setStep] = useState<number>(0);
+    const minStep = minLevel ?? 0
+    const [step, setStep] = useState<number>(minStep);
     const currentChild = childrenArray[step] as React.ReactElement<FormikStepProps>
 
     const isLastStep = step === childrenArray.length - 1
@@ -21,30 +24,31 @@ export const FormikStepper = ({ children, ...props }: FormikConfig<FormikValues>
             onSubmit={async (values, helpers) => {
                 if (isLastStep) {
                     await props.onSubmit(values, helpers)
-                    console.log("submitted")
                 } else {
                     setStep(step => step + 1)
                 }
             }}>
-            <Form autoComplete="off">
-                {currentChild}
-                <ToggleFormButtons>
-                    <Button
-                        bold
-                        color={theme.layoutContentBg}
-                        disableElevation
-                        disabled={step <= 0}
-                        onClick={() => setStep(step => step - 1)}
-                        onKeyDown={() => setStep(step => step - 1)}
-                        type="button"
-                    >
-                        Go Back
+            {(props: FormikProps<any>) => (
+                <Form autoComplete="off">
+                    {currentChild}
+                    <ToggleFormButtons>
+                        <Button
+                            bold
+                            color={theme.layoutContentBg}
+                            disableElevation
+                            disabled={step <= minStep}
+                            onClick={() => setStep(step => step - 1)}
+                            onKeyDown={() => setStep(step => step - 1)}
+                            type="button"
+                        >
+                            Go Back
                     </Button>
-                    <Button bold>
-                        {isLastStep ? "Register" : "Next Step"}
-                    </Button>
-                </ToggleFormButtons>
-            </Form>
+                        <Button bold>
+                            {isLastStep ? "Register" : "Next Step"}
+                        </Button>
+                    </ToggleFormButtons>
+                </Form>
+            )}
         </Formik >
     )
 }
