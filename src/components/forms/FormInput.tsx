@@ -1,21 +1,29 @@
-import { darken, lighten } from "polished";
-import { InputType } from "ts";
+import { darken, lighten, rgba } from "polished";
 import styled, { css } from "styled-components";
 
-interface FormInputProps {
-    hasValidInput?: boolean;
+interface TextFieldProps {
+    hasError?: boolean;
 }
 
 //support for label above input
-export const FormInput = styled.div<FormInputProps>`
+export const StyledFormInput = styled.div`
     margin-top: 1em;
     display: flex;
     flex-direction: column;
-    font-size: 0.9rem;
-    font-weight: bold;
 `;
 
-export const TextField = styled.div`
+export const StyledMetaInputInfo = styled.div`
+    font-size: 0.9rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+
+    .error{
+        color: red;
+    }
+`;
+
+export const StyledTextField = styled.div<TextFieldProps>`
     display: inline-flex;
     width: clamp(1px, 100%, 600px);
     margin-top: .2em;
@@ -24,10 +32,12 @@ export const TextField = styled.div`
     align-items: center;
     font-size: 1rem;
     font-family: "Roboto";
-    background: var(--layout-content-background);
-    border: 2px ${p => darken(0.1, p.theme.layoutContentBg)} solid; 
+    background: ${p => p.hasError ? rgba(255, 0, 0, 0.05) : "var(--layout-content-background)"};
+    border: 2px ${p => p.hasError ? "red" : darken(0.1, p.theme.layoutContentBg)} solid; 
     border-radius: var(--border-radius);
-    transition: border 0.3s var(--easing);
+    transition: 0.5s;
+    transition-property:
+        border background;
 
 
     input, span{
