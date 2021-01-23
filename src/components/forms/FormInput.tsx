@@ -63,7 +63,7 @@ interface SVGWrapperProps {
 // for wrapping svgs in inputs if there are any
 export const SVGWrapper = styled.div<SVGWrapperProps>`
         border-radius: 30%;
-        max-width: 40px;
+        width: 40px;
         justify-content: center;
         align-items: center;
         height: 100%;
