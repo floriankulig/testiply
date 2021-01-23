@@ -18,8 +18,30 @@ export const StyledMetaInputInfo = styled.div`
     display: flex;
     justify-content: space-between;
 
-    .error{
+    .error-enter{
+        color: grey;
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    .error-enter-active{
         color: red;
+        opacity: 1;
+        transform: translateY(0);
+        transition: all 0.25s var(--easing);
+    }
+    .error-enter-done{
+        color: red;
+    }
+    .error-exit{
+        color: red;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .error-exit-active{
+        color: grey;
+        opacity: 0;
+        transform: translateY(100%);
+        transition: all 0.25s var(--easing);
     }
 `;
 
