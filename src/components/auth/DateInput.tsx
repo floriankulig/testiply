@@ -1,4 +1,4 @@
-import { FormInput, SVGWrapper, TextField } from "components/forms"
+import { StyledFormInput, SVGWrapper, StyledTextField } from "components/forms"
 import { useRef, useState } from "react";
 import styled from "styled-components";
 import DatePicker from "react-datepicker"
@@ -141,9 +141,9 @@ export const DateInput: React.FC<DateInputProps> = ({ label, date, setDate, minD
     useOnClickOutside(ref, () => setCalendarOpen(false));
 
     return (
-        <FormInput style={{ position: "relative", ...style }} className={className}>
+        <StyledFormInput style={{ position: "relative", ...style }} className={className}>
             {label}
-            <TextField>
+            <StyledTextField>
                 <span>
                     {hasInitialDate ? "Select Your Birthday ➜" : date.toString().slice(4, 15)}
                 </span>
@@ -154,7 +154,7 @@ export const DateInput: React.FC<DateInputProps> = ({ label, date, setDate, minD
                 >
                     <FaCalendarAlt />
                 </SVGWrapper>
-            </TextField>
+            </StyledTextField>
             <CSSTransition in={calendarOpen} classNames="calendar" timeout={250} unmountOnExit>
                 <CalendarWrapper ref={ref}>
                     <DatePicker
@@ -171,6 +171,6 @@ export const DateInput: React.FC<DateInputProps> = ({ label, date, setDate, minD
                     />
                 </CalendarWrapper>
             </CSSTransition>
-        </FormInput>
+        </StyledFormInput>
     )
 }
