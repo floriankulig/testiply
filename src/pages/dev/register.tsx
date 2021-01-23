@@ -31,7 +31,7 @@ const DevRegister: NextPage = () => {
         gender: "male",
     }
 
-    const handleSubmit = (values: FormikValues, helpers: FormikHelpers<FormikValues>): boolean => {
+    const handleSubmit = (values: FormikValues, helpers: FormikHelpers<FormikValues>) => {
         console.log(values)
     }
 
@@ -46,18 +46,19 @@ const DevRegister: NextPage = () => {
                     <FormikStepper
                         initialValues={initialValues}
                         onSubmit={(values, helpers) => handleSubmit(values, helpers)}
+                        minLevel={0}
                     >
                         <FormikStep
                             validationSchema={Yup.object({
-                                email: Yup.string().required().min(3),
-                                password: Yup.string().required('Password is required'),
+                                email: Yup.string().email('Invalid format').required('Required').min(3),
+                                password: Yup.string().required('Required').min(8, "Has to be at least 8 characters"),
                                 confirmPassword: Yup.string()
                                     .oneOf([Yup.ref('password'), null], 'Passwords must match')
                             })}
                         >
                             <TextInput
-                                svg={<MdEmail />}
                                 name="email"
+                                svg={<MdEmail />}
                                 label="E-Mail Address"
                                 placeholder="Enter your E-Mail Address"
                             />
