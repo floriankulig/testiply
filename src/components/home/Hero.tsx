@@ -2,6 +2,7 @@ import { Button } from "components/Button";
 import Link from "next/link"
 import { useIsMobile } from "hooks"
 import styled from "styled-components";
+import { CSSTransition } from "react-transition-group";
 
 const HeroSection = styled.section`
     margin-top: 10em;
@@ -20,6 +21,11 @@ const HeroSection = styled.section`
         @media (${({ theme }) => theme.bp.medium}) {
             display: block;
         }
+
+        &.image-enter{transform: scale(0.5); opacity: 0;}
+        &.image-enter-active{transform: scale(1); opacity: 1; transition: 0.25s all var(--easing);}
+        &.image-exit{transform: scale(1); opacity: 1;}
+        &.image-exit-active{transform: scale(0.5); opacity: 0; transition: 0.25s all var(--easing);}
     }
 `;
 
@@ -30,6 +36,7 @@ const BackgroundImage = styled.img`
     left: 0;
     width: 100%;
     z-index: -9000;
+
     &.mobile {
         width: 100%;
         height: auto;
@@ -40,9 +47,11 @@ const BackgroundImage = styled.img`
 
 const Content = styled.div`
     user-select: none;
+
     @media (${({ theme }) => theme.bp.medium}){
         margin: 0;
     }
+
     h1 {
         color: white;
         font-size: clamp(3.3rem, 6.3vw, 5rem);
@@ -52,6 +61,7 @@ const Content = styled.div`
             margin-bottom: .5em;
         }
     }
+
     button{
         box-shadow: 4px 5px 15px rgba(110, 127, 218, 0.25);
         font-size: clamp(1rem, 2vw, 1.2rem);
@@ -61,17 +71,19 @@ const Content = styled.div`
 export const Hero: React.FC = () => {
     const isMobile = useIsMobile(1080);
 
+    const handleClick = () => document.querySelector("#newsletter").scrollIntoView({ behavior: "smooth" })
+
     return (
         <HeroSection className="container">
             <BackgroundImage className={`${isMobile && "mobile"}`} src={`/images/hero_bg${isMobile ? "-mobile" : ""}.svg`} alt="" />
             <Content>
                 <h1>Test Apps.</h1>
                 <h1>Give Feedback.</h1>
-                <Link href="/store">
-                    <Button rounded bold color="white">View Apps</Button>
-                </Link>
+                <Button rounded bold color="white" onClick={() => handleClick()} onKeyDown={() => handleClick()}>More Information</Button>
             </Content>
-            {!isMobile && <img className="hero__svg" src="/images/app_phone.svg" alt="" />}
+            <CSSTransition in={!isMobile} timeout={250} classNames="image" unmountOnExit>
+                <img className="hero__svg" src="/images/app_phone.svg" alt="" />
+            </CSSTransition>
         </HeroSection>
     )
 }
