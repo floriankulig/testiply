@@ -7,15 +7,19 @@ const HeroSection = styled.section`
     margin-top: 10em;
     margin-bottom: 30em;
     @media (${({ theme }) => theme.bp.medium}) {
-    margin-top: 5em;
-    margin-bottom: 20vw;
+        margin-top: 5em;
+        margin-bottom: 20vw;
     }
     align-items: center;
     display: flex;
     justify-content: space-between;
     .hero__svg {
+        display: none;
         margin: 0;
         height: clamp(200px, 40vw, 600px);
+        @media (${({ theme }) => theme.bp.medium}) {
+            display: block;
+        }
     }
 `;
 
