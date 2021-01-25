@@ -78,7 +78,11 @@ const DevRegister: NextPage = () => {
                                 svgClickHandler={() => setShowPasswords(prev => !prev)}
                             />
                         </FormikStep>
-                        <FormikStep>
+                        <FormikStep
+                            validationSchema={Yup.object({
+                                gender: Yup.string().required('Required').oneOf(genders, "Must be one of: Male, Female, Other")
+                            })}
+                        >
                             <FormikSelectionInput
                                 values={genders}
                                 label="Gender"
