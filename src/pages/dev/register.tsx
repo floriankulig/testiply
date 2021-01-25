@@ -1,6 +1,4 @@
-import { AuthForm, FormikStep, TextInput } from "components/forms";
-import { FormikStepper } from "components/forms";
-import { SelectionInput } from "components/SelectionInput";
+import { FormikStepper, AuthForm, FormikStep, FormikTextInput, FormikSelectionInput } from "components/forms";
 import { AuthLayout } from "components/layouts";
 import { FormikHelpers, FormikValues } from "formik";
 import { useIsMobile } from "hooks";
@@ -57,13 +55,13 @@ const DevRegister: NextPage = () => {
                                     .oneOf([Yup.ref('password'), null], 'Passwords must match')
                             })}
                         >
-                            <TextInput
+                            <FormikTextInput
                                 name="email"
                                 svg={<MdEmail />}
                                 label="E-Mail Address"
                                 placeholder="Enter your E-Mail Address"
                             />
-                            <TextInput
+                            <FormikTextInput
                                 name="password"
                                 label="Password"
                                 placeholder="Must be at least 8 characters"
@@ -71,7 +69,7 @@ const DevRegister: NextPage = () => {
                                 svg={showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
                                 svgClickHandler={() => setShowPasswords(prev => !prev)}
                             />
-                            <TextInput
+                            <FormikTextInput
                                 name="confirmPassword"
                                 label="Confirm Password"
                                 placeholder="Must be at least 8 characters"
@@ -80,9 +78,12 @@ const DevRegister: NextPage = () => {
                                 svgClickHandler={() => setShowPasswords(prev => !prev)}
                             />
                         </FormikStep>
-                        <FormikStep
-                        >
-                            <SelectionInput />
+                        <FormikStep>
+                            <FormikSelectionInput
+                                values={genders}
+                                label="Gender"
+                                name="gender"
+                            />
                         </FormikStep>
                     </FormikStepper>
                 </AuthForm>
