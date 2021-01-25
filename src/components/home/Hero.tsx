@@ -71,15 +71,15 @@ const Content = styled.div`
 export const Hero: React.FC = () => {
     const isMobile = useIsMobile(1080);
 
-    const handleClick = () => document.querySelector("#newsletter").scrollIntoView({ behavior: "smooth" })
-
     return (
         <HeroSection className="container">
             <BackgroundImage className={`${isMobile && "mobile"}`} src={`/images/hero_bg${isMobile ? "-mobile" : ""}.svg`} alt="" />
             <Content>
                 <h1>Test Apps.</h1>
                 <h1>Give Feedback.</h1>
-                <Button rounded bold color="white" onClick={() => handleClick()} onKeyDown={() => handleClick()}>More Information</Button>
+                <Link href="/store">
+                    <Button rounded bold color="white">View Apps</Button>
+                </Link>
             </Content>
             <CSSTransition in={!isMobile} timeout={250} classNames="image" unmountOnExit>
                 <img className="hero__svg" src="/images/app_phone.svg" alt="" />
