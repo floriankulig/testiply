@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { FaChevronDown } from "react-icons/fa"
 import { CSSTransition } from "react-transition-group";
 import styled from "styled-components";
-import { StyledFormInput, SVGWrapper, StyledTextField } from "components/forms"
+import { StyledFormInput, SVGWrapper, StyledTextField, StyledMetaInputInfo } from "components/forms"
 
 const Dropdown = styled.ul`
     position: absolute;
@@ -76,7 +76,10 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({ label, style, cl
 
     return (
         <StyledFormInput style={{ position: "relative", ...style }} className={className}>
-            {label && label}{optional && " (optional)"}
+            {label &&
+                <StyledMetaInputInfo>
+                    {label}{optional && " (optional)"}
+                </StyledMetaInputInfo>}
             <div ref={ref}>
                 <StyledTextField>
                     <span>
