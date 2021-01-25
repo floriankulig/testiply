@@ -1,5 +1,4 @@
 import { useField } from 'formik'
-import React from 'react'
 import { CSSTransition } from 'react-transition-group';
 import { StyledFormInput, StyledMetaInputInfo, SVGWrapper, StyledTextField } from './FormInput'
 
