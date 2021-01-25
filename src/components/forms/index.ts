@@ -7,7 +7,8 @@ import {
 import { FormikStepper } from './FormikStepper';
 import { FormikStep } from './FormikStep';
 import { AuthForm } from './AuthForm';
-import { TextInput } from './TextInput';
+import { FormikTextInput } from './FormikTextInput';
+import { FormikSelectionInput } from './FormikSelectionInput';
 
 export {
   SVGWrapper,
@@ -17,5 +18,6 @@ export {
   FormikStepper,
   FormikStep,
   AuthForm,
-  TextInput,
+  FormikTextInput,
+  FormikSelectionInput,
 };
