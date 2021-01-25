@@ -45,9 +45,9 @@ interface SelectionInputProps {
     style?: Object;
     className?: string;
     selection: string;
-    setSelection: React.Dispatch<React.SetStateAction<string>>;
+    setSelection: React.Dispatch<React.SetStateAction<string | number>>;
     optional?: boolean;
-    values: any[]
+    values: Array<string | number>
 }
 
 export const SelectionInput: React.FC<SelectionInputProps> = ({ label, style, className, selection, optional, setSelection, values }) => {
