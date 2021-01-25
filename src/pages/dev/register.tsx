@@ -1,7 +1,8 @@
-import { AuthForm, FormikStep, TextField, TextInput } from "components/forms";
+import { AuthForm, FormikStep, TextInput } from "components/forms";
 import { FormikStepper } from "components/forms";
+import { SelectionInput } from "components/SelectionInput";
 import { AuthLayout } from "components/layouts";
-import { Field, FormikHelpers, FormikValues } from "formik";
+import { FormikHelpers, FormikValues } from "formik";
 import { useIsMobile } from "hooks";
 import { NextPage } from "next";
 import Head from "next/head";
@@ -81,12 +82,7 @@ const DevRegister: NextPage = () => {
                         </FormikStep>
                         <FormikStep
                         >
-                            <TextInput
-                                svg={<MdEmail />}
-                                name="gender"
-                                label="gender"
-                                placeholder="Enter your gender"
-                            />
+                            <SelectionInput />
                         </FormikStep>
                     </FormikStepper>
                 </AuthForm>
