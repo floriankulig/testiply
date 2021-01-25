@@ -41,7 +41,7 @@ const Dropdown = styled.ul`
     &.dropdown-exit-active {opacity: 0; transform: translateY(-50%) scaleY(0.1); transition: .25s all var(--easing);}
 `;
 
-export const FormikSelectionInput = ({ label, optional, values, ...restProps }: any) => {
+export const FormikSelectionInput = ({ label, optional = false, values, ...restProps }: any) => {
     const [field, meta, helpers] = useField(restProps);
     const showsError: boolean = meta.touched && meta.error ? true : false
 
