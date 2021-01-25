@@ -1,4 +1,9 @@
-import { SVGWrapper, StyledFormInput, StyledTextField } from './FormInput';
+import {
+  SVGWrapper,
+  StyledFormInput,
+  StyledMetaInputInfo,
+  StyledTextField,
+} from './FormInput';
 import { FormikStepper } from './FormikStepper';
 import { FormikStep } from './FormikStep';
 import { AuthForm } from './AuthForm';
@@ -8,6 +13,7 @@ export {
   SVGWrapper,
   StyledFormInput,
   StyledTextField,
+  StyledMetaInputInfo,
   FormikStepper,
   FormikStep,
   AuthForm,
