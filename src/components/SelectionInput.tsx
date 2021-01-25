@@ -54,16 +54,13 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({ label, style, cl
     const [dropdownOpens, setDropdownOpens] = useState<boolean>(false);
     const dropdownShouldOpen: boolean = dropdownOpens && !!values[1] && !optional || dropdownOpens && !!values && optional
 
-    const [active, setActive] = useState<string>(optional ? "No Selection" : selection);
     const ref = useRef<HTMLDivElement>()
     useOnClickOutside(ref, () => setDropdownOpens(false));
 
     const handleSelectionChange = (newSelection: string) => {
         if (newSelection) {
-            setActive(newSelection)
             setSelection(newSelection)
         } else {
-            setActive("No Selection")
             setSelection(null)
         }
 
@@ -83,7 +80,7 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({ label, style, cl
             <div ref={ref}>
                 <StyledTextField>
                     <span>
-                        {capitalized(active)}
+                        {selection ? capitalized(selection) : "No Selection"}
                     </span>
                     <SVGWrapper
                         clickable
@@ -99,7 +96,7 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({ label, style, cl
                 </StyledTextField>
                 <CSSTransition in={dropdownShouldOpen} classNames="dropdown" timeout={300} unmountOnExit>
                     <Dropdown>
-                        {values && values.filter(value => value !== active).map(value => (
+                        {values && values.filter(value => value !== selection).map(value => (
                             <li
                                 key={value}
                                 onClick={() => handleSelectionChange(value)}
@@ -108,7 +105,7 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({ label, style, cl
                                 {capitalized(value)}
                             </li>
                         ))}
-                        {optional && active !== "No Selection" && <li
+                        {optional && selection !== null && <li
                             onClick={() => handleSelectionChange(null)}
                             onKeyDown={() => handleSelectionChange(null)}
                         >
