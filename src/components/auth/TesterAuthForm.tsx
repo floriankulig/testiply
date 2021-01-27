@@ -1,9 +1,9 @@
 import { Button } from "components/Button";
-import { AuthForm, FormikDateInput, FormikSelectionInput, FormikTextInput } from "components/forms";
+import { AuthForm, FormikSelectionInput, FormikTextInput } from "components/forms";
 import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { MdEmail } from "react-icons/md";
-import { FormType, Gender, genders } from "ts"
+import { FormType } from "ts"
 import { Form, Formik, FormikHelpers, FormikValues } from "formik"
 import * as Yup from 'yup';
 import { useIsMobile } from "hooks";
@@ -18,17 +18,11 @@ interface FormValues {
     email: string;
     password: string;
     confirmPassword?: string;
-    dateOfBirth?: string;
-    gender?: Gender | null;
 }
 
 
 export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
     const [showPasswords, setShowPasswords] = useState<boolean>(false);
-
-    const minBirthDate = new Date("1900-01-01")
-    let maxBirthDate = new Date()
-    maxBirthDate.setFullYear(maxBirthDate.getFullYear() - 10)
 
     const inputsStacked = useIsMobile(720);
     const isFullscreen = useIsMobile(1200);
@@ -40,8 +34,6 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
             email: "",
             password: "",
             confirmPassword: "",
-            dateOfBirth: "",
-            gender: null,
         }
 
     const validationSchema = Yup.object({
@@ -82,32 +74,14 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
                             svgClickHandler={() => setShowPasswords(prev => !prev)}
                         />
                         {formType === "register" && (
-                            <>
-                                <FormikTextInput
-                                    name="confirmPassword"
-                                    label="Confirm Password"
-                                    placeholder="Must be at least 8 characters"
-                                    type={showPasswords ? "text" : "password"}
-                                    svg={showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
-                                    svgClickHandler={() => setShowPasswords(prev => !prev)}
-                                />
-                                <div className="meta-inputs">
-                                    <FormikDateInput
-                                        name="dateOfBirth"
-                                        label="Date Of Birth (optional)"
-                                        style={inputsStacked ? { width: "100%" } : { width: "60%" }}
-                                        minDate={minBirthDate}
-                                        maxDate={maxBirthDate}
-                                    />
-                                    <FormikSelectionInput
-                                        values={genders}
-                                        label="Gender"
-                                        style={inputsStacked ? { width: "100%" } : { width: "35%" }}
-                                        name="gender"
-                                        optional={true}
-                                    />
-                                </div>
-                            </>
+                            <FormikTextInput
+                                name="confirmPassword"
+                                label="Confirm Password"
+                                placeholder="Must be at least 8 characters"
+                                type={showPasswords ? "text" : "password"}
+                                svg={showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
+                                svgClickHandler={() => setShowPasswords(prev => !prev)}
+                            />
                         )}
                         <Button bold type="submit">{formType === "register" ? "Register" : "Log In"}</Button>
                     </Form>
