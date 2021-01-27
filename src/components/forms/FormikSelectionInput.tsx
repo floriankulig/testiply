@@ -41,7 +41,7 @@ const Dropdown = styled.ul`
     &.dropdown-exit-active {opacity: 0; transform: translateY(-50%) scaleY(0.1); transition: .25s all var(--easing);}
 `;
 
-export const FormikSelectionInput = ({ label, optional = false, values, ...restProps }: any) => {
+export const FormikSelectionInput = ({ label, optional = false, values, style, className, ...restProps }: any) => {
     const [field, meta, helpers] = useField(restProps);
     const showsError: boolean = meta.touched && meta.error ? true : false
 
@@ -50,7 +50,7 @@ export const FormikSelectionInput = ({ label, optional = false, values, ...restP
     const ref = useRef<HTMLDivElement>()
     useOnClickOutside(ref, () => setDropdownOpens(false));
 
-    const handleSelectionChange = (newSelection: string) => {
+    const handleSelectionChange = (newSelection: string | null) => {
         if (newSelection) {
             helpers.setValue(newSelection)
         } else {
@@ -61,9 +61,9 @@ export const FormikSelectionInput = ({ label, optional = false, values, ...restP
     }
 
     return (
-        <StyledFormInput style={{ position: "relative" }}>
+        <StyledFormInput style={{ position: "relative", ...style }} className={className}>
             <StyledMetaInputInfo>
-                {label}
+                {label}{optional && " (optional)"}
                 <CSSTransition in={showsError} classNames="error" timeout={250} unmountOnExit>
                     <span>{meta.error}</span>
                 </CSSTransition>
@@ -71,7 +71,7 @@ export const FormikSelectionInput = ({ label, optional = false, values, ...restP
             <div ref={ref}>
                 <StyledTextField hasError={showsError}>
                     <span>
-                        {capitalized(field.value)}
+                        {field.value ? capitalized(field.value) : "No Selection"}
                     </span>
                     <SVGWrapper
                         clickable
@@ -96,6 +96,14 @@ export const FormikSelectionInput = ({ label, optional = false, values, ...restP
                                 {capitalized(value)}
                             </li>
                         ))}
+                        {optional && field.value && (
+                            <li
+                                onClick={() => handleSelectionChange(null)}
+                                onKeyDown={() => handleSelectionChange(null)}
+                            >
+                                {capitalized("No Selection")}
+                            </li>
+                        )}
                     </Dropdown>
                 </CSSTransition>
             </div>
