@@ -1,4 +1,4 @@
-import { FormikStepper, AuthForm, FormikStep, FormikTextInput, FormikSelectionInput } from "components/forms";
+import { FormikStepper, AuthForm, FormikStep, FormikTextInput, FormikSelectionInput, FormikDateInput } from "components/forms";
 import { AuthLayout } from "components/layouts";
 import { FormikHelpers, FormikValues } from "formik";
 import { useIsMobile } from "hooks";
@@ -14,7 +14,7 @@ interface FormValues {
     email: string;
     password: string;
     confirmPassword: string;
-    dateOfBirth: Date | null;
+    dateOfBirth: string;
     gender: Gender;
 }
 
@@ -22,11 +22,15 @@ const DevRegister: NextPage = () => {
     const [showPasswords, setShowPasswords] = useState<boolean>(false);
     const inputsStacked = useIsMobile(720);
 
+    const minBirthDate = new Date("1900-01-01")
+    let maxBirthDate = new Date()
+    maxBirthDate.setFullYear(maxBirthDate.getFullYear() - 10)
+
     const initialValues: FormValues = {
         email: "",
         password: "",
         confirmPassword: "",
-        dateOfBirth: null,
+        dateOfBirth: "",
         gender: "male",
     }
 
@@ -52,7 +56,7 @@ const DevRegister: NextPage = () => {
                                 email: Yup.string().email('Invalid format').required('Required').min(3),
                                 password: Yup.string().required('Required').min(8, "Has to be at least 8 characters"),
                                 confirmPassword: Yup.string()
-                                    .oneOf([Yup.ref('password'), null], 'Passwords must match')
+                                    .oneOf([Yup.ref('password'), null], 'Passwords must match').required('Required')
                             })}
                         >
                             <FormikTextInput
@@ -80,13 +84,20 @@ const DevRegister: NextPage = () => {
                         </FormikStep>
                         <FormikStep
                             validationSchema={Yup.object({
-                                gender: Yup.string().required('Required').oneOf(genders, "Must be one of: Male, Female, Other")
+                                gender: Yup.string().required('Required').oneOf(genders, "Must be one of: Male, Female, Other"),
+                                dateOfBirth: Yup.string().required('Required')
                             })}
                         >
                             <FormikSelectionInput
                                 values={genders}
                                 label="Gender"
                                 name="gender"
+                            />
+                            <FormikDateInput
+                                name="dateOfBirth"
+                                label="Date of Birth"
+                                minDate={minBirthDate}
+                                maxDate={maxBirthDate}
                             />
                         </FormikStep>
                     </FormikStepper>

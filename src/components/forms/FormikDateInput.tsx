@@ -10,7 +10,7 @@ import { capitalized, getFormattedDate } from "helpers";
 
 export const FormikDateInput = ({ label, minDate, maxDate, optional = false, style, className, ...restProps }: any) => {
     const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
-    const [currentDate, setCurrentDate] = useState<Date>(new Date());
+    const [currentDate, setCurrentDate] = useState<Date>(maxDate);
     const [field, meta, helpers] = useField(restProps);
     const showsError: boolean = meta.touched && meta.error ? true : false
 
@@ -44,7 +44,7 @@ export const FormikDateInput = ({ label, minDate, maxDate, optional = false, sty
                         selected={currentDate}
                         showYearDropdown
                         minDate={minDate}
-                        // maxDate={maxDate}
+                        maxDate={maxDate}
                         onChange={(newdate: Date) => {
                             helpers.setValue(getFormattedDate(newdate))
                             setCurrentDate(newdate)
