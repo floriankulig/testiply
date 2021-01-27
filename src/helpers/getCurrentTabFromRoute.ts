@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 import { devTabNames, testerTabNames } from 'ts/constants';
 
 const getCurrentTabFromRoute = (): string => {
