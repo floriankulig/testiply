@@ -1,6 +1,3 @@
-export type Gender = 'male' | 'female' | 'other';
-export const genders: Gender[] = ['male', 'female', 'other'];
-
 export type Platform =
   | 'ios'
   | 'android'
@@ -26,8 +23,6 @@ export interface User {
   firstName: string;
   lastName: string;
   email: string;
-  dateOfBirth?: string;
-  gender?: Gender;
   _id: string;
 }
 
