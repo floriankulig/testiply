@@ -83,13 +83,6 @@ export const AuthInfoSidebar: React.FC<AuthInfoSidebarProps> = ({ type }) => {
             <div className="cta-change-formtype">
                 <h2>{type.includes("register") ? "Already have an account?" : "Don't have an account yet?"}</h2>
                 <Button color="white" big bold onClick={() => handleFormToggle()} onKeyDown={() => handleFormToggle()}>{type !== "login" ? "Go to Login" : "Go to Register"}</Button>
-                {type !== "dev_register" && (
-                    <>
-                        <h2>Want to publish your own apps?</h2>
-                        <Link href="/dev/register">
-                            <Button basic color="white" big bold>Register as a Developer</Button>
-                        </Link>
-                    </>)}
             </div>
             <Info>
                 <div className="info-group">

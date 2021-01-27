@@ -18,18 +18,6 @@ export const AuthForm = styled.div`
     margin-bottom: 1.5em;
   }
 
-  .meta-inputs {
-    width: 100%;
-    // same as FormInputs
-    max-width: 600px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    @media (${({ theme }) => theme.bp.small}) {
-      flex-direction: row;
-    }
-  }
-
   ${Button} {
     margin-top: 2em;
     @media (${({ theme }) => theme.bp.small}) {

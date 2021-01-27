@@ -9,6 +9,7 @@ import * as Yup from 'yup';
 import { useIsMobile } from "hooks";
 import Link from "next/link";
 import { theme } from "styles";
+import { InfoCard } from "components/InfoCard";
 
 interface TesterAuthFormProps {
     formType: FormType;
@@ -23,9 +24,6 @@ interface FormValues {
 
 export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
     const [showPasswords, setShowPasswords] = useState<boolean>(false);
-
-    const inputsStacked = useIsMobile(720);
-    const isFullscreen = useIsMobile(1200);
 
     const initialValues: FormValues = formType === "login" ? {
         email: "",
@@ -87,14 +85,6 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
                     </Form>
                 </Formik>
             </AuthForm>
-            {isFullscreen && (
-                <div style={{ textAlign: "center" }}>
-                    <h2>Want to publish your own apps?</h2>
-                    <Link href="/dev/register">
-                        <Button big bold color={theme.navy}>Register as a Developer</Button>
-                    </Link>
-                </div>
-            )}
         </>
     )
 }

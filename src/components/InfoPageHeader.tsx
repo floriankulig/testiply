@@ -74,11 +74,6 @@ export const InfoPageHeader: React.FC<InfoPageHeaderProps> = ({ style, className
                         <a>Register</a>
                     </li>
                 </Link>}
-                {router.pathname.includes("/dev") && <Link href="/register">
-                    <li>
-                        <a>Register</a>
-                    </li>
-                </Link>}
             </ul>
         </Header>
     )
