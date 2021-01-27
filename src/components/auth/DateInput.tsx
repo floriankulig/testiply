@@ -9,7 +9,7 @@ import { getTextColor } from "helpers";
 import { FaCalendarAlt } from "react-icons/fa";
 import { CSSTransition } from "react-transition-group";
 
-const CalendarWrapper = styled.div`
+export const CalendarWrapper = styled.div`
     position: absolute;
     right: 0;
     border-radius: 1.5em;
@@ -57,7 +57,7 @@ const CalendarWrapper = styled.div`
 
     & .react-datepicker__year-dropdown{
         border-radius: .5em;
-        border: 2px solid ${({ theme }) => rgba(theme.navy, 0.15)};
+        border: 2px solid ${({ theme }) => darken(0.1, theme.layoutContentBg)};
         background-color: var(--layout-content-background); 
         box-shadow: 0px 3px 10px ${rgba(0, 0, 0, 0.1)};
     }
