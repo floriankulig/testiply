@@ -68,7 +68,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
                         setSidebarOpen={setOpen}
                     />
                     {!isDevRoute && (
-                        <SelectionInput selection={selectedPlatform} setSelection={setSelectedPlatform} label="Platform" values={platforms} />
+                        <SelectionInput style={{ marginBottom: "6em" }} selection={selectedPlatform} setSelection={setSelectedPlatform} label="Platform" values={platforms} />
                     )}
                 </div>
                 {currentUser && (
