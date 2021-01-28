@@ -1,4 +1,5 @@
 import { Button } from 'components/Button';
+import { ContentHolder } from 'components/forms/FormikCheckbox';
 import { rgba } from 'polished';
 import styled from 'styled-components';
 
@@ -16,6 +17,19 @@ export const AuthForm = styled.div`
   h1 {
     margin: 0;
     margin-bottom: 1.5em;
+  }
+
+  .link {
+    color: var(--primary);
+    text-decoration: underline;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  ${ContentHolder} {
+    margin-top: 1em;
   }
 
   ${Button} {
