@@ -4,11 +4,11 @@ export const useStaticJSON = (lang: "de" | "en", filename: string) => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        let newProjects;
-        if (lang) newProjects = require(`../static/${filename}_${lang}.json`);
+        let newData;
+        if (lang) newData = require(`../static/${filename}_${lang}.json`);
 
-        if (data !== newProjects.content) {
-            setData(newProjects.content)
+        if (data !== newData.content) {
+            setData(newData.content)
         };
         console.log(data);
     }, [lang, data]);
