@@ -6,10 +6,8 @@ import { MdEmail } from "react-icons/md";
 import { FormType } from "ts"
 import { Form, Formik, FormikHelpers, FormikValues } from "formik"
 import * as Yup from 'yup';
-import { useIsMobile } from "hooks";
+import { FormikCheckbox } from "components/forms/FormikCheckbox";
 import Link from "next/link";
-import { theme } from "styles";
-import { InfoCard } from "components/InfoCard";
 
 interface TesterAuthFormProps {
     formType: FormType;
@@ -19,6 +17,7 @@ interface FormValues {
     email: string;
     password: string;
     confirmPassword?: string;
+    acceptedTAS?: boolean
 }
 
 
@@ -32,13 +31,15 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
             email: "",
             password: "",
             confirmPassword: "",
+            acceptedTAS: false
         }
 
     const validationSchema = Yup.object({
         email: Yup.string().email('Invalid format').required('Required').min(3),
         password: Yup.string().required('Required').min(8, "Has to be at least 8 characters"),
         confirmPassword: (formType === "register" ? Yup.string()
-            .oneOf([Yup.ref('password'), null], 'Passwords must match').required('Required') : undefined)
+            .oneOf([Yup.ref('password'), null], 'Passwords must match').required('Required') : undefined),
+        acceptedTAS: (formType === "register" ? Yup.boolean().oneOf([true]) : undefined),
     })
 
     const handleSubmit = (values: FormikValues, helpers: FormikHelpers<FormikValues>) => {
@@ -72,14 +73,20 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
                             svgClickHandler={() => setShowPasswords(prev => !prev)}
                         />
                         {formType === "register" && (
-                            <FormikTextInput
-                                name="confirmPassword"
-                                label="Confirm Password"
-                                placeholder="Must be at least 8 characters"
-                                type={showPasswords ? "text" : "password"}
-                                svg={showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
-                                svgClickHandler={() => setShowPasswords(prev => !prev)}
-                            />
+                            <>
+                                <FormikTextInput
+                                    name="confirmPassword"
+                                    label="Confirm Password"
+                                    placeholder="Must be at least 8 characters"
+                                    type={showPasswords ? "text" : "password"}
+                                    svg={showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
+                                    svgClickHandler={() => setShowPasswords(prev => !prev)}
+                                />
+                                <FormikCheckbox name="acceptedTAS">
+                                    {/*LINK NEEDS TO POINT TO TERMS AND CONDITIONS LATER*/}
+                                    I agree to the&nbsp;<Link href="/register"><span className="link">Terms and Conditions</span></Link>
+                                </FormikCheckbox>
+                            </>
                         )}
                         <Button bold type="submit">{formType === "register" ? "Register" : "Log In"}</Button>
                     </Form>
