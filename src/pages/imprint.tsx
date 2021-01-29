@@ -11,6 +11,7 @@ import { theme } from "styles";
 
 const Content = styled.div`
     margin-top: 1em;
+    min-height: 105vh;
     span {
         font-size: 1.5rem;
         color: #a5a5a5;
