@@ -1,5 +1,5 @@
 import { Button } from "components/Button";
-import { AuthForm, FormikSelectionInput, FormikTextInput } from "components/forms";
+import { AuthForm, FormikTextInput } from "components/forms";
 import { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { MdEmail } from "react-icons/md";
@@ -42,7 +42,7 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
         acceptedTAS: (formType === "register" ? Yup.boolean().oneOf([true]) : undefined),
     })
 
-    const handleSubmit = (values: FormikValues, helpers: FormikHelpers<FormikValues>) => {
+    const handleSubmit = (values: FormikValues) => {
         console.log(values)
     }
 
@@ -54,7 +54,7 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
                 </h1>
                 <Formik
                     initialValues={initialValues}
-                    onSubmit={async (values, helpers) => await handleSubmit(values, helpers)}
+                    onSubmit={async (values) => await handleSubmit(values)}
                     validationSchema={validationSchema}
                 >
                     <Form autoComplete="off">
