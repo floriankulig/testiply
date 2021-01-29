@@ -55,7 +55,7 @@ const CheckboxHolder = styled.div<CheckboxHolderProps>`
           stroke-dashoffset: 0;
           transition: stroke-dashoffset 0.3s linear;
         }
-      }
+    }
 
     .reverse {
         .box {
@@ -65,7 +65,7 @@ const CheckboxHolder = styled.div<CheckboxHolderProps>`
         .check {
             stroke-dashoffset: 70;
             transition: stroke-dashoffset 0.3s linear;
-    }
+        }
     }
 `;
 
