@@ -23,6 +23,7 @@ export const testerTabIcons = [
   [<RiStackLine />, <RiStackFill />],
   [<IoNewspaperOutline />, <IoNewspaper />]
 ];
+
 export const devTabNames = ['dashboard', 'apps', 'feedback'];
 export const devTabIcons = [
   [<AiOutlineDashboard />, <AiFillDashboard />],

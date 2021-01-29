@@ -20,9 +20,8 @@ export type FormType = 'login' | 'register' | 'dev_register';
 export type UserType = 'tester' | 'dev';
 
 export interface User {
-  firstName: string;
-  lastName: string;
   email: string;
+  is_dev: boolean;
   _id: string;
 }
 
