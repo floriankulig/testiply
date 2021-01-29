@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { User } from "ts"
 
-const testUser: User = { firstName: "Max", lastName: "Mustermann", email: "muster@mail.com", _id: "tgg51cfgfdt8" }
+const testUser: User = { email: "muster@mail.com", is_dev: true, _id: "tgg51cfgfdt8" }
 
 type ContextType = {
     currentUser?: User | null;
