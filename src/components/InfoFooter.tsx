@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { FaInstagram, FaTwitter, FaFacebook, FaDiscord } from "react-icons/fa"
+import Link from "next/link";
 
 
 const StyledFooter = styled.footer`
@@ -81,6 +82,7 @@ const StyledPolicies = styled.div`
     @media (${({ theme }) => theme.bp.small}){
         margin: 0 ;
     }
+    h3:hover{ cursor: pointer;}
 `
 
 export const Socials: React.FC = () => {
@@ -111,9 +113,11 @@ export const Socials: React.FC = () => {
 export const Policies: React.FC = () => {
     return (
         <StyledPolicies>
-            <h3>
-                Imprint
-            </h3>
+            <Link href="/imprint">
+                <h3>
+                    Imprint
+                </h3>
+            </Link>
             <h3>
                 Privacy Policy
             </h3>
