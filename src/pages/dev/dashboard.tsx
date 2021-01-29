@@ -17,7 +17,7 @@ const DevDashboard = () => {
                 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
             </Head>
             <TabHeader>
-                Feedback
+                Dashboard
             </TabHeader>
         </>
     )
