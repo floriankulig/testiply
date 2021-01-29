@@ -90,7 +90,7 @@ export const Socials: React.FC = () => {
         <StyledSocials>
             <h3>
                 Socials
-                        </h3>
+            </h3>
             <div className="social-icons">
                 <a href="https://www.instagram.com/betappstore/" target="_blank" rel="noopener noreferrer">
                     <FaInstagram />
@@ -101,7 +101,7 @@ export const Socials: React.FC = () => {
                 <a href="https://twitter.com/betaAppStoree" target="_blank" rel="noopener noreferrer">
                     <FaTwitter />
                 </a>
-                <a href="https://discord.com/invite/6Buy9FdC" target="_blank" rel="noopener noreferrer">
+                <a href="https://discord.gg/EebKeM32RH" target="_blank" rel="noopener noreferrer">
                     <FaDiscord />
                 </a>
             </div>
