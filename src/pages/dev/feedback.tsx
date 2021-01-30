@@ -1,16 +1,8 @@
 import { Layout } from "components/layouts"
 import { TabHeader } from "components/TabHeader"
-import { useSelectedTabValue } from "context"
 import Head from "next/head"
-import { useEffect } from "react"
 
 const DevFeedback = () => {
-    const { setSelectedTab } = useSelectedTabValue()
-
-    useEffect(() => {
-        setSelectedTab("feedback")
-    }, [])
-
     return (
         <>
             <Head>
