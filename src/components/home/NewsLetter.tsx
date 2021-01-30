@@ -7,7 +7,6 @@ import { MdError } from "react-icons/md";
 import styled from "styled-components";
 import { SectionHeader } from "./Benefits";
 import { postData } from "api";
-import { evaluateEmailRes } from "helpers";
 import { Loading } from "components/Loading";
 import { CSSTransition } from "react-transition-group";
 import { api_url } from "ts/constants";
@@ -124,18 +123,14 @@ export const NewsLetter: React.FC = () => {
         postData(
             `${api_url}/newsletterregister`,
             { email })
-            .then(data => {
+            .then(() => {
                 setErrorMessage("")
                 setIsLoading(false)
-                if (data.res === 0) {
-                    setSubmitted(true)
-                } else {
-                    setErrorMessage(evaluateEmailRes(data.res))
-                }
+                setSubmitted(true)
             })
             .catch((err) => {
-                console.log(err)
-                setErrorMessage("Oops... something went wrong. Please retry.")
+                setErrorMessage(err.response.data.err)
+                setIsLoading(false)
             });
     }
 
