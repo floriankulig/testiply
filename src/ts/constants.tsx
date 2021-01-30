@@ -30,3 +30,5 @@ export const devTabIcons = [
   [<AiOutlineAppstore />, <AiFillAppstore />],
   [<FaRegComment />, <FaComment />]
 ];
+
+export const api_url = "https://api.beta-app-store.com"

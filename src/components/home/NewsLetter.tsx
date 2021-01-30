@@ -10,6 +10,7 @@ import { postData } from "api";
 import { evaluateEmailRes } from "helpers";
 import { Loading } from "components/Loading";
 import { CSSTransition } from "react-transition-group";
+import { api_url } from "ts/constants";
 
 const StyledInput = styled.div`
     background-color: #f5f5f5;
@@ -121,7 +122,7 @@ export const NewsLetter: React.FC = () => {
         }
 
         postData(
-            "https://api.beta-app-store.com/newsletterregister",
+            `${api_url}/newsletterregister`,
             { email })
             .then(data => {
                 setErrorMessage("")
