@@ -39,7 +39,10 @@ const ContentContainer = styled.div<ContentContainerProps>`
         font-size: 3rem;
 
         svg{
-            margin-right: .5em;
+            margin: 0;
+            @media (${({ theme }) => theme.bp.small}){
+                margin-right: .5em;
+            }   
         }
     }
 `
