@@ -52,7 +52,7 @@ const DividerWrapper = styled.div`
     .circle{
         position: absolute;
         border: 1px solid ${rgba("#ffffff", 0.05)};
-        background: linear-gradient(to bottom left, ${rgba("#ffffff", 0.2)}, ${rgba("#ffffff", 0.1)});
+        background: linear-gradient(to bottom right, ${rgba("#ffffff", 0.1)}, ${rgba("#ffffff", 0.08)});
 
         &-1{
             top: 15%;
@@ -60,6 +60,7 @@ const DividerWrapper = styled.div`
             border-radius: 31% 69% 31% 69% / 20% 27% 73% 80% ;
             width: 300px;
             height: 370px;
+            background: linear-gradient(to bottom left, ${rgba("#ffffff", 0.2)}, ${rgba("#ffffff", 0.1)});
         }
         &-2{
             top: 15%;
