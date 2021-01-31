@@ -34,7 +34,7 @@ const Background = styled.div`
     width: 100vw;
     height: 100vh;
     max-height: 900px;
-    background: linear-gradient(to bottom right, #4930a3, #9822ec);
+    background: linear-gradient(to bottom right, #4930a3, #8c21ed);
     z-index: -999;
 
     @media (${({ theme }) => theme.bp.big}){
