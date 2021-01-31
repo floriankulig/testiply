@@ -1,10 +1,12 @@
+import { lighten } from "polished";
+import { RiCodeSSlashFill, RiFeedbackLine, RiShoppingBag3Line } from "react-icons/ri";
 import styled from "styled-components"
 
 const FeaturesSection = styled.div`
     margin-top: 400px;
     position: relative;
     background: var(--layout-content-background);
-    padding: 200px 0;
+    padding: 180px 0 200px;
 
     .triangle{
         position: absolute;
@@ -36,17 +38,26 @@ const FeaturesContainer = styled.ul`
 `
 
 const Feature = styled.li`
-    width: 350px;
+    width: 370px;
     max-width: 100%;
     margin: 0 auto;
     margin-bottom: 4em;
-    &:last-of-type{
-        margin-bottom: 0;
+    color: var(--navy);
+
+    svg{
+        width: 20%;
+        height: 20%;
+        color: var(--primary);
+        margin-left: -4%;
+    }
+
+    p {
+        color: ${({ theme }) => lighten(0.2, theme.navy)};
     }
 
     @media (${({ theme }) => theme.bp.big}) {
         margin: 0;
-        width: clamp(230px, 18vw, 330px);
+        width: clamp(230px, 22vw, 330px);
     }
 `
 
@@ -56,14 +67,17 @@ export const Features: React.FC = () => {
             <div className="triangle triangle-1" />
             <FeaturesContainer className="container">
                 <Feature>
+                    <RiShoppingBag3Line />
                     <h2>Large App Offer</h2>
                     <p>Our App-Market is always expanding and offering applications from all sorts of categories. Without having to download the source code, you can test any app you like.</p>
                 </Feature>
                 <Feature>
+                    <RiFeedbackLine />
                     <h2>Easy Feedback</h2>
                     <p>We provide easy ways in our User Interface to give fast and easy feedback to featured developers, because we value your time. </p>
                 </Feature>
                 <Feature>
+                    <RiCodeSSlashFill />
                     <h2>Great For Developers</h2>
                     <p>Having a platform to offer apps for Beta-Testing, developers can get valueable and fast feedback from users who know what could be important for your app.</p>
                 </Feature>
