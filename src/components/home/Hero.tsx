@@ -39,7 +39,8 @@ const Background = styled.div`
 
     @media (${({ theme }) => theme.bp.big}){
         height: 115vh;
-        max-height: 115vh;
+        min-height: 960px;
+        max-height: 1200px;
     }
 
 `
