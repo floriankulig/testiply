@@ -71,6 +71,10 @@ const SearchbarInput = styled.input`
     border: none;
     background-color: transparent;  
 
+    &:focus-within{
+      outline: none;
+    }
+
     &::placeholder{
         color: #535353;
     }
