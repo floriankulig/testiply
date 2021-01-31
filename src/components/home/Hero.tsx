@@ -34,6 +34,7 @@ const Background = styled.div`
     width: 100vw;
     height: 100vh;
     max-height: 900px;
+    min-height: 850px;
     background: linear-gradient(to bottom right, #4930a3, #8c21ed);
     z-index: -999;
 
