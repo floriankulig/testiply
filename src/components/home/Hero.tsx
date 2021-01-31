@@ -48,6 +48,7 @@ const DividerWrapper = styled.div`
     position: relative;
     width: 100%;
     height: 100%;
+    overflow: hidden;
 
     .circle{
         position: absolute;
@@ -75,6 +76,8 @@ const DividerWrapper = styled.div`
             border-radius: 19% 81% 27% 73% / 70% 70% 30% 30%;
             width: 400px;
             height: 325px;
+            visibility: hidden;
+            @media (${({ theme }) => theme.bp.small}){ visibility: visible;}
         }
     }
 
