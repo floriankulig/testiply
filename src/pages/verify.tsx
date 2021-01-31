@@ -62,7 +62,7 @@ const Verify: NextPage<PageProps> = ({ success }) => {
                 color: getTextColor(theme.layoutContentBg),
             }} />
             <ContentContainer hasError={!success} className="container">
-                <h1>{success ? <GoVerified /> : <MdError />}{success ? "You are now verified" : "Something failed."}</h1>
+                <h1>{success ? <GoVerified /> : <MdError />}{success ? "You are now verified" : "Your Verification failed."}</h1>
                 {success ? (
                     <Link href="/store">
                         <Button big bold>Go to Store</Button>
