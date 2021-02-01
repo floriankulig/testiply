@@ -34,7 +34,8 @@ const transitions = css`
   }
 
   [data-scroll] {
-    transition: all 0.3s var(--easing);
+    transition: 0.3s var(--easing);
+    transition-property: opacity, transform;
     opacity: 0;
     transform: translateY(30px);
   }
