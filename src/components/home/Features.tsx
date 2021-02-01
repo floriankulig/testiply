@@ -1,4 +1,6 @@
 import { lighten } from "polished";
+import { useEffect, useRef } from "react";
+import ScrollOut from "scroll-out"
 import { RiCodeSSlashFill, RiFeedbackLine, RiShoppingBag3Line } from "react-icons/ri";
 import styled from "styled-components"
 
@@ -43,6 +45,7 @@ const Feature = styled.li`
     margin: 0 auto;
     margin-bottom: 4em;
     color: var(--navy);
+    
 
     svg{
         width: 20%;
@@ -58,25 +61,34 @@ const Feature = styled.li`
     @media (${({ theme }) => theme.bp.big}) {
         margin: 0;
         width: clamp(230px, 22vw, 330px);
+        &:nth-child(1){ transition-delay: 0.1s; }
+        &:nth-child(2){ transition-delay: 0.2s; }
+        &:nth-child(3){ transition-delay: 0.3s; }
     }
 `
 
 export const Features: React.FC = () => {
+    const features = useRef([])
+
+    useEffect(() => {
+        ScrollOut({ targets: features.current, once: true, threshold: 0.5 })
+    }, []);
+
     return (
         <FeaturesSection>
             <div className="triangle triangle-1" />
             <FeaturesContainer className="container">
-                <Feature>
+                <Feature ref={el => (features.current[0] = el)}>
                     <RiShoppingBag3Line />
                     <h2>Large App Offer</h2>
                     <p>Our App-Market is always expanding and offering applications from all sorts of categories. Without having to download the source code, you can test any app you like.</p>
                 </Feature>
-                <Feature>
+                <Feature ref={el => (features.current[1] = el)}>
                     <RiFeedbackLine />
                     <h2>Easy Feedback</h2>
                     <p>We provide easy ways in our User Interface to give fast and easy feedback to featured developers, because we value your time. </p>
                 </Feature>
-                <Feature>
+                <Feature ref={el => (features.current[2] = el)}>
                     <RiCodeSSlashFill />
                     <h2>Great For Developers</h2>
                     <p>Having a platform to offer apps for Beta-Testing, developers can get valueable and fast feedback from users who know what could be important for your app.</p>
