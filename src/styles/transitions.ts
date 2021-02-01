@@ -19,6 +19,16 @@ const transitions = css`
     opacity: 0;
     transition: 0.25s all var(--easing);
   }
+
+  [data-scroll] {
+    transition: all 0.3s var(--easing);
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  [data-scroll='in'] {
+    transform: translateY(0px);
+    opacity: 1;
+  }
 `;
 
 export default transitions;
