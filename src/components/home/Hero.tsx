@@ -54,8 +54,7 @@ const DividerWrapper = styled.div`
 
     .circle{
         position: absolute;
-        border: 1px solid ${rgba("#ffffff", 0.05)};
-        background: linear-gradient(to bottom right, ${rgba("#ffffff", 0.1)}, ${rgba("#ffffff", 0.08)});
+        background: linear-gradient(to bottom right, ${rgba("#ffffff", 0.1)}, ${rgba("#ffffff", 0.05)});
 
         &-1{
             top: 15%;
@@ -63,7 +62,7 @@ const DividerWrapper = styled.div`
             border-radius: 31% 69% 31% 69% / 20% 27% 73% 80% ;
             width: 300px;
             height: 370px;
-            background: linear-gradient(to bottom left, ${rgba("#ffffff", 0.2)}, ${rgba("#ffffff", 0.1)});
+            background: linear-gradient(to bottom right, ${rgba("#ffffff", 0.2)}, ${rgba("#ffffff", 0.01)});
         }
         &-2{
             top: 15%;
@@ -120,15 +119,20 @@ const Content = styled.div`
         color: white;
         font-size: clamp(3.3rem, 6.3vw, 5rem);
         margin: 0 0 0.25em 0;
+        opacity: 0;
+        animation: fadeUp 0.5s var(--easing) forwards;
         &:last-of-type {
             color: #ff0000;
             margin-bottom: .5em;
+            animation-delay: 0.1s;
         }
     }
 
-    button{
+    button {
         box-shadow: 4px 5px 15px rgba(110, 127, 218, 0.25);
         font-size: clamp(1rem, 2vw, 1.2rem);
+        opacity: 0;
+        animation: fadeUp 0.5s var(--easing) forwards 0.15s;
     }
 `
 
@@ -139,7 +143,7 @@ export const Hero: React.FC = () => {
         <HeroSection className="container">
             <Background>
                 <DividerWrapper>
-                    <CSSTransition in={!isMobile} timeout={250} classNames="pop-in" unmountOnExit>
+                    <CSSTransition in={!isMobile} timeout={250} classNames="pop-in" unmountOnExit >
                         <div className="circle circle-1" />
                     </CSSTransition>
                     <div className="circle circle-2" />
