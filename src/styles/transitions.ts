@@ -1,5 +1,18 @@
 import { css } from 'styled-components';
 
+const fadeUp = css`
+  @keyframes fadeUp {
+    0% {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    100% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+  }
+`;
+
 const transitions = css`
   .pop-in-enter {
     transform: scale(0.5);
@@ -23,12 +36,14 @@ const transitions = css`
   [data-scroll] {
     transition: all 0.3s var(--easing);
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   [data-scroll='in'] {
     transform: translateY(0px);
     opacity: 1;
   }
+
+  ${fadeUp}
 `;
 
 export default transitions;
