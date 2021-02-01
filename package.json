@@ -16,10 +16,12 @@
     "react-datepicker": "^3.4.0",
     "react-dom": "17.0.1",
     "react-transition-group": "^4.4.1",
+    "scrollreveal": "^4.0.7",
     "styled-components": "^5.2.1",
     "yup": "^0.32.8"
   },
   "devDependencies": {
+    "@types/scrollreveal": "0.0.6",
     "@types/node": "^14.14.12",
     "@types/react": "^17.0.0",
     "@types/react-datepicker": "^3.1.2",
