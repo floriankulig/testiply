@@ -51,13 +51,9 @@ export const InfoPageHeader: React.FC<InfoPageHeaderProps> = ({ style, className
 
     return (
         <Header className={className} style={style}>
-            {!router.pathname.endsWith("/") ? (
-                <Link href="/">
-                    <div className="logo">BetaStore</div>
-                </Link>
-            ) : (
-                    <div className="logo">BetaStore</div>
-                )}
+            <Link href="/">
+                <div className="logo link">BetaStore</div>
+            </Link>
             <ul className="nav-links">
                 {!router.pathname.endsWith("/") && <Link href="/store">
                     <li>
