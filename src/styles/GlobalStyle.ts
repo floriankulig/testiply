@@ -37,6 +37,10 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: inherit;
   }
 
+  *:focus{
+    outline: none;
+  }
+
   body {
     margin: 0;
     padding: 0;
@@ -62,6 +66,28 @@ const GlobalStyle = createGlobalStyle`
   p {
     font-size: 16px;
     line-height: 1.4;
+  }
+
+  .link{
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 2px;
+      width: 100%;
+      background: currentColor;
+
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 250ms var(--easing);
+    }
+
+    &:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
   }
 
   .container {
