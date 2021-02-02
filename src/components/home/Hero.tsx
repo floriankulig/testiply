@@ -120,11 +120,11 @@ const Content = styled.div`
         font-size: clamp(3.3rem, 6.3vw, 5rem);
         margin: 0 0 0.25em 0;
         opacity: 0;
-        animation: fadeUp 0.5s var(--easing) forwards;
+        animation: fadeUp 0.5s var(--easing) forwards 0.2s;
         &:last-of-type {
             color: #ff0000;
             margin-bottom: .5em;
-            animation-delay: 0.1s;
+            animation-delay: 0.25s;
         }
     }
 
@@ -132,7 +132,7 @@ const Content = styled.div`
         box-shadow: 4px 5px 15px rgba(110, 127, 218, 0.25);
         font-size: clamp(1rem, 2vw, 1.2rem);
         opacity: 0;
-        animation: fadeUp 0.5s var(--easing) forwards 0.15s;
+        animation: fadeUp 0.5s var(--easing) forwards 0.3s;
     }
 `
 
