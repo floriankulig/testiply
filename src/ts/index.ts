@@ -1,44 +1,11 @@
-export type Platform =
-  | 'ios'
-  | 'android'
-  | 'windows'
-  | 'macOS'
-  | 'linux'
-  | 'all';
-
-export type CategoryID =
-  | 'education'
-  | 'finances'
-  | 'graphicsAndDesign'
-  | 'music'
-  | 'productivity'
-  | 'socialMedia'
-  | 'entertainment'
-  | 'utilities'
-  | 'photoAndVideo'
-  | 'lifestyle'
-  | 'news'
-  | 'travel'
-  | 'games'
-  | 'weather'
-  | 'developerTools'
-  | 'healthAndFitness'
-  | 'medicine'
-  | 'referenceBooks'
-  | 'addons'
-  | 'sport'
-  | 'economy';
-
-export interface Category {
-  id?: CategoryID;
-  icon?: JSX.Element;
-  displayName: string;
-}
-
-export type InputType = 'email' | 'password';
-export type FormType = 'login' | 'register' | 'dev_register';
-
-export type UserType = 'tester' | 'dev';
+import {
+  Category,
+  Platform,
+  CategoryID,
+  UserType,
+  InputType,
+  FormType,
+} from './types';
 
 export interface User {
   email: string;
@@ -66,3 +33,5 @@ interface TodayAppWidgets {
   _id: string;
   apps: App[];
 }
+
+export type { Category, Platform, CategoryID, UserType, InputType, FormType };
