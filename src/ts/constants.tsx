@@ -14,6 +14,24 @@ import {
   IoNewspaper,
 } from 'react-icons/io5';
 import { RiStackLine, RiStackFill } from 'react-icons/ri';
+import { Platform, CategoryID } from "."
+
+export const platforms: Platform[] = [
+  'ios',
+  'android',
+  'windows',
+  'macOS',
+  'linux',
+  'all',
+];
+interface Category {
+  id?: CategoryID;
+  icon?: JSX.Element;
+  displayName: string;
+}
+export const categories: Category[] = [
+  { id: "education", displayName: 'Education' }, { id: "finances", displayName: 'Finances' }, { id: "graphicsAndDesign", displayName: 'Graphics and Design' }, { id: "music", displayName: 'Music' }, { id: "productivity", displayName: 'Productivity' }, { id: "socialMedia", displayName: 'Social Media' }, { id: "entertainment", displayName: 'Entertainment' }, { id: "utilities", displayName: 'Utilities' }, { id: "photoAndVideo", displayName: 'Photo and Video' }, { id: "lifestyle", displayName: 'Lifestyle' }, { id: "news", displayName: 'News' }, { id: "travel", displayName: 'Travel' }, { id: "games", displayName: 'Games' }, { id: "weather", displayName: 'Weather' }, { id: "developerTools", displayName: 'Developer Tools' }, { id: "healthAndFitness", displayName: 'Health and fitness' }, { id: "medicine", displayName: 'Medicine' }, { id: "referenceBooks", displayName: 'Reference Books', }, { id: "addons", displayName: 'Addons' }, { id: "sport", displayName: 'Sport' }, { id: "economy", displayName: 'Economy' }
+]
 
 export const testerTabNames = ['today', 'apps', 'games', 'categories', 'news'];
 export const testerTabIcons = [
