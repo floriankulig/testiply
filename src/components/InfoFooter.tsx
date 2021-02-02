@@ -82,7 +82,7 @@ const StyledPolicies = styled.div`
     @media (${({ theme }) => theme.bp.small}){
         margin: 0 ;
     }
-    h3:hover{ cursor: pointer;}
+    h3 a:hover{ cursor: pointer;}
 `
 
 export const Socials: React.FC = () => {
@@ -92,16 +92,16 @@ export const Socials: React.FC = () => {
                 Socials
             </h3>
             <div className="social-icons">
-                <a href="https://www.instagram.com/betappstore/" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.instagram.com/betappstore/" className="link" target="_blank" rel="noopener noreferrer">
                     <FaInstagram />
                 </a>
-                <a href="https://www.facebook.com/betaappstoree" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.facebook.com/betaappstoree" className="link" target="_blank" rel="noopener noreferrer">
                     <FaFacebook />
                 </a>
-                <a href="https://twitter.com/betaAppStoree" target="_blank" rel="noopener noreferrer">
+                <a href="https://twitter.com/betaAppStoree" className="link" target="_blank" rel="noopener noreferrer">
                     <FaTwitter />
                 </a>
-                <a href="https://discord.gg/EebKeM32RH" target="_blank" rel="noopener noreferrer">
+                <a href="https://discord.gg/EebKeM32RH" className="link" target="_blank" rel="noopener noreferrer">
                     <FaDiscord />
                 </a>
             </div>
@@ -115,11 +115,15 @@ export const Policies: React.FC = () => {
         <StyledPolicies>
             <Link href="/imprint">
                 <h3>
-                    Imprint
+                    <a className="link">
+                        Imprint
+                    </a>
                 </h3>
             </Link>
             <h3>
-                Privacy Policy
+                <a className="link">
+                    Privacy Policy
+                </a>
             </h3>
         </StyledPolicies>
     )
