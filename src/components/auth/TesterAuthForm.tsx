@@ -1,20 +1,22 @@
-import { Button } from "components/Button";
-import { AuthForm, FormikTextInput } from "components/forms";
-import { useState, useEffect } from "react";
-import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
-import { MdEmail, MdError } from "react-icons/md";
-import { FormType } from "ts";
-import { Form, Formik, FormikValues } from "formik";
-import * as Yup from "yup";
-import { FormikCheckbox } from "components/forms/FormikCheckbox";
-import Link from "next/link";
-import { api_url } from "ts/constants";
-import styled from "styled-components";
-import { darken, rgba } from "polished";
-import { CSSTransition } from "react-transition-group";
-import { ErrorMessage } from "components/ErrorMessage";
-import axios from "axios";
-import { useRouter } from "next/router";
+import { Button } from 'components/Button';
+import { AuthForm, FormikTextInput } from 'components/forms';
+import { useState, useEffect } from 'react';
+import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai';
+import { MdEmail, MdError } from 'react-icons/md';
+import { FormType } from 'ts';
+import { Form, Formik, FormikValues } from 'formik';
+import * as Yup from 'yup';
+import { FormikCheckbox } from 'components/forms/FormikCheckbox';
+import Link from 'next/link';
+import { api_url } from 'ts/constants';
+import styled from 'styled-components';
+import { darken, rgba } from 'polished';
+import { CSSTransition } from 'react-transition-group';
+import { ErrorMessage } from 'components/ErrorMessage';
+import axios from 'axios';
+import { useRouter } from 'next/router';
+import { capitalized } from 'helpers';
+import { Loading } from 'components/Loading';
 
 const Overlay = styled.div`
   display: grid;
@@ -54,6 +56,10 @@ const StyledModal = styled.div`
     color: ${({ theme }) => rgba(theme.navy, 0.8)};
     margin-bottom: 2em;
   }
+  ${Button} {
+    opacity: 0;
+    animation: fadeUp 0.5s var(--easing) forwards 0.15s;
+  }
 `;
 
 const SvgWrapper = styled.div`
@@ -89,67 +95,66 @@ interface FormValues {
 export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
   const [showPasswords, setShowPasswords] = useState<boolean>(false);
   const router = useRouter();
-  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   useEffect(() => {
     modalOpen
-      ? (document.body.style.overflow = "hidden")
+      ? (document.body.style.overflow = 'hidden')
       : (document.body.style.overflow = null);
   }, [modalOpen]);
 
   const initialValues: FormValues =
-    formType === "login"
+    formType === 'login'
       ? {
-          email: "",
-          password: "",
+          email: '',
+          password: '',
         }
       : {
-          email: "",
-          password: "",
-          confirmPassword: "",
+          email: '',
+          password: '',
+          confirmPassword: '',
           acceptedTAS: false,
         };
 
   const validationSchema = Yup.object({
-    email: Yup.string().email("Invalid format").required("Required").min(3),
+    email: Yup.string().email('Invalid format').required('Required').min(3),
     password: Yup.string()
-      .required("Required")
-      .min(8, "Has to be at least 8 characters"),
+      .required('Required')
+      .min(8, 'Has to be at least 8 characters'),
     confirmPassword:
-      formType === "register"
+      formType === 'register'
         ? Yup.string()
-            .oneOf([Yup.ref("password"), null], "Passwords must match")
-            .required("Required")
+            .oneOf([Yup.ref('password'), null], 'Passwords must match')
+            .required('Required')
         : undefined,
     acceptedTAS:
-      formType === "register" ? Yup.boolean().oneOf([true]) : undefined,
+      formType === 'register' ? Yup.boolean().oneOf([true]) : undefined,
   });
 
   const handleSubmit = async (values: FormikValues) => {
     console.log(values);
-    if (formType === "register") {
+    if (formType === 'register') {
       await axios
         .post(`${api_url}/register`, {
           email: values.email,
           password: values.password,
         })
         .then(() => {
-          router.replace("/store");
           setModalOpen(true);
         })
         .catch((err) => {
           setErrorMessage(err.response.data.err);
           console.log(err.response.data.err);
         });
-    } else if (formType === "login") {
+    } else if (formType === 'login') {
       await axios
         .post(`${api_url}/login`, {
           email: values.email,
           password: values.password,
         })
         .then(() => {
-          router.replace("/store");
+          router.push('/store');
         })
         .catch((err) => {
           setErrorMessage(err.response.data.err);
@@ -159,66 +164,75 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
 
   return (
     <>
-      <AuthForm style={{ filter: modalOpen ? "blur(3px)" : "none" }}>
-        <h1>{formType === "register" ? "Register" : "Login"}</h1>
-        {errorMessage && (
-          <ErrorMessage>
-            <MdError />
-            Error while {formType === "register" ? "Register" : "Login"}.{" "}
-            {errorMessage}
-          </ErrorMessage>
-        )}
+      <AuthForm style={{ filter: modalOpen ? 'blur(3px)' : 'none' }}>
+        <h1>{formType === 'register' ? 'Register' : 'Login'}</h1>
         <Formik
           initialValues={initialValues}
           onSubmit={async (values) => await handleSubmit(values)}
           validationSchema={validationSchema}
         >
-          <Form autoComplete="off">
-            <FormikTextInput
-              name="email"
-              svg={<MdEmail />}
-              label="E-Mail Address"
-              placeholder="Enter your E-Mail Address"
-            />
-            <FormikTextInput
-              name="password"
-              label="Password"
-              placeholder="Must be at least 8 characters"
-              type={showPasswords ? "text" : "password"}
-              svg={showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
-              svgClickHandler={() => setShowPasswords((prev) => !prev)}
-            />
-            {formType === "register" && (
-              <>
-                <FormikTextInput
-                  name="confirmPassword"
-                  label="Confirm Password"
-                  placeholder="Must be at least 8 characters"
-                  type={showPasswords ? "text" : "password"}
-                  svg={showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
-                  svgClickHandler={() => setShowPasswords((prev) => !prev)}
-                />
-                <FormikCheckbox name="acceptedTAS">
-                  {/*LINK NEEDS TO POINT TO TERMS AND CONDITIONS LATER*/}I agree
-                  to the&nbsp;
-                  <Link href="/register">
-                    <span className="link">Terms and Conditions</span>
-                  </Link>
-                </FormikCheckbox>
-              </>
-            )}
-            <Button bold type="submit">
-              {formType === "register" ? "Register" : "Log In"}
-            </Button>
-          </Form>
+          {({ isSubmitting }) => (
+            <Form autoComplete="off">
+              <FormikTextInput
+                name="email"
+                svg={<MdEmail />}
+                label="E-Mail Address"
+                placeholder="Enter your E-Mail Address"
+              />
+              <FormikTextInput
+                name="password"
+                label="Password"
+                placeholder="Must be at least 8 characters"
+                type={showPasswords ? 'text' : 'password'}
+                svg={showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
+                svgClickHandler={() => setShowPasswords((prev) => !prev)}
+              />
+              {formType === 'register' && (
+                <>
+                  <FormikTextInput
+                    name="confirmPassword"
+                    label="Confirm Password"
+                    placeholder="Must be at least 8 characters"
+                    type={showPasswords ? 'text' : 'password'}
+                    svg={showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
+                    svgClickHandler={() => setShowPasswords((prev) => !prev)}
+                  />
+                  <FormikCheckbox name="acceptedTAS">
+                    {/*LINK NEEDS TO POINT TO TERMS AND CONDITIONS LATER*/}I
+                    agree to the&nbsp;
+                    <Link href="/register">
+                      <span className="link">Terms and Conditions</span>
+                    </Link>
+                  </FormikCheckbox>
+                </>
+              )}
+              <CSSTransition
+                in={!!errorMessage}
+                classNames="pop-in"
+                timeout={250}
+                unmountOnExit
+              >
+                <ErrorMessage>
+                  <MdError />
+                  {capitalized(formType)} error: {errorMessage}
+                </ErrorMessage>
+              </CSSTransition>
+              <Button bold type="submit">
+                {!isSubmitting ? (
+                  formType === 'register' ? (
+                    'Register'
+                  ) : (
+                    'Log In'
+                  )
+                ) : (
+                  <Loading size={40} />
+                )}
+              </Button>
+            </Form>
+          )}
         </Formik>
       </AuthForm>
-      <CSSTransition
-        in={modalOpen}
-        timeout={250}
-        classNames="pop-in"
-        unmountOnExit
-      >
+      {modalOpen && (
         <Overlay>
           <StyledModal>
             <SvgWrapper>
@@ -231,8 +245,14 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
             </p>
             <Button
               transparent
-              onClick={() => setModalOpen(false)}
-              onKeyDown={() => setModalOpen(false)}
+              onClick={() => {
+                setModalOpen(false);
+                router.push('/store');
+              }}
+              onKeyDown={() => {
+                setModalOpen(false);
+                router.replace('/store');
+              }}
               aria-label="Close Modal"
               tabIndex={0}
             >
@@ -240,7 +260,7 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
             </Button>
           </StyledModal>
         </Overlay>
-      </CSSTransition>
+      )}
     </>
   );
 };
