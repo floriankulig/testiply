@@ -21,11 +21,6 @@ export const AuthForm = styled.div`
 
   .link {
     color: var(--primary);
-    text-decoration: underline;
-
-    &:hover {
-      cursor: pointer;
-    }
   }
 
   ${ContentHolder} {
