@@ -66,9 +66,11 @@ const Verify: NextPage<PageProps> = ({ success }) => {
                 {success ? (
                     <Link href="/store">
                         <Button big bold>Go to Store</Button>
-                    </Link>) : (<a href="mailto:support@beta-app-store.com?subject=Verfication%20Error">
-                        <Button big bold color={"red"} basic>Contact our Support</Button>
-                    </a>)}
+                    </Link>) : (
+                        <a href="mailto:support@beta-app-store.com?subject=Verfication%20Error">
+                            <Button big bold color={"red"} basic>Contact our Support</Button>
+                        </a>
+                    )}
             </ContentContainer>
             <InfoFooter />
         </>
