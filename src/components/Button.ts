@@ -58,8 +58,8 @@ export const Button = styled.button<ButtonProps>`
 
           &:hover {
             background-color: ${p.color
-              ? rgba(p.color, 0.1)
-              : rgba(p.theme.primary, 0.1)};
+              ? rgba(p.color, 0.08)
+              : rgba(p.theme.primary, 0.08)};
             box-shadow: none;
           }
         `
