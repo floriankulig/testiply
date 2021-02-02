@@ -29,6 +29,12 @@ export type CategoryID =
   | 'sport'
   | 'economy';
 
+export interface Category {
+  id?: CategoryID;
+  icon?: JSX.Element;
+  displayName: string;
+}
+
 export type InputType = 'email' | 'password';
 export type FormType = 'login' | 'register' | 'dev_register';
 
