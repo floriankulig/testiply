@@ -70,6 +70,7 @@ const GlobalStyle = createGlobalStyle`
 
   .link{
     position: relative;
+    cursor: pointer;
     &::after {
       content: "";
       position: absolute;
