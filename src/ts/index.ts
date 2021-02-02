@@ -5,14 +5,29 @@ export type Platform =
   | 'macOS'
   | 'linux'
   | 'all';
-export const platforms: Platform[] = [
-  'ios',
-  'android',
-  'windows',
-  'macOS',
-  'linux',
-  'all',
-];
+
+export type CategoryID =
+  | 'education'
+  | 'finances'
+  | 'graphicsAndDesign'
+  | 'music'
+  | 'productivity'
+  | 'socialMedia'
+  | 'entertainment'
+  | 'utilities'
+  | 'photoAndVideo'
+  | 'lifestyle'
+  | 'news'
+  | 'travel'
+  | 'games'
+  | 'weather'
+  | 'developerTools'
+  | 'healthAndFitness'
+  | 'medicine'
+  | 'referenceBooks'
+  | 'addons'
+  | 'sport'
+  | 'economy';
 
 export type InputType = 'email' | 'password';
 export type FormType = 'login' | 'register' | 'dev_register';
