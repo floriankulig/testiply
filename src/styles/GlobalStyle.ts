@@ -77,11 +77,12 @@ const GlobalStyle = createGlobalStyle`
       bottom: 0;
       height: 2px;
       width: 100%;
+      border-radius: 1px;
       background: currentColor;
 
       transform: scaleX(0);
       transform-origin: right;
-      transition: transform 250ms var(--easing);
+      transition: transform 0.3s var(--easing);
     }
 
     &:hover::after {
