@@ -36,7 +36,6 @@ export const categories: Category[] = [
   { id: 'utilities', displayName: 'Utilities' },
   { id: 'photoAndVideo', displayName: 'Photo and Video' },
   { id: 'lifestyle', displayName: 'Lifestyle' },
-  { id: 'news', displayName: 'News' },
   { id: 'travel', displayName: 'Travel' },
   { id: 'games', displayName: 'Games' },
   { id: 'weather', displayName: 'Weather' },

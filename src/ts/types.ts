@@ -17,7 +17,6 @@ export type CategoryID =
   | 'utilities'
   | 'photoAndVideo'
   | 'lifestyle'
-  | 'news'
   | 'travel'
   | 'games'
   | 'weather'
