@@ -1,22 +1,22 @@
-import { Button } from 'components/Button';
-import { AuthForm, FormikTextInput } from 'components/forms';
-import { useState, useEffect } from 'react';
-import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai';
-import { MdEmail, MdError } from 'react-icons/md';
-import { FormType } from 'ts';
-import { Form, Formik, FormikValues } from 'formik';
-import * as Yup from 'yup';
-import { FormikCheckbox } from 'components/forms/FormikCheckbox';
-import Link from 'next/link';
-import { api_url } from 'ts/constants';
-import styled from 'styled-components';
-import { darken, rgba } from 'polished';
-import { CSSTransition } from 'react-transition-group';
-import { ErrorMessage } from 'components/ErrorMessage';
-import axios from 'axios';
-import { useRouter } from 'next/router';
-import { capitalized } from 'helpers';
-import { Loading } from 'components/Loading';
+import { Button } from "components/Button";
+import { AuthForm, FormikTextInput } from "components/forms";
+import { useState, useEffect } from "react";
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { MdEmail, MdError } from "react-icons/md";
+import { FormType } from "ts";
+import { Form, Formik, FormikValues } from "formik";
+import * as Yup from "yup";
+import { FormikCheckbox } from "components/forms/FormikCheckbox";
+import Link from "next/link";
+import { api_url } from "ts/constants";
+import styled from "styled-components";
+import { darken, rgba } from "polished";
+import { CSSTransition } from "react-transition-group";
+import { ErrorMessage } from "components/ErrorMessage";
+import axios from "axios";
+import { useRouter } from "next/router";
+import { capitalized } from "helpers";
+import { Loading } from "components/Loading";
 
 const Overlay = styled.div`
   display: grid;
@@ -95,46 +95,45 @@ interface FormValues {
 export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
   const [showPasswords, setShowPasswords] = useState<boolean>(false);
   const router = useRouter();
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   useEffect(() => {
     modalOpen
-      ? (document.body.style.overflow = 'hidden')
+      ? (document.body.style.overflow = "hidden")
       : (document.body.style.overflow = null);
   }, [modalOpen]);
 
   const initialValues: FormValues =
-    formType === 'login'
+    formType === "login"
       ? {
-          email: '',
-          password: '',
+          email: "",
+          password: "",
         }
       : {
-          email: '',
-          password: '',
-          confirmPassword: '',
+          email: "",
+          password: "",
+          confirmPassword: "",
           acceptedTAS: false,
         };
 
   const validationSchema = Yup.object({
-    email: Yup.string().email('Invalid format').required('Required').min(3),
+    email: Yup.string().email("Invalid format").required("Required").min(3),
     password: Yup.string()
-      .required('Required')
-      .min(8, 'Has to be at least 8 characters'),
+      .required("Required")
+      .min(8, "Has to be at least 8 characters"),
     confirmPassword:
-      formType === 'register'
+      formType === "register"
         ? Yup.string()
-            .oneOf([Yup.ref('password'), null], 'Passwords must match')
-            .required('Required')
+            .oneOf([Yup.ref("password"), null], "Passwords must match")
+            .required("Required")
         : undefined,
     acceptedTAS:
-      formType === 'register' ? Yup.boolean().oneOf([true]) : undefined,
+      formType === "register" ? Yup.boolean().oneOf([true]) : undefined,
   });
 
   const handleSubmit = async (values: FormikValues) => {
-    console.log(values);
-    if (formType === 'register') {
+    if (formType === "register") {
       await axios
         .post(`${api_url}/register`, {
           email: values.email,
@@ -147,14 +146,14 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
           setErrorMessage(err.response.data.err);
           console.log(err.response.data.err);
         });
-    } else if (formType === 'login') {
+    } else if (formType === "login") {
       await axios
         .post(`${api_url}/login`, {
           email: values.email,
           password: values.password,
         })
         .then(() => {
-          router.push('/store');
+          router.push("/store");
         })
         .catch((err) => {
           setErrorMessage(err.response.data.err);
@@ -164,8 +163,8 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
 
   return (
     <>
-      <AuthForm style={{ filter: modalOpen ? 'blur(3px)' : 'none' }}>
-        <h1>{formType === 'register' ? 'Register' : 'Login'}</h1>
+      <AuthForm style={{ filter: modalOpen ? "blur(3px)" : "none" }}>
+        <h1>{formType === "register" ? "Register" : "Login"}</h1>
         <Formik
           initialValues={initialValues}
           onSubmit={async (values) => await handleSubmit(values)}
@@ -183,17 +182,17 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
                 name="password"
                 label="Password"
                 placeholder="Must be at least 8 characters"
-                type={showPasswords ? 'text' : 'password'}
+                type={showPasswords ? "text" : "password"}
                 svg={showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
                 svgClickHandler={() => setShowPasswords((prev) => !prev)}
               />
-              {formType === 'register' && (
+              {formType === "register" && (
                 <>
                   <FormikTextInput
                     name="confirmPassword"
                     label="Confirm Password"
                     placeholder="Must be at least 8 characters"
-                    type={showPasswords ? 'text' : 'password'}
+                    type={showPasswords ? "text" : "password"}
                     svg={showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
                     svgClickHandler={() => setShowPasswords((prev) => !prev)}
                   />
@@ -219,10 +218,10 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
               </CSSTransition>
               <Button bold type="submit">
                 {!isSubmitting ? (
-                  formType === 'register' ? (
-                    'Register'
+                  formType === "register" ? (
+                    "Register"
                   ) : (
-                    'Log In'
+                    "Log In"
                   )
                 ) : (
                   <Loading size={40} />
@@ -247,11 +246,11 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
               transparent
               onClick={() => {
                 setModalOpen(false);
-                router.push('/store');
+                router.push("/store");
               }}
               onKeyDown={() => {
                 setModalOpen(false);
-                router.replace('/store');
+                router.replace("/store");
               }}
               aria-label="Close Modal"
               tabIndex={0}

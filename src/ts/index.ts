@@ -7,6 +7,8 @@ import {
   FormType,
 } from './types';
 
+import { platforms, categories } from './constants';
+
 export interface User {
   email: string;
   is_dev: boolean;
@@ -34,4 +36,5 @@ interface TodayAppWidgets {
   apps: App[];
 }
 
+export { platforms, categories };
 export type { Category, Platform, CategoryID, UserType, InputType, FormType };
