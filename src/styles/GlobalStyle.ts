@@ -1,7 +1,7 @@
-import { createGlobalStyle } from 'styled-components';
-import theme from './theme';
-import { rgba } from 'polished';
-import transitions from './transitions';
+import { createGlobalStyle } from "styled-components";
+import theme from "./theme";
+import { rgba } from "polished";
+import transitions from "./transitions";
 
 const GlobalStyle = createGlobalStyle`
   :root{
@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
     --auth-sidebar-width: ${theme.authSidebarWidth};
     --header-height: ${theme.headerHeight};
     --inner-padding: 50px;
-    --mobile-inner-padding: 25px;
+    --mobile-inner-padding: 30px;
     --layout-nav-background: ${theme.layoutNavBg};
     --layout-content-background: ${theme.layoutContentBg};
     --sidebarDuration: 0.2s;
