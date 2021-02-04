@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import { css } from "styled-components";
 
 const fadeUp = css`
   @keyframes fadeUp {
@@ -32,6 +32,24 @@ const transitions = css`
     opacity: 0;
     transition: 0.25s all var(--easing);
   }
+  .fade-right-enter {
+    transform: translateX(-70px) scale(0.8);
+    opacity: 0;
+  }
+  .fade-right-enter-active {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+    transition: 0.25s all var(--easing);
+  }
+  .fade-right-exit {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+  .fade-right-exit-active {
+    transform: translateX(-70px) scale(0.8);
+    opacity: 0;
+    transition: 0.25s all var(--easing);
+  }
 
   [data-scroll] {
     transition: 0.3s var(--easing);
@@ -39,7 +57,7 @@ const transitions = css`
     opacity: 0;
     transform: translateY(30px);
   }
-  [data-scroll='in'] {
+  [data-scroll="in"] {
     transform: translateY(0px);
     opacity: 1;
   }
