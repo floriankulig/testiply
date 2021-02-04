@@ -4,7 +4,7 @@ const fadeUp = css`
   @keyframes fadeUp {
     0% {
       opacity: 0;
-      transform: translateY(50px);
+      transform: translateY(70px);
     }
     100% {
       transform: translateY(0px);
