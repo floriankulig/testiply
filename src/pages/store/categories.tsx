@@ -2,7 +2,6 @@ import { Layout } from "components/layouts";
 import { BasePath, CustomPath, TabHeader } from "components/TabHeader";
 import { FiChevronLeft } from "react-icons/fi";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import { categories } from "ts";
 import { CategoryChip, CategoryGrid } from "components/store/categories";
 import { testerTabNames } from "ts/constants";
