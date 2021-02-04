@@ -39,7 +39,7 @@ const transitions = css`
   .fade-right-enter-active {
     transform: translateX(0) scale(1);
     opacity: 1;
-    transition: 0.25s all var(--easing);
+    transition: 0.3s all var(--easing);
   }
   .fade-right-exit {
     transform: translateX(0) scale(1);
@@ -48,7 +48,7 @@ const transitions = css`
   .fade-right-exit-active {
     transform: translateX(-70px) scale(0.8);
     opacity: 0;
-    transition: 0.25s all var(--easing);
+    transition: 0.3s all var(--easing);
   }
 
   [data-scroll] {
