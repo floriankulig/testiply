@@ -1,20 +1,17 @@
 import {
   SelectedTabProvider,
   useSelectedTabValue,
-} from './selected-tab-context';
+} from "./selected-tab-context";
 
-import {
-  SelectedPlatformProvider,
-  useSelectedPlatformValue,
-} from './selected-platform-context';
+import { FiltersProvider, useFiltersValue } from "./filters-context";
 
-import { AuthProvider, useAuthValue } from './user-context';
+import { AuthProvider, useAuthValue } from "./user-context";
 
 export {
   SelectedTabProvider,
   useSelectedTabValue,
-  SelectedPlatformProvider,
-  useSelectedPlatformValue,
+  FiltersProvider,
+  useFiltersValue,
   AuthProvider,
   useAuthValue,
 };
