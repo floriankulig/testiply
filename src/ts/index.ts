@@ -5,9 +5,10 @@ import {
   UserType,
   InputType,
   FormType,
-} from './types';
+  App,
+} from "./types";
 
-import { platforms, categories } from './constants';
+import { platforms, categories } from "./constants";
 
 export interface User {
   email: string;
@@ -15,26 +16,13 @@ export interface User {
   _id: string;
 }
 
-interface App {
-  name: string;
-  desc: string;
-  websiteUrl: string; //Website oder Github oder FaceBook
-  platform: Platform;
-  icon: string;
-  screenshots: string[];
-  rating: number;
-  downloads: number;
-  developer_id: number; // dev/dev_id
-  developer_name: string;
-  _id: string;
-}
-
-interface TodayAppWidgets {
-  heading: string;
-  opensLongDescription: boolean;
-  _id: string;
-  apps: App[];
-}
-
 export { platforms, categories };
-export type { Category, Platform, CategoryID, UserType, InputType, FormType };
+export type {
+  Category,
+  Platform,
+  CategoryID,
+  UserType,
+  InputType,
+  FormType,
+  App,
+};
