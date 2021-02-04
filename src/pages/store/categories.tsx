@@ -56,7 +56,7 @@ const Categories = () => {
       </TabHeader>
       <CategoryGrid>
         {!selectedCategory &&
-          categories?.map((category) => {
+          categories?.map((category, i) => {
             if (testerTabNames.includes(category.id))
               //if we got a tab with the same name as the current category e.g. games, then link to that tab in the store
               return (
@@ -64,6 +64,7 @@ const Categories = () => {
                   <CategoryChip
                     onClick={() => setSelectedTab(category.id)}
                     onKeyDown={() => setSelectedTab(category.id)}
+                    style={{ animationDelay: `${i * 25}ms` }}
                     tabIndex={0}
                     aria-label={`Select ${category.displayName} as the current category.`}
                   >
@@ -77,6 +78,7 @@ const Categories = () => {
                 onClick={() => setSelectedCategory(category)}
                 onKeyDown={() => setSelectedCategory(category)}
                 tabIndex={0}
+                style={{ animationDelay: `${i * 25}ms` }}
                 aria-label={`Select ${category.displayName} as the current category.`}
               >
                 {category.displayName}
