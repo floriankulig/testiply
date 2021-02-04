@@ -12,8 +12,7 @@ interface StyledContentProps {
 }
 
 const StyledContent = styled.div<StyledContentProps>`
-  min-height: 100vh;
-  height: 150vh;
+  min-height: calc(100vh - var(--header-height));
   width: 100vw;
   @media (${({ theme }) => theme.bp.big}) {
     border-radius: ${(p) => (p.scrolled ? "0" : "50px")} 0 0 0;
@@ -22,6 +21,7 @@ const StyledContent = styled.div<StyledContentProps>`
     filter: none;
   }
   padding-top: 2.5em;
+  padding-bottom: 5em;
   transform: translateY(var(--header-height));
   background: var(--layout-content-background);
   filter: ${(p) => (p.sidebarOpen ? "blur(4px)" : "none")};
