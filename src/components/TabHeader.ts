@@ -13,7 +13,6 @@ export const TabHeader = styled.h1`
   i {
     color: grey;
     font-weight: normal;
-    font-size: 2.1rem;
     margin: 0 7px;
     transform: scaleX(0.7);
   }
