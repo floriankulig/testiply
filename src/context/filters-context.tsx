@@ -11,10 +11,22 @@ export type FilterContext = {
 const FilterContext = createContext<Partial<FilterContext>>({});
 
 export const FiltersProvider = ({ children }) => {
-  const filters = useFilters();
+  const {
+    selectedPlatform,
+    setSelectedPlatform,
+    searchQuery,
+    setSearchQuery,
+  } = useFilters();
 
   return (
-    <FilterContext.Provider value={{ ...filters }}>
+    <FilterContext.Provider
+      value={{
+        selectedPlatform,
+        setSelectedPlatform,
+        searchQuery,
+        setSearchQuery,
+      }}
+    >
       {children}
     </FilterContext.Provider>
   );
