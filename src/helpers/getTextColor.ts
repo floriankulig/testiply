@@ -1,15 +1,15 @@
-import { theme } from 'styles';
+import { theme } from "styles";
 
 const getTextColor = (initialColor: string): string => {
   let r, g, b;
 
   //Check if color is white
   if (
-    initialColor === 'white' ||
-    initialColor === '#ffffff' ||
-    initialColor === 'white'
+    initialColor === "white" ||
+    initialColor === "#ffffff" ||
+    initialColor === "white"
   ) {
-    return '#000000';
+    return "#000000";
   }
 
   // Check the format of the color, HEX or RGB?
@@ -25,8 +25,8 @@ const getTextColor = (initialColor: string): string => {
   } else {
     // If RGB --> Convert it to HEX: http://gist.github.com/983661
     const convertedColor = +(
-      '0x' +
-      initialColor.slice(1).replace(initialColor.length < 5 && /./g, '$&$&')
+      "0x" +
+      initialColor.slice(1).replace(initialColor.length < 5 && /./g, "$&$&")
     );
 
     r = convertedColor >> 16;
