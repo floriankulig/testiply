@@ -65,6 +65,7 @@ const Categories = () => {
                       tabIndex={0}
                       aria-label={`Select ${category.displayName} as the current category.`}
                     >
+                      <category.icon />
                       {category.displayName}
                     </CategoryChip>
                   </Link>
@@ -78,6 +79,7 @@ const Categories = () => {
                   style={{ animationDelay: `${i * 25}ms` }}
                   aria-label={`Select ${category.displayName} as the current category.`}
                 >
+                  <category.icon />
                   {category.displayName}
                 </CategoryChip>
               );
