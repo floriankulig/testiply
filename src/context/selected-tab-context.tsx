@@ -1,22 +1,22 @@
 import { getCurrentTabFromRoute } from "helpers";
 import { useRouter } from "next/router";
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
-export type ContextType = {
+export type TabContextType = {
   selectedTab?: string;
   setSelectedTab?: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const SelectedTabContext = createContext<Partial<ContextType>>({});
+export const SelectedTabContext = createContext<Partial<TabContextType>>({});
 
 export const SelectedTabProvider = ({ children }) => {
-  const [selectedTab, setSelectedTab] = useState<string>(
-    getCurrentTabFromRoute()
-  );
   const { pathname } = useRouter();
+  const [selectedTab, setSelectedTab] = useState<string>(
+    getCurrentTabFromRoute(pathname)
+  );
 
   useEffect(() => {
-    setSelectedTab(getCurrentTabFromRoute);
+    setSelectedTab(getCurrentTabFromRoute(pathname));
   }, [pathname]);
 
   return (
