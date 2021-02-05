@@ -12,7 +12,7 @@ import { CSSTransition } from "react-transition-group";
 
 const Categories = () => {
   const { setSelectedTab } = useSelectedTabValue();
-  const { selectedCategory, setSelectedCategory } = useCategory(null);
+  const { selectedCategory, setSelectedCategory, apps } = useCategory(null);
 
   return (
     <>
@@ -55,36 +55,37 @@ const Categories = () => {
         </CSSTransition>
       </TabHeader>
       <CategoryGrid>
-        {!selectedCategory &&
-          categories?.map((category, i) => {
-            if (testerTabNames.includes(category.id))
-              //if we got a tab with the same name as the current category e.g. games, then link to that tab in the store
+        {!selectedCategory
+          ? categories?.map((category, i) => {
+              if (testerTabNames.includes(category.id))
+                //if we got a tab with the same name as the current category e.g. games, then link to that tab in the store
+                return (
+                  <Link href={`/store/${category.id}`} key={category.id}>
+                    <CategoryChip
+                      onClick={() => setSelectedTab(category.id)}
+                      onKeyDown={() => setSelectedTab(category.id)}
+                      style={{ animationDelay: `${i * 25}ms` }}
+                      tabIndex={0}
+                      aria-label={`Select ${category.displayName} as the current category.`}
+                    >
+                      {category.displayName}
+                    </CategoryChip>
+                  </Link>
+                );
               return (
-                <Link href={`/store/${category.id}`} key={category.id}>
-                  <CategoryChip
-                    onClick={() => setSelectedTab(category.id)}
-                    onKeyDown={() => setSelectedTab(category.id)}
-                    style={{ animationDelay: `${i * 25}ms` }}
-                    tabIndex={0}
-                    aria-label={`Select ${category.displayName} as the current category.`}
-                  >
-                    {category.displayName}
-                  </CategoryChip>
-                </Link>
+                <CategoryChip
+                  key={category.id}
+                  onClick={() => setSelectedCategory(category)}
+                  onKeyDown={() => setSelectedCategory(category)}
+                  tabIndex={0}
+                  style={{ animationDelay: `${i * 25}ms` }}
+                  aria-label={`Select ${category.displayName} as the current category.`}
+                >
+                  {category.displayName}
+                </CategoryChip>
               );
-            return (
-              <CategoryChip
-                key={category.id}
-                onClick={() => setSelectedCategory(category)}
-                onKeyDown={() => setSelectedCategory(category)}
-                tabIndex={0}
-                style={{ animationDelay: `${i * 25}ms` }}
-                aria-label={`Select ${category.displayName} as the current category.`}
-              >
-                {category.displayName}
-              </CategoryChip>
-            );
-          })}
+            })
+          : apps?.map((app) => <li>{app.name}</li>)}
       </CategoryGrid>
     </>
   );
