@@ -1,6 +1,6 @@
-import { darken, rgba, rgb } from 'polished';
-import styled, { css } from 'styled-components';
-import { getTextColor } from 'helpers';
+import { darken, rgba } from "polished";
+import styled, { css } from "styled-components";
+import { getTextColor } from "helpers";
 
 interface ButtonProps {
   big?: boolean;
@@ -15,9 +15,9 @@ interface ButtonProps {
 export const Button = styled.button<ButtonProps>`
   border: none;
   cursor: pointer;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   transition: 0.25s all;
-  ${(p) => p.bold && 'font-weight: bold'};
+  ${(p) => p.bold && "font-weight: bold"};
   ${(p) =>
     p.big
       ? css`
@@ -51,10 +51,10 @@ export const Button = styled.button<ButtonProps>`
     p.transparent || p.basic //When Button is transparent or basic
       ? css`
           background-color: transparent;
-          color: ${p.color ? p.color : 'var(--primary)'};
+          color: ${p.color ? p.color : "var(--primary)"};
           box-shadow: none;
-          border: 1px solid
-            ${p.basic ? (p.color ? p.color : 'var(--primary)') : 'none'};
+          border: 2px solid
+            ${p.basic ? (p.color ? p.color : "var(--primary)") : "none"};
 
           &:hover {
             background-color: ${p.color
@@ -65,8 +65,8 @@ export const Button = styled.button<ButtonProps>`
         `
       : css`
           //default styles (normal primary color)
-          background-color: ${p.color ? p.color : 'var(--primary)'};
-          color: ${p.color ? getTextColor(p.color) : '#ffffff'};
+          background-color: ${p.color ? p.color : "var(--primary)"};
+          color: ${p.color ? getTextColor(p.color) : "#ffffff"};
           &:hover {
             background-color: ${p.color
               ? darken(0.05, p.color)
