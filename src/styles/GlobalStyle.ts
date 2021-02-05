@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
     --sidebar-width: ${theme.sidebarWidth};
     --auth-sidebar-width: ${theme.authSidebarWidth};
     --header-height: ${theme.headerHeight};
-    --inner-padding: 50px;
+    --inner-padding: 60px;
     --mobile-inner-padding: 30px;
     --layout-nav-background: ${theme.layoutNavBg};
     --layout-content-background: ${theme.layoutContentBg};
