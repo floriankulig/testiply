@@ -8,7 +8,7 @@ type CategoryType = Category | null;
 interface ReturnType {
   selectedCategory: CategoryType;
   setSelectedCategory: React.Dispatch<React.SetStateAction<CategoryType>>;
-  apps: Array<App | null>;
+  apps: App[];
 }
 
 export const useCategory = (initial?: CategoryType): ReturnType => {
@@ -16,7 +16,7 @@ export const useCategory = (initial?: CategoryType): ReturnType => {
   const [selectedCategory, setSelectedCategory] = useState<CategoryType>(
     initial
   );
-  const [apps, setApps] = useState<Array<App>>([]);
+  const [apps, setApps] = useState<App[]>([]);
 
   useEffect(() => {
     if (selectedCategory === null) {
