@@ -1,9 +1,10 @@
 import { useFilters } from "hooks";
 import { createContext, useContext, useState } from "react";
+import { Platform } from "ts";
 
 export type FilterContext = {
-  selectedPlatform?: string;
-  setSelectedPlatform?: React.Dispatch<React.SetStateAction<string>>;
+  selectedPlatform?: Platform;
+  setSelectedPlatform?: React.Dispatch<React.SetStateAction<Platform>>;
   searchQuery?: string;
   setSearchQuery?: React.Dispatch<React.SetStateAction<string>>;
 };
