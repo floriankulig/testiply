@@ -11,7 +11,6 @@ import { useCategory } from "hooks";
 import { CSSTransition } from "react-transition-group";
 
 const Categories = () => {
-  const { setSelectedTab } = useSelectedTabValue();
   const { selectedCategory, setSelectedCategory, apps } = useCategory(null);
 
   return (
@@ -62,8 +61,6 @@ const Categories = () => {
                 return (
                   <Link href={`/store/${category.id}`} key={category.id}>
                     <CategoryChip
-                      onClick={() => setSelectedTab(category.id)}
-                      onKeyDown={() => setSelectedTab(category.id)}
                       style={{ animationDelay: `${i * 25}ms` }}
                       tabIndex={0}
                       aria-label={`Select ${category.displayName} as the current category.`}
