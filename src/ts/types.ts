@@ -2,7 +2,7 @@ export type Platform =
   | "ios"
   | "android"
   | "windows"
-  | "macOS"
+  | "macoS"
   | "linux"
   | "all";
 

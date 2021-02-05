@@ -20,7 +20,7 @@ export const platforms: Platform[] = [
   "ios",
   "android",
   "windows",
-  "macOS",
+  "macoS",
   "linux",
   "all",
 ];
