@@ -7,7 +7,7 @@ const CategoryGrid = styled.ul`
 `;
 
 const CategoryChip = styled.li`
-  padding: 1.2em 1em;
+  padding: 1.2em 1.5em;
   border-radius: var(--border-radius);
   box-shadow: var(--btn-shadow);
   cursor: pointer;
