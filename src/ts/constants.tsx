@@ -7,45 +7,86 @@ import {
   AiFillDashboard,
 } from "react-icons/ai";
 import { FaComment, FaRegComment } from "react-icons/fa";
+import { HiOutlinePhotograph } from "react-icons/hi";
+import { GiArchiveResearch } from "react-icons/gi";
 import {
   IoGameControllerOutline,
   IoGameController,
   IoNewspaperOutline,
   IoNewspaper,
+  IoFootballOutline,
+  IoGlasses,
 } from "react-icons/io5";
-import { RiStackLine, RiStackFill } from "react-icons/ri";
+import {
+  RiStackLine,
+  RiStackFill,
+  RiBook2Line,
+  RiPencilLine,
+  RiMusicLine,
+  RiTimerLine,
+  RiNotification2Line,
+  RiTv2Line,
+  RiPlaneLine,
+  RiSunFoggyLine,
+  RiCodeSSlashLine,
+  RiHeart2Line,
+  RiMedicineBottleLine,
+  RiToolsLine,
+} from "react-icons/ri";
+import { BsCreditCard, BsGraphUp } from "react-icons/bs";
 import { Platform, Category } from ".";
+import { GoPackage } from "react-icons/go";
 
 export const platforms: Platform[] = [
   "ios",
   "android",
   "windows",
-  "macoS",
+  "macos",
   "linux",
   "all",
 ];
 
 export const categories: Category[] = [
-  { id: "education", displayName: "Education" },
-  { id: "finances", displayName: "Finances" },
-  { id: "graphicsAndDesign", displayName: "Graphics and Design" },
-  { id: "music", displayName: "Music" },
-  { id: "productivity", displayName: "Productivity" },
-  { id: "socialMedia", displayName: "Social Media" },
-  { id: "entertainment", displayName: "Entertainment" },
-  { id: "utilities", displayName: "Utilities" },
-  { id: "photoAndVideo", displayName: "Photo and Video" },
-  { id: "lifestyle", displayName: "Lifestyle" },
-  { id: "travel", displayName: "Travel" },
-  { id: "games", displayName: "Games" },
-  { id: "weather", displayName: "Weather" },
-  { id: "developerTools", displayName: "Developer Tools" },
-  { id: "healthAndFitness", displayName: "Health and fitness" },
-  { id: "medicine", displayName: "Medicine" },
-  { id: "referenceBooks", displayName: "Reference Books" },
-  { id: "addons", displayName: "Addons" },
-  { id: "sport", displayName: "Sport" },
-  { id: "economy", displayName: "Economy" },
+  { id: "education", displayName: "Education", icon: RiBook2Line },
+  { id: "finances", displayName: "Finance", icon: BsCreditCard },
+  {
+    id: "graphicsAndDesign",
+    displayName: "Graphics And Design",
+    icon: RiPencilLine,
+  },
+  { id: "music", displayName: "Music", icon: RiMusicLine },
+  { id: "productivity", displayName: "Productivity", icon: RiTimerLine },
+  { id: "socialMedia", displayName: "Social Media", icon: RiNotification2Line },
+  { id: "entertainment", displayName: "Entertainment", icon: RiTv2Line },
+  { id: "utilities", displayName: "Utilities", icon: RiToolsLine },
+  {
+    id: "photoAndVideo",
+    displayName: "Photo and Video",
+    icon: HiOutlinePhotograph,
+  },
+  { id: "lifestyle", displayName: "Lifestyle", icon: IoGlasses },
+  { id: "travel", displayName: "Travel", icon: RiPlaneLine },
+  { id: "games", displayName: "Games", icon: IoGameControllerOutline },
+  { id: "weather", displayName: "Weather", icon: RiSunFoggyLine },
+  {
+    id: "developerTools",
+    displayName: "Developer Tools",
+    icon: RiCodeSSlashLine,
+  },
+  {
+    id: "healthAndFitness",
+    displayName: "Health And Fitness",
+    icon: RiHeart2Line,
+  },
+  { id: "medicine", displayName: "Medicine", icon: RiMedicineBottleLine },
+  {
+    id: "referenceBooks",
+    displayName: "Reference Books",
+    icon: GiArchiveResearch,
+  },
+  { id: "addons", displayName: "Addons", icon: GoPackage },
+  { id: "sport", displayName: "Sport", icon: IoFootballOutline },
+  { id: "economy", displayName: "Economy", icon: BsGraphUp },
 ];
 
 export const testerTabNames = ["today", "apps", "games", "categories", "news"];
