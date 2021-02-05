@@ -1,8 +1,10 @@
+import { IconType } from "react-icons/lib";
+
 export type Platform =
   | "ios"
   | "android"
   | "windows"
-  | "macoS"
+  | "macos"
   | "linux"
   | "all";
 
@@ -30,7 +32,7 @@ export type CategoryID =
 
 export interface Category {
   id?: CategoryID;
-  icon?: JSX.Element;
+  icon?: IconType;
   displayName: string;
 }
 
