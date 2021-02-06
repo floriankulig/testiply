@@ -10,6 +10,7 @@ import { CSSTransition } from "react-transition-group";
 import { useEffect, useState } from "react";
 import { useFiltersValue } from "context";
 import { Loading } from "components/Loading";
+import { NoAppsView } from "components/store";
 
 const Categories = () => {
   const { selectedCategory, loading, apps } = useCategory();
@@ -81,7 +82,10 @@ const Categories = () => {
               <CategoryChip
                 key={category.id}
                 tabIndex={0}
-                style={{ animationDelay: `${i * 25}ms` }}
+                style={{
+                  animationDelay: `${i * 15}ms`,
+                }}
+                color={category.color}
                 aria-label={`Select ${category.displayName} as the current category.`}
               >
                 <category.icon />
@@ -89,13 +93,20 @@ const Categories = () => {
               </CategoryChip>
             </Link>
           ))
-        ) : loading ? (
+        ) : loading ? ( // If it's loading
           <h2 className="loading">
             Loading
             <Loading size={60} />
           </h2>
+        ) : !filteredApps[0] ? ( //if we don't have apps for our search
+          <NoAppsView hasApps={!!apps[0]} />
         ) : (
-          filteredApps.map((app) => <li key={app._id}>{app.name}</li>)
+          // if there are apps, render them
+          filteredApps.map((app, i) => (
+            <li key={app._id} style={{ animationDelay: `${i * 15}ms` }}>
+              {app.name}
+            </li>
+          ))
         )}
       </AppGrid>
     </>
