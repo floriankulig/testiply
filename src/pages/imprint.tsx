@@ -66,7 +66,7 @@ const Imprint: NextPage = () => {
           .split("/")
           .slice(1)
           .map((link) => (
-            <span>/ {capitalized(link)}</span>
+            <span key={link}>/ {capitalized(link)}</span>
           ))}
         {paragraphs &&
           paragraphs.map((paragraph: Paragraph) => (
