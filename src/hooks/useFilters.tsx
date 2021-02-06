@@ -6,13 +6,6 @@ export const useFilters = (): FilterContext => {
   const [selectedPlatform, setSelectedPlatform] = useState<Platform>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  useEffect(() => {
-    console.log(searchQuery);
-  }, [searchQuery]);
-  useEffect(() => {
-    console.log(selectedPlatform);
-  }, [selectedPlatform]);
-
   return {
     selectedPlatform,
     setSelectedPlatform,
