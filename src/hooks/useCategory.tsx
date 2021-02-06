@@ -34,10 +34,8 @@ export const useCategory = (): ReturnType => {
       return;
     }
     let query: string = `?category=${selectedCategory.id}`;
-    query =
-      selectedPlatform === "all"
-        ? query + ""
-        : query + `&platform[]=${selectedPlatform}`;
+    query +=
+      selectedPlatform === "all" ? "" : `&platform[]=${selectedPlatform}`;
 
     axios
       .get(`${api_url}/categoryApps${query}`)
