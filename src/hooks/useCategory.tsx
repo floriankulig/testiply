@@ -9,11 +9,11 @@ import { api_url } from "ts/constants";
 type CategoryType = Category | null;
 interface ReturnType {
   selectedCategory: CategoryType;
-  setSelectedCategory: React.Dispatch<React.SetStateAction<CategoryType>>;
+  loading: boolean;
   apps: App[];
 }
 
-export const useCategory = (): ReturnType => {
+export const useCategory = (initalApps?: App[]): ReturnType => {
   //Helper Hooks
   const { query } = useRouter();
   const { selectedPlatform } = useFiltersValue();
@@ -28,11 +28,13 @@ export const useCategory = (): ReturnType => {
 
   // Requesting Apps Logic
   const [apps, setApps] = useState<App[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
     if (selectedCategory === null) {
       setApps([]);
       return;
     }
+    setLoading(true);
     let query: string = `?category=${selectedCategory.id}`;
     query +=
       selectedPlatform === "all" ? "" : `&platform[]=${selectedPlatform}`;
@@ -43,9 +45,10 @@ export const useCategory = (): ReturnType => {
         if (JSON.stringify(res.data) !== JSON.stringify(apps)) {
           setApps(res.data);
         }
+        // setLoading(false);
       })
       .catch((err) => console.log(err));
   }, [selectedCategory, selectedPlatform]);
 
-  return { selectedCategory, setSelectedCategory, apps };
+  return { selectedCategory, loading, apps };
 };
