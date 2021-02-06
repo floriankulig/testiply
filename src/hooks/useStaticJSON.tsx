@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 
-export const useStaticJSON = (lang: "de" | "en", filename: string) => {
-    const [data, setData] = useState([]);
+export const useStaticJSON = (lang: "de" | "en", filename: string): any[] => {
+  const [data, setData] = useState([]);
 
-    useEffect(() => {
-        let newData;
-        if (lang) newData = require(`../static/${filename}_${lang}.json`);
+  useEffect(() => {
+    let newData: { content: any[] };
+    if (lang) newData = require(`../static/${filename}_${lang}.json`);
 
-        if (data !== newData.content) {
-            setData(newData.content)
-        };
-        console.log(data);
-    }, [lang, data]);
+    if (data !== newData.content) {
+      setData(newData.content);
+    }
+  }, [lang, data]);
 
-    return data;
+  return data;
 };
