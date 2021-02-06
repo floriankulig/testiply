@@ -17,6 +17,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { capitalized } from "helpers";
 import { Loading } from "components/Loading";
+import { useCookies } from "react-cookie";
 
 const Overlay = styled.div`
   display: grid;
@@ -96,6 +97,7 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
   const [showPasswords, setShowPasswords] = useState<boolean>(false);
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [cookie, setCookie] = useCookies(["token"]);
 
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   useEffect(() => {
@@ -152,7 +154,13 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
           email: values.email,
           password: values.password,
         })
-        .then(() => {
+        .then(async (res) => {
+          let date = new Date();
+          date.setDate(date.getDate() + 30);
+          await setCookie("token", res.data.token, {
+            sameSite: true,
+            expires: date,
+          });
           router.push("/store");
         })
         .catch((err) => {
