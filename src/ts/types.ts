@@ -32,9 +32,10 @@ export type CategoryID =
   | "economy";
 
 export interface Category {
-  id?: CategoryID;
-  icon?: IconType;
+  id: CategoryID;
+  icon: IconType;
   displayName: string;
+  color?: string;
 }
 
 export type InputType = "email" | "password";
