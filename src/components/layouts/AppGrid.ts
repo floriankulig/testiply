@@ -17,6 +17,6 @@ export const AppGrid = styled.ul`
 
   li {
     opacity: 0;
-    animation: fadeUp 0.3s var(--easing) forwards;
+    animation: fadeUp 0.4s var(--easing) forwards;
   }
 `;
