@@ -14,9 +14,4 @@ export const AppGrid = styled.ul`
     color: #c8c8c8;
     margin-top: 10vh;
   }
-
-  li {
-    opacity: 0;
-    animation: fadeUp 0.4s var(--easing) forwards;
-  }
 `;
