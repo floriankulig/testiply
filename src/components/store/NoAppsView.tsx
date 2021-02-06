@@ -17,10 +17,10 @@ const ViewContainer = styled.div`
   img,
   h3 {
     opacity: 0;
-    animation: fadeUp 0.5s var(--easing) forwards;
+    animation: fadeUp 0.5s var(--easing) forwards 0.1s;
   }
   h3 {
-    animation-delay: 0.1s;
+    animation-delay: 0.15s;
     text-align: center;
     color: ${({ theme }) => lighten(0.3, theme.navy)};
     font-size: 2rem;
