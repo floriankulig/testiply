@@ -7,9 +7,7 @@ const CategoryChip = styled.li`
   border-radius: var(--border-radius);
   box-shadow: var(--btn-shadow);
   cursor: pointer;
-  opacity: 0;
   font-size: clamp(1rem, 2vw, 1.2rem);
-  animation: fadeUp 0.3s var(--easing) forwards;
   transition: box-shadow 300ms var(--easing);
 
   &:hover {
