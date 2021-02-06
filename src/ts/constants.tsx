@@ -6,7 +6,7 @@ import {
   AiOutlineDashboard,
   AiFillDashboard,
 } from "react-icons/ai";
-import { FaComment, FaRegComment } from "react-icons/fa";
+import { FaComment, FaRegComment, FaRegNewspaper } from "react-icons/fa";
 import { HiOutlinePhotograph } from "react-icons/hi";
 import { GiArchiveResearch } from "react-icons/gi";
 import {
@@ -79,6 +79,7 @@ export const categories: Category[] = [
     icon: RiHeart2Line,
   },
   { id: "medicine", displayName: "Medicine", icon: RiMedicineBottleLine },
+  { id: "news", displayName: "News", icon: FaRegNewspaper },
   {
     id: "referenceBooks",
     displayName: "Reference Books",

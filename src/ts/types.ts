@@ -25,6 +25,7 @@ export type CategoryID =
   | "developerTools"
   | "healthAndFitness"
   | "medicine"
+  | "news"
   | "referenceBooks"
   | "addons"
   | "sport"
@@ -41,7 +42,7 @@ export type FormType = "login" | "register" | "dev_register";
 
 export interface App {
   name: string;
-  desc: string;
+  description: string;
   websiteUrl: string; //Website oder Github oder FaceBook
   platform: Platform;
   icon: string;
