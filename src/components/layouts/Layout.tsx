@@ -14,6 +14,7 @@ interface StyledContentProps {
 const StyledContent = styled.div<StyledContentProps>`
   min-height: calc(100vh - var(--header-height));
   width: 100vw;
+  overflow-x: hidden;
   @media (${({ theme }) => theme.bp.big}) {
     border-radius: ${(p) => (p.scrolled ? "0" : "50px")} 0 0 0;
     width: calc(100vw - var(--sidebar-width));
