@@ -4,14 +4,12 @@ import { FiChevronLeft } from "react-icons/fi";
 import Head from "next/head";
 import { categories } from "ts";
 import { CategoryChip, CategoryGrid } from "components/store/categories";
-import { testerTabNames } from "ts/constants";
 import Link from "next/link";
-import { useSelectedTabValue } from "context";
 import { useCategory } from "hooks";
 import { CSSTransition } from "react-transition-group";
 
 const Categories = () => {
-  const { selectedCategory, setSelectedCategory, apps } = useCategory(null);
+  const { selectedCategory, apps } = useCategory();
 
   return (
     <>
@@ -19,23 +17,23 @@ const Categories = () => {
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
       </Head>
       <TabHeader>
-        <BasePath
-          onClick={() => setSelectedCategory(null)}
-          onKeyDown={() => setSelectedCategory(null)}
-          aria-label="Reset selected category"
-          tabIndex={-1}
-          hasIcon={!!selectedCategory}
-        >
-          <CSSTransition
-            in={!!selectedCategory}
-            timeout={250}
-            classNames="pop-in"
-            unmountOnExit
+        <Link href="/store/categories">
+          <BasePath
+            aria-label="Reset selected category"
+            tabIndex={-1}
+            hasIcon={!!selectedCategory}
           >
-            <FiChevronLeft />
-          </CSSTransition>
-          Categories
-        </BasePath>
+            <CSSTransition
+              in={!!selectedCategory}
+              timeout={250}
+              classNames="pop-in"
+              unmountOnExit
+            >
+              <FiChevronLeft />
+            </CSSTransition>
+            Categories
+          </BasePath>
+        </Link>
         <CSSTransition
           in={!!selectedCategory}
           timeout={300}
@@ -55,26 +53,17 @@ const Categories = () => {
       </TabHeader>
       <CategoryGrid>
         {!selectedCategory
-          ? categories?.map((category, i) => {
-              if (testerTabNames.includes(category.id))
-                //if we got a tab with the same name as the current category e.g. games, then link to that tab in the store
-                return (
-                  <Link href={`/store/${category.id}`} key={category.id}>
-                    <CategoryChip
-                      style={{ animationDelay: `${i * 25}ms` }}
-                      tabIndex={0}
-                      aria-label={`Select ${category.displayName} as the current category.`}
-                    >
-                      <category.icon />
-                      {category.displayName}
-                    </CategoryChip>
-                  </Link>
-                );
-              return (
+          ? categories?.map((category, i) => (
+              <Link
+                href={
+                  category.id === "games"
+                    ? "/store/games"
+                    : `/store/categories?category=${category.id}`
+                }
+                key={category.id}
+              >
                 <CategoryChip
                   key={category.id}
-                  onClick={() => setSelectedCategory(category)}
-                  onKeyDown={() => setSelectedCategory(category)}
                   tabIndex={0}
                   style={{ animationDelay: `${i * 25}ms` }}
                   aria-label={`Select ${category.displayName} as the current category.`}
@@ -82,8 +71,8 @@ const Categories = () => {
                   <category.icon />
                   {category.displayName}
                 </CategoryChip>
-              );
-            })
+              </Link>
+            ))
           : apps?.map((app) => <li>{app.name}</li>)}
       </CategoryGrid>
     </>
