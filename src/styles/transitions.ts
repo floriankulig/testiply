@@ -33,20 +33,20 @@ const transitions = css`
     transition: 0.25s all var(--easing);
   }
   .fade-right-enter {
-    transform: translateX(-70px) scale(0.8);
+    transform: translateX(-70px);
     opacity: 0;
   }
   .fade-right-enter-active {
-    transform: translateX(0) scale(1);
+    transform: translateX(0);
     opacity: 1;
     transition: 0.3s all var(--easing);
   }
   .fade-right-exit {
-    transform: translateX(0) scale(1);
+    transform: translateX(0);
     opacity: 1;
   }
   .fade-right-exit-active {
-    transform: translateX(-70px) scale(0.8);
+    transform: translateX(-70px);
     opacity: 0;
     transition: 0.3s all var(--easing);
   }
