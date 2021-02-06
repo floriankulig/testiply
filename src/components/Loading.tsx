@@ -70,7 +70,7 @@ interface LoaderProps {
   color?: string;
   size?: number;
   className?: string;
-  style?: Object;
+  style?: React.CSSProperties;
 }
 
 export const Loading: React.FC<LoaderProps> = ({
