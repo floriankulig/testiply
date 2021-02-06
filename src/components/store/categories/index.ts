@@ -7,6 +7,13 @@ const CategoryGrid = styled.ul`
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
   gap: 2.5em;
+
+  h2.loading {
+    display: inline-flex;
+    justify-content: center;
+    color: #c8c8c8;
+    margin-top: 10vh;
+  }
 `;
 
 const CategoryChip = styled.li`
