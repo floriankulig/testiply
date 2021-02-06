@@ -1,9 +1,9 @@
-import { Layout } from "components/layouts";
+import { Layout, AppGrid } from "components/layouts";
 import { BasePath, CustomPath, TabHeader } from "components/TabHeader";
 import { FiChevronLeft } from "react-icons/fi";
 import Head from "next/head";
 import { App, categories } from "ts";
-import { CategoryChip, CategoryGrid } from "components/store/categories";
+import { CategoryChip } from "components/store/categories";
 import Link from "next/link";
 import { useCategory } from "hooks";
 import { CSSTransition } from "react-transition-group";
@@ -67,7 +67,7 @@ const Categories = () => {
           <CustomPath>{selectedCategory?.displayName}</CustomPath>
         </CSSTransition>
       </TabHeader>
-      <CategoryGrid>
+      <AppGrid>
         {!selectedCategory ? (
           categories?.map((category, i) => (
             <Link
@@ -97,7 +97,7 @@ const Categories = () => {
         ) : (
           filteredApps.map((app) => <li key={app._id}>{app.name}</li>)
         )}
-      </CategoryGrid>
+      </AppGrid>
     </>
   );
 };
