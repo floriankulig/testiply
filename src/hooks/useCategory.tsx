@@ -45,7 +45,7 @@ export const useCategory = (initalApps?: App[]): ReturnType => {
         if (JSON.stringify(res.data) !== JSON.stringify(apps)) {
           setApps(res.data);
         }
-        // setLoading(false);
+        setLoading(false);
       })
       .catch((err) => console.log(err));
   }, [selectedCategory, selectedPlatform]);
