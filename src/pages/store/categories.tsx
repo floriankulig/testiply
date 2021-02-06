@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { useFiltersValue } from "context";
 import { Loading } from "components/Loading";
 import { NoAppsView } from "components/store";
+import { MenuTransition } from "components/MenuTransition";
 
 const Categories = () => {
   const { selectedCategory, loading, apps } = useCategory();
@@ -68,47 +69,61 @@ const Categories = () => {
           <CustomPath>{selectedCategory?.displayName}</CustomPath>
         </CSSTransition>
       </TabHeader>
-      <AppGrid>
-        {!selectedCategory ? (
-          categories?.map((category, i) => (
-            <Link
-              href={
-                category.id === "games"
-                  ? "/store/games"
-                  : `/store/categories?category=${category.id}`
-              }
-              key={category.id}
-            >
-              <CategoryChip
+      <MenuTransition>
+        <CSSTransition
+          in={!selectedCategory}
+          classNames="menu-primary"
+          timeout={400}
+          unmountOnExit
+        >
+          <AppGrid>
+            {categories?.map((category, i) => (
+              <Link
+                href={
+                  category.id === "games"
+                    ? "/store/games"
+                    : `/store/categories?category=${category.id}`
+                }
                 key={category.id}
-                tabIndex={0}
-                style={{
-                  animationDelay: `${i * 15}ms`,
-                }}
-                color={category.color}
-                aria-label={`Select ${category.displayName} as the current category.`}
               >
-                <category.icon />
-                {category.displayName}
-              </CategoryChip>
-            </Link>
-          ))
-        ) : loading ? ( // If it's loading
-          <h2 className="loading">
-            Loading
-            <Loading size={60} />
-          </h2>
-        ) : !filteredApps[0] ? ( //if we don't have apps for our search
-          <NoAppsView hasApps={!!apps[0]} />
-        ) : (
-          // if there are apps, render them
-          filteredApps.map((app, i) => (
-            <li key={app._id} style={{ animationDelay: `${i * 15}ms` }}>
-              {app.name}
-            </li>
-          ))
-        )}
-      </AppGrid>
+                <CategoryChip
+                  key={category.id}
+                  tabIndex={0}
+                  style={{ animationDelay: `${i * 15}ms` }}
+                  color={category.color}
+                  aria-label={`Select ${category.displayName} as the current category.`}
+                >
+                  <category.icon />
+                  {category.displayName}
+                </CategoryChip>
+              </Link>
+            ))}
+          </AppGrid>
+        </CSSTransition>
+        <CSSTransition
+          in={!!selectedCategory}
+          classNames="menu-secondary"
+          timeout={400}
+          unmountOnExit
+        >
+          <AppGrid>
+            {loading ? (
+              <h2 className="loading">
+                Loading
+                <Loading size={60} />
+              </h2>
+            ) : !filteredApps[0] ? (
+              <NoAppsView hasApps={!!apps[0]} />
+            ) : (
+              filteredApps.map((app, i) => (
+                <li key={app._id} style={{ animationDelay: `${i * 15}ms` }}>
+                  {app.name}
+                </li>
+              ))
+            )}
+          </AppGrid>
+        </CSSTransition>
+      </MenuTransition>
     </>
   );
 };
