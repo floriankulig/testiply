@@ -1,4 +1,5 @@
-import { Layout } from './Layout';
-import { AuthLayout } from './AuthLayout';
+import { Layout } from "./Layout";
+import { AuthLayout } from "./AuthLayout";
+import { AppGrid } from "./AppGrid";
 
-export { Layout, AuthLayout };
+export { Layout, AuthLayout, AppGrid };
