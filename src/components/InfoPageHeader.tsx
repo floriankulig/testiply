@@ -36,7 +36,7 @@ const Header = styled.header<HeaderProps>`
           margin-right: 5px;
           background: white;
         `};
-      padding-left: 1px;
+      padding: 0 0 1px 1px;
       border-radius: var(--border-radius);
       z-index: 9;
     }
@@ -89,7 +89,7 @@ export const InfoPageHeader: React.FC<InfoPageHeaderProps> = ({
       <Link href="/">
         <div className="logo">
           <div className="svg-wrapper">
-            <Image width={30} height={35} src="/images/logo.svg" />
+            <Image width={30} height={35} src="/images/logo.svg" priority />
           </div>
           <CSSTransition
             in={!isMobile}
