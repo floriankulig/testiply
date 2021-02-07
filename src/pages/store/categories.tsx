@@ -75,6 +75,7 @@ const Categories = () => {
           classNames="menu-primary"
           timeout={400}
           unmountOnExit
+          appear
         >
           <AppGrid>
             {categories?.map((category, i) => (
