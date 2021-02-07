@@ -122,9 +122,11 @@ const DividerWrapper = styled.div`
 
 const Content = styled.div`
   user-select: none;
+
   @media (${({ theme }) => theme.bp.medium}) {
     margin: 0;
   }
+
   h1 {
     color: white;
     font-size: clamp(3.3rem, 6.3vw, 5rem);
@@ -148,11 +150,6 @@ const Content = styled.div`
 
 export const Hero: React.FC = () => {
   const isMobile = useIsMobile(1080);
-
-  const handleClick = () =>
-    document
-      .querySelector("#newsletter")
-      .scrollIntoView({ behavior: "smooth" });
 
   return (
     <HeroSection className="container">
@@ -196,15 +193,11 @@ export const Hero: React.FC = () => {
       <Content>
         <h1>Test Apps.</h1>
         <h1>Give Feedback.</h1>
-        <Button
-          rounded
-          bold
-          color="white"
-          onClick={() => handleClick()}
-          onKeyDown={() => handleClick()}
-        >
-          More Information
-        </Button>
+        <Link href="/store">
+          <Button rounded bold color="white">
+            View Apps
+          </Button>
+        </Link>
       </Content>
       <CSSTransition
         in={!isMobile}
