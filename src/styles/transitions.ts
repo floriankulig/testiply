@@ -32,11 +32,13 @@ const transitions = css`
     opacity: 0;
     transition: 0.25s all var(--easing);
   }
-  .fade-right-enter {
+  .fade-right-enter,
+  .fade-right-appear {
     transform: translateX(-70px);
     opacity: 0;
   }
-  .fade-right-enter-active {
+  .fade-right-enter-active,
+  .fade-right-appear-active {
     transform: translateX(0);
     opacity: 1;
     transition: 0.3s all var(--easing);
