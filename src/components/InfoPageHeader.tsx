@@ -28,14 +28,14 @@ const Header = styled.header<HeaderProps>`
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 35px;
+      width: 34px;
       height: 35px;
       ${(p) =>
         css`
           margin-right: ${p.hasLogoBackground ? "10px" : "5px"};
           background: ${p.hasLogoBackground ? "white" : "transparent"};
         `};
-      padding: 0 0 1px 1px;
+      padding: 0 0 2px 2px;
       border-radius: var(--border-radius);
       z-index: 9;
     }
