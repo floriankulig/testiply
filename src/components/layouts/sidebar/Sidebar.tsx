@@ -55,7 +55,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
   const isDevRoute = pathname.split("/")[1] === "dev";
 
   const ref = useRef<HTMLDivElement>();
-  const { currentUser } = useAuthValue();
+  const { logout } = useAuthValue();
   useOnClickOutside(ref, () => setOpen(false));
 
   return (
@@ -77,14 +77,18 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
             />
           )}
         </div>
-        {currentUser && (
-          <TabRow selected={false} icon style={{ marginTop: "3em" }}>
-            <span>
-              <BiLogOut />
-            </span>
-            Logout
-          </TabRow>
-        )}
+        <TabRow
+          selected={false}
+          icon
+          style={{ marginTop: "3em" }}
+          onClick={() => logout()}
+          onKeyDown={() => logout()}
+        >
+          <span>
+            <BiLogOut />
+          </span>
+          Logout
+        </TabRow>
       </SidebarContent>
     </StyledSidebar>
   );
