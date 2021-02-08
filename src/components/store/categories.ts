@@ -1,4 +1,3 @@
-import { getTextColor } from "helpers";
 import { darken, rgba } from "polished";
 import styled from "styled-components";
 
@@ -11,15 +10,14 @@ const CategoryChip = styled.li<Props>`
   align-items: center;
   border-radius: 14px;
   background: ${({ theme }) => darken(0.02, theme.layoutContentBg)};
-  box-shadow: var(--btn-shadow);
+  box-shadow: 0px 3px 7px ${({ theme }) => rgba(theme.navy, 0.3)};
   cursor: pointer;
   font-size: clamp(1rem, 2vw, 1.2rem);
   transition: 350ms linear;
   transition-property: box-shadow, background;
 
   &:hover {
-    box-shadow: var(--btn-shadow-hover);
-    background: ${(p) => rgba(p.color, 0.2)};
+    background: ${(p) => rgba(p.color, 0.3)};
   }
 
   svg {
