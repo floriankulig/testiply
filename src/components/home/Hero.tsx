@@ -4,6 +4,7 @@ import { useIsMobile } from "hooks";
 import styled from "styled-components";
 import { CSSTransition } from "react-transition-group";
 import { rgba } from "polished";
+import Image from "next/image";
 
 const HeroSection = styled.section`
   margin-top: 10em;
@@ -16,12 +17,9 @@ const HeroSection = styled.section`
   display: flex;
   justify-content: space-between;
   .hero__svg {
-    display: none;
     margin: 0;
     height: clamp(200px, 40vw, 600px);
-    @media (${({ theme }) => theme.bp.medium}) {
-      display: block;
-    }
+    width: clamp(150px, 20vw, 330px);
   }
 `;
 
@@ -205,11 +203,14 @@ export const Hero: React.FC = () => {
         classNames="pop-in"
         unmountOnExit
       >
-        <img
-          className="hero__svg"
-          src="/images/app_phone.svg"
-          alt="People holding app icons"
-        />
+        <div className="hero__svg">
+          <Image
+            src="/images/app_phone.svg"
+            alt="People holding app icons"
+            height={1200}
+            width={660}
+          />
+        </div>
       </CSSTransition>
     </HeroSection>
   );
