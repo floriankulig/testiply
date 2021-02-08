@@ -5,7 +5,7 @@ import Head from "next/head";
 import { App, categories } from "ts";
 import { CategoryChip } from "components/store/categories";
 import Link from "next/link";
-import { useCategory } from "hooks";
+import { useCategory, useIsMobile } from "hooks";
 import { CSSTransition } from "react-transition-group";
 import { useEffect, useState } from "react";
 import { useFiltersValue } from "context";
@@ -16,6 +16,7 @@ import { MenuTransition } from "components/MenuTransition";
 const Categories = () => {
   const { selectedCategory, loading, apps } = useCategory();
   const { searchQuery } = useFiltersValue();
+  const isMobile = useIsMobile(550);
   const [filteredApps, setFilteredApps] = useState<App[]>(apps);
 
   useEffect(() => {
@@ -46,6 +47,7 @@ const Categories = () => {
               timeout={250}
               classNames="pop-in"
               unmountOnExit
+              appear
             >
               <FiChevronLeft />
             </CSSTransition>
@@ -55,18 +57,13 @@ const Categories = () => {
         <CSSTransition
           in={!!selectedCategory}
           timeout={300}
-          classNames="fade-right"
+          classNames={`fade-${isMobile ? "down" : "right"}`}
           unmountOnExit
         >
-          <i>/</i>
-        </CSSTransition>
-        <CSSTransition
-          in={!!selectedCategory}
-          timeout={300}
-          classNames="fade-right"
-          unmountOnExit
-        >
-          <CustomPath>{selectedCategory?.displayName}</CustomPath>
+          <div>
+            <i>/</i>
+            <CustomPath>{selectedCategory?.displayName}</CustomPath>
+          </div>
         </CSSTransition>
       </TabHeader>
       <MenuTransition>
