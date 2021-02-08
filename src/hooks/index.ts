@@ -3,6 +3,7 @@ import { useOnClickOutside } from "./useOnClickOutside";
 import { useStaticJSON } from "./useStaticJSON";
 import { useFilters } from "./useFilters";
 import { useCategory } from "./useCategory";
+import { useUser } from "./useUser";
 
 export {
   useIsMobile,
@@ -10,4 +11,5 @@ export {
   useStaticJSON,
   useFilters,
   useCategory,
+  useUser,
 };
