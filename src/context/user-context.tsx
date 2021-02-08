@@ -1,29 +1,18 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import { User } from "ts"
+import { useUser } from "hooks";
+import { createContext, useContext } from "react";
+import { User } from "ts";
 
-const testUser: User = { email: "muster@mail.com", is_dev: true, _id: "tgg51cfgfdt8" }
+export type AuthContextType = {
+  currentUser: User | null;
+  logout: () => void;
+};
 
-type ContextType = {
-    currentUser?: User | null;
-    setCurrentUser?: React.Dispatch<React.SetStateAction<User>>;
-}
-
-const AuthContext = createContext<Partial<ContextType>>({});
+const AuthContext = createContext<Partial<AuthContextType>>({});
 
 export const AuthProvider = ({ children }) => {
-    const [currentUser, setCurrentUser] = useState<User | null>(testUser);
+  const auth = useUser();
 
-    useEffect(() => {
-        console.log(currentUser)
-    }, [currentUser]);
-
-    return (
-        <AuthContext.Provider
-            value={{ currentUser, setCurrentUser }}
-        >
-            {children}
-        </AuthContext.Provider>
-    );
+  return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 };
 
 export const useAuthValue = () => useContext(AuthContext);
