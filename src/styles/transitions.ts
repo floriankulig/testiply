@@ -32,6 +32,7 @@ const transitions = css`
     opacity: 0;
     transition: 0.25s all var(--easing);
   }
+
   .fade-right-enter,
   .fade-right-appear {
     transform: translateX(-70px);
@@ -49,6 +50,27 @@ const transitions = css`
   }
   .fade-right-exit-active {
     transform: translateX(-70px);
+    opacity: 0;
+    transition: 0.3s all var(--easing);
+  }
+
+  .fade-down-enter,
+  .fade-down-appear {
+    transform: translateY(-70px);
+    opacity: 0;
+  }
+  .fade-down-enter-active,
+  .fade-down-appear-active {
+    transform: translateY(0);
+    opacity: 1;
+    transition: 0.3s all var(--easing);
+  }
+  .fade-down-exit {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .fade-down-exit-active {
+    transform: translateY(-70px);
     opacity: 0;
     transition: 0.3s all var(--easing);
   }
