@@ -55,7 +55,7 @@ const Categories = () => {
           </BasePath>
         </Link>
         <CSSTransition
-          in={!!selectedCategory}
+          in={!!selectedCategory && !isMobile}
           timeout={300}
           classNames={`fade-${isMobile ? "down" : "right"}`}
           unmountOnExit
