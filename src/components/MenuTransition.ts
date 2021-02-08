@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const MenuTransition = styled.div`
   position: relative;
+  min-height: 100%;
   & .menu-primary-enter,
   & .menu-primary-appear {
     position: absolute;
@@ -12,6 +13,7 @@ export const MenuTransition = styled.div`
   & .menu-primary-appear-active {
     transform: translateX(0);
     transition: transform 0.4s var(--easing);
+    position: relative;
   }
   & .menu-primary-exit {
     position: absolute;
@@ -35,9 +37,12 @@ export const MenuTransition = styled.div`
   & .menu-secondary-exit {
     transform: translateX(110%);
   }
-  & .menu-secondary-exit-active {
+  & .menu-secondary-exit-active,
+  & .menu-secondary-exit-done {
     transform: translateX(110%);
     transition: transform 0.4s var(--easing);
     width: 100%;
+    min-height: 100%;
+    position: relative;
   }
 `;
