@@ -11,14 +11,15 @@ export const useUser = (): AuthContextType => {
   useEffect(() => {
     const currentToken = cookie["token"];
 
-    removeCookie("token");
-
-    let newExpireDate = new Date();
-    newExpireDate.setDate(newExpireDate.getDate() + 30);
-    setCookie("token", currentToken, {
-      sameSite: true,
-      expires: newExpireDate,
-    });
+    if (currentToken) {
+      removeCookie("token");
+      let newExpireDate = new Date();
+      newExpireDate.setDate(newExpireDate.getDate() + 30);
+      setCookie("token", currentToken, {
+        sameSite: true,
+        expires: newExpireDate,
+      });
+    }
   }, []);
 
   // Set Cookie to date in past / non-existant date
