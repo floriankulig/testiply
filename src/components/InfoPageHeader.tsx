@@ -89,7 +89,13 @@ export const InfoPageHeader: React.FC<InfoPageHeaderProps> = ({
       <Link href="/">
         <div className="logo">
           <div className="svg-wrapper">
-            <Image width={30} height={35} src="/images/logo.svg" priority />
+            <Image
+              width={30}
+              height={35}
+              src="/images/logo.svg"
+              priority
+              alt="Abstract Letter B"
+            />
           </div>
           <CSSTransition
             in={!isMobile}
