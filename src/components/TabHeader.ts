@@ -4,12 +4,10 @@ export const TabHeader = styled.h1`
   margin: 0 0 1.5em;
   display: flex;
   align-items: center;
-  flex-direction: column;
-  //TODO: make custom path absolute -> no layout shift
 
   span,
   div {
-    margin: 0 auto 0 0;
+    margin: 0;
     display: inline-flex;
     align-items: center;
   }
@@ -19,14 +17,6 @@ export const TabHeader = styled.h1`
     font-weight: normal;
     margin: 0 7px;
     transform: scaleX(0.7);
-  }
-
-  @media (${({ theme }) => theme.bp.small}) {
-    flex-direction: row;
-    span,
-    div {
-      margin: 0;
-    }
   }
 `;
 
