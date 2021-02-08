@@ -96,7 +96,6 @@ export const InfoPageHeader: React.FC<InfoPageHeaderProps> = ({
             timeout={300}
             classNames="fade-right"
             unmountOnExit
-            appear
           >
             <span>eta App Store</span>
           </CSSTransition>
