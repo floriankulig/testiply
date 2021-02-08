@@ -31,10 +31,9 @@ const Header = styled.header<HeaderProps>`
       width: 35px;
       height: 35px;
       ${(p) =>
-        p.hasLogoBackground &&
         css`
-          margin-right: 5px;
-          background: white;
+          margin-right: ${p.hasLogoBackground ? "10px" : "5px"};
+          background: ${p.hasLogoBackground ? "white" : "transparent"};
         `};
       padding: 0 0 1px 1px;
       border-radius: var(--border-radius);
@@ -103,7 +102,7 @@ export const InfoPageHeader: React.FC<InfoPageHeaderProps> = ({
             classNames="fade-right"
             unmountOnExit
           >
-            <span>eta App Store</span>
+            <span>Beta Store</span>
           </CSSTransition>
         </div>
       </Link>
