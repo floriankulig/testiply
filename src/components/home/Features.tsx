@@ -1,4 +1,4 @@
-import { lighten } from "polished";
+import { lighten, rgba } from "polished";
 import { useEffect, useRef } from "react";
 import ScrollOut from "scroll-out";
 import {
@@ -45,11 +45,20 @@ const FeaturesContainer = styled.ul`
 
 const Feature = styled.li`
   width: 370px;
+  padding: 4em 2.5em;
   max-width: 100%;
+  min-height: 400px;
   margin: 0 auto;
+  border-radius: 0.5em;
+  text-align: center;
   margin-bottom: 4em;
-  color: var(--navy);
+  background: #ffffff;
+  box-shadow: 10px 15px 35px ${({ theme }) => rgba(theme.navy, 0.15)};
 
+  h2 {
+    color: var(--navy);
+    margin: 1.3em 0;
+  }
   svg {
     width: 40px;
     height: 40px;
@@ -62,7 +71,7 @@ const Feature = styled.li`
 
   @media (${({ theme }) => theme.bp.big}) {
     margin: 0;
-    width: clamp(230px, 22vw, 330px);
+    width: clamp(230px, 22vw, 350px);
     &:nth-child(1) {
       transition-delay: 0.1s;
     }
