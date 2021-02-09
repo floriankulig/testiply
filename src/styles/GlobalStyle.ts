@@ -114,6 +114,11 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
+  .full-grid-width{
+    grid-column: 1/-1;
+    text-align: center;
+  }
+
   ${transitions}
 `;
 
