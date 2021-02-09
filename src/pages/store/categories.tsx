@@ -12,6 +12,7 @@ import { useFiltersValue } from "context";
 import { Loading } from "components/Loading";
 import { NoAppsView } from "components/store";
 import { MenuTransition } from "components/MenuTransition";
+import { Button } from "components/Button";
 
 const Categories = () => {
   const { selectedCategory, loading, apps } = useCategory();
@@ -105,19 +106,28 @@ const Categories = () => {
           unmountOnExit
         >
           <AppGrid>
-            {loading ? (
-              <h2 className="loading">
-                Loading
-                <Loading size={60} />
-              </h2>
-            ) : !filteredApps[0] ? (
+            {!filteredApps[0] ? (
               <NoAppsView hasApps={!!apps[0]} />
             ) : (
-              filteredApps.map((app, i) => (
-                <li key={app._id} style={{ animationDelay: `${i * 15}ms` }}>
-                  {app.name}
-                </li>
-              ))
+              <>
+                {filteredApps.map((app, i) => (
+                  <li key={app._id} style={{ animationDelay: `${i * 15}ms` }}>
+                    {app.name}
+                  </li>
+                ))}
+                <div className="full-grid-width">
+                  {loading ? (
+                    <h2 className="loading">
+                      Loading
+                      <Loading size={60} />
+                    </h2>
+                  ) : (
+                    <Button basic big bold>
+                      Load More
+                    </Button>
+                  )}
+                </div>
+              </>
             )}
           </AppGrid>
         </CSSTransition>
