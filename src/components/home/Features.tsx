@@ -60,8 +60,8 @@ const Feature = styled.li`
     margin: 1.3em 0;
   }
   svg {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     color: var(--primary);
     margin-left: -10px;
   }
