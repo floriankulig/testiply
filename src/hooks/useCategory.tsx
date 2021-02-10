@@ -13,7 +13,7 @@ interface ReturnType {
   apps: App[];
 }
 
-export const useCategory = (initalApps?: App[]): ReturnType => {
+export const useCategory = (): ReturnType => {
   //Helper Hooks
   const { query } = useRouter();
   const { selectedPlatform } = useFiltersValue();
@@ -28,6 +28,7 @@ export const useCategory = (initalApps?: App[]): ReturnType => {
 
   // Requesting Apps Logic
   const [apps, setApps] = useState<App[]>([]);
+  const [page, setPage] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
     if (selectedCategory === null) {
@@ -35,7 +36,7 @@ export const useCategory = (initalApps?: App[]): ReturnType => {
       return;
     }
     setLoading(true);
-    let query: string = `?category=${selectedCategory.id}`;
+    let query: string = `?category=${selectedCategory.id}&page=${page}`;
     query +=
       selectedPlatform === "all" ? "" : `&platform[]=${selectedPlatform}`;
 
@@ -48,7 +49,7 @@ export const useCategory = (initalApps?: App[]): ReturnType => {
         setLoading(false);
       })
       .catch((err) => console.log(err));
-  }, [selectedCategory, selectedPlatform]);
+  }, [selectedCategory, selectedPlatform, page]);
 
   return { selectedCategory, loading, apps };
 };
