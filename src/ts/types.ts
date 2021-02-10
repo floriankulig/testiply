@@ -55,6 +55,10 @@ export interface App {
   _id: string;
 }
 
+export type AppPreview = Readonly<
+  Pick<App, "name" | "description" | "_id" | "icon" | "downloads" | "rating">
+>;
+
 interface TodayAppWidgets {
   heading: string;
   opensLongDescription: boolean;
