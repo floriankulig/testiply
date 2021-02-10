@@ -63,6 +63,7 @@ const Feature = styled.li`
     width: 40px;
     height: 40px;
     color: var(--primary);
+    margin-left: -10px;
   }
 
   p {
