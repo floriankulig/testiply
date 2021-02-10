@@ -10,7 +10,7 @@ import { CSSTransition } from "react-transition-group";
 import { useEffect, useState } from "react";
 import { useFiltersValue } from "context";
 import { Loading } from "components/Loading";
-import { NoAppsView } from "components/store";
+import { AppTile, NoAppsView } from "components/store";
 import { MenuTransition } from "components/MenuTransition";
 import { Button } from "components/Button";
 
@@ -111,9 +111,11 @@ const Categories = () => {
             ) : (
               <>
                 {filteredApps.map((app, i) => (
-                  <li key={app._id} style={{ animationDelay: `${i * 15}ms` }}>
-                    {app.name}
-                  </li>
+                  <AppTile
+                    key={app._id}
+                    style={{ animationDelay: `${i * 15}ms` }}
+                    appInfo={app}
+                  />
                 ))}
                 <div className="full-grid-width">
                   {loading ? (
