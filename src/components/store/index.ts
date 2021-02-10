@@ -1,3 +1,4 @@
 import { NoAppsView } from "./NoAppsView";
+import { AppTile } from "./AppTile";
 
-export { NoAppsView };
+export { NoAppsView, AppTile };
