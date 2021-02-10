@@ -65,7 +65,7 @@ const GlobalStyle = createGlobalStyle`
   }
   p {
     font-size: 16px;
-    line-height: 1.4;
+    line-height: 1.6;
   }
 
   .link{
