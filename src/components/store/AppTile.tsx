@@ -1,8 +1,7 @@
 import { useIsMobile } from "hooks";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { darken, rgba } from "polished";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaChevronDown, FaStar } from "react-icons/fa";
 import styled from "styled-components";
 import { AppPreview } from "ts";
@@ -141,8 +140,6 @@ export const AppTile: React.FC<AppTileProps> = ({
   const { name, description, _id, devName, rating } = appInfo;
   const appsStack = useIsMobile(APPSTACKWIDTH - 1); //Apps stack with less than 640px
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const router = useRouter();
-  const openerRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     // open apps if apps are not stacking in grid
@@ -176,7 +173,6 @@ export const AppTile: React.FC<AppTileProps> = ({
           tabIndex={0}
           role="button"
           open={appsStack ? isOpen : true}
-          ref={openerRef}
         >
           <FaChevronDown />
         </SVGOpenerWrapper>
