@@ -138,7 +138,7 @@ export const AppTile: React.FC<AppTileProps> = ({
   className,
   style,
 }) => {
-  const { name, description, _id, developerName, rating } = appInfo;
+  const { name, description, _id, devName, rating } = appInfo;
   const appsStack = useIsMobile(APPSTACKWIDTH - 1); //Apps stack with less than 640px
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const router = useRouter();
@@ -161,7 +161,7 @@ export const AppTile: React.FC<AppTileProps> = ({
           <IconWrapper>{IMG}</IconWrapper>
           <StyledAppInfo>
             <p className="app__name">{name}</p>
-            <p className="app_dev">BetaStore</p>
+            <p className="app_dev">{devName}</p>
             <div className="app__rating">
               {rating} <FaStar />
             </div>
