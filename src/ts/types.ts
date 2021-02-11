@@ -51,12 +51,12 @@ export interface App {
   rating: number;
   downloads: number;
   developer_id: number; // dev/dev_id
-  developer_name: string;
+  devName: string;
   _id: string;
 }
 
 export type AppPreview = Readonly<
-  Pick<App, "name" | "description" | "_id" | "icon" | "downloads" | "rating">
+  Pick<App, "name" | "description" | "_id" | "devName" | "rating">
 >;
 
 interface TodayAppWidgets {
