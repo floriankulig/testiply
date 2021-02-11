@@ -103,6 +103,7 @@ const SVGOpenerWrapper = styled.span<OpenProp>`
   }
   &:hover,
   &:focus {
+    color: var(--primary);
     background: ${({ theme }) => darken(0.05, theme.layoutNavBg)};
   }
 `;
