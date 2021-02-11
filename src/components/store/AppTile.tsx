@@ -1,13 +1,136 @@
-import React from "react";
+import { useIsMobile } from "hooks";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { darken, rgba } from "polished";
+import React, { useEffect, useRef, useState } from "react";
+import { FaChevronDown, FaStar } from "react-icons/fa";
 import styled from "styled-components";
-import { App } from "ts";
+import { AppPreview } from "ts";
 
-const StyledAppTile = styled.li``;
+interface OpenProp {
+  open?: boolean;
+}
+
+const APPSTACKWIDTH = 640;
+
+const IMG = (
+  <img
+    className="icon"
+    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXJz1MjjxjP7-m7Ija3C4teDldt-3tXd4vmg&usqp=CAU"
+    alt="Icon"
+  />
+);
+
+const StyledAppTile = styled.li`
+  border-radius: 1.5em;
+  position: relative;
+  box-shadow: 2px 8px 20px ${({ theme }) => rgba(theme.navy, 0.1)};
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  background: #fefeff;
+  @media (${({ theme }) => theme.bp.medium}) {
+    padding: 1.5em;
+  }
+  .edge-fader {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    height: calc(100% - 2em);
+    width: 40px;
+    background: linear-gradient(to right, ${rgba("#fefeff", 0.001)}, #fefeff);
+    z-index: 1;
+  }
+`;
+
+const StyledRow = styled.div<Partial<OpenProp>>`
+  max-height: 85px;
+  display: flex;
+  &:first-of-type {
+    cursor: pointer;
+  }
+  p {
+    margin: 0;
+  }
+  margin-bottom: ${(p) => (p.open ? "1em" : "0")};
+  .app {
+    &__name {
+      color: ${({ theme }) => rgba(theme.navy, 0.8)};
+      font-weight: bold;
+      font-size: 1.2rem;
+      overflow: hidden;
+    }
+    &__rating {
+      display: flex;
+      align-items: center;
+      svg {
+        font-size: 0.7rem;
+        margin-left: 5px;
+      }
+    }
+    &__desc {
+      max-height: 80px;
+      max-width: 90%;
+      overflow-y: hidden;
+    }
+  }
+`;
+
+const IconWrapper = styled.div`
+  height: 85px;
+  width: 85px;
+  min-height: 85px;
+  min-width: 85px;
+  box-shadow: 0px 0px 20px ${({ theme }) => rgba(theme.navy, 0.05)};
+  border-radius: 20%;
+  user-select: none;
+  .icon {
+    height: 100%;
+    width: 100%;
+    border-radius: 20%;
+  }
+`;
+
+const SVGOpenerWrapper = styled.span<OpenProp>`
+  position: absolute;
+  right: 1em;
+  top: calc(85px - 15px);
+  border-radius: 20%;
+  height: 30px;
+  width: 30px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  color: ${({ theme }) => rgba(theme.navy, 0.6)};
+  transition: background 0.3s var(--easing);
+  z-index: 2;
+  svg {
+    height: 80%;
+    width: 80%;
+    transform: rotate(${(p) => (p.open ? "180deg" : "0deg")});
+    transition: transform 0.3s var(--easing);
+  }
+  &:hover,
+  &:focus {
+    background: ${({ theme }) => darken(0.05, theme.layoutNavBg)};
+  }
+`;
+
+const StyledAppInfo = styled.div`
+  margin-left: 1em;
+  padding: 5px 0;
+  display: flex;
+  overflow: hidden;
+  width: 90%;
+  flex-direction: column;
+  justify-content: space-between;
+  color: ${({ theme }) => rgba(theme.navy, 0.5)};
+`;
 
 interface AppTileProps {
   style?: React.CSSProperties;
   className?: string;
-  appInfo: App;
+  appInfo: AppPreview;
 }
 
 export const AppTile: React.FC<AppTileProps> = ({
@@ -15,10 +138,58 @@ export const AppTile: React.FC<AppTileProps> = ({
   className,
   style,
 }) => {
-  const { name, description, _id, icon, rating, downloads } = appInfo;
+  const { name, description, _id, developerName, rating } = appInfo;
+  const appsStack = useIsMobile(APPSTACKWIDTH - 1); //Apps stack with less than 640px
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const router = useRouter();
+  const openerRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    // open apps if apps are not stacking in grid
+    setIsOpen(!appsStack);
+  }, [appsStack]);
+
   return (
     <StyledAppTile style={{ ...style }} className={className}>
-      {name}
+      <Link href={`/app/${_id}`}>
+        <StyledRow
+          open={isOpen}
+          aria-label={`View details for ${name}.`}
+          tabIndex={0}
+          role="button"
+        >
+          <IconWrapper>{IMG}</IconWrapper>
+          <StyledAppInfo>
+            <p className="app__name">{name}</p>
+            <p className="app_dev">BetaStore</p>
+            <div className="app__rating">
+              {rating} <FaStar />
+            </div>
+          </StyledAppInfo>
+        </StyledRow>
+      </Link>
+      {appsStack && (
+        <SVGOpenerWrapper
+          onClick={() => setIsOpen((prev) => !prev)}
+          onKeyDown={() => setIsOpen((prev) => !prev)}
+          aria-label={`Open Description for ${name}.`}
+          tabIndex={0}
+          role="button"
+          open={appsStack ? isOpen : true}
+          ref={openerRef}
+        >
+          <FaChevronDown />
+        </SVGOpenerWrapper>
+      )}
+      <div className="edge-fader" />
+      {isOpen && (
+        <StyledRow>
+          <p className="app__desc">
+            {description.slice(0, 150)}
+            {description.length > 150 && "..."}
+          </p>
+        </StyledRow>
+      )}
     </StyledAppTile>
   );
 };
