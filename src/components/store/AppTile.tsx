@@ -12,14 +12,6 @@ interface OpenProp {
 
 const APPSTACKWIDTH = 640;
 
-const IMG = (
-  <img
-    className="icon"
-    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXJz1MjjxjP7-m7Ija3C4teDldt-3tXd4vmg&usqp=CAU"
-    alt="Icon"
-  />
-);
-
 const StyledAppTile = styled.li`
   border-radius: 1.5em;
   position: relative;
@@ -155,7 +147,13 @@ export const AppTile: React.FC<AppTileProps> = ({
           tabIndex={0}
           role="button"
         >
-          <IconWrapper>{IMG}</IconWrapper>
+          <IconWrapper>
+            <img
+              src={`https://media.beta-app-store.com/apps/icon/${_id}.png`}
+              className="icon"
+              alt={`${name} app icon`}
+            />
+          </IconWrapper>
           <StyledAppInfo>
             <p className="app__name">{name}</p>
             <p className="app_dev">{devName}</p>
