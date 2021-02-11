@@ -6,6 +6,7 @@ import {
   InputType,
   FormType,
   App,
+  AppPreview,
 } from "./types";
 
 import { platforms, categories } from "./constants";
@@ -25,4 +26,5 @@ export type {
   InputType,
   FormType,
   App,
+  AppPreview,
 };
