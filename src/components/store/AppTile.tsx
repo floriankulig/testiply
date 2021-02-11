@@ -93,7 +93,8 @@ const SVGOpenerWrapper = styled.span<OpenProp>`
   place-items: center;
   cursor: pointer;
   color: ${({ theme }) => rgba(theme.navy, 0.6)};
-  transition: background 0.3s var(--easing);
+  transition: 0.3s var(--easing);
+  transition-property: background, color;
   z-index: 2;
   svg {
     height: 80%;
@@ -104,7 +105,7 @@ const SVGOpenerWrapper = styled.span<OpenProp>`
   &:hover,
   &:focus {
     color: var(--primary);
-    background: ${({ theme }) => darken(0.05, theme.layoutNavBg)};
+    background: ${({ theme }) => rgba(theme.navy, 0.1)};
   }
 `;
 
