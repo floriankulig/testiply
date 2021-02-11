@@ -18,7 +18,6 @@ import { useRouter } from "next/router";
 import { capitalized } from "helpers";
 import { Loading } from "components/Loading";
 import { useCookies } from "react-cookie";
-import { useAuthValue } from "context";
 
 const Overlay = styled.div`
   display: grid;
@@ -99,7 +98,6 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [cookie, setCookie] = useCookies(["token"]);
-  const {  } = useAuthValue();
 
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   useEffect(() => {
