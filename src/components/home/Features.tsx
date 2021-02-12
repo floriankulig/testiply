@@ -53,7 +53,7 @@ const Feature = styled.li`
   text-align: center;
   margin-bottom: 4em;
   background: #ffffff;
-  box-shadow: 10px 15px 35px ${({ theme }) => rgba(theme.navy, 0.15)};
+  box-shadow: 10px 15px 35px ${({ theme }) => rgba(theme.primary, 0.15)};
 
   h2 {
     color: var(--navy);
