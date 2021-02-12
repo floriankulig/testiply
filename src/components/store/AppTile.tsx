@@ -82,6 +82,17 @@ const IconWrapper = styled.div`
   }
 `;
 
+const StyledAppInfo = styled.div`
+  margin-left: 1em;
+  padding: 5px 0;
+  display: flex;
+  overflow: hidden;
+  width: 90%;
+  flex-direction: column;
+  justify-content: space-between;
+  color: ${({ theme }) => rgba(theme.navy, 0.5)};
+`;
+
 const SVGOpenerWrapper = styled.span<OpenProp>`
   position: absolute;
   right: 1em;
@@ -107,17 +118,6 @@ const SVGOpenerWrapper = styled.span<OpenProp>`
     color: var(--primary);
     background: ${({ theme }) => rgba(theme.navy, 0.1)};
   }
-`;
-
-const StyledAppInfo = styled.div`
-  margin-left: 1em;
-  padding: 5px 0;
-  display: flex;
-  overflow: hidden;
-  width: 90%;
-  flex-direction: column;
-  justify-content: space-between;
-  color: ${({ theme }) => rgba(theme.navy, 0.5)};
 `;
 
 interface AppTileProps {
