@@ -1,4 +1,5 @@
 import { useIsMobile } from "hooks";
+import Image from "next/image";
 import Link from "next/link";
 import { darken, rgba } from "polished";
 import React, { useEffect, useState } from "react";
@@ -150,7 +151,9 @@ export const AppTile: React.FC<AppTileProps> = ({
           role="button"
         >
           <IconWrapper>
-            <img
+            <Image
+              width={85}
+              height={85}
               src={`https://media.beta-app-store.com/apps/icon/${_id}.png`}
               className="icon"
               alt={`${name} app icon`}
