@@ -59,11 +59,36 @@ const Feature = styled.li`
     color: var(--navy);
     margin: 1.3em 0;
   }
-  svg {
-    width: 50px;
-    height: 50px;
+  .svg-wrapper {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    background: ${({ theme }) => rgba(theme.primary, 0.05)};
     color: var(--primary);
-    margin-left: -10px;
+    margin-left: calc(50% - 60px);
+    svg {
+      position: absolute;
+      top: 25%;
+      left: 25%;
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  &:nth-child(1) {
+    .svg-wrapper {
+      border-radius: 30% 70% 48% 52% / 35% 30% 70% 65%;
+    }
+  }
+  &:nth-child(2) {
+    .svg-wrapper {
+      border-radius: 69% 31% 60% 40% / 39% 54% 46% 61%;
+    }
+  }
+  &:nth-child(3) {
+    .svg-wrapper {
+      border-radius: 65% 35% 32% 68% / 47% 40% 60% 53%;
+    }
   }
 
   p {
@@ -97,7 +122,9 @@ export const Features: React.FC = () => {
       <div className="triangle triangle-1" />
       <FeaturesContainer className="container">
         <Feature ref={(el) => (features.current[0] = el)}>
-          <RiShoppingBag3Line />
+          <div className="svg-wrapper">
+            <RiShoppingBag3Line />
+          </div>
           <h2>Large App Offer</h2>
           <p>
             Our App-Market is always expanding and offering applications from
@@ -106,7 +133,9 @@ export const Features: React.FC = () => {
           </p>
         </Feature>
         <Feature ref={(el) => (features.current[1] = el)}>
-          <RiFeedbackLine />
+          <div className="svg-wrapper">
+            <RiFeedbackLine />
+          </div>
           <h2>Easy Feedback</h2>
           <p>
             We provide easy ways in our User Interface to give fast and easy
@@ -114,7 +143,9 @@ export const Features: React.FC = () => {
           </p>
         </Feature>
         <Feature ref={(el) => (features.current[2] = el)}>
-          <RiCodeSSlashFill />
+          <div className="svg-wrapper">
+            <RiCodeSSlashFill />
+          </div>
           <h2>Great For Developers</h2>
           <p>
             Having a platform to offer apps for Beta-Testing, developers can get
