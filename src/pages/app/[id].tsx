@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-const Today = () => {
+const AppDetail = () => {
   return (
     <>
       <Head>
@@ -10,4 +10,4 @@ const Today = () => {
   );
 };
 
-export default Today;
+export default AppDetail;
