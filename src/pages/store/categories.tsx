@@ -15,7 +15,7 @@ import { MenuTransition } from "components/MenuTransition";
 import { Button } from "components/Button";
 
 const Categories = () => {
-  const { selectedCategory, loading, apps } = useCategory();
+  const { selectedCategory, loading, apps, pageUp } = useCategory();
   const { searchQuery } = useFiltersValue();
   const isMobile = useIsMobile(550);
   const [filteredApps, setFilteredApps] = useState<App[]>(apps);
@@ -124,7 +124,15 @@ const Categories = () => {
                       <Loading size={60} />
                     </h2>
                   ) : (
-                    <Button basic big bold>
+                    <Button
+                      basic
+                      big
+                      bold
+                      onClick={() => pageUp()}
+                      onKeyDown={() => pageUp()}
+                      tabIndex={0}
+                      aria-label="Load more apps."
+                    >
                       Load More
                     </Button>
                   )}
