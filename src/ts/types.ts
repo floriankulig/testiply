@@ -46,11 +46,10 @@ export interface App {
   description: string;
   websiteUrl: string; //Website oder Github oder FaceBook
   platform: Platform;
-  icon: string;
   screenshots: string[];
   rating: number;
   downloads: number;
-  developer_id: number; // dev/dev_id
+  devId: number; // dev/dev_id
   devName: string;
   _id: string;
 }
