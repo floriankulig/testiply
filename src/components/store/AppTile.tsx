@@ -161,7 +161,7 @@ export const AppTile: React.FC<AppTileProps> = ({
           </IconWrapper>
           <StyledAppInfo>
             <p className="app__name">{name}</p>
-            <p className="app_dev">{devName}</p>
+            <p className="app__dev">{devName}</p>
             <div className="app__rating">
               {rating} <FaStar />
             </div>
