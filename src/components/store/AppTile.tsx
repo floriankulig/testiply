@@ -1,7 +1,7 @@
 import { useIsMobile } from "hooks";
 import Image from "next/image";
 import Link from "next/link";
-import { darken, rgba } from "polished";
+import { rgba } from "polished";
 import React, { useEffect, useState } from "react";
 import { FaChevronDown, FaStar } from "react-icons/fa";
 import styled from "styled-components";
