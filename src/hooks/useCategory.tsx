@@ -48,14 +48,12 @@ export const useCategory = (): ReturnType => {
         if (JSON.stringify(res.data) !== JSON.stringify(apps)) {
           setApps(res.data);
         }
-        console.log(res.data);
         setLoading(false);
       })
       .catch((err) => console.log(err));
   }, [selectedCategory, selectedPlatform]);
 
   useEffect(() => {
-    console.log(page);
     if (!selectedCategory || page <= 1) return;
 
     setLoading(true);
@@ -66,11 +64,15 @@ export const useCategory = (): ReturnType => {
     axios
       .get(`${api_url}/categoryApps${query}`)
       .then((res) => {
-        const newApps: App[] = [...apps, ...res.data];
+        // check if new loaded apps are already displayed
+        const newPageApps = res.data.filter(
+          (newApp: App) => !apps.some((oldApp) => oldApp._id === newApp._id)
+        );
+        // merge old apps with newly loaded ones
+        const newApps: App[] = [...apps, ...newPageApps];
         if (JSON.stringify(newApps) !== JSON.stringify(apps)) {
           setApps(newApps);
         }
-        console.log(apps);
         setLoading(false);
       })
       .catch((err) => console.log(err));
