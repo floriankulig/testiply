@@ -38,7 +38,7 @@ export const useCategory = (): ReturnType => {
       return;
     }
     setLoading(true);
-    let query: string = `?category=${selectedCategory.id}&page=1`;
+    let query: string = `?category=${selectedCategory.id}`;
     query +=
       selectedPlatform === "all" ? "" : `&platform[]=${selectedPlatform}`;
 
@@ -57,7 +57,9 @@ export const useCategory = (): ReturnType => {
     if (!selectedCategory || page <= 1) return;
 
     setLoading(true);
-    let query: string = `?category=${selectedCategory.id}&page=${page}`;
+    let query: string = `?category=${selectedCategory.id}&page=${
+      apps.slice(-1).pop()._id
+    }`;
     query +=
       selectedPlatform === "all" ? "" : `&platform[]=${selectedPlatform}`;
 
