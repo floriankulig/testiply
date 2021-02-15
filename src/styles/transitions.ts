@@ -14,11 +14,13 @@ const fadeUp = css`
 `;
 
 const transitions = css`
-  .pop-in-enter {
+  .pop-in-enter,
+  .pop-in-appear {
     transform: scale(0.5);
     opacity: 0;
   }
-  .pop-in-enter-active {
+  .pop-in-enter-active,
+  .pop-in-appear-active {
     transform: scale(1);
     opacity: 1;
     transition: 0.25s all var(--easing);
