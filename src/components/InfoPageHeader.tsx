@@ -121,10 +121,10 @@ export const InfoPageHeader: React.FC<InfoPageHeaderProps> = ({
             role="button"
             tabIndex={0}
             aria-label="Log out"
-            onClick={() => logout}
-            onKeyDown={() => logout}
+            onClick={() => logout()}
+            onKeyDown={() => logout()}
           >
-            <a>Log In</a>
+            <a>Log Out</a>
           </li>
         )}
         {!router.pathname.endsWith("/login") && !currentUser && (
