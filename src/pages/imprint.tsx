@@ -1,6 +1,7 @@
 import { Button } from "components/Button";
 import { InfoFooter } from "components/InfoFooter";
 import { InfoPageHeader } from "components/InfoPageHeader";
+import { SingleColumnLayout } from "components/layouts";
 import { capitalized, getTextColor } from "helpers";
 import { useStaticJSON } from "hooks";
 import { NextPage } from "next";
@@ -55,38 +56,33 @@ const Imprint: NextPage = () => {
       <Head>
         <title>Imprint | Beta App Store</title>
       </Head>
-      <InfoPageHeader
-        className="container"
-        style={{
-          color: getTextColor(theme.layoutContentBg),
-        }}
-      />
-      <Content className="container">
-        {pathname
-          .split("/")
-          .slice(1)
-          .map((link) => (
-            <span key={link}>/ {capitalized(link)}</span>
-          ))}
-        {paragraphs &&
-          paragraphs.map((paragraph: Paragraph) => (
-            <ContentBlock key={paragraph.title}>
-              <h2>{paragraph.title}</h2>
-              {paragraph.text.split("\n").map((text) => (
-                <p>{text}</p>
-              ))}
-            </ContentBlock>
-          ))}
-        <Button
-          big
-          onClick={toggleLang}
-          onKeyDown={toggleLang}
-          aria-label="Toggle language"
-        >
-          {buttonText}
-        </Button>
-      </Content>
-      <InfoFooter />
+      <SingleColumnLayout>
+        <Content className="container">
+          {pathname
+            .split("/")
+            .slice(1)
+            .map((link) => (
+              <span key={link}>/ {capitalized(link)}</span>
+            ))}
+          {paragraphs &&
+            paragraphs.map((paragraph: Paragraph) => (
+              <ContentBlock key={paragraph.title}>
+                <h2>{paragraph.title}</h2>
+                {paragraph.text.split("\n").map((text) => (
+                  <p>{text}</p>
+                ))}
+              </ContentBlock>
+            ))}
+          <Button
+            big
+            onClick={toggleLang}
+            onKeyDown={toggleLang}
+            aria-label="Toggle language"
+          >
+            {buttonText}
+          </Button>
+        </Content>
+      </SingleColumnLayout>
     </>
   );
 };
