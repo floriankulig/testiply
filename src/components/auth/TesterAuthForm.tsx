@@ -135,6 +135,7 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
   });
 
   const handleSubmit = async (values: FormikValues) => {
+    setErrorMessage("");
     if (formType === "register") {
       await axios
         .post(`${api_url}/register`, {
@@ -146,7 +147,6 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
         })
         .catch((err) => {
           setErrorMessage(err.response.data.err);
-          console.log(err.response.data.err);
         });
     } else if (formType === "login") {
       await axios
