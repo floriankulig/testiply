@@ -1,8 +1,9 @@
-import { darken, lighten, rgba } from 'polished';
-import styled, { css } from 'styled-components';
+import { darken, lighten, rgba } from "polished";
+import styled, { css } from "styled-components";
 
 interface TextFieldProps {
   hasError?: boolean;
+  contained?: boolean;
 }
 
 //support for label above input
@@ -53,11 +54,21 @@ export const StyledTextField = styled.div<TextFieldProps>`
   padding: 0.5em 1em;
   align-items: center;
   font-size: 1rem;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   background: ${(p) =>
-    p.hasError ? rgba(255, 0, 0, 0.05) : 'var(--layout-content-background)'};
+    p.hasError
+      ? rgba(255, 0, 0, 0.05)
+      : p.contained
+      ? "var(--primary)"
+      : "var(--layout-content-background)"};
   border: 2px
-    ${(p) => (p.hasError ? 'red' : darken(0.1, p.theme.layoutContentBg))} solid;
+    ${(p) =>
+      p.hasError
+        ? "red"
+        : p.contained
+        ? darken(0.05, p.theme.primary)
+        : darken(0.1, p.theme.layoutContentBg)}
+    solid;
   border-radius: var(--border-radius);
   transition: 0.5s;
   transition-property: border background;
@@ -66,7 +77,7 @@ export const StyledTextField = styled.div<TextFieldProps>`
   span {
     background: none;
     border: none;
-    font-family: 'Roboto';
+    font-family: "Roboto";
     font-size: 1rem;
     width: 95%;
     height: 100%;
@@ -96,6 +107,31 @@ interface SVGWrapperProps {
 
 // for wrapping svgs in inputs if there are any
 export const SVGWrapper = styled.div<SVGWrapperProps>`
+  border-radius: 30%;
+  width: 40px;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 5px;
+  transition: all 0.25s ease;
+  color: ${(p) => lighten(0.1, p.theme.navy)};
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  ${(p) =>
+    p.clickable &&
+    css`
+      cursor: pointer;
+      &:hover {
+        background: var(--layout-nav-background);
+        color: var(--primary);
+      }
+    `}
+`;
+export const BorderedSVGWrapper = styled.div<SVGWrapperProps>`
   border-radius: 30%;
   width: 40px;
   justify-content: center;

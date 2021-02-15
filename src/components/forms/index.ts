@@ -3,13 +3,14 @@ import {
   StyledFormInput,
   StyledMetaInputInfo,
   StyledTextField,
-} from './FormInput';
-import { AuthForm } from './AuthForm';
-import { FormikStepper } from './FormikStepper';
-import { FormikStep } from './FormikStep';
-import { FormikTextInput } from './FormikTextInput';
-import { FormikSelectionInput } from './FormikSelectionInput';
-import { FormikCheckbox } from './FormikCheckbox';
+  BorderedSVGWrapper,
+} from "./FormInput";
+import { AuthForm } from "./AuthForm";
+import { FormikStepper } from "./FormikStepper";
+import { FormikStep } from "./FormikStep";
+import { FormikTextInput } from "./FormikTextInput";
+import { FormikSelectionInput } from "./FormikSelectionInput";
+import { FormikCheckbox } from "./FormikCheckbox";
 
 export {
   SVGWrapper,
@@ -22,4 +23,5 @@ export {
   FormikTextInput,
   FormikSelectionInput,
   FormikCheckbox,
+  BorderedSVGWrapper,
 };
