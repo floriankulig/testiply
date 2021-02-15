@@ -1,3 +1,4 @@
+import { useAuthValue } from "context";
 import { getTextColor } from "helpers";
 import { useIsMobile } from "hooks";
 import Image from "next/image";
@@ -78,6 +79,7 @@ export const InfoPageHeader: React.FC<InfoPageHeaderProps> = ({
 }) => {
   const router = useRouter();
   const isMobile = useIsMobile();
+  const { currentUser, logout } = useAuthValue();
 
   return (
     <Header
@@ -114,14 +116,25 @@ export const InfoPageHeader: React.FC<InfoPageHeaderProps> = ({
             </li>
           </Link>
         )}
-        {!router.pathname.endsWith("/login") && (
+        {!!currentUser && (
+          <li
+            role="button"
+            tabIndex={0}
+            aria-label="Log out"
+            onClick={() => logout}
+            onKeyDown={() => logout}
+          >
+            <a>Log In</a>
+          </li>
+        )}
+        {!router.pathname.endsWith("/login") && !currentUser && (
           <Link href="/login">
             <li>
               <a>Log In</a>
             </li>
           </Link>
         )}
-        {!router.pathname.endsWith("/register") && (
+        {!router.pathname.endsWith("/register") && !currentUser && (
           <Link href="/register">
             <li>
               <a>Register</a>
