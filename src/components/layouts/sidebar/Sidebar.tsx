@@ -7,6 +7,7 @@ import { useAuthValue, useFiltersValue } from "context";
 import { SelectionInput } from "components/SelectionInput";
 import { platforms } from "ts";
 import { useRouter } from "next/router";
+import { CSSTransition } from "react-transition-group";
 
 interface StyledSidebarProps {
   open: boolean;
@@ -55,7 +56,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
   const isDevRoute = pathname.split("/")[1] === "dev";
 
   const ref = useRef<HTMLDivElement>();
-  const { logout } = useAuthValue();
+  const { currentUser, logout } = useAuthValue();
   useOnClickOutside(ref, () => setOpen(false));
 
   return (
@@ -77,18 +78,26 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
             />
           )}
         </div>
-        <TabRow
-          selected={false}
-          icon
-          style={{ marginTop: "3em" }}
-          onClick={() => logout()}
-          onKeyDown={() => logout()}
+        <CSSTransition
+          in={!!currentUser}
+          classNames="pop-in"
+          timeout={250}
+          appear
+          unmountOnExit
         >
-          <span>
-            <BiLogOut />
-          </span>
-          Logout
-        </TabRow>
+          <TabRow
+            selected={false}
+            icon
+            style={{ marginTop: "3em" }}
+            onClick={() => logout()}
+            onKeyDown={() => logout()}
+          >
+            <span>
+              <BiLogOut />
+            </span>
+            Logout
+          </TabRow>
+        </CSSTransition>
       </SidebarContent>
     </StyledSidebar>
   );
