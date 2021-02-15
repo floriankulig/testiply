@@ -44,7 +44,7 @@ export type FormType = "login" | "register" | "dev_register";
 export interface App {
   name: string;
   description: string;
-  websiteUrl: string; //Website oder Github oder FaceBook
+  website: string; //Website oder Github oder FaceBook
   platform: Platform;
   screenshots: string[];
   rating: number;
