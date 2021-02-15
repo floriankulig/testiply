@@ -98,14 +98,7 @@ export const InfoPageHeader: React.FC<InfoPageHeaderProps> = ({
               alt="Abstract Letter B"
             />
           </div>
-          <CSSTransition
-            in={!isMobile}
-            timeout={300}
-            classNames="fade-right"
-            unmountOnExit
-          >
-            <span>Beta Store</span>
-          </CSSTransition>
+          <span>Beta Store</span>
         </div>
       </Link>
       <ul className="nav-links">
