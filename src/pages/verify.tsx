@@ -1,9 +1,5 @@
 import Head from "next/head";
-import { InfoPageHeader } from "components/InfoPageHeader";
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
-import { getTextColor } from "helpers";
-import { theme } from "styles";
-import { InfoFooter } from "components/InfoFooter";
 import { api_url } from "ts/constants";
 import { GoVerified } from "react-icons/go";
 import { MdError } from "react-icons/md";
