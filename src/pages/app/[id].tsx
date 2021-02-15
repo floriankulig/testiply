@@ -43,6 +43,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
                 key={`screenshot_${_id}_${i}`}
                 src={`https://media.beta-app-store.com/apps/screenshots/${_id}/${screenshot}`}
                 alt={`Screenshot ${i + 1} of ${name}`}
+                style={{ animationDelay: `${i * 30 + 500}ms` }}
               />
             ))}
           </div>

@@ -1,3 +1,4 @@
+import { rgba } from "polished";
 import styled from "styled-components";
 
 const ScreenshotSection = styled.section`
@@ -10,6 +11,8 @@ const ScreenshotSection = styled.section`
     }
   }
   .screenshots {
+    padding-top: 1em;
+    padding-bottom: 2em;
     overflow-y: auto;
     white-space: nowrap;
     display: flex;
@@ -23,6 +26,10 @@ const Screenshot = styled.img`
   width: auto;
   height: auto;
   border-radius: 0.5em;
+  user-select: none;
+  box-shadow: 3px 10px 20px ${({ theme }) => rgba(theme.navy, 0.15)};
+  opacity: 0;
+  animation: fadeUp 0.4s var(--easing) forwards;
 `;
 
 export { Screenshot, ScreenshotSection };
