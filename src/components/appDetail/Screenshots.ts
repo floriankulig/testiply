@@ -27,7 +27,7 @@ const Screenshot = styled.img`
   height: auto;
   border-radius: 0.5em;
   user-select: none;
-  box-shadow: 3px 10px 20px ${({ theme }) => rgba(theme.navy, 0.15)};
+  box-shadow: 3px 10px 20px ${({ theme }) => rgba(theme.navy, 0.1)};
   opacity: 0;
   animation: fadeUp 0.4s var(--easing) forwards;
 `;
