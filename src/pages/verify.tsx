@@ -11,6 +11,7 @@ import { postData } from "api";
 import styled from "styled-components";
 import { Button } from "components/Button";
 import Link from "next/link";
+import { SingleColumnLayout } from "components/layouts";
 
 interface ContentContainerProps {
   hasError: boolean;
@@ -56,32 +57,27 @@ const Verify: NextPage<PageProps> = ({ success }) => {
       <Head>
         <title>Verify | Beta App Store</title>
       </Head>
-      <InfoPageHeader
-        className="container"
-        style={{
-          color: getTextColor(theme.layoutContentBg),
-        }}
-      />
-      <ContentContainer hasError={!success} className="container">
-        <h1>
-          {success ? <GoVerified /> : <MdError />}
-          {success ? "You are now verified" : "Your Verification failed."}
-        </h1>
-        {success ? (
-          <Link href="/store">
-            <Button big bold>
-              Go to Store
-            </Button>
-          </Link>
-        ) : (
-          <a href="mailto:support@beta-app-store.com?subject=Verfication%20Error">
-            <Button big bold color={"red"} basic>
-              Contact our Support
-            </Button>
-          </a>
-        )}
-      </ContentContainer>
-      <InfoFooter />
+      <SingleColumnLayout>
+        <ContentContainer hasError={!success} className="container">
+          <h1>
+            {success ? <GoVerified /> : <MdError />}
+            {success ? "You are now verified" : "Your Verification failed."}
+          </h1>
+          {success ? (
+            <Link href="/store">
+              <Button big bold>
+                Go to Store
+              </Button>
+            </Link>
+          ) : (
+            <a href="mailto:support@beta-app-store.com?subject=Verfication%20Error">
+              <Button big bold color={"red"} basic>
+                Contact our Support
+              </Button>
+            </a>
+          )}
+        </ContentContainer>
+      </SingleColumnLayout>
     </>
   );
 };
