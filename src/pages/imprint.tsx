@@ -1,15 +1,12 @@
 import { Button } from "components/Button";
-import { InfoFooter } from "components/InfoFooter";
-import { InfoPageHeader } from "components/InfoPageHeader";
 import { SingleColumnLayout } from "components/layouts";
-import { capitalized, getTextColor } from "helpers";
+import { capitalized } from "helpers";
 import { useStaticJSON } from "hooks";
 import { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import styled from "styled-components";
-import { theme } from "styles";
 
 const Content = styled.div`
   margin-top: 1em;
