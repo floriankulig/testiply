@@ -1,10 +1,26 @@
 import getAppInfo from "api/getAppInfo";
-import { Screenshot, ScreenshotSection } from "components/appDetail";
+import {
+  HeroSection,
+  IconWrapper,
+  MetaInfo,
+  RatingBar,
+  RatingBars,
+  RatingSection,
+  RatingSummary,
+  Screenshot,
+  ScreenshotSection,
+  StarPercentageRating,
+  StyledRow,
+} from "components/appDetail";
 import { SingleColumnLayout } from "components/layouts";
 import { capitalized } from "helpers";
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
 import Head from "next/head";
-import { App } from "ts";
+import { App, Platform } from "ts";
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { IoPeople } from "react-icons/io5";
 
 interface AppDetailProps {
   appInfo: App;
@@ -24,6 +40,10 @@ const AppDetail: NextPage<AppDetailProps> = ({
     _id,
   },
 }) => {
+  const [downloadPlatform, setDownloadPlatform] = useState<
+    Omit<Platform, "all">
+  >("ios");
+
   return (
     <>
       <Head>
@@ -35,8 +55,25 @@ const AppDetail: NextPage<AppDetailProps> = ({
         <title>{capitalized(name)} | Beta App Store</title>
       </Head>
       <SingleColumnLayout>
+        <HeroSection className="container">
+          <StyledRow>
+            <IconWrapper>
+              <Image
+                width={200}
+                height={200}
+                src={`https://media.beta-app-store.com/apps/icon/${_id}.webp`}
+                alt={`${name} app icon`}
+              />
+            </IconWrapper>
+            <MetaInfo>
+              <h1>{name}</h1>
+              <Link href={`/dev/${devId}`}>
+                <h3 className="link">{devName}</h3>
+              </Link>
+            </MetaInfo>
+          </StyledRow>
+        </HeroSection>
         <ScreenshotSection>
-          <h3>Screenshots</h3>
           <div className="screenshots">
             {screenshots?.map((screenshot, i) => (
               <Screenshot
@@ -48,6 +85,22 @@ const AppDetail: NextPage<AppDetailProps> = ({
             ))}
           </div>
         </ScreenshotSection>
+        <div className="container">
+          <RatingSection>
+            <RatingSummary>
+              <h2>{rating}</h2>
+              <StarPercentageRating percentage={rating} />
+              <span className="rating__amount">
+                <IoPeople /> 1.065.564
+              </span>
+            </RatingSummary>
+            <RatingBars>
+              {["", "", "", "", ""].map((_, i) => (
+                <RatingBar progress={i / 5} i={i} />
+              ))}
+            </RatingBars>
+          </RatingSection>
+        </div>
       </SingleColumnLayout>
     </>
   );
@@ -58,6 +111,7 @@ export const getServerSideProps: GetServerSideProps = async (
 ) => {
   const id = ctx?.params.id as string;
   const appInfo = await getAppInfo(id);
+  console.log(appInfo);
 
   return {
     props: { appInfo },
