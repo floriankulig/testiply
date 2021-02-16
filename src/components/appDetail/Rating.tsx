@@ -42,14 +42,17 @@ export const RatingSummary = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 0.25em 0 0.5em;
+  padding: 0.25em 0 0.25em;
+  @media (${({ theme }) => theme.bp.medium}) {
+    padding-top: 0;
+  }
 
   & > * {
     opacity: 0; //for animations
   }
 
   h2 {
-    font-size: 3rem;
+    font-size: clamp(3rem, 5vw, 4.5rem);
     margin: 0 0 0.1em;
     animation: fadeUp 0.5s var(--easing) forwards;
   }
@@ -70,13 +73,14 @@ export const RatingSummary = styled.div`
 export const RatingBars = styled.ul`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 100%;
   max-width: 300px;
 
   li {
     display: flex;
     align-items: center;
-    margin-bottom: 0.25em;
+    /* margin-bottom: 0.25em; */
     span {
       font-size: 1.1rem;
       color: ${({ theme }) => rgba(theme.navy, 0.7)};
@@ -85,18 +89,23 @@ export const RatingBars = styled.ul`
 `;
 
 const StyledRatingBar = styled.div`
+  --height: 8px;
   width: calc(100% - 30px);
-  height: 8px;
+  height: var(--height);
   margin-left: 1em;
   background-color: #cecdcd;
-  border-radius: 4px;
+  border-radius: calc(var(--height) / 2);
   .progress {
     background-color: var(--primary);
-    height: 8px;
-    border-radius: 4px;
+    height: var(--height);
+    border-radius: calc(var(--height) / 2);
     animation: growRight 0.8s var(--easing) forwards;
     transform-origin: left;
     transform: scaleX(0);
+  }
+
+  @media (${({ theme }) => theme.bp.medium}) {
+    --height: 10px;
   }
 `;
 
