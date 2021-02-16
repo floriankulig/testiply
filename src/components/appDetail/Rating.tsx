@@ -2,10 +2,20 @@ import { rgba } from "polished";
 import styled from "styled-components";
 
 export const RatingSection = styled.section`
-  display: flex;
   margin-top: 5em;
   width: 100%;
   overflow-y: hidden;
+  h1.section-header {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: ${({ theme }) => rgba(theme.navy, 0.8)};
+  }
+`;
+
+export const RatingContent = styled.div`
+  display: flex;
+  width: 100%;
+  overflow-y: hidden;
+  margin-top: clamp(1em, 2vw, 2em);
 `;
 
 const StarRatings = styled.div`
@@ -83,7 +93,6 @@ export const RatingBars = styled.ul`
   li {
     display: flex;
     align-items: center;
-    /* margin-bottom: 0.25em; */
     span {
       font-size: 1.1rem;
       color: ${({ theme }) => rgba(theme.navy, 0.7)};
