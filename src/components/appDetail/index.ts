@@ -6,6 +6,7 @@ import {
   RatingSection,
   RatingSummary,
   StarPercentageRating,
+  RatingContent,
 } from "./Rating";
 
 export {
@@ -20,4 +21,5 @@ export {
   RatingSection,
   RatingSummary,
   StarPercentageRating,
+  RatingContent,
 };
