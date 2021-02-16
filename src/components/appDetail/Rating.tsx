@@ -153,7 +153,7 @@ export const StarPercentageRating: React.FC<StarpercentageRatingProps> = ({
 }) => {
   return (
     <StarRatings style={{ fontSize: `${size}px` }}>
-      <div className="fill-ratings" style={{ width: `${percentage * 200}%` }}>
+      <div className="fill-ratings" style={{ width: `${percentage * 100}%` }}>
         <span>★★★★★</span>
       </div>
       <div className="empty-ratings">
