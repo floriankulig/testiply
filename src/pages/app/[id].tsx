@@ -5,6 +5,7 @@ import {
   MetaInfo,
   RatingBar,
   RatingBars,
+  RatingContent,
   RatingSection,
   RatingSummary,
   Screenshot,
@@ -85,8 +86,9 @@ const AppDetail: NextPage<AppDetailProps> = ({
             ))}
           </div>
         </ScreenshotSection>
-        <div className="container">
-          <RatingSection>
+        <RatingSection className="container">
+          <h1 className="section-header">Rating & Feedback</h1>
+          <RatingContent>
             <RatingSummary>
               <h2>{rating}</h2>
               <StarPercentageRating percentage={rating} />
@@ -99,8 +101,8 @@ const AppDetail: NextPage<AppDetailProps> = ({
                 <RatingBar progress={i / 5} i={i} />
               ))}
             </RatingBars>
-          </RatingSection>
-        </div>
+          </RatingContent>
+        </RatingSection>
       </SingleColumnLayout>
     </>
   );
