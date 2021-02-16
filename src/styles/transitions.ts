@@ -13,6 +13,17 @@ const fadeUp = css`
   }
 `;
 
+const growRight = css`
+  @keyframes growRight {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+`;
+
 const transitions = css`
   .pop-in-enter,
   .pop-in-appear {
@@ -89,6 +100,7 @@ const transitions = css`
   }
 
   ${fadeUp}
+  ${growRight}
 `;
 
 export default transitions;
