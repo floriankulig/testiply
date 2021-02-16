@@ -76,6 +76,9 @@ export const RatingBars = styled.ul`
   justify-content: space-between;
   width: 100%;
   max-width: 300px;
+  @media (${({ theme }) => theme.bp.medium}) {
+    max-width: 350px;
+  }
 
   li {
     display: flex;
