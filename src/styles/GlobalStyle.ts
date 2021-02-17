@@ -105,6 +105,18 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
+  .container-small {
+    width: 90%;
+    // not using margin: 0 auto; here, because that would interfear with (Styled)Components with container class
+    // we only want to control the margin on the sides, therefore the centering of an Component
+    margin-left: auto;
+    margin-right: auto;
+
+    @media (min-width: 1081px) {
+      width: 60%;
+    }
+  }
+
   .inner-content {
     padding-left:var(--mobile-inner-padding);
     padding-right:var(--mobile-inner-padding);
