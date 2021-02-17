@@ -14,7 +14,7 @@ export const RatingContent = styled.div`
   display: flex;
   width: 100%;
   overflow-y: hidden;
-  margin-top: clamp(1em, 2vw, 2em);
+  margin: clamp(1em, 2vw, 1.5em) 0 6em;
 `;
 
 const StarRatings = styled.div`
