@@ -71,4 +71,11 @@ interface TodayAppWidgets {
   apps: App[];
 }
 
+export interface Feedback {
+  heading: string;
+  text: string;
+  date: string;
+  rating: number;
+}
+
 export type UserType = "tester" | "dev";
