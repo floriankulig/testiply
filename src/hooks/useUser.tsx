@@ -8,14 +8,25 @@ export const useUser = (): AuthContextType => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [cookie, setCookie, removeCookie] = useCookies(["token"]);
 
+  const renewToken = async (currentToken): Promise<void> => {
+    await removeCookie("token");
+    let newExpireDate = new Date();
+    newExpireDate.setDate(newExpireDate.getDate() + 30);
+    await setCookie("token", currentToken, {
+      sameSite: true,
+      path: "/",
+      expires: newExpireDate,
+    });
+  };
+
   useEffect(() => {
     if (!cookie["token"]) return;
     let decoded: any;
     try {
-       decoded = jwt.verify(cookie["token"], process.env.JWT_SECRET);
+      decoded = jwt.verify(cookie["token"], process.env.JWT_SECRET);
     } catch (error) {
-      setCurrentUser(null)
-      return
+      setCurrentUser(null);
+      return;
     }
     setCurrentUser({
       email: "meine@mail.mail",
@@ -29,20 +40,14 @@ export const useUser = (): AuthContextType => {
     const currentToken = cookie["token"];
 
     if (currentToken) {
-      removeCookie("token");
-      let newExpireDate = new Date();
-      newExpireDate.setDate(newExpireDate.getDate() + 30);
-      setCookie("token", currentToken, {
-        sameSite: true,
-        expires: newExpireDate,
-      });
+      renewToken(currentToken);
     }
   }, []);
 
   // Set Cookie to date in past / non-existant date
-  const logout = (): void => {
-    removeCookie("token");
-    setCurrentUser(null);
+  const logout = async (): Promise<void> => {
+    await removeCookie("token");
+    await setCurrentUser(null);
   };
 
   return { currentUser, logout };

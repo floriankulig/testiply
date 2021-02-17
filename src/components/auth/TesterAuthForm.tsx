@@ -160,6 +160,7 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({ formType }) => {
           await setCookie("token", res.data.token, {
             sameSite: true,
             expires: date,
+            path: "/",
           });
           router.push("/store");
         })
