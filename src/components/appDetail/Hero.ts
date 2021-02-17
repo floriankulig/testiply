@@ -31,7 +31,7 @@ const IconWrapper = styled.div`
 
 const MetaInfo = styled.div`
   padding: 0.5em 0;
-  margin-left: 1.5em;
+  margin-left: clamp(0.75em, 3vw, 1.5em);
   max-height: 200px;
   display: flex;
   flex-direction: column;
