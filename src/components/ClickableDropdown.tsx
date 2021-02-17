@@ -20,7 +20,7 @@ export const StyledClickableDropdown = styled.div<DropdownOpenProps>`
   width: max-content;
   display: flex;
   align-items: center;
-  box-shadow: 1px 3px 6px ${({ theme }) => rgba(theme.primary, 0.15)};
+  box-shadow: 2px 5px 6px ${({ theme }) => rgba(theme.primary, 0.15)};
   transition: 0.3s var(--easing);
   transition-property: background, border-radius;
 
