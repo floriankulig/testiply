@@ -17,7 +17,7 @@ import { SingleColumnLayout } from "components/layouts";
 import { capitalized } from "helpers";
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
 import Head from "next/head";
-import { App, Platform } from "ts";
+import { App, Platform, platforms } from "ts";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -34,7 +34,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
     name,
     description,
     website,
-    platforms,
+    // platforms,
     screenshots,
     rating,
     downloads,
@@ -43,9 +43,9 @@ const AppDetail: NextPage<AppDetailProps> = ({
     _id,
   },
 }) => {
-  const [downloadPlatform, setDownloadPlatform] = useState<
-    Omit<Platform, "all">
-  >("ios");
+  const [downloadPlatform, setDownloadPlatform] = useState<Platform>(
+    platforms[0]
+  );
   const isMobile = useIsMobile(550);
 
   return (
@@ -78,7 +78,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
                 label="Download for "
                 selection={downloadPlatform}
                 setSelection={setDownloadPlatform}
-                values={["ios", "android", "macos"]}
+                values={platforms}
                 style={{ visibility: !isMobile ? "visible" : "hidden" }}
               />
             </MetaInfo>
@@ -88,7 +88,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
               label="Download for "
               selection={downloadPlatform}
               setSelection={setDownloadPlatform}
-              values={["ios", "android", "macos"]}
+              values={platforms}
               style={{
                 width: "100%",
                 visibility: isMobile ? "visible" : "hidden",
