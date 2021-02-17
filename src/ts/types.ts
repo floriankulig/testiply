@@ -1,12 +1,17 @@
 import { IconType } from "react-icons/lib";
 
-export type Platform =
+export type PlatformID =
   | "ios"
   | "android"
   | "windows"
   | "macos"
   | "linux"
   | "all";
+
+export interface Platform {
+  id: PlatformID;
+  displayName: string;
+}
 
 export type CategoryID =
   | "education"
