@@ -48,6 +48,10 @@ const AppDetail: NextPage<AppDetailProps> = ({
   );
   const isMobile = useIsMobile(550);
 
+  const handleDownload = (): void => {
+    console.log(`Downloaded for ${downloadPlatform.displayName}`);
+  };
+
   return (
     <>
       <Head>
@@ -78,6 +82,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
                 label="Download for "
                 selection={downloadPlatform}
                 setSelection={setDownloadPlatform}
+                ctaClickHandler={handleDownload}
                 values={platforms.slice(0, platforms.length - 1)}
                 style={{ visibility: !isMobile ? "visible" : "hidden" }}
               />
@@ -89,6 +94,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
               selection={downloadPlatform}
               setSelection={setDownloadPlatform}
               values={platforms.slice(0, platforms.length - 1)}
+              ctaClickHandler={handleDownload}
               style={{
                 width: "100%",
                 visibility: isMobile ? "visible" : "hidden",
