@@ -22,6 +22,8 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { IoPeople } from "react-icons/io5";
+import { ClickableDropdown } from "components/ClickableDropdown";
+import { useIsMobile } from "hooks";
 
 interface AppDetailProps {
   appInfo: App;
@@ -44,6 +46,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
   const [downloadPlatform, setDownloadPlatform] = useState<
     Omit<Platform, "all">
   >("ios");
+  const isMobile = useIsMobile(550);
 
   return (
     <>
@@ -71,8 +74,27 @@ const AppDetail: NextPage<AppDetailProps> = ({
               <Link href={`/dev/${devId}`}>
                 <h3 className="link">{devName}</h3>
               </Link>
+              {!isMobile && (
+                <ClickableDropdown
+                  label="Download for "
+                  selection={downloadPlatform}
+                  setSelection={setDownloadPlatform}
+                  values={["ios", "android", "macos"]}
+                />
+              )}
             </MetaInfo>
           </StyledRow>
+          {isMobile && (
+            <StyledRow>
+              <ClickableDropdown
+                label="Download for "
+                selection={downloadPlatform}
+                setSelection={setDownloadPlatform}
+                values={["ios", "android", "macos"]}
+                style={{ width: "100%" }}
+              />
+            </StyledRow>
+          )}
         </HeroSection>
         <ScreenshotSection>
           <div className="screenshots">
