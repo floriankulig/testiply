@@ -38,12 +38,12 @@ import { Platform, Category } from ".";
 import { GoPackage } from "react-icons/go";
 
 export const platforms: Platform[] = [
-  "ios",
-  "android",
-  "windows",
-  "macos",
-  "linux",
-  "all",
+  { displayName: "iOS", id: "ios" },
+  { displayName: "Android", id: "android" },
+  { displayName: "Windows", id: "windows" },
+  { displayName: "MacOS", id: "macos" },
+  { displayName: "Linux", id: "linux" },
+  { displayName: "All", id: "all" },
 ];
 
 export const categories: Category[] = [
