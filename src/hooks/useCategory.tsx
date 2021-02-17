@@ -40,7 +40,7 @@ export const useCategory = (): ReturnType => {
     setLoading(true);
     let query: string = `?category=${selectedCategory.id}`;
     query +=
-      selectedPlatform === "all" ? "" : `&platform[]=${selectedPlatform}`;
+      selectedPlatform.id === "all" ? "" : `&platform[]=${selectedPlatform.id}`;
 
     axios
       .get(`${api_url}/categoryApps${query}`)
@@ -61,7 +61,7 @@ export const useCategory = (): ReturnType => {
       apps.slice(-1).pop()._id
     }`;
     query +=
-      selectedPlatform === "all" ? "" : `&platform[]=${selectedPlatform}`;
+      selectedPlatform.id === "all" ? "" : `&platform[]=${selectedPlatform.id}`;
 
     axios
       .get(`${api_url}/categoryApps${query}`)
