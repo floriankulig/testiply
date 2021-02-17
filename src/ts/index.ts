@@ -7,6 +7,7 @@ import {
   FormType,
   App,
   AppPreview,
+  Feedback,
 } from "./types";
 
 import { platforms, categories } from "./constants";
@@ -27,4 +28,5 @@ export type {
   FormType,
   App,
   AppPreview,
+  Feedback,
 };
