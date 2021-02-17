@@ -1,13 +1,16 @@
 import styled from "styled-components";
 
-export const AppGrid = styled.ul`
+export const AppGrid = styled.ul<{ small?: boolean }>`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   @media (${({ theme }) => theme.bp.small}) {
     grid-template-columns: repeat(2, 1fr);
   }
   @media (${({ theme }) => theme.bp.big}) {
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(${(p) => (p.small ? "280px" : "350px")}, 1fr)
+    );
   }
   gap: clamp(1em, 3vw, 2.5em);
 
