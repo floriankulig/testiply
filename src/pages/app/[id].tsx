@@ -74,27 +74,27 @@ const AppDetail: NextPage<AppDetailProps> = ({
               <Link href={`/dev/${devId}`}>
                 <h3 className="link">{devName}</h3>
               </Link>
-              {!isMobile && (
-                <ClickableDropdown
-                  label="Download for "
-                  selection={downloadPlatform}
-                  setSelection={setDownloadPlatform}
-                  values={["ios", "android", "macos"]}
-                />
-              )}
-            </MetaInfo>
-          </StyledRow>
-          {isMobile && (
-            <StyledRow>
               <ClickableDropdown
                 label="Download for "
                 selection={downloadPlatform}
                 setSelection={setDownloadPlatform}
                 values={["ios", "android", "macos"]}
-                style={{ width: "100%" }}
+                style={{ visibility: !isMobile ? "visible" : "hidden" }}
               />
-            </StyledRow>
-          )}
+            </MetaInfo>
+          </StyledRow>
+          <StyledRow>
+            <ClickableDropdown
+              label="Download for "
+              selection={downloadPlatform}
+              setSelection={setDownloadPlatform}
+              values={["ios", "android", "macos"]}
+              style={{
+                width: "100%",
+                visibility: isMobile ? "visible" : "hidden",
+              }}
+            />
+          </StyledRow>
         </HeroSection>
         <ScreenshotSection>
           <div className="screenshots">
@@ -120,7 +120,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
             </RatingSummary>
             <RatingBars>
               {["", "", "", "", ""].map((_, i) => (
-                <RatingBar progress={i / 5} i={i} />
+                <RatingBar key={i} progress={i / 5} i={i} />
               ))}
             </RatingBars>
           </RatingContent>
