@@ -40,6 +40,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
     downloads,
     devId,
     devName,
+    devWebsite,
     _id,
   },
 }) => {
@@ -75,9 +76,13 @@ const AppDetail: NextPage<AppDetailProps> = ({
             </IconWrapper>
             <MetaInfo>
               <h1>{name}</h1>
-              <Link href={`/dev/${devId}`}>
+              <a
+                href={`http://${devWebsite}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <h3 className="link">{devName}</h3>
-              </Link>
+              </a>
               <ClickableDropdown
                 label="Download for "
                 selection={downloadPlatform}
