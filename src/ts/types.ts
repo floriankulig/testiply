@@ -56,6 +56,7 @@ export interface App {
   downloads: number;
   devId: number; // dev/dev_id
   devName: string;
+  devWebsite: string;
   _id: string;
 }
 
