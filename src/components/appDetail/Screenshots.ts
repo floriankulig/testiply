@@ -7,7 +7,7 @@ const ScreenshotSection = styled.section`
   & > * {
     padding: 0 5%;
     @media (${({ theme }) => theme.bp.medium}) {
-      padding: 0 15%;
+      padding: 0 20%;
     }
   }
   .screenshots {
