@@ -78,7 +78,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
                 label="Download for "
                 selection={downloadPlatform}
                 setSelection={setDownloadPlatform}
-                values={platforms}
+                values={platforms.slice(0, platforms.length - 1)}
                 style={{ visibility: !isMobile ? "visible" : "hidden" }}
               />
             </MetaInfo>
@@ -88,7 +88,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
               label="Download for "
               selection={downloadPlatform}
               setSelection={setDownloadPlatform}
-              values={platforms}
+              values={platforms.slice(0, platforms.length - 1)}
               style={{
                 width: "100%",
                 visibility: isMobile ? "visible" : "hidden",
