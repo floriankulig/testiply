@@ -59,14 +59,19 @@ const Dropdown = styled.ul`
   }
 `;
 
+interface Value {
+  id: string;
+  displayName: string;
+}
+
 interface SelectionInputProps {
   label?: string;
   style?: Object;
   className?: string;
-  selection: string;
-  setSelection: React.Dispatch<React.SetStateAction<string | number>>;
+  selection: Value;
+  setSelection: React.Dispatch<React.SetStateAction<Value>>;
   optional?: boolean;
-  values: Array<string>;
+  values: Array<Value>;
 }
 
 export const SelectionInput: React.FC<SelectionInputProps> = ({
@@ -86,7 +91,7 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({
   const ref = useRef<HTMLDivElement>();
   useOnClickOutside(ref, () => setDropdownOpens(false));
 
-  const handleSelectionChange = (newSelection: string) => {
+  const handleSelectionChange = (newSelection: Value) => {
     if (newSelection) {
       setSelection(newSelection);
     } else {
@@ -113,7 +118,7 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({
       )}
       <div ref={ref}>
         <StyledTextField>
-          <span>{selection ? capitalized(selection) : "No Selection"}</span>
+          <span>{selection ? selection.displayName : "No Selection"}</span>
           <SVGWrapper
             clickable
             onClick={() => setDropdownOpens(!dropdownOpens)}
@@ -139,14 +144,14 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({
           <Dropdown>
             {values &&
               values
-                .filter((value) => value !== selection)
+                .filter((value) => value.id !== selection.id)
                 .map((value) => (
                   <li
-                    key={value}
+                    key={value.id}
                     onClick={() => handleSelectionChange(value)}
                     onKeyDown={() => handleSelectionChange(value)}
                   >
-                    {capitalized(value)}
+                    {value.displayName}
                   </li>
                 ))}
             {optional && selection !== null && (
@@ -154,7 +159,7 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({
                 onClick={() => handleSelectionChange(null)}
                 onKeyDown={() => handleSelectionChange(null)}
               >
-                {capitalized("No Selection")}
+                No Selection
               </li>
             )}
           </Dropdown>
