@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 export const RatingSection = styled.section`
   margin-top: 5em;
-  width: 100%;
   overflow-y: hidden;
   h1.section-header {
     font-size: clamp(1.5rem, 3vw, 2rem);
