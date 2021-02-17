@@ -30,6 +30,7 @@ const Screenshot = styled.img`
   box-shadow: 3px 10px 20px ${({ theme }) => rgba(theme.navy, 0.1)};
   opacity: 0;
   animation: fadeUp 0.4s var(--easing) forwards;
+  z-index: -1;
 `;
 
 export { Screenshot, ScreenshotSection };
