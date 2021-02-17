@@ -11,7 +11,8 @@ interface DropdownOpenProps {
 }
 
 export const StyledClickableDropdown = styled.div<DropdownOpenProps>`
-  background-color: var(--primary);
+  background-color: ${(p) =>
+    p.open ? darken(0.05, p.theme.primary) : "var(--primary)"};
   color: #ffffff;
   border-radius: 6px ${(p) => p.open && "6px 0px 0px"};
   margin-top: auto;
@@ -117,6 +118,7 @@ interface ClickableDropdownProps {
   selection: Value;
   setSelection: React.Dispatch<React.SetStateAction<Value>>;
   values: Array<Value>;
+  ctaClickHandler: () => void;
 }
 
 export const ClickableDropdown: React.FC<ClickableDropdownProps> = ({
@@ -126,6 +128,7 @@ export const ClickableDropdown: React.FC<ClickableDropdownProps> = ({
   selection,
   setSelection,
   values,
+  ctaClickHandler,
 }) => {
   const [dropdownOpens, setDropdownOpens] = useState<boolean>(false);
   const dropdownShouldOpen: boolean =
@@ -151,7 +154,13 @@ export const ClickableDropdown: React.FC<ClickableDropdownProps> = ({
       ref={ref}
       open={dropdownShouldOpen}
     >
-      <ClickableSelection>
+      <ClickableSelection
+        onClick={() => ctaClickHandler()}
+        onKeyDown={() => ctaClickHandler()}
+        role="button"
+        aria-label={`${label} ${selection.displayName}`}
+        tabIndex={0}
+      >
         {label}
         {selection.displayName}
       </ClickableSelection>
