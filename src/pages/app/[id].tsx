@@ -1,5 +1,6 @@
 import getAppInfo from "api/getAppInfo";
 import {
+  FeedbackTile,
   HeroSection,
   IconWrapper,
   MetaInfo,
@@ -17,7 +18,7 @@ import { AppGrid } from "components/layouts";
 import { capitalized, getTextColor } from "helpers";
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
 import Head from "next/head";
-import { App, Platform, platforms } from "ts";
+import { App, Platform, platforms as allPlatforms } from "ts";
 import { useState } from "react";
 import Image from "next/image";
 import { IoPeople } from "react-icons/io5";
@@ -36,21 +37,22 @@ const AppDetail: NextPage<AppDetailProps> = ({
     name,
     description,
     website,
-    // platforms,
+    platforms,
     screenshots,
     rating,
     downloads,
-    devId,
     devName,
     devWebsite,
     _id,
   },
 }) => {
+  const downloadablePlatforms = platforms?.map((platformID) =>
+    allPlatforms.find((p) => p.id === platformID)
+  );
   const [downloadPlatform, setDownloadPlatform] = useState<Platform>(
-    platforms[0]
+    downloadablePlatforms[0]
   );
   const isMobile = useIsMobile(550);
-
   const handleDownload = (): void => {
     console.log(`Downloaded for ${downloadPlatform.displayName}`);
   };
@@ -95,7 +97,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
               selection={downloadPlatform}
               setSelection={setDownloadPlatform}
               ctaClickHandler={handleDownload}
-              values={platforms.slice(0, platforms.length - 1)}
+              values={downloadablePlatforms}
               style={{ visibility: !isMobile ? "visible" : "hidden" }}
             />
           </MetaInfo>
@@ -105,7 +107,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
             label="Download for "
             selection={downloadPlatform}
             setSelection={setDownloadPlatform}
-            values={platforms.slice(0, platforms.length - 1)}
+            values={downloadablePlatforms}
             ctaClickHandler={handleDownload}
             style={{
               width: "100%",
@@ -127,7 +129,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
         </div>
       </ScreenshotSection>
       <RatingSection className="container-small">
-        <h1 className="section-header">Rating & Feedback</h1>
+        <h1 className="section-header">Rating</h1>
         <RatingContent>
           <RatingSummary>
             <h2>{rating}</h2>
@@ -142,7 +144,34 @@ const AppDetail: NextPage<AppDetailProps> = ({
             ))}
           </RatingBars>
         </RatingContent>
-        <AppGrid>Hello</AppGrid>
+        <h1 className="section-header">Latest Feedback</h1>
+        <AppGrid small>
+          <FeedbackTile
+            feedback={{
+              text:
+                "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+              date: "17/02/2021",
+              rating: 4,
+              heading: "Good App",
+            }}
+          />
+          <FeedbackTile
+            feedback={{
+              text: "muulm",
+              date: "17/02/2021",
+              rating: 4,
+              heading: "Good App",
+            }}
+          />
+          <FeedbackTile
+            feedback={{
+              text: "muulm",
+              date: "17/02/2021",
+              rating: 4,
+              heading: "Good App",
+            }}
+          />
+        </AppGrid>
       </RatingSection>
       <Footer />
     </>
