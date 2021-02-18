@@ -15,7 +15,13 @@ import { MenuTransition } from "components/MenuTransition";
 import { Button } from "components/Button";
 
 const Categories = () => {
-  const { selectedCategory, loading, apps, pageUp } = useCategory();
+  const {
+    selectedCategory,
+    loading,
+    apps,
+    pageUp,
+    hasMoreApps,
+  } = useCategory();
   const { searchQuery } = useFiltersValue();
   const isMobile = useIsMobile(550);
   const [filteredApps, setFilteredApps] = useState<App[]>(apps);
@@ -131,6 +137,7 @@ const Categories = () => {
                       onClick={() => pageUp()}
                       onKeyDown={() => pageUp()}
                       tabIndex={0}
+                      disabled={!hasMoreApps}
                       aria-label="Load more apps."
                     >
                       Load More
