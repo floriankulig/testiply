@@ -10,6 +10,7 @@ type CategoryType = Category | null;
 interface ReturnType {
   selectedCategory: CategoryType;
   loading: boolean;
+  hasMoreApps: boolean;
   apps: App[];
   pageUp: () => void;
 }
@@ -31,8 +32,10 @@ export const useCategory = (): ReturnType => {
   const [apps, setApps] = useState<App[]>([]);
   const [page, setPage] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(true);
+  const [hasMoreApps, setHasMoreApps] = useState<boolean>(true);
   useEffect(() => {
     setPage(1);
+    setHasMoreApps(true);
     if (selectedCategory === null) {
       setApps([]);
       return;
@@ -45,9 +48,10 @@ export const useCategory = (): ReturnType => {
     axios
       .get(`${api_url}/categoryApps${query}`)
       .then((res) => {
-        if (JSON.stringify(res.data) !== JSON.stringify(apps)) {
-          setApps(res.data);
+        if (JSON.stringify(res.data.apps) !== JSON.stringify(apps)) {
+          setApps(res.data.apps);
         }
+        setHasMoreApps(res.data.metaData.moreApps);
         setLoading(false);
       })
       .catch((err) => console.log(err));
@@ -67,7 +71,7 @@ export const useCategory = (): ReturnType => {
       .get(`${api_url}/categoryApps${query}`)
       .then((res) => {
         // check if new loaded apps are already displayed
-        const newPageApps = res.data.filter(
+        const newPageApps = res.data.apps.filter(
           (newApp: App) => !apps.some((oldApp) => oldApp._id === newApp._id)
         );
         // merge old apps with newly loaded ones
@@ -75,6 +79,7 @@ export const useCategory = (): ReturnType => {
         if (JSON.stringify(newApps) !== JSON.stringify(apps)) {
           setApps(newApps);
         }
+        setHasMoreApps(res.data.metaData.moreApps);
         setLoading(false);
       })
       .catch((err) => console.log(err));
@@ -85,5 +90,5 @@ export const useCategory = (): ReturnType => {
     setPage(page + 1);
   };
 
-  return { selectedCategory, loading, apps, pageUp };
+  return { selectedCategory, loading, apps, pageUp, hasMoreApps };
 };
