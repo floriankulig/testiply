@@ -14,7 +14,8 @@ export const StyledClickableDropdown = styled.div<DropdownOpenProps>`
   background-color: ${(p) =>
     p.open ? darken(0.05, p.theme.primary) : "var(--primary)"};
   color: #ffffff;
-  border-radius: 6px ${(p) => p.open && "6px 0px 0px"};
+  border-radius: var(--border-radius)
+    ${(p) => p.open && "var(--border-radius) 0px 0px"};
   margin-top: auto;
   height: 50px;
   width: max-content;
@@ -64,7 +65,7 @@ const Dropdown = styled.ul`
   font-weight: normal;
   font-size: 1rem;
   z-index: 9999;
-  border-radius: 0 0 4px 4px;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
   background: var(--primary);
   border-top: none;
 
@@ -82,7 +83,7 @@ const Dropdown = styled.ul`
     }
     transition: 0.5s background;
     &:last-of-type {
-      border-radius: 0 0 4px 4px;
+      border-radius: 0 0 var(--border-radius) var(--border-radius);
     }
   }
 
@@ -133,6 +134,7 @@ export const ClickableDropdown: React.FC<ClickableDropdownProps> = ({
   const [dropdownOpens, setDropdownOpens] = useState<boolean>(false);
   const dropdownShouldOpen: boolean =
     (dropdownOpens && !!values[1]) || (dropdownOpens && !!values);
+  const hasMultipleApps = values.length > 1;
 
   const ref = useRef<HTMLDivElement>();
   useOnClickOutside(ref, () => setDropdownOpens(false));
@@ -160,11 +162,12 @@ export const ClickableDropdown: React.FC<ClickableDropdownProps> = ({
         role="button"
         aria-label={`${label} ${selection.displayName}`}
         tabIndex={0}
+        style={{ width: !hasMultipleApps && "100%" }}
       >
         {label}
         {selection.displayName}
       </ClickableSelection>
-      {values.length > 1 && (
+      {hasMultipleApps && (
         <DropdownOpenerWrapper
           onClick={() => setDropdownOpens(!dropdownOpens)}
           onKeyDown={() => setDropdownOpens(!dropdownOpens)}
