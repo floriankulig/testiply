@@ -50,7 +50,7 @@ export interface App {
   name: string;
   description: string;
   website: string; //Website oder Github oder FaceBook
-  platforms: Platform[];
+  platforms: PlatformID[];
   screenshots: string[];
   rating: number;
   downloads: number;
