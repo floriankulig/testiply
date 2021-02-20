@@ -150,13 +150,12 @@ export const categories: Category[] = [
   { id: "economy", displayName: "Economy", icon: BsGraphUp, color: "#b25803" },
 ];
 
-export const testerTabNames = ["today", "apps", "games", "categories", "news"];
+export const testerTabNames = ["today", "apps", "games", "categories"];
 export const testerTabIcons = [
   [<AiOutlineHome />, <AiFillHome />],
   [<AiOutlineAppstore />, <AiFillAppstore />],
   [<IoGameControllerOutline />, <IoGameController />],
   [<RiStackLine />, <RiStackFill />],
-  [<IoNewspaperOutline />, <IoNewspaper />],
 ];
 
 export const devTabNames = ["dashboard", "apps", "feedback"];
