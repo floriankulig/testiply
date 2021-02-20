@@ -65,7 +65,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
           href="/favicons/favicon.ico"
           type="image/x-icon"
         />
-        <title>{capitalized(name)} | Beta App Store</title>
+        <title>{capitalized(name)} | Testiply</title>
       </Head>
       <InfoPageHeader
         className="container-small"

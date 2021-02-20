@@ -98,7 +98,7 @@ export const InfoPageHeader: React.FC<InfoPageHeaderProps> = ({
               alt="Abstract Letter B"
             />
           </div>
-          {!isMobile && <span>Beta Store</span>}
+          {!isMobile && <span>Testiply</span>}
         </div>
       </Link>
       <ul className="nav-links">

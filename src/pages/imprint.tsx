@@ -51,7 +51,7 @@ const Imprint: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Imprint | Beta App Store</title>
+        <title>Imprint | Testiply</title>
       </Head>
       <SingleColumnLayout>
         <Content className="container">

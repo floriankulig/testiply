@@ -51,7 +51,7 @@ const Verify: NextPage<PageProps> = ({ success }) => {
   return (
     <>
       <Head>
-        <title>Verify | Beta App Store</title>
+        <title>Verify | Testiply</title>
       </Head>
       <SingleColumnLayout>
         <ContentContainer hasError={!success} className="container">

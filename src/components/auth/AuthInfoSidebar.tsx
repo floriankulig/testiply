@@ -109,7 +109,7 @@ export const AuthInfoSidebar: React.FC<AuthInfoSidebarProps> = ({ type }) => {
           <Socials />
           <Policies />
         </div>
-        <p>© {new Date().getFullYear()} Beta App Store</p>
+        <p>© {new Date().getFullYear()} Testiply</p>
       </Info>
     </StyledAuthInfoSidebar>
   );
