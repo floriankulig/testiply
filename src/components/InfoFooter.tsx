@@ -80,8 +80,11 @@ const StyledPolicies = styled.div`
   @media (${({ theme }) => theme.bp.small}) {
     margin: 0;
   }
-  h3 a:hover {
-    cursor: pointer;
+  h3 a {
+    color: currentColor;
+    &:hover {
+      cursor: pointer;
+    }
   }
 `;
 
@@ -130,11 +133,16 @@ export const Socials: React.FC = () => {
 export const Policies: React.FC = () => {
   return (
     <StyledPolicies>
-      <Link href="/imprint">
-        <h3>
-          <a className="link">Imprint</a>
-        </h3>
-      </Link>
+      <h3>
+        <a
+          href="https://n-mayr.net/datenschutz"
+          className="link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Imprint
+        </a>
+      </h3>
       <h3>
         <a className="link">Privacy Policy</a>
       </h3>
