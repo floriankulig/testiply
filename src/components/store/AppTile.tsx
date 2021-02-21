@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useIsMobile } from "hooks";
 import Image from "next/image";
 import Link from "next/link";
@@ -150,7 +151,7 @@ export const AppTile: React.FC<AppTileProps> = ({
           tabIndex={0}
           role="button"
         >
-          <IconWrapper>
+          <IconWrapper as={motion.div} layoutId={`appIcon-${_id}`}>
             <Image
               width={85}
               height={85}
@@ -160,8 +161,12 @@ export const AppTile: React.FC<AppTileProps> = ({
             />
           </IconWrapper>
           <StyledAppInfo>
-            <p className="app__name">{name}</p>
-            <p className="app__dev">{devName}</p>
+            <motion.p layoutId={`appTitle-${_id}`} className="app__name">
+              {name}
+            </motion.p>
+            <motion.p layoutId={`appDevName-${_id}`} className="app__dev">
+              {devName}
+            </motion.p>
             <div className="app__rating">
               {rating} <FaStar />
             </div>
