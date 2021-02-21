@@ -85,46 +85,44 @@ export const Tabs: React.FC<TabsProps> = ({ setSidebarOpen, tabTypes }) => {
   }, [selectedTab]);
 
   return (
-    <AnimateSharedLayout>
-      <TabsContainer>
-        <Head>
-          <title>{active[0].toUpperCase() + active.slice(1)} | Testiply</title>
-        </Head>
-        {tabs &&
-          tabs.map((tabName, i) => (
-            <Link
-              href={
-                tabName === "today"
-                  ? "/store"
-                  : tabTypes === "tester"
-                  ? `/store/${tabName}`
-                  : `/dev/${tabName}`
-              }
-              key={i}
+    <TabsContainer>
+      <Head>
+        <title>{active[0].toUpperCase() + active.slice(1)} | Testiply</title>
+      </Head>
+      {tabs &&
+        tabs.map((tabName, i) => (
+          <Link
+            href={
+              tabName === "today"
+                ? "/store"
+                : tabTypes === "tester"
+                ? `/store/${tabName}`
+                : `/dev/${tabName}`
+            }
+            key={i}
+          >
+            <TabRow
+              onClick={() => handleTabSwitch(tabName)}
+              onKeyDown={() => handleTabSwitch(tabName)}
+              icon={!!icons[i]}
+              role="button"
+              as={motion.li}
+              animate={{
+                color: active === tabName ? theme.primary : theme.navy,
+                fontWeight: active === tabName ? "bold" : "normal",
+              }}
+              aria-label={`Switch tab to ${tabName}`}
             >
-              <TabRow
-                onClick={() => handleTabSwitch(tabName)}
-                onKeyDown={() => handleTabSwitch(tabName)}
-                icon={!!icons[i]}
-                role="button"
-                as={motion.li}
-                animate={{
-                  color: active === tabName ? theme.primary : theme.navy,
-                  fontWeight: active === tabName ? "bold" : "normal",
-                }}
-                aria-label={`Switch tab to ${tabName}`}
-              >
-                {active === tabName ? (
-                  <span>{icons[i][1]}</span>
-                ) : (
-                  <span>{icons[i][0]}</span>
-                )}
-                {tabName}
-                {active === tabName && <motion.div layoutId="background" />}
-              </TabRow>
-            </Link>
-          ))}
-      </TabsContainer>
-    </AnimateSharedLayout>
+              {active === tabName ? (
+                <span>{icons[i][1]}</span>
+              ) : (
+                <span>{icons[i][0]}</span>
+              )}
+              {tabName}
+              {active === tabName && <motion.div layoutId="background" />}
+            </TabRow>
+          </Link>
+        ))}
+    </TabsContainer>
   );
 };

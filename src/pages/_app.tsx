@@ -4,6 +4,7 @@ import { Layout as StoreLayout } from "components/layouts/Layout";
 import Head from "next/head";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle, theme } from "styles";
+import { AnimateSharedLayout } from "framer-motion";
 
 interface EmptyLayoutProps {
   children: React.ReactNode;
@@ -57,19 +58,21 @@ const MyApp = ({ Component, pageProps }: any) => {
       <ThemeProvider theme={theme}>
         <CookiesProvider>
           <AuthProvider>
-            {Layout === StoreLayout ? (
-              <SelectedTabProvider>
+            <AnimateSharedLayout>
+              {Layout === StoreLayout ? (
+                <SelectedTabProvider>
+                  <Layout>
+                    <GlobalStyle />
+                    <Component {...pageProps} />
+                  </Layout>
+                </SelectedTabProvider>
+              ) : (
                 <Layout>
                   <GlobalStyle />
                   <Component {...pageProps} />
                 </Layout>
-              </SelectedTabProvider>
-            ) : (
-              <Layout>
-                <GlobalStyle />
-                <Component {...pageProps} />
-              </Layout>
-            )}
+              )}
+            </AnimateSharedLayout>
           </AuthProvider>
         </CookiesProvider>
       </ThemeProvider>
