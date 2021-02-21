@@ -4,7 +4,8 @@ import Head from "next/head";
 import Link from "next/link";
 import { rgba } from "polished";
 import { useEffect, useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
+import { theme } from "styles";
 import { UserType } from "ts";
 import {
   devTabIcons,
@@ -14,7 +15,6 @@ import {
 } from "ts/constants";
 
 interface TabRowProps {
-  selected: boolean;
   icon: boolean;
 }
 
@@ -29,21 +29,9 @@ export const TabRow = styled.li<TabRowProps>`
   font-size: 1.2rem;
   cursor: pointer;
   position: relative;
-  font-weight: bold;
   text-transform: capitalize;
   display: inline-flex;
   align-items: center;
-  ${(p) =>
-    p.selected
-      ? css`
-          color: var(--primary);
-          font-weight: bold;
-        `
-      : css`
-          color: #000000;
-          font-weight: normal;
-        `};
-  transition: 0.25s all linear;
 
   span {
     margin-right: 0.5em;
@@ -115,13 +103,15 @@ export const Tabs: React.FC<TabsProps> = ({ setSidebarOpen, tabTypes }) => {
               key={i}
             >
               <TabRow
-                selected={active === tabName}
                 onClick={() => handleTabSwitch(tabName)}
                 onKeyDown={() => handleTabSwitch(tabName)}
                 icon={!!icons[i]}
                 role="button"
                 as={motion.li}
-                animate
+                animate={{
+                  color: active === tabName ? theme.primary : theme.navy,
+                  fontWeight: active === tabName ? "bold" : "normal",
+                }}
                 aria-label={`Switch tab to ${tabName}`}
               >
                 {active === tabName ? (
