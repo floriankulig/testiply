@@ -27,6 +27,7 @@ import { useIsMobile } from "hooks";
 import { Footer } from "components/home";
 import { theme } from "styles";
 import { InfoPageHeader } from "components/InfoPageHeader";
+import { motion } from "framer-motion";
 
 interface AppDetailProps {
   appInfo: App;
@@ -75,7 +76,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
       />
       <HeroSection className="container-small">
         <StyledRow>
-          <IconWrapper>
+          <IconWrapper as={motion.div} layoutId={`appIcon-${_id}`}>
             <Image
               width={200}
               height={200}
@@ -84,13 +85,15 @@ const AppDetail: NextPage<AppDetailProps> = ({
             />
           </IconWrapper>
           <MetaInfo>
-            <h1>{name}</h1>
+            <motion.h1 layoutId={`appTitle-${_id}`}>{name}</motion.h1>
             <a
               href={`http://${devWebsite}`}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <h3 className="link">{devName}</h3>
+              <motion.h3 layoutId={`appDevName-${_id}`} className="link">
+                {devName}
+              </motion.h3>
             </a>
             <ClickableDropdown
               label="Download for "
