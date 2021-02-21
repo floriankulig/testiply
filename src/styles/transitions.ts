@@ -4,10 +4,10 @@ const fadeUp = css`
   @keyframes fadeUp {
     0% {
       opacity: 0;
-      transform: translateY(70px);
+      transform: translate3d(0, 70px, 0);
     }
     100% {
-      transform: translateY(0px);
+      transform: translate3d(0, 0px, 0);
       opacity: 1;
     }
   }
@@ -48,42 +48,42 @@ const transitions = css`
 
   .fade-right-enter,
   .fade-right-appear {
-    transform: translateX(-70px);
+    transform: translate3d(-70px, 0, 0);
     opacity: 0;
   }
   .fade-right-enter-active,
   .fade-right-appear-active {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
     opacity: 1;
     transition: 0.3s all var(--easing);
   }
   .fade-right-exit {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
     opacity: 1;
   }
   .fade-right-exit-active {
-    transform: translateX(-70px);
+    transform: translate3d(-70px, 0, 0);
     opacity: 0;
     transition: 0.3s all var(--easing);
   }
 
   .fade-down-enter,
   .fade-down-appear {
-    transform: translateY(-70px);
+    transform: translate3d(0, 70px, 0);
     opacity: 0;
   }
   .fade-down-enter-active,
   .fade-down-appear-active {
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
     opacity: 1;
     transition: 0.3s all var(--easing);
   }
   .fade-down-exit {
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
     opacity: 1;
   }
   .fade-down-exit-active {
-    transform: translateY(-70px);
+    transform: translate3d(0, -70px, 0);
     opacity: 0;
     transition: 0.3s all var(--easing);
   }
@@ -92,10 +92,10 @@ const transitions = css`
     transition: 0.3s var(--easing);
     transition-property: opacity, transform;
     opacity: 0;
-    transform: translateY(30px);
+    transform: translate3d(0, 30px, 0);
   }
   [data-scroll="in"] {
-    transform: translateY(0px);
+    transform: translate3d(0, 0px, 0);
     opacity: 1;
   }
 
