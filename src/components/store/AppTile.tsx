@@ -151,7 +151,11 @@ export const AppTile: React.FC<AppTileProps> = ({
           tabIndex={0}
           role="button"
         >
-          <IconWrapper as={motion.div} layoutId={`appIcon-${_id}`}>
+          <IconWrapper
+            as={motion.div}
+            layoutId={`appIcon-${_id}`}
+            style={{ borderRadius: "25%" }}
+          >
             <Image
               width={85}
               height={85}
