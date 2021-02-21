@@ -43,16 +43,11 @@ export const TabRow = styled.li<TabRowProps>`
     }
   }
   div {
-    background: ${(p) => rgba(p.theme.primary, 0.1)};
     position: absolute;
     left: 0;
-    background: linear-gradient(
-      to right,
-      ${(p) => rgba(p.theme.primary, 0.2)},
-      var(--layout-content-background)
-    );
-    border-left: 3px solid ${(p) => rgba(p.theme.primary, 0.8)};
-    width: 100%;
+    background: ${(p) => rgba(p.theme.primary, 0.15)};
+    border-left: 3px solid ${(p) => rgba(p.theme.primary, 0.7)};
+    width: 85%;
     height: 100%;
     z-index: -1;
   }
@@ -119,7 +114,15 @@ export const Tabs: React.FC<TabsProps> = ({ setSidebarOpen, tabTypes }) => {
                 <span>{icons[i][0]}</span>
               )}
               {tabName}
-              {active === tabName && <motion.div layoutId="background" />}
+              {active === tabName && (
+                <motion.div
+                  style={{
+                    borderTopRightRadius: "25px",
+                    borderBottomRightRadius: "25px",
+                  }}
+                  layoutId="background"
+                />
+              )}
             </TabRow>
           </Link>
         ))}
