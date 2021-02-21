@@ -1,4 +1,5 @@
 import { useSelectedTabValue } from "context";
+import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
 import Head from "next/head";
 import Link from "next/link";
 import { rgba } from "polished";
@@ -23,9 +24,8 @@ const TabsContainer = styled.ul`
 
 export const TabRow = styled.li<TabRowProps>`
   width: 100%;
-  padding: 15px ${(p) => p.icon && "50px"};
+  padding: 15px ${(p) => (p.icon ? "65px" : "30px")};
   margin-bottom: 0.25em;
-  border-radius: var(--border-radius);
   font-size: 1.2rem;
   cursor: pointer;
   position: relative;
@@ -38,25 +38,35 @@ export const TabRow = styled.li<TabRowProps>`
       ? css`
           color: var(--primary);
           font-weight: bold;
-          background: ${(p) => rgba(p.theme.primary, 0.1)};
         `
       : css`
           color: #000000;
           font-weight: normal;
         `};
-  &:hover {
-    background: var(--layout-content-background);
-  }
   transition: 0.25s all linear;
 
   span {
     margin-right: 0.5em;
     position: absolute;
-    left: 15px;
+    left: 30px;
     svg {
       width: 1.3rem;
       height: 1.3rem;
     }
+  }
+  div {
+    background: ${(p) => rgba(p.theme.primary, 0.1)};
+    position: absolute;
+    left: 0;
+    background: linear-gradient(
+      to right,
+      ${(p) => rgba(p.theme.primary, 0.2)},
+      var(--layout-content-background)
+    );
+    border-left: 3px solid ${(p) => rgba(p.theme.primary, 0.8)};
+    width: 100%;
+    height: 100%;
+    z-index: -1;
   }
 `;
 
@@ -87,39 +97,44 @@ export const Tabs: React.FC<TabsProps> = ({ setSidebarOpen, tabTypes }) => {
   }, [selectedTab]);
 
   return (
-    <TabsContainer>
-      <Head>
-        <title>{active[0].toUpperCase() + active.slice(1)} | Testiply</title>
-      </Head>
-      {tabs &&
-        tabs.map((tabName, i) => (
-          <Link
-            href={
-              tabName === "today"
-                ? "/store"
-                : tabTypes === "tester"
-                ? `/store/${tabName}`
-                : `/dev/${tabName}`
-            }
-            key={i}
-          >
-            <TabRow
-              selected={active === tabName}
-              onClick={() => handleTabSwitch(tabName)}
-              onKeyDown={() => handleTabSwitch(tabName)}
-              icon={!!icons[i]}
-              role="button"
-              aria-label={`Switch tab to ${tabName}`}
+    <AnimateSharedLayout>
+      <TabsContainer>
+        <Head>
+          <title>{active[0].toUpperCase() + active.slice(1)} | Testiply</title>
+        </Head>
+        {tabs &&
+          tabs.map((tabName, i) => (
+            <Link
+              href={
+                tabName === "today"
+                  ? "/store"
+                  : tabTypes === "tester"
+                  ? `/store/${tabName}`
+                  : `/dev/${tabName}`
+              }
+              key={i}
             >
-              {active === tabName ? (
-                <span>{icons[i][1]}</span>
-              ) : (
-                <span>{icons[i][0]}</span>
-              )}
-              {tabName}
-            </TabRow>
-          </Link>
-        ))}
-    </TabsContainer>
+              <TabRow
+                selected={active === tabName}
+                onClick={() => handleTabSwitch(tabName)}
+                onKeyDown={() => handleTabSwitch(tabName)}
+                icon={!!icons[i]}
+                role="button"
+                as={motion.li}
+                animate
+                aria-label={`Switch tab to ${tabName}`}
+              >
+                {active === tabName ? (
+                  <span>{icons[i][1]}</span>
+                ) : (
+                  <span>{icons[i][0]}</span>
+                )}
+                {tabName}
+                {active === tabName && <motion.div layoutId="background" />}
+              </TabRow>
+            </Link>
+          ))}
+      </TabsContainer>
+    </AnimateSharedLayout>
   );
 };
