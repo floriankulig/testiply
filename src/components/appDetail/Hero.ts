@@ -25,8 +25,7 @@ const IconWrapper = styled.div`
   min-width: 120px;
   min-height: 120px;
   border-radius: 20%;
-  opacity: 0;
-  animation: fadeUp 0.5s var(--easing) forwards 0.1s;
+  user-select: none;
 `;
 
 const MetaInfo = styled.div`
@@ -39,8 +38,6 @@ const MetaInfo = styled.div`
     font-size: clamp(30px, 5vw, 60px);
     margin: 0;
     color: var(--navy);
-    opacity: 0;
-    animation: fadeUp 0.5s var(--easing) forwards 0.2s;
   }
   h3 {
     color: var(--primary);
@@ -48,8 +45,6 @@ const MetaInfo = styled.div`
     margin: 0.75em 0;
     width: max-content;
     flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.5s var(--easing) forwards 0.3s;
   }
   ${StyledClickableDropdown} {
     margin-top: auto;
