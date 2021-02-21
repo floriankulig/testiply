@@ -1,4 +1,3 @@
-import { capitalized } from "helpers";
 import { useOnClickOutside } from "hooks";
 import { darken, rgba } from "polished";
 import { useRef, useState } from "react";
