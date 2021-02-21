@@ -7,11 +7,11 @@ export const MenuTransition = styled.div`
   & .menu-primary-appear {
     position: absolute;
     width: 100%;
-    transform: translateX(-110%);
+    transform: translate3D(-110%, 0, 0);
   }
   & .menu-primary-enter-active,
   & .menu-primary-appear-active {
-    transform: translateX(0);
+    transform: translate3D(0, 0, 0);
     transition: transform 0.4s var(--easing);
     position: relative;
   }
@@ -21,25 +21,25 @@ export const MenuTransition = styled.div`
   & .menu-primary-exit-active,
   & .menu-primary-exit-done {
     position: absolute;
-    transform: translateX(-110%);
+    transform: translate3D(-110%, 0, 0);
     transition: transform 0.4s var(--easing);
     width: 100%;
   }
 
   & .menu-secondary-enter {
-    transform: translateX(110%);
+    transform: translate3D(110%, 0, 0);
     width: 100%;
   }
   & .menu-secondary-enter-active {
-    transform: translateX(0);
+    transform: translate3D(0, 0, 0);
     transition: transform 0.4s var(--easing);
   }
   & .menu-secondary-exit {
-    transform: translateX(110%);
+    transform: translate3D(110%, 0, 0);
   }
   & .menu-secondary-exit-active,
   & .menu-secondary-exit-done {
-    transform: translateX(110%);
+    transform: translate3D(110%, 0, 0);
     transition: transform 0.4s var(--easing);
     width: 100%;
     min-height: 100%;
