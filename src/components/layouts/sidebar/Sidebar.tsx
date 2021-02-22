@@ -92,7 +92,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
           unmountOnExit
         >
           <TabRow
-            selected={false}
             icon
             style={{ marginTop: "3em" }}
             onClick={() => logout()}
