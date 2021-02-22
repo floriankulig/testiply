@@ -4,6 +4,7 @@ import { useStaticJSON } from "./useStaticJSON";
 import { useFilters } from "./useFilters";
 import { useCategory } from "./useCategory";
 import { useUser } from "./useUser";
+import { useCannotScroll } from "./useCannotScroll";
 
 export {
   useIsMobile,
@@ -12,4 +13,5 @@ export {
   useFilters,
   useCategory,
   useUser,
+  useCannotScroll,
 };
