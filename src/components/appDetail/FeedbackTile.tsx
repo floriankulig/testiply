@@ -1,6 +1,6 @@
 import { Overlay } from "components/Overlay";
 import { AnimatePresence, motion } from "framer-motion";
-import { useCannotScroll, useOnClickOutside } from "hooks";
+import { useOnClickOutside } from "hooks";
 import { darken, rgba } from "polished";
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
@@ -81,11 +81,7 @@ const StyledFeedbackDetail = styled.div`
   width: clamp(100px, 90%, 500px);
   box-shadow: 15px 30px 40px ${({ theme }) => rgba(theme.navy, 0.15)};
   padding: 3em;
-  /* position: absolute; */
-  /* align-self: center; */
   z-index: 3;
-  /* left: 50%; */
-  /* transform: translateX(-50%); */
 `;
 
 export const FeedbackTile: React.FC<{ feedback: Feedback }> = ({
