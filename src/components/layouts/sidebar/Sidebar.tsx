@@ -65,7 +65,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
 
   return (
     <StyledSidebar ref={ref} open={open}>
-      <div className="logo">BetaStore </div>
+      <div className="logo">Testiply </div>
       <SidebarContent>
         <div>
           <Tabs
