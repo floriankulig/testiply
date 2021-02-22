@@ -30,9 +30,6 @@ const Overlay = styled.div`
   z-index: 99;
   transform: translate(-50%, -50%);
   background: ${({ theme }) => rgba(theme.navy, 0.3)};
-
-  @media (${({ theme }) => theme.bp.big}) {
-  }
 `;
 
 const StyledModal = styled.div`
