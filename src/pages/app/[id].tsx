@@ -156,6 +156,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
               date: "17/02/2021",
               rating: 4,
               heading: "Good App",
+              _id: "ajnsdiausdasd",
             }}
           />
           <FeedbackTile
@@ -164,6 +165,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
               date: "17/02/2021",
               rating: 4,
               heading: "Good App",
+              _id: "ajnsdfsfsdfsdiausdasd",
             }}
           />
           <FeedbackTile
@@ -172,6 +174,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
               date: "17/02/2021",
               rating: 4,
               heading: "Good App",
+              _id: "sdfsfds",
             }}
           />
         </AppGrid>
