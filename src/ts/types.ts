@@ -76,6 +76,7 @@ export interface Feedback {
   text: string;
   date: string;
   rating: number;
+  _id: string;
 }
 
 export type UserType = "tester" | "dev";
