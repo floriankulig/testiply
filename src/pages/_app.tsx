@@ -58,7 +58,7 @@ const MyApp = ({ Component, pageProps }: any) => {
       <ThemeProvider theme={theme}>
         <CookiesProvider>
           <AuthProvider>
-            <AnimateSharedLayout>
+            <AnimateSharedLayout type="crossfade">
               {Layout === StoreLayout ? (
                 <SelectedTabProvider>
                   <Layout>
