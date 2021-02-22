@@ -1,6 +1,6 @@
 import { Overlay } from "components/Overlay";
 import { AnimatePresence, motion } from "framer-motion";
-import { useOnClickOutside } from "hooks";
+import { useCannotScroll, useOnClickOutside } from "hooks";
 import { darken, rgba } from "polished";
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
@@ -99,7 +99,6 @@ export const FeedbackTile: React.FC<{ feedback: Feedback }> = ({
     <>
       <StyledFeedbackTile
         as={motion.li}
-        // animate={{ opacity: isOpen ? 0 : 1 }}
         style={{ borderRadius: "1em" }}
         layoutId={`feedbackTile-${_id}`}
       >
