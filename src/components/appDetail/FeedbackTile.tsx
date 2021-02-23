@@ -8,13 +8,15 @@ import { Feedback } from "ts";
 import { StarPercentageRating } from "./Rating";
 
 const StyledFeedbackTile = styled.li`
-  --background: ${({ theme }) => darken(0.01, theme.layoutContentBg)};
   position: relative;
-  padding: 2em 2.5em;
+  padding: 2.5em 2em 3em;
+  @media (${(p) => p.theme.bp.big}) {
+    padding: 2.5em 2.5em 3em;
+  }
   display: flex;
   flex-direction: column;
-  background: var(--background);
-  max-height: 200px;
+  background: var(--layout-content-background);
+  /* max-height: 300px; */
   & .content-wrapper {
     position: relative;
     height: 100%;
@@ -29,7 +31,7 @@ const StyledFeedbackTile = styled.li`
     }
     &__heading {
       margin: 0;
-      font-size: 1.6rem;
+      font-size: 1.5rem;
     }
     &__text {
       overflow-y: hidden;
@@ -62,9 +64,9 @@ const ShowMoreButton = styled.button`
   color: var(--primary);
   background: linear-gradient(
     to right,
-    ${({ theme }) => rgba(darken(0.01, theme.layoutContentBg), 0.05)},
-    ${({ theme }) => rgba(darken(0.01, theme.layoutContentBg), 1)} 50%,
-    ${({ theme }) => rgba(darken(0.01, theme.layoutContentBg), 1)}
+    ${({ theme }) => rgba(theme.layoutContentBg, 0.05)},
+    ${({ theme }) => rgba(theme.layoutContentBg, 1)} 50%,
+    ${({ theme }) => rgba(theme.layoutContentBg, 1)}
   );
   border: none;
   padding: 0.25em 0 0 0.25em;
@@ -78,10 +80,35 @@ const ShowMoreButton = styled.button`
 
 const StyledFeedbackDetail = styled.div`
   background: #fefeff;
-  width: clamp(100px, 90%, 500px);
-  box-shadow: 15px 30px 40px ${({ theme }) => rgba(theme.navy, 0.15)};
-  padding: 3em;
+  width: clamp(100px, 85%, 500px);
+  padding: 3em 3em 3.5em;
   z-index: 3;
+
+  & .feedback-detail {
+    &__date {
+      color: ${({ theme }) => rgba(theme.navy, 0.5)};
+      font-size: 1rem;
+    }
+    &__heading {
+      margin: 0;
+      font-size: 2rem;
+    }
+    &__text {
+      color: ${({ theme }) => rgba(theme.navy, 0.7)};
+      height: auto;
+      max-width: 60ch;
+      p {
+        margin: 0;
+      }
+    }
+    &__rating {
+      margin-bottom: 0.5em;
+    }
+  }
+  ${TopBar} {
+    align-items: center;
+    margin: 1em 0 1.5em;
+  }
 `;
 
 export const FeedbackTile: React.FC<{ feedback: Feedback }> = ({
@@ -113,7 +140,9 @@ export const FeedbackTile: React.FC<{ feedback: Feedback }> = ({
               >
                 {date}
               </motion.span>
-              <StarPercentageRating percentage={rating} />
+              <motion.div layoutId={`feedbackTile-rating-${_id}`}>
+                <StarPercentageRating percentage={rating} />
+              </motion.div>
             </MetaData>
           </TopBar>
           <motion.div
@@ -146,26 +175,29 @@ export const FeedbackTile: React.FC<{ feedback: Feedback }> = ({
               as={motion.div}
               layoutId={`feedbackTile-${_id}`}
             >
+              <motion.div
+                className="feedback-detail__rating"
+                layoutId={`feedbackTile-rating-${_id}`}
+              >
+                <StarPercentageRating percentage={rating} size={40} />
+              </motion.div>
               <TopBar>
                 <motion.h3
                   layoutId={`feedbackTile-heading-${_id}`}
-                  className="feedback__heading"
+                  className="feedback-detail__heading"
                 >
                   {heading}
                 </motion.h3>
-                <MetaData as={motion.div} layoutId={`feedbackTile-meta-${_id}`}>
-                  <motion.span
-                    className="feedback__date"
-                    layoutId={`feedbackTile-metaDate-${_id}`}
-                  >
-                    {date}
-                  </motion.span>
-                  <StarPercentageRating percentage={rating} />
-                </MetaData>
+                <motion.span
+                  className="feedback-detail__date"
+                  layoutId={`feedbackTile-metaDate-${_id}`}
+                >
+                  {date}
+                </motion.span>
               </TopBar>
               <motion.div
                 layoutId={`feedbackTile-text-${_id}`}
-                className="feedback__text"
+                className="feedback-detail__text"
               >
                 <p>{text}</p>
               </motion.div>
