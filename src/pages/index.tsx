@@ -7,7 +7,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Testiply</title>
+        <title>Testiply - Test Beta Apps</title>
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
       </Head>
       <InfoPageHeader className="container" hasLogoBackground={true} />
