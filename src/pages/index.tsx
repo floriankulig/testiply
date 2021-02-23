@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Hero, Features, Benefits, Footer, NewsLetter } from "components/home";
+import { Hero, Features, Benefits, Footer } from "components/home";
 import { InfoPageHeader } from "components/InfoPageHeader";
 import { NextPage } from "next";
 
@@ -14,7 +14,6 @@ const Home: NextPage = () => {
       <Hero />
       <Features />
       <Benefits />
-      <NewsLetter />
       <Footer />
     </>
   );
