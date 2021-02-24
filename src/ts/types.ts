@@ -60,6 +60,13 @@ export interface App {
   _id: string;
 }
 
+export interface User {
+  email: string;
+  is_dev: boolean;
+  _id: string;
+  ownedApps: Array<string>;
+}
+
 export type AppPreview = Readonly<
   Pick<App, "name" | "description" | "_id" | "devName" | "rating">
 >;
