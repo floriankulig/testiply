@@ -101,6 +101,53 @@ export const StyledTextField = styled.div<TextFieldProps>`
   }
 `;
 
+export const StyledTextFieldArea = styled.div<TextFieldProps>`
+  display: inline-flex;
+  width: clamp(1px, 100%, 600px);
+  margin-top: 0.2em;
+  align-items: center;
+  font-size: 1rem;
+  font-family: "Roboto";
+  min-height: 3.5em;
+  background: ${(p) =>
+    p.hasError
+      ? rgba(255, 0, 0, 0.05)
+      : p.contained
+      ? "var(--primary)"
+      : "var(--layout-content-background)"};
+  border: 2px
+    ${(p) =>
+      p.hasError
+        ? "red"
+        : p.contained
+        ? darken(0.05, p.theme.primary)
+        : darken(0.1, p.theme.layoutContentBg)}
+    solid;
+  border-radius: var(--border-radius);
+  transition: 0.5s;
+  transition-property: border background;
+
+  textarea {
+    padding: 0.7em 1em;
+    background: none;
+    border: none;
+    font-family: "Roboto";
+    font-size: 1rem;
+    min-width: 100%;
+    min-height: 8em;
+    display: inline-flex;
+    align-items: center;
+    line-height: 1.2;
+    &:focus-within {
+      outline: none;
+    }
+  }
+
+  span {
+    opacity: 0.8;
+  }
+`;
+
 interface SVGWrapperProps {
   clickable?: boolean;
 }
