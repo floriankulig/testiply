@@ -5,6 +5,7 @@ import { User } from "ts";
 export type AuthContextType = {
   currentUser: User | null;
   logout: () => void;
+  renewToken: (token: { [name: string]: any }) => Promise<void>;
 };
 
 const AuthContext = createContext<Partial<AuthContextType>>({});

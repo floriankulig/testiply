@@ -8,7 +8,9 @@ export const useUser = (): AuthContextType => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [cookie, setCookie, removeCookie] = useCookies(["token"]);
 
-  const renewToken = async (currentToken): Promise<void> => {
+  const renewToken = async (currentToken: {
+    [name: string]: any;
+  }): Promise<void> => {
     await removeCookie("token");
     let newExpireDate = new Date();
     newExpireDate.setDate(newExpireDate.getDate() + 30);
@@ -32,6 +34,7 @@ export const useUser = (): AuthContextType => {
       email: "meine@mail.mail",
       is_dev: false,
       _id: decoded.id,
+      ownedApps: ["ansdopauidiau"],
     });
   }, [cookie]);
 
@@ -50,5 +53,5 @@ export const useUser = (): AuthContextType => {
     await setCurrentUser(null);
   };
 
-  return { currentUser, logout };
+  return { currentUser, logout, renewToken };
 };
