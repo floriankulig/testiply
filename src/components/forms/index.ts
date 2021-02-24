@@ -11,6 +11,7 @@ import { FormikStep } from "./FormikStep";
 import { FormikTextInput } from "./FormikTextInput";
 import { FormikSelectionInput } from "./FormikSelectionInput";
 import { FormikCheckbox } from "./FormikCheckbox";
+import { FeedbackForm } from "./FeedbackForm";
 
 export {
   SVGWrapper,
@@ -24,4 +25,5 @@ export {
   FormikSelectionInput,
   FormikCheckbox,
   BorderedSVGWrapper,
+  FeedbackForm,
 };
