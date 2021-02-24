@@ -8,15 +8,10 @@ import {
   App,
   AppPreview,
   Feedback,
+  User,
 } from "./types";
 
 import { platforms, categories } from "./constants";
-
-export interface User {
-  email: string;
-  is_dev: boolean;
-  _id: string;
-}
 
 export { platforms, categories };
 export type {
@@ -29,4 +24,5 @@ export type {
   App,
   AppPreview,
   Feedback,
+  User,
 };
