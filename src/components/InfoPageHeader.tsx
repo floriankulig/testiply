@@ -26,19 +26,15 @@ const Header = styled.header<HeaderProps>`
     align-items: center;
 
     .svg-wrapper {
-      display: inline-flex;
+      margin-right: ${(p) => (p.hasLogoBackground ? "0px" : "10px")};
+      display: flex;
       align-items: center;
-      justify-content: center;
-      width: 34px;
-      height: 35px;
-      ${(p) =>
-        css`
-          margin-right: ${p.hasLogoBackground ? "10px" : "5px"};
-          background: ${p.hasLogoBackground ? "white" : "transparent"};
-        `};
-      padding: 0 0 2px 2px;
-      border-radius: var(--border-radius);
       z-index: 9;
+      border-radius: var(--border-radius);
+      transform: translateY(${(p) => (p.hasLogoBackground ? "-4px" : "0")});
+      img {
+        border-radius: var(--border-radius);
+      }
     }
   }
   .nav-links {
@@ -91,11 +87,11 @@ export const InfoPageHeader: React.FC<InfoPageHeaderProps> = ({
         <div className="logo">
           <div className="svg-wrapper">
             <Image
-              width={30}
+              width={35}
               height={35}
-              src="/images/logo.svg"
+              src={`/images/logo${hasLogoBackground ? "-no-bg" : ""}.svg`}
               priority
-              alt="Abstract Letter B"
+              alt="Abstract Letter T"
             />
           </div>
           {!isMobile && <span>Testiply</span>}
