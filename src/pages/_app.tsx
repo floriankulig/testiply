@@ -45,15 +45,19 @@ const MyApp = ({ Component, pageProps }: any) => {
         <link
           rel="mask-icon"
           href="favicons/safari-pinned-tab.svg"
-          color="#6b1ef1"
+          color="#2262b6"
         />
         <link rel="shortcut icon" href="favicons/favicon.ico" />
         <meta name="msapplication-TileColor" content="#603cba" />
         <meta
+          name="msapplication-TileImage"
+          content="favicons/mstile-144x144.png"
+        />
+        <meta
           name="msapplication-config"
           content="favicons/browserconfig.xml"
         />
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#2262b6" />
       </Head>
       <ThemeProvider theme={theme}>
         <CookiesProvider>
