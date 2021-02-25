@@ -31,7 +31,7 @@ const FeedbackDone = styled.div`
     padding: 0 10% 15%;
     background: var(--layout-content-background);
     border-radius: 51% 49% 37% 63% / 64% 44% 56% 36%;
-    box-shadow: 2px 4px 10px ${({ theme }) => rgba(theme.navy, 0.1)};
+    box-shadow: 1px 3px 8px ${({ theme }) => rgba(theme.navy, 0.05)};
     svg {
       stroke-width: 8;
       width: 90%;
