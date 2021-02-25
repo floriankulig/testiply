@@ -23,11 +23,16 @@ import { useState } from "react";
 import Image from "next/image";
 import { IoPeople } from "react-icons/io5";
 import { ClickableDropdown } from "components/ClickableDropdown";
-import { useIsMobile } from "hooks";
+import { useCannotScroll, useIsMobile } from "hooks";
 import { Footer } from "components/home";
 import { theme } from "styles";
 import { InfoPageHeader } from "components/InfoPageHeader";
 import { motion } from "framer-motion";
+import { Button } from "components/Button";
+import { useAuthValue } from "context";
+import { TesterAuthForm } from "components/auth";
+import { BiMessageAltDetail } from "react-icons/bi";
+import { FeedbackForm } from "components/forms";
 
 interface AppDetailProps {
   appInfo: App;
@@ -47,15 +52,36 @@ const AppDetail: NextPage<AppDetailProps> = ({
     _id,
   },
 }) => {
+  //helper state
+  const [authModalOpen, setAuthModalOpen] = useState<boolean>(false);
+  const [feedbackFormOpen, setFeedbackFormOpen] = useState<boolean>(false);
+  const isMobile = useIsMobile(550);
+  const { currentUser } = useAuthValue();
+  useCannotScroll(authModalOpen);
+
+  //platform availability filtering
   const downloadablePlatforms = platforms?.map((platformID) =>
     allPlatforms.find((p) => p.id === platformID)
   );
   const [downloadPlatform, setDownloadPlatform] = useState<Platform>(
     downloadablePlatforms[0]
   );
-  const isMobile = useIsMobile(550);
+
+  //event handlers
   const handleDownload = (): void => {
     console.log(`Downloaded for ${downloadPlatform.displayName}`);
+  };
+  const handleFeedbackOpen = (
+    e:
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+      | React.KeyboardEvent<HTMLButtonElement>
+  ): void => {
+    e.preventDefault();
+    // if (!currentUser) {
+    //   setAuthModalOpen(true);
+    // } else {
+    setFeedbackFormOpen(true);
+    // }
   };
 
   return (
@@ -132,7 +158,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
         </div>
       </ScreenshotSection>
       <RatingSection className="container-small">
-        <h1 className="section-header">Rating</h1>
+        {/* <h1 className="section-header">Rating</h1>
         <RatingContent>
           <RatingSummary>
             <h2>{rating}</h2>
@@ -146,41 +172,47 @@ const AppDetail: NextPage<AppDetailProps> = ({
               <RatingBar key={i} progress={i / 5} i={i} />
             ))}
           </RatingBars>
-        </RatingContent>
-        <h1 className="section-header">Latest Feedback</h1>
-        <AppGrid small>
-          <FeedbackTile
-            feedback={{
-              text:
-                "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-              date: "17/02/2021",
-              rating: 4,
-              heading: "Good App",
-              _id: "ajnsdiausdasd",
-            }}
-          />
-          <FeedbackTile
-            feedback={{
-              text:
-                "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-              date: "17/02/2021",
-              rating: 4,
-              heading: "Good App",
-              _id: "ajnsdfsfsdfsdiausdasd",
-            }}
-          />
-          <FeedbackTile
-            feedback={{
-              text:
-                "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-              date: "17/02/2021",
-              rating: 4,
-              heading: "Good App",
-              _id: "sdfsfds",
-            }}
-          />
-        </AppGrid>
+        </RatingContent> */}
+        {feedbackFormOpen ? (
+          <FeedbackForm appId={_id} />
+        ) : (
+          <div className="full-grid-width">
+            <Button
+              big
+              bold
+              onClick={(e) => handleFeedbackOpen(e)}
+              onKeyDown={(e) => handleFeedbackOpen(e)}
+              aria-label="Open Feedback Modal"
+              tabIndex={0}
+              basic
+            >
+              <motion.span
+                layoutId="leaveFeedbackHead"
+                style={{
+                  marginLeft: "40px",
+                  position: "relative",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <BiMessageAltDetail
+                  style={{
+                    position: "absolute",
+                    left: "-45px",
+                    width: "30px",
+                    height: "30px",
+                    marginRight: "1em",
+                  }}
+                />
+                Leave your feedback
+              </motion.span>
+            </Button>
+          </div>
+        )}
       </RatingSection>
+      {authModalOpen && (
+        <TesterAuthForm formType="login" asModal setOpen={setAuthModalOpen} />
+      )}
       <Footer />
     </>
   );
