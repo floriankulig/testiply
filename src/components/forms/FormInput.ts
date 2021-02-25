@@ -135,6 +135,7 @@ export const StyledTextFieldArea = styled.div<TextFieldProps>`
     font-size: 1rem;
     min-width: 100%;
     min-height: 8em;
+    max-height: 40em;
     display: inline-flex;
     align-items: center;
     line-height: 1.2;
