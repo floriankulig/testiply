@@ -17,7 +17,7 @@ export const RatingContent = styled.div`
   margin: clamp(1em, 2vw, 1.5em) 0 6em;
 `;
 
-const StarRatings = styled.div`
+export const StarRatings = styled.div<{ clickable?: boolean }>`
   unicode-bidi: bidi-override;
   color: #cecdcd;
   font-size: 64px;
@@ -25,6 +25,7 @@ const StarRatings = styled.div`
   margin: 0;
   padding: 0;
   width: min-content;
+  cursor: default;
   .fill-ratings {
     color: var(--primary);
     padding: 0;
@@ -37,12 +38,20 @@ const StarRatings = styled.div`
     max-width: 100%;
     span {
       display: inline-block;
+      i {
+        font-style: normal;
+        cursor: ${(p) => (p.clickable ? "pointer" : "default")};
+      }
     }
   }
   .empty-ratings {
     padding: 0;
     display: block;
     z-index: 0;
+    span i {
+      font-style: normal;
+      cursor: ${(p) => (p.clickable ? "pointer" : "default")};
+    }
   }
 `;
 
