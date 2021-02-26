@@ -96,12 +96,6 @@ export const categories: Category[] = [
     icon: HiOutlinePhotograph,
     color: "#fc6602",
   },
-  {
-    id: "lifestyle",
-    displayName: "Lifestyle",
-    icon: IoGlasses,
-    color: "#58d130",
-  },
   { id: "travel", displayName: "Travel", icon: RiPlaneLine, color: "#99f9ff" },
   {
     id: "games",
@@ -127,19 +121,7 @@ export const categories: Category[] = [
     icon: RiHeart2Line,
     color: "#00fff0",
   },
-  {
-    id: "medicine",
-    displayName: "Medicine",
-    icon: RiMedicineBottleLine,
-    color: "#ff6be8",
-  },
   { id: "news", displayName: "News", icon: FaRegNewspaper, color: "#8e8e93" },
-  {
-    id: "referenceBooks",
-    displayName: "Reference Books",
-    icon: GiArchiveResearch,
-    color: "#73ce2d",
-  },
   { id: "addons", displayName: "Addons", icon: GoPackage, color: "#f4ff32" },
   {
     id: "sport",
@@ -147,7 +129,6 @@ export const categories: Category[] = [
     icon: IoFootballOutline,
     color: "#00cbff",
   },
-  { id: "economy", displayName: "Economy", icon: BsGraphUp, color: "#b25803" },
 ];
 
 export const testerTabNames = ["today", "apps", "games", "categories"];
@@ -164,3 +145,5 @@ export const devTabIcons = [
   [<AiOutlineAppstore />, <AiFillAppstore />],
   [<FaRegComment />, <FaComment />],
 ];
+
+export const api_url = "https://api.beta-app-store.com";

@@ -23,18 +23,14 @@ export type CategoryID =
   | "entertainment"
   | "utilities"
   | "photoAndVideo"
-  | "lifestyle"
   | "travel"
   | "games"
   | "weather"
   | "developerTools"
   | "healthAndFitness"
-  | "medicine"
   | "news"
-  | "referenceBooks"
   | "addons"
-  | "sport"
-  | "economy";
+  | "sport";
 
 export interface Category {
   id: CategoryID;
