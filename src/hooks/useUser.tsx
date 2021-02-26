@@ -8,7 +8,7 @@ export const useUser = (): AuthContextType => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [cookie, setCookie, removeCookie] = useCookies(["token"]);
 
-  const renewToken = async (currentToken: {
+  const renewUid = async (currentToken: {
     [name: string]: any;
   }): Promise<void> => {
     await removeCookie("token");
@@ -43,7 +43,7 @@ export const useUser = (): AuthContextType => {
     const currentToken = cookie["token"];
 
     if (currentToken) {
-      renewToken(currentToken);
+      renewUid(currentToken);
     }
   }, []);
 
@@ -53,5 +53,5 @@ export const useUser = (): AuthContextType => {
     await setCurrentUser(null);
   };
 
-  return { currentUser, logout, renewToken };
+  return { currentUser, logout, renewUid };
 };
