@@ -47,7 +47,7 @@ export const useUser = (): AuthContextType => {
 
   // Set Cookie to date in past / non-existant date
   const logout = async (): Promise<void> => {
-    await removeCookie("token");
+    await removeCookie("uid");
     await setCurrentUser(null);
   };
 
