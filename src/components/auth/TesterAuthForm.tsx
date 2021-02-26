@@ -8,7 +8,6 @@ import { Form, Formik, FormikValues } from "formik";
 import * as Yup from "yup";
 import { FormikCheckbox } from "components/forms/FormikCheckbox";
 import Link from "next/link";
-import { api_url } from "ts/constants";
 import { CSSTransition } from "react-transition-group";
 import { ErrorMessage } from "components/ErrorMessage";
 import axios from "axios";
