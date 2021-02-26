@@ -30,10 +30,7 @@ export const useUser = (): AuthContextType => {
 
     axios
       .post(`${process.env.API_URL}/getUser`, { userid: currentUserId })
-      .then((res) => {
-        setCurrentUser({ ...res.data.user });
-        console.log(res.data.user);
-      })
+      .then((res) => setCurrentUser({ ...res.data.user }))
       .catch((error) => {
         return;
       });
