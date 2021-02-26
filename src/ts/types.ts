@@ -53,7 +53,7 @@ export interface App {
   screenshots: string[];
   rating: number;
   downloads: number;
-  devId: number; // dev/dev_id
+  devId: string; // dev/dev_id
   devName: string;
   devWebsite: string;
   _id: string;
