@@ -2,19 +2,19 @@ import { useEffect, useState } from "react";
 import { User } from "ts";
 import { AuthContextType } from "context/user-context";
 import { useCookies } from "react-cookie";
-import * as jwt from "jsonwebtoken";
+import axios from "axios";
 
 export const useUser = (): AuthContextType => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
-  const [cookie, setCookie, removeCookie] = useCookies(["token"]);
+  const [cookie, setCookie, removeCookie] = useCookies(["uid"]);
 
-  const renewUid = async (currentToken: {
+  const renewUid = async (currentUserId: {
     [name: string]: any;
   }): Promise<void> => {
-    await removeCookie("token");
+    await removeCookie("uid");
     let newExpireDate = new Date();
     newExpireDate.setDate(newExpireDate.getDate() + 30);
-    await setCookie("token", currentToken, {
+    await setCookie("uid", currentUserId, {
       sameSite: true,
       path: "/",
       expires: newExpireDate,
@@ -22,28 +22,29 @@ export const useUser = (): AuthContextType => {
   };
 
   useEffect(() => {
-    if (!cookie["token"]) return;
-    let decoded: any;
-    try {
-      decoded = jwt.verify(cookie["token"], process.env.JWT_SECRET);
-    } catch (error) {
+    const currentUserId = cookie["uid"];
+    if (!currentUserId) {
       setCurrentUser(null);
       return;
     }
-    setCurrentUser({
-      email: "meine@mail.mail",
-      is_dev: false,
-      _id: decoded.id,
-      ownedApps: ["ansdopauidiau"],
-    });
+
+    axios
+      .post(`${process.env.API_URL}/getUser`, { userid: currentUserId })
+      .then((res) => {
+        setCurrentUser({ ...res.data.user });
+        console.log(res.data.user);
+      })
+      .catch((error) => {
+        return;
+      });
   }, [cookie]);
 
   // Renew Cookie on App Mount and set Session User
   useEffect(() => {
-    const currentToken = cookie["token"];
+    const currentUserId = cookie["uid"];
 
-    if (currentToken) {
-      renewUid(currentToken);
+    if (currentUserId) {
+      renewUid(currentUserId);
     }
   }, []);
 
