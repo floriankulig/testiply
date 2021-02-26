@@ -5,6 +5,8 @@ import Head from "next/head";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle, theme } from "styles";
 import { AnimateSharedLayout } from "framer-motion";
+import { useEffect } from "react";
+import axios from "axios";
 
 interface EmptyLayoutProps {
   children: React.ReactNode;
@@ -15,6 +17,10 @@ const EmptyLayout: React.FC<EmptyLayoutProps> = ({ children }) => (
 
 const MyApp = ({ Component, pageProps }: any) => {
   const Layout = Component.Layout || EmptyLayout;
+
+  useEffect(() => {
+    axios.defaults.headers.common["api_key"] = process.env.API_KEY;
+  }, []);
 
   return (
     <>
