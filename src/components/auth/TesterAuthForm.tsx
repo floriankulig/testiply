@@ -40,7 +40,7 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({
   const [showPasswords, setShowPasswords] = useState<boolean>(false);
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const { renewToken } = useAuthValue();
+  const { renewUid } = useAuthValue();
   const ref = useRef<HTMLDivElement>(null);
   if (asModal) {
     useOnClickOutside(ref, () => setOpen(false));
@@ -76,34 +76,25 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({
 
   const handleSubmit = async (values: FormikValues) => {
     setErrorMessage("");
-    if (formType === "register") {
-      await axios
-        .post(`${api_url}/register`, {
-          email: values.email,
-          password: values.password,
-        })
-        .then(() => {})
-        .catch((err) => {
-          setErrorMessage(err.response.data.err);
-        });
-    } else if (formType === "login") {
-      await axios
-        .post(`${api_url}/login`, {
-          email: values.email,
-          password: values.password,
-        })
-        .then(async (res) => {
-          await renewToken(res.data.token);
-          if (asModal) {
-            setOpen(false);
-          } else {
-            router.push("/store");
-          }
-        })
-        .catch((err) => {
-          setErrorMessage(err.response.data.err);
-        });
-    }
+    const body = { mail: values.email, password: values.password };
+    await axios
+      .post(
+        `${process.env.API_URL}/${
+          formType === "register" ? "register" : "login"
+        }`,
+        body
+      )
+      .then(async (res) => {
+        await renewUid(res.data.userId);
+        if (asModal) {
+          setOpen(false);
+        } else {
+          router.push("/store");
+        }
+      })
+      .catch((err) => {
+        setErrorMessage(err.response.data.err);
+      });
   };
 
   const body = (
