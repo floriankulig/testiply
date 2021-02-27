@@ -12,6 +12,9 @@ import { CSSTransition } from "react-transition-group";
 import { StyledFormInput } from "./FormInput";
 import { StarRatings } from "components/appDetail";
 import { rgba } from "polished";
+import { useAuthValue } from "context";
+import { TesterAuthForm } from "components/auth";
+import { useCannotScroll } from "hooks";
 
 const Wrapper = styled.div<{ done: boolean }>`
   width: clamp(200px, 100%, 400px);
@@ -70,6 +73,11 @@ interface FeedbackFormProps {
 
 export const FeedbackForm: React.FC<FeedbackFormProps> = ({ appId }) => {
   const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
+  const [authModalOpen, setAuthModalOpen] = useState<boolean>(false);
+  const { currentUser } = useAuthValue();
+
+  useCannotScroll(authModalOpen);
+
   const initialValues: FormValues = {
     heading: "",
     text: "",
@@ -92,7 +100,11 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({ appId }) => {
 
   const handleSubmit = async (values: FormikValues) => {
     console.log({ ...values, date: getFormattedDate(new Date()), appId });
-    setHasSubmitted(true);
+    if (currentUser) {
+      setHasSubmitted(true);
+    } else {
+      setAuthModalOpen(true);
+    }
   };
 
   return (
@@ -230,6 +242,9 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({ appId }) => {
           </Formik>
         )}
       </Wrapper>
+      {authModalOpen && (
+        <TesterAuthForm formType="login" asModal setOpen={setAuthModalOpen} />
+      )}
     </>
   );
 };
