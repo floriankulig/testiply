@@ -52,11 +52,8 @@ const AppDetail: NextPage<AppDetailProps> = ({
   },
 }) => {
   //helper state
-  const [authModalOpen, setAuthModalOpen] = useState<boolean>(false);
   const [feedbackFormOpen, setFeedbackFormOpen] = useState<boolean>(false);
   const isMobile = useIsMobile(550);
-  const { currentUser } = useAuthValue();
-  useCannotScroll(authModalOpen);
 
   //platform availability filtering
   const downloadablePlatforms = platforms?.map((platformID) =>
@@ -69,18 +66,6 @@ const AppDetail: NextPage<AppDetailProps> = ({
   //event handlers
   const handleDownload = (): void => {
     console.log(`Downloaded for ${downloadPlatform.displayName}`);
-  };
-  const handleFeedbackOpen = (
-    e:
-      | React.MouseEvent<HTMLButtonElement, MouseEvent>
-      | React.KeyboardEvent<HTMLButtonElement>
-  ): void => {
-    e.preventDefault();
-    // if (!currentUser) {
-    //   setAuthModalOpen(true);
-    // } else {
-    setFeedbackFormOpen(true);
-    // }
   };
 
   return (
@@ -179,8 +164,8 @@ const AppDetail: NextPage<AppDetailProps> = ({
             <Button
               big
               bold
-              onClick={(e) => handleFeedbackOpen(e)}
-              onKeyDown={(e) => handleFeedbackOpen(e)}
+              onClick={() => setFeedbackFormOpen(true)}
+              onKeyDown={() => setFeedbackFormOpen(true)}
               aria-label="Open Feedback Modal"
               tabIndex={0}
               basic
@@ -209,9 +194,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
           </div>
         )}
       </RatingSection>
-      {authModalOpen && (
-        <TesterAuthForm formType="login" asModal setOpen={setAuthModalOpen} />
-      )}
+
       <Footer />
     </>
   );
