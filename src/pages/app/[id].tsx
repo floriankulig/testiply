@@ -42,7 +42,6 @@ const AppDetail: NextPage<AppDetailProps> = ({
   appInfo: {
     name,
     description,
-    website,
     platforms,
     screenshots,
     rating,
