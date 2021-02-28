@@ -192,10 +192,10 @@ export const AppTile: React.FC<AppTileProps> = ({
       <div className="edge-fader" />
       {isOpen && (
         <StyledRow>
-          <p className="app__desc">
+          <motion.p className="app__desc" layoutId={`appDesc-${_id}`}>
             {description.slice(0, 150)}
             {description.length > 150 && "..."}
-          </p>
+          </motion.p>
         </StyledRow>
       )}
     </StyledAppTile>
