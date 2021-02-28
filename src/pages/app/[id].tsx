@@ -13,6 +13,7 @@ import {
   ScreenshotSection,
   StarPercentageRating,
   StyledRow,
+  Description,
 } from "components/appDetail";
 import { AppGrid } from "components/layouts";
 import { capitalized, getTextColor } from "helpers";
@@ -128,8 +129,11 @@ const AppDetail: NextPage<AppDetailProps> = ({
             }}
           />
         </StyledRow>
+        <h1 className="section-header">Description</h1>
+        <Description>{description}</Description>
       </HeroSection>
       <ScreenshotSection>
+        <h1 className="section-header">Screenshots</h1>
         <div className="screenshots">
           {screenshots?.map((screenshot, i) => (
             <Screenshot
