@@ -1,5 +1,11 @@
 import { Screenshot, ScreenshotSection } from "./Screenshots";
-import { HeroSection, IconWrapper, MetaInfo, StyledRow } from "./Hero";
+import {
+  HeroSection,
+  IconWrapper,
+  MetaInfo,
+  StyledRow,
+  Description,
+} from "./Hero";
 import { FeedbackTile } from "./FeedbackTile";
 import {
   RatingBar,
@@ -26,4 +32,5 @@ export {
   RatingContent,
   FeedbackTile,
   StarRatings,
+  Description,
 };
