@@ -60,6 +60,7 @@ const MetaInfo = styled.div`
 const Description = styled.p`
   margin-bottom: 4em;
   color: ${({ theme }) => rgba(theme.navy, 0.8)};
+  max-width: 80ch;
 `;
 
 export { HeroSection, IconWrapper, MetaInfo, StyledRow, Description };
