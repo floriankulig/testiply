@@ -1,4 +1,5 @@
 import { StyledClickableDropdown } from "components/ClickableDropdown";
+import { rgba } from "polished";
 import styled from "styled-components";
 const HeroSection = styled.section`
   margin-top: 3em;
@@ -11,6 +12,11 @@ const HeroSection = styled.section`
     // after name and dev
     opacity: 0;
     animation: fadeUp 0.5s var(--easing) forwards 0.4s;
+  }
+  h1.section-header {
+    margin-top: 2em;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    color: ${({ theme }) => rgba(theme.navy, 0.8)};
   }
 `;
 const StyledRow = styled.div`
@@ -51,4 +57,9 @@ const MetaInfo = styled.div`
   }
 `;
 
-export { HeroSection, IconWrapper, MetaInfo, StyledRow };
+const Description = styled.p`
+  margin-bottom: 4em;
+  color: ${({ theme }) => rgba(theme.navy, 0.8)};
+`;
+
+export { HeroSection, IconWrapper, MetaInfo, StyledRow, Description };
