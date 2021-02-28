@@ -27,13 +27,17 @@ export const useUser = (): AuthContextType => {
       setCurrentUser(null);
       return;
     }
+    console.log("asking for user");
+    const timeout = setTimeout(() => {
+      axios
+        .post(`${process.env.API_URL}/getUser`, { userid: currentUserId })
+        .then((res) => setCurrentUser({ ...res.data.user }))
+        .catch((error) => {
+          console.log(error.response.data.err);
+        });
+    }, 1000);
 
-    axios
-      .post(`${process.env.API_URL}/getUser`, { userid: currentUserId })
-      .then((res) => setCurrentUser({ ...res.data.user }))
-      .catch((error) => {
-        return;
-      });
+    return () => clearTimeout(timeout);
   }, [cookie]);
 
   // Renew Cookie on App Mount and set Session User
