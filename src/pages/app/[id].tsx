@@ -129,7 +129,9 @@ const AppDetail: NextPage<AppDetailProps> = ({
           />
         </StyledRow>
         <h1 className="section-header">Description</h1>
-        <Description>{description}</Description>
+        <Description as={motion.p} layoutId={`appDesc-${_id}`}>
+          {description}
+        </Description>
       </HeroSection>
       <ScreenshotSection>
         <h1 className="section-header">Screenshots</h1>
