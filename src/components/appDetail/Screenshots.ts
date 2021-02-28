@@ -18,6 +18,10 @@ const ScreenshotSection = styled.section`
     display: flex;
     gap: 3em;
   }
+  h1.section-header {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    color: ${({ theme }) => rgba(theme.navy, 0.8)};
+  }
 `;
 
 const Screenshot = styled.img`
