@@ -24,14 +24,12 @@ import { useState } from "react";
 import Image from "next/image";
 import { IoPeople } from "react-icons/io5";
 import { ClickableDropdown } from "components/ClickableDropdown";
-import { useCannotScroll, useIsMobile } from "hooks";
+import { useIsMobile } from "hooks";
 import { Footer } from "components/home";
 import { theme } from "styles";
 import { InfoPageHeader } from "components/InfoPageHeader";
 import { motion } from "framer-motion";
 import { Button } from "components/Button";
-import { useAuthValue } from "context";
-import { TesterAuthForm } from "components/auth";
 import { BiMessageAltDetail } from "react-icons/bi";
 import { FeedbackForm } from "components/forms";
 
