@@ -124,6 +124,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
             style={{
               width: "100%",
               visibility: isMobile ? "visible" : "hidden",
+              marginBottom: !isMobile && "-5em",
             }}
           />
         </StyledRow>
