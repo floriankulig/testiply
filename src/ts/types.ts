@@ -47,6 +47,7 @@ export interface App {
   description: string;
   platforms: PlatformID[];
   screenshots: string[];
+  categories: CategoryID[];
   rating: number;
   downloads: number;
   devId: string; // dev/dev_id
