@@ -53,6 +53,8 @@ export interface App {
   devId: string; // dev/dev_id
   devName: string;
   devWebsite: string;
+  testflightLink?: string;
+  isSample?: boolean;
   _id: string;
 }
 
