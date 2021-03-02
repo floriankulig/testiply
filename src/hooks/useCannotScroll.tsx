@@ -7,5 +7,8 @@ export const useCannotScroll = (cantScroll: boolean): void => {
     } else {
       document.body.style.overflow = null;
     }
+    return () => {
+      document.body.style.overflow = null;
+    };
   }, [cantScroll]);
 };
