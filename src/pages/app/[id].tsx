@@ -14,6 +14,7 @@ import {
   StarPercentageRating,
   StyledRow,
   Description,
+  IsSampleAppModal,
 } from "components/appDetail";
 import { AppGrid } from "components/layouts";
 import { capitalized, getTextColor } from "helpers";
@@ -120,6 +121,9 @@ const AppDetail: NextPage<AppDetailProps> = ({
               style={{ visibility: !isMobile ? "visible" : "hidden" }}
             />
           </MetaInfo>
+          {sampleAppModalOpen && (
+            <IsSampleAppModal setOpen={setSampleAppModalOpen} />
+          )}
         </StyledRow>
         <StyledRow>
           <ClickableDropdown
@@ -135,13 +139,17 @@ const AppDetail: NextPage<AppDetailProps> = ({
             }}
           />
         </StyledRow>
-        <h1 className="section-header">Description</h1>
+        <motion.h1 animate className="section-header">
+          Description
+        </motion.h1>
         <Description as={motion.p} layoutId={`appDesc-${_id}`}>
           {description}
         </Description>
       </HeroSection>
       <ScreenshotSection>
-        <h1 className="section-header">Screenshots</h1>
+        <motion.h1 animate className="section-header">
+          Screenshots
+        </motion.h1>
         <div className="screenshots">
           {screenshots?.map((screenshot, i) => (
             <Screenshot
@@ -154,7 +162,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
         </div>
       </ScreenshotSection>
       <RatingSection className="container-small">
-        {/* <h1 className="section-header">Rating</h1>
+        {/* <motion.h1 animate className="section-header">Rating</motion.h1>
         <RatingContent>
           <RatingSummary>
             <h2>{rating}</h2>
