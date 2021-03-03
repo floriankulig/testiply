@@ -143,7 +143,12 @@ export const AppTile: React.FC<AppTileProps> = ({
   }, [appsStack]);
 
   return (
-    <StyledAppTile style={{ ...style }} className={className}>
+    <StyledAppTile
+      style={{ ...style }}
+      className={className}
+      as={motion.li}
+      layout
+    >
       <Link href={`/app/${_id}`}>
         <StyledRow
           open={isOpen}
@@ -171,9 +176,9 @@ export const AppTile: React.FC<AppTileProps> = ({
             <motion.p layoutId={`appDevName-${_id}`} className="app__dev">
               {devName}
             </motion.p>
-            <div className="app__rating">
+            <motion.div className="app__rating" layout>
               {rating} <FaStar />
-            </div>
+            </motion.div>
           </StyledAppInfo>
         </StyledRow>
       </Link>
