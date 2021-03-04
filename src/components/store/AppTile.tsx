@@ -176,7 +176,11 @@ export const AppTile: React.FC<AppTileProps> = ({
             <motion.p layoutId={`appDevName-${_id}`} className="app__dev">
               {devName}
             </motion.p>
-            <motion.div className="app__rating" layout>
+            <motion.div
+              className="app__rating"
+              layout
+              style={{ color: rating > 0 && "orange" }}
+            >
               {rating} <FaStar />
             </motion.div>
           </StyledAppInfo>
