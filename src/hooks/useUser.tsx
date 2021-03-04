@@ -15,7 +15,8 @@ export const useUser = (): AuthContextType => {
     let newExpireDate = new Date();
     newExpireDate.setDate(newExpireDate.getDate() + 30);
     await setCookie("uid", currentUserId, {
-      sameSite: true,
+      sameSite: "strict",
+      secure: true,
       path: "/",
       expires: newExpireDate,
     });
