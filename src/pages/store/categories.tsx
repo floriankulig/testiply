@@ -12,16 +12,9 @@ import { useFiltersValue } from "context";
 import { Loading } from "components/Loading";
 import { AppTile, NoAppsView } from "components/store";
 import { MenuTransition } from "components/MenuTransition";
-import { Button } from "components/Button";
 
 const Categories = () => {
-  const {
-    selectedCategory,
-    loading,
-    apps,
-    pageUp,
-    hasMoreApps,
-  } = useCategory();
+  const { selectedCategory, loading, apps } = useCategory();
   const { searchQuery } = useFiltersValue();
   const isMobile = useIsMobile(550);
   const [filteredApps, setFilteredApps] = useState<App[]>(apps);
@@ -124,24 +117,11 @@ const Categories = () => {
                   />
                 ))}
                 <div className="full-grid-width">
-                  {loading ? (
+                  {loading && (
                     <h2 className="loading">
                       Loading
                       <Loading size={60} />
                     </h2>
-                  ) : (
-                    <Button
-                      basic
-                      big
-                      bold
-                      onClick={() => pageUp()}
-                      onKeyDown={() => pageUp()}
-                      tabIndex={0}
-                      disabled={!hasMoreApps}
-                      aria-label="Load more apps."
-                    >
-                      Load More
-                    </Button>
                   )}
                 </div>
               </>
