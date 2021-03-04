@@ -6,12 +6,17 @@ import axios from "axios";
 
 export const useUser = (): AuthContextType => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
-  const [cookie, setCookie, removeCookie] = useCookies(["uid"]);
+  const [cookie, setCookie] = useCookies(["uid"]);
 
   const renewUid = async (currentUserId: {
     [name: string]: any;
   }): Promise<void> => {
-    await removeCookie("uid");
+    await setCookie("uid", currentUserId, {
+      sameSite: "strict",
+      secure: true,
+      path: "/",
+      expires: new Date("1900-01-01"),
+    });
     let newExpireDate = new Date();
     newExpireDate.setDate(newExpireDate.getDate() + 30);
     await setCookie("uid", currentUserId, {
@@ -52,7 +57,12 @@ export const useUser = (): AuthContextType => {
 
   // Set Cookie to date in past / non-existant date
   const logout = async (): Promise<void> => {
-    await removeCookie("uid");
+    await setCookie("uid", "asdasd", {
+      sameSite: "strict",
+      secure: true,
+      path: "/",
+      expires: new Date("1900-01-01"),
+    });
     await setCurrentUser(null);
   };
 
