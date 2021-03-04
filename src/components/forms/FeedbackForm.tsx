@@ -100,7 +100,7 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({ appId }) => {
 
   const handleSubmit = async (values: FormikValues) => {
     // console.log({ ...values, date: getFormattedDate(new Date()), appId });
-    if (currentUser) {
+    if (!!currentUser) {
       setHasSubmitted(true);
     } else {
       setAuthModalOpen(true);
