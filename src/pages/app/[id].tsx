@@ -22,8 +22,8 @@ import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
 import Head from "next/head";
 import { App, Platform, platforms as allPlatforms } from "ts";
 import { useState } from "react";
-import Image from "next/image";
 import { IoPeople } from "react-icons/io5";
+import Image from "next/image";
 import { ClickableDropdown } from "components/ClickableDropdown";
 import { useIsMobile } from "hooks";
 import { Footer } from "components/home";
@@ -103,15 +103,15 @@ const AppDetail: NextPage<AppDetailProps> = ({
           </IconWrapper>
           <MetaInfo>
             <motion.h1 layoutId={`appTitle-${_id}`}>{name}</motion.h1>
-            <a
-              href={`http://${devWebsite}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <motion.h3 layoutId={`appDevName-${_id}`} className="link">
+            <motion.h3 layoutId={`appDevName-${_id}`} className="link">
+              <a
+                href={`http://${devWebsite}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {devName}
-              </motion.h3>
-            </a>
+              </a>
+            </motion.h3>
             <ClickableDropdown
               label="Download for "
               selection={downloadPlatform}
