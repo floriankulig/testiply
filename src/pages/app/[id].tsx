@@ -68,10 +68,14 @@ const AppDetail: NextPage<AppDetailProps> = ({
 
   //event handlers
   const handleDownload = (): void => {
-    console.log(`Downloaded for ${downloadPlatform.displayName}`);
     if (isSample) {
       setSampleAppModalOpen(true);
       return;
+    }
+    if (!!testflightLink) {
+      if (downloadPlatform.id === "ios" || downloadPlatform.id === "macos") {
+        location.href = testflightLink;
+      }
     }
   };
 
