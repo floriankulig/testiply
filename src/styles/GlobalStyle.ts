@@ -62,6 +62,7 @@ const GlobalStyle = createGlobalStyle`
 
   a {
     text-decoration: none;
+    color: currentColor
   }
   p {
     font-size: 16px;
