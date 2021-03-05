@@ -224,22 +224,22 @@ export const getServerSideProps: GetServerSideProps = async (
   ctx: GetServerSidePropsContext
 ) => {
   const id = ctx?.params.id as string;
-  // const appInfo = await getAppInfo(id);
-  const appInfo: App = {
-    _id: id,
-    platforms: ["ios"],
-    categories: ["socialMedia"],
-    rating: 4.9,
-    devId: "ansdihaosdtaz",
-    downloads: 187,
-    name: "Clubhouse",
-    devWebsite: "google.com",
-    devName: "Alpha Exploration Co.",
-    description:
-      "Hey! We're working hard to add people to Clubhouse as fast as we can, but right now you need an invite to sign up. Anyone can get one by joining the waitlist, or by asking an existing user for one. We really appreciate your patience and can't wait to welcome you. Thank you! ",
-    screenshots: ["0.webp", "1.webp", "2.webp", "3.webp"],
-    isSample: true,
-  };
+  const appInfo = await getAppInfo(id);
+  // const appInfo: App = {
+  //   _id: id,
+  //   platforms: ["ios"],
+  //   categories: ["socialMedia"],
+  //   rating: 4.9,
+  //   devId: "ansdihaosdtaz",
+  //   downloads: 187,
+  //   name: "Clubhouse",
+  //   devWebsite: "google.com",
+  //   devName: "Alpha Exploration Co.",
+  //   description:
+  //     "Hey! We're working hard to add people to Clubhouse as fast as we can, but right now you need an invite to sign up. Anyone can get one by joining the waitlist, or by asking an existing user for one. We really appreciate your patience and can't wait to welcome you. Thank you! ",
+  //   screenshots: ["0.webp", "1.webp", "2.webp", "3.webp"],
+  //   isSample: true,
+  // };
   console.log(appInfo);
 
   return {
