@@ -45,7 +45,7 @@ export const TabRow = styled.li<TabRowProps>`
   div {
     position: absolute;
     left: 0;
-    background: ${(p) => rgba(p.theme.primary, 0.1)};
+    background: ${(p) => rgba(p.theme.primary, 0.2)};
     border-left: 3px solid ${(p) => rgba(p.theme.primary, 0.7)};
     width: 85%;
     height: 100%;
