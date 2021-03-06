@@ -60,7 +60,6 @@ interface TabsProps {
 
 export const Tabs: React.FC<TabsProps> = ({ setSidebarOpen, tabTypes }) => {
   // tabs and icons indices correspond to eachother
-  // make constants file and put every tab in object with icon; differ between dev and tester tabs
   const tabs = tabTypes === "tester" ? testerTabNames : devTabNames;
   const icons = tabTypes === "tester" ? testerTabIcons : devTabIcons;
 
