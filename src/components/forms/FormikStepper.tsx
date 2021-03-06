@@ -54,9 +54,7 @@ export const FormikStepper = ({
             >
               Go Back
             </Button>
-            <Button bold>
-              {isLastStep ? { lastButtonText } : "Next Step"}
-            </Button>
+            <Button bold>{isLastStep ? lastButtonText : "Next Step"}</Button>
           </ToggleFormButtons>
         </Form>
       )}
@@ -68,7 +66,7 @@ const ToggleFormButtons = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  margin-top: 1em;
+  margin-top: 3em;
   @media (min-width: 400px) {
     flex-direction: row;
   }
