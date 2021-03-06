@@ -14,6 +14,7 @@ import { FormikTextArea } from "./FormikTextArea";
 import { FormikSelectionInput } from "./FormikSelectionInput";
 import { FormikCheckbox } from "./FormikCheckbox";
 import { FeedbackForm } from "./FeedbackForm";
+import { PublishAppForm } from "./PublishAppForm";
 
 export {
   SVGWrapper,
@@ -30,4 +31,5 @@ export {
   FormikCheckbox,
   BorderedSVGWrapper,
   FeedbackForm,
+  PublishAppForm,
 };
