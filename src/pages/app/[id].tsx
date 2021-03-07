@@ -182,7 +182,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
           </RatingBars>
         </RatingContent> */}
         {feedbackFormOpen ? (
-          <FeedbackForm appId={_id} />
+          <FeedbackForm appId={_id} appName={name} />
         ) : (
           <div className="full-grid-width">
             <Button
