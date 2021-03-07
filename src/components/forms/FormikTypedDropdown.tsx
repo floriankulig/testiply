@@ -84,7 +84,7 @@ export const FormikTypedDropdown = ({
   const [filteredValues, setFilteredValues] = useState<DescriptiveObj[]>([]);
   const [dropdownOpens, setDropdownOpens] = useState<boolean>(false);
   const dropdownShouldOpen: boolean =
-    dropdownOpens && !!filteredValues && !field.value.length <= maxValues;
+    dropdownOpens && !!filteredValues && field.value.length < maxValues;
   const dropdownRef = useRef<HTMLDivElement>();
   useOnClickOutside(dropdownRef, () => setDropdownOpens(false));
 
@@ -109,7 +109,7 @@ export const FormikTypedDropdown = ({
   return (
     <StyledFormInput style={{ position: "relative" }}>
       <StyledMetaInputInfo>
-        {label}
+        {label + ` ${field.value.length}/${maxValues}`}
         <CSSTransition
           in={showsError}
           classNames="error"
