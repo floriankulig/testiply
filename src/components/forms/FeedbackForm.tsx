@@ -11,10 +11,13 @@ import { Loading } from "components/Loading";
 import { CSSTransition } from "react-transition-group";
 import { StyledFormInput } from "./FormInput";
 import { StarRatings } from "components/appDetail";
+import { ErrorMessage } from "components/ErrorMessage";
 import { rgba } from "polished";
 import { useAuthValue } from "context";
 import { TesterAuthForm } from "components/auth";
 import { useCannotScroll } from "hooks";
+import { MdError } from "react-icons/md";
+import axios from "axios";
 
 const Wrapper = styled.div<{ done: boolean }>`
   width: clamp(200px, 100%, 400px);
@@ -78,6 +81,7 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({
 }) => {
   const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
   const [authModalOpen, setAuthModalOpen] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const { currentUser } = useAuthValue();
 
   useCannotScroll(authModalOpen);
@@ -105,7 +109,23 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({
   const handleSubmit = async (values: FormikValues) => {
     // console.log({ ...values, date: getFormattedDate(new Date()), appId });
     if (!!currentUser) {
-      setHasSubmitted(true);
+      const body = {
+        heading: values.heading,
+        text: values.text,
+        rating: values.rating,
+        date: getFormattedDate(new Date()),
+        appId,
+        appName,
+      };
+
+      await axios
+        .post(`${process.env.API_URL}/feedback`, body)
+        .then((res) => {
+          setHasSubmitted(true);
+        })
+        .catch((err) => {
+          setErrorMessage(err.response.data.err);
+        });
     } else {
       setAuthModalOpen(true);
     }
@@ -160,6 +180,17 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({
                       meta: { touched, error },
                     }) => (
                       <StyledFormInput>
+                        <CSSTransition
+                          in={!!errorMessage}
+                          classNames="pop-in"
+                          timeout={250}
+                          unmountOnExit
+                        >
+                          <ErrorMessage>
+                            <MdError />
+                            error: {errorMessage}
+                          </ErrorMessage>
+                        </CSSTransition>
                         <StyledMetaInputInfo>
                           {capitalized(field.name)}
                           <CSSTransition
