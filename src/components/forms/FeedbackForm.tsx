@@ -69,9 +69,13 @@ interface FormValues {
 
 interface FeedbackFormProps {
   appId: string;
+  appName: string;
 }
 
-export const FeedbackForm: React.FC<FeedbackFormProps> = ({ appId }) => {
+export const FeedbackForm: React.FC<FeedbackFormProps> = ({
+  appId,
+  appName,
+}) => {
   const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
   const [authModalOpen, setAuthModalOpen] = useState<boolean>(false);
   const { currentUser } = useAuthValue();
