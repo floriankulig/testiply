@@ -16,7 +16,8 @@ interface FormValues {
   description: string;
   platforms: PlatformID[];
   categories: CategoryID[];
-  testflightLink: string;
+  testflightIos: string;
+  testflightMacos: string;
 }
 
 const initialValues: FormValues = {
@@ -24,7 +25,8 @@ const initialValues: FormValues = {
   description: "",
   platforms: [],
   categories: [],
-  testflightLink: "",
+  testflightIos: "",
+  testflightMacos: "",
 };
 
 const baseValidationSchema = Yup.object({
@@ -36,11 +38,19 @@ const baseValidationSchema = Yup.object({
     .required("Required")
     .min(150, "Must be at least 150 characters")
     .max(1028, "Can't be longer than 1028 characters"),
-  testflightLink: Yup.string().required("Required"),
 });
 const metaValidationSchema = Yup.object({
-  platforms: Yup.array().of(Yup.string()).required(),
-  categories: Yup.array().of(Yup.string()).required(),
+  platforms: Yup.array()
+    .of(Yup.object({ id: Yup.string(), displayName: Yup.string() }))
+    .required(),
+  categories: Yup.array()
+    .of(Yup.object({ id: Yup.string(), displayName: Yup.string() }))
+    .required()
+    .max(4, "Can't select more than 4 categories"),
+});
+const filesValidationSchema = Yup.object({
+  testflightIos: Yup.string().required("Required"),
+  testflightMacos: Yup.string().required("Required"),
 });
 
 export const PublishAppForm: React.FC = () => {
@@ -54,7 +64,6 @@ export const PublishAppForm: React.FC = () => {
       initialValues={initialValues}
       onSubmit={async (values) => await handleSubmit(values)}
     >
-      {}
       <FormikStep validationSchema={baseValidationSchema}>
         <FormikTextInput
           name="name"
@@ -66,11 +75,6 @@ export const PublishAppForm: React.FC = () => {
           label="Description"
           placeholder="Describe your app's functionality"
         />
-        <FormikTextInput
-          name="testflightLink"
-          label="TestFlight Link"
-          placeholder="Provide your TestFlight link"
-        />
       </FormikStep>
       <FormikStep validationSchema={metaValidationSchema}>
         <FormikTypedDropdown
@@ -78,6 +82,19 @@ export const PublishAppForm: React.FC = () => {
           label="Categories"
           placeholder="Name your app's categories"
           values={categories}
+          maxValues={4}
+        />
+      </FormikStep>
+      <FormikStep validationSchema={filesValidationSchema}>
+        <FormikTextInput
+          name="testflightIos"
+          label="TestFlight Link for iOS"
+          placeholder="Provide your TestFlight link for iOS"
+        />
+        <FormikTextInput
+          name="testflightMacos"
+          label="TestFlight Link for MacOS"
+          placeholder="Provide your TestFlight link for MacOS"
         />
       </FormikStep>
     </FormikStepper>
