@@ -13,6 +13,11 @@ export interface Platform {
   displayName: string;
 }
 
+export interface DescriptiveObj {
+  id: string;
+  displayName: string;
+}
+
 export type CategoryID =
   | "education"
   | "finances"

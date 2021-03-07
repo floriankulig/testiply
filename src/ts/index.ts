@@ -9,6 +9,7 @@ import {
   AppPreview,
   Feedback,
   User,
+  DescriptiveObj,
 } from "./types";
 
 import { platforms, categories } from "./constants";
@@ -25,4 +26,5 @@ export type {
   AppPreview,
   Feedback,
   User,
+  DescriptiveObj,
 };
