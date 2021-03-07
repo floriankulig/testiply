@@ -58,7 +58,8 @@ export interface App {
   devId: string; // dev/dev_id
   devName: string;
   devWebsite: string;
-  testflightLink?: string;
+  testflightIos?: string;
+  testflightMacos?: string;
   isSample?: boolean;
   _id: string;
 }
@@ -87,6 +88,7 @@ export interface Feedback {
   date: string;
   rating: number;
   appId: string;
+  appName: string;
   _id: string;
 }
 

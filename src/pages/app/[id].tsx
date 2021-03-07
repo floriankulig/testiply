@@ -49,7 +49,8 @@ const AppDetail: NextPage<AppDetailProps> = ({
     devName,
     devWebsite,
     isSample,
-    testflightLink,
+    testflightIos,
+    testflightMacos,
     _id,
   },
 }) => {
@@ -72,10 +73,10 @@ const AppDetail: NextPage<AppDetailProps> = ({
       setSampleAppModalOpen(true);
       return;
     }
-    if (!!testflightLink) {
-      if (downloadPlatform.id === "ios" || downloadPlatform.id === "macos") {
-        location.href = testflightLink;
-      }
+    if (downloadPlatform.id === "ios") {
+      location.href = testflightIos;
+    } else if (downloadPlatform.id === "macos") {
+      location.href = testflightMacos;
     }
   };
 
