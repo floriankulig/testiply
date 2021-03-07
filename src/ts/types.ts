@@ -87,6 +87,7 @@ export interface Feedback {
   date: string;
   rating: number;
   appId: string;
+  appName: string;
   _id: string;
 }
 
