@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Field, Form, Formik, FormikValues } from "formik";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import * as Yup from "yup";
 import { capitalized, getFormattedDate } from "helpers";
 import { FormikTextInput, StyledMetaInputInfo } from ".";
@@ -107,20 +107,15 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({
   });
 
   const handleSubmit = async (values: FormikValues) => {
-    // console.log({ ...values, date: getFormattedDate(new Date()), appId });
     if (!!currentUser) {
-      const body = {
-        heading: values.heading,
-        text: values.text,
-        rating: values.rating,
-        date: getFormattedDate(new Date()),
-        appId,
-        appName,
-      };
-
       await axios
-        .post(`${process.env.API_URL}/feedback`, body)
-        .then((res) => {
+        .post(`${process.env.API_URL}/feedback`, {
+          ...values,
+          date: getFormattedDate(new Date()),
+          appId,
+          appName,
+        })
+        .then(() => {
           setHasSubmitted(true);
         })
         .catch((err) => {
@@ -180,17 +175,6 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({
                       meta: { touched, error },
                     }) => (
                       <StyledFormInput>
-                        <CSSTransition
-                          in={!!errorMessage}
-                          classNames="pop-in"
-                          timeout={250}
-                          unmountOnExit
-                        >
-                          <ErrorMessage>
-                            <MdError />
-                            error: {errorMessage}
-                          </ErrorMessage>
-                        </CSSTransition>
                         <StyledMetaInputInfo>
                           {capitalized(field.name)}
                           <CSSTransition
@@ -263,6 +247,19 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({
                     label="Feedback"
                     placeholder="Share your experience"
                   />
+                  <AnimatePresence>
+                    {!!errorMessage && (
+                      <ErrorMessage
+                        as={motion.p}
+                        initial={{ scale: 0.1 }}
+                        animate={{ scale: 1 }}
+                        exit={{ scale: 0.1 }}
+                      >
+                        <MdError />
+                        Error: {errorMessage}
+                      </ErrorMessage>
+                    )}
+                  </AnimatePresence>
                   <Button
                     type="submit"
                     bold
