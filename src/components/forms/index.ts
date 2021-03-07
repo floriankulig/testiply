@@ -13,6 +13,7 @@ import { FormikTextInput } from "./FormikTextInput";
 import { FormikTextArea } from "./FormikTextArea";
 import { FormikSelectionInput } from "./FormikSelectionInput";
 import { FormikCheckbox } from "./FormikCheckbox";
+import { FormikTypedDropdown } from "./FormikTypedDropdown";
 import { FeedbackForm } from "./FeedbackForm";
 import { PublishAppForm } from "./PublishAppForm";
 
@@ -32,4 +33,5 @@ export {
   BorderedSVGWrapper,
   FeedbackForm,
   PublishAppForm,
+  FormikTypedDropdown,
 };
