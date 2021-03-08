@@ -41,7 +41,7 @@ export const useUser = (): AuthContextType => {
         .catch((error) => {
           console.log(error.response.data.err);
         });
-    }, 1000);
+    }, 500);
 
     return () => clearTimeout(timeout);
   }, [cookie]);
