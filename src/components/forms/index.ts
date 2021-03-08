@@ -6,7 +6,7 @@ import {
   StyledTextFieldArea,
   BorderedSVGWrapper,
 } from "./FormInput";
-import { AuthForm } from "./AuthForm";
+import { AuthForm, SwitchFormType } from "./AuthForm";
 import { FormikStepper } from "./FormikStepper";
 import { FormikStep } from "./FormikStep";
 import { FormikTextInput } from "./FormikTextInput";
@@ -33,5 +33,6 @@ export {
   BorderedSVGWrapper,
   FeedbackForm,
   PublishAppForm,
+  SwitchFormType,
   FormikTypedDropdown,
 };
