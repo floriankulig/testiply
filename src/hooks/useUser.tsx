@@ -36,7 +36,9 @@ export const useUser = (): AuthContextType => {
     console.log("asking for user");
     const timeout = setTimeout(() => {
       axios
-        .post(`${process.env.API_URL}/getUser`, { userid: currentUserId })
+        .post(`${process.env.NEXT_PUBLIC_API_URL}/getUser`, {
+          userid: currentUserId,
+        })
         .then((res) => setCurrentUser({ ...res.data.user }))
         .catch((error) => {
           console.log(error.response.data.err);

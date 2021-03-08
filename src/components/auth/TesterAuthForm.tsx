@@ -81,7 +81,9 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({
     const body = { mail: values.email, password: values.password };
     await axios
       .post(
-        `${process.env.API_URL}/${type === "register" ? "register" : "login"}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/${
+          type === "register" ? "register" : "login"
+        }`,
         body
       )
       .then(async (res) => {

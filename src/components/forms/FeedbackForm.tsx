@@ -109,7 +109,7 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({
   const handleSubmit = async (values: FormikValues) => {
     if (!!currentUser) {
       await axios
-        .post(`${process.env.API_URL}/feedback`, {
+        .post(`${process.env.NEXT_PUBLIC_API_URL}/feedback`, {
           ...values,
           date: getFormattedDate(new Date()),
           appId,

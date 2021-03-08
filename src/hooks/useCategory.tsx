@@ -36,7 +36,7 @@ export const useCategory = (): ReturnType => {
     setLoading(true);
     const query: string = `?category=${selectedCategory.id}&platform=${selectedPlatform.id}`;
     axios
-      .get(`${process.env.API_URL}/getCategoryApps${query}`)
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/getCategoryApps${query}`)
       .then((res) => {
         if (JSON.stringify(res.data.apps) !== JSON.stringify(apps)) {
           setApps(res.data.apps);
