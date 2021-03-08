@@ -39,6 +39,7 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({
   const [showPasswords, setShowPasswords] = useState<boolean>(false);
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [type, setType] = useState<FormType>(formType);
   const { renewUid } = useAuthValue();
   const ref = useRef<HTMLDivElement>(null);
   if (asModal) {
@@ -46,7 +47,7 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({
   }
 
   const initialValues: FormValues =
-    formType === "login"
+    type === "login"
       ? {
           email: "",
           password: "",
@@ -64,13 +65,12 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({
       .required("Required")
       .min(8, "Has to be at least 8 characters"),
     confirmPassword:
-      formType === "register"
+      type === "register"
         ? Yup.string()
             .oneOf([Yup.ref("password"), null], "Passwords must match")
             .required("Required")
         : undefined,
-    acceptedTAS:
-      formType === "register" ? Yup.boolean().oneOf([true]) : undefined,
+    acceptedTAS: type === "register" ? Yup.boolean().oneOf([true]) : undefined,
   });
 
   const handleSubmit = async (values: FormikValues) => {
@@ -78,9 +78,7 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({
     const body = { mail: values.email, password: values.password };
     await axios
       .post(
-        `${process.env.API_URL}/${
-          formType === "register" ? "register" : "login"
-        }`,
+        `${process.env.API_URL}/${type === "register" ? "register" : "login"}`,
         body
       )
       .then(async (res) => {
@@ -98,7 +96,7 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({
 
   const body = (
     <AuthForm ref={ref}>
-      <h1>{formType === "register" ? "Register" : "Login"}</h1>
+      <h1>{type === "register" ? "Register" : "Login"}</h1>
       <Formik
         initialValues={initialValues}
         onSubmit={async (values) => await handleSubmit(values)}
@@ -120,7 +118,7 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({
               svg={showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
               svgClickHandler={() => setShowPasswords((prev) => !prev)}
             />
-            {formType === "register" && (
+            {type === "register" && (
               <>
                 <FormikTextInput
                   name="confirmPassword"
@@ -147,12 +145,12 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({
             >
               <ErrorMessage>
                 <MdError />
-                {capitalized(formType)} error: {errorMessage}
+                {capitalized(type)} error: {errorMessage}
               </ErrorMessage>
             </CSSTransition>
             <Button bold type="submit">
               {!isSubmitting ? (
-                formType === "register" ? (
+                type === "register" ? (
                   "Register"
                 ) : (
                   "Log In"
