@@ -1,7 +1,8 @@
-import { Button } from 'components/Button';
-import { ContentHolder } from 'components/forms/FormikCheckbox';
-import { rgba } from 'polished';
-import styled from 'styled-components';
+import { Button } from "components/Button";
+import { ContentHolder } from "components/forms/FormikCheckbox";
+import { SpaceBetween } from "components/SpaceBetweenRow";
+import { rgba } from "polished";
+import styled from "styled-components";
 
 export const AuthForm = styled.div`
   width: clamp(1px, 90%, 650px);
@@ -16,7 +17,6 @@ export const AuthForm = styled.div`
 
   h1 {
     margin: 0;
-    margin-bottom: 1.5em;
   }
 
   .link {
@@ -33,4 +33,15 @@ export const AuthForm = styled.div`
       margin-top: 3em;
     }
   }
+
+  ${SpaceBetween} {
+    margin-bottom: 1.5em;
+  }
+`;
+export const SwitchFormType = styled.button`
+  color: var(--primary);
+  background: transparent;
+  padding: 0;
+  border: none;
+  font-size: 1.2rem;
 `;
