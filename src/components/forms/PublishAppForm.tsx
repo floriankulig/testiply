@@ -6,6 +6,10 @@ import { FormikStep, FormikTextInput } from ".";
 import { FormikTextArea } from "./FormikTextArea";
 import { FormikTypedDropdown } from "./FormikTypedDropdown";
 import { categories, platforms } from "ts";
+import { useState } from "react";
+import { useAuthValue } from "context";
+import { DevAuthForm, TesterAuthForm } from "components/auth";
+import { useCannotScroll } from "hooks";
 
 const availablePlatforms = platforms.filter(
   (plat) => plat.id === "ios" || plat.id === "macos"
@@ -49,54 +53,83 @@ const metaValidationSchema = Yup.object({
     .max(4, "Can't select more than 4 categories"),
 });
 const filesValidationSchema = Yup.object({
-  testflightIos: Yup.string().required("Required"),
-  testflightMacos: Yup.string().required("Required"),
+  testflightIos: Yup.string(),
+  testflightMacos: Yup.string(),
 });
 
 export const PublishAppForm: React.FC = () => {
+  const [loginModalOpen, setLoginModalOpen] = useState<boolean>(false);
+  const [devModalOpen, setDevModalOpen] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const { currentUser } = useAuthValue();
+  useCannotScroll(loginModalOpen || devModalOpen);
+
   const handleSubmit = async (values: FormikValues) => {
+    setErrorMessage("");
+    if (!values.testflightIos && !values.testflightMacos) {
+      setErrorMessage("Must provide at least one TestFlight link.");
+      return;
+    }
+    if (!currentUser) {
+      setLoginModalOpen(true);
+      return;
+    } else if (!currentUser.is_dev) {
+      setDevModalOpen(true);
+      return;
+    }
     console.log({ values });
   };
 
   return (
-    <FormikStepper
-      lastButtonText="Publish"
-      initialValues={initialValues}
-      onSubmit={async (values) => await handleSubmit(values)}
-    >
-      <FormikStep validationSchema={baseValidationSchema}>
-        <FormikTextInput
-          name="name"
-          label="App Name"
-          placeholder="Name your app"
-        />
-        <FormikTextArea
-          name="description"
-          label="Description"
-          placeholder="Describe your app's functionality"
-        />
-      </FormikStep>
-      <FormikStep validationSchema={metaValidationSchema}>
-        <FormikTypedDropdown
-          name="categories"
-          label="Categories"
-          placeholder="Name your app's categories"
-          values={categories}
-          maxValues={4}
-        />
-      </FormikStep>
-      <FormikStep validationSchema={filesValidationSchema}>
-        <FormikTextInput
-          name="testflightIos"
-          label="TestFlight Link for iOS"
-          placeholder="Provide your TestFlight link for iOS"
-        />
-        <FormikTextInput
-          name="testflightMacos"
-          label="TestFlight Link for MacOS"
-          placeholder="Provide your TestFlight link for MacOS"
-        />
-      </FormikStep>
-    </FormikStepper>
+    <>
+      <FormikStepper
+        lastButtonText="Publish"
+        initialValues={initialValues}
+        onSubmit={async (values) => await handleSubmit(values)}
+        errorMsg={errorMessage}
+        setErrorMsg={setErrorMessage}
+      >
+        <FormikStep validationSchema={baseValidationSchema}>
+          <FormikTextInput
+            name="name"
+            label="App Name"
+            placeholder="Name your app"
+          />
+          <FormikTextArea
+            name="description"
+            label="Description"
+            placeholder="Describe your app's functionality"
+          />
+        </FormikStep>
+        <FormikStep validationSchema={metaValidationSchema}>
+          <FormikTypedDropdown
+            name="categories"
+            label="Categories"
+            placeholder="Name your app's categories"
+            values={categories}
+            maxValues={4}
+          />
+        </FormikStep>
+        <FormikStep validationSchema={filesValidationSchema}>
+          <FormikTextInput
+            name="testflightIos"
+            label="TestFlight Link for iOS"
+            placeholder="Provide your TestFlight link for iOS"
+          />
+          <FormikTextInput
+            name="testflightMacos"
+            label="TestFlight Link for MacOS"
+            placeholder="Provide your TestFlight link for MacOS"
+          />
+        </FormikStep>
+      </FormikStepper>
+
+      {loginModalOpen && (
+        <TesterAuthForm formType="login" asModal setOpen={setLoginModalOpen} />
+      )}
+      {devModalOpen && (
+        <DevAuthForm hasUserRegistered asModal setOpen={setLoginModalOpen} />
+      )}
+    </>
   );
 };
