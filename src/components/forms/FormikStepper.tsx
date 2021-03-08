@@ -4,16 +4,23 @@ import styled from "styled-components";
 import { theme } from "styles";
 import { FormikStepProps } from "./FormikStep";
 import { FormikValues, FormikConfig, Formik, Form, FormikProps } from "formik";
+import { AnimatePresence, motion } from "framer-motion";
+import { ErrorMessage } from "components/ErrorMessage";
+import { MdError } from "react-icons/md";
 
 interface FormikStepperProps extends FormikConfig<FormikValues> {
   minLevel?: number;
   lastButtonText: string;
+  errorMsg?: string;
+  setErrorMsg: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const FormikStepper = ({
   children,
   lastButtonText,
   minLevel,
+  errorMsg,
+  setErrorMsg,
   ...props
 }: FormikStepperProps) => {
   const childrenArray = React.Children.toArray(
@@ -36,20 +43,40 @@ export const FormikStepper = ({
           await props.onSubmit(values, helpers);
         } else {
           setStep((step) => step + 1);
+          setErrorMsg("");
         }
       }}
     >
       {(props: FormikProps<any>) => (
         <Form autoComplete="off">
           {currentChild}
+          <AnimatePresence>
+            {!!errorMsg && (
+              <ErrorMessage
+                as={motion.p}
+                initial={{ scale: 0.1 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0.1 }}
+              >
+                <MdError />
+                Error: {errorMsg}
+              </ErrorMessage>
+            )}
+          </AnimatePresence>
           <ToggleFormButtons>
             <Button
               bold
               color={theme.layoutContentBg}
               disableElevation
               disabled={step <= minStep}
-              onClick={() => setStep((step) => step - 1)}
-              onKeyDown={() => setStep((step) => step - 1)}
+              onClick={() => {
+                setStep((step) => step - 1);
+                setErrorMsg("");
+              }}
+              onKeyDown={() => {
+                setStep((step) => step - 1);
+                setErrorMsg("");
+              }}
               type="button"
             >
               Go Back
