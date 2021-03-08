@@ -35,7 +35,7 @@ export const AuthForm = styled.div`
   }
 
   ${SpaceBetween} {
-    margin-bottom: 1.5em;
+    margin-bottom: 3em;
   }
 `;
 export const SwitchFormType = styled.button`
@@ -43,5 +43,11 @@ export const SwitchFormType = styled.button`
   background: transparent;
   padding: 0;
   border: none;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  svg {
+    margin-left: 0.25em;
+    transform: translateY(1px);
+  }
 `;
