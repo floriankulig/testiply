@@ -1,5 +1,5 @@
 // import { useEffect, useState } from "react";
-export const placeholder = "mulm";
+export const placeholder = "new env";
 
 // export const useStaticJSON = (lang: "de" | "en", filename: string): any[] => {
 //   const [data, setData] = useState([]);
