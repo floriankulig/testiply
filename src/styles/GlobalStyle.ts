@@ -87,8 +87,7 @@ const GlobalStyle = createGlobalStyle`
       transition: transform 0.3s var(--easing);
     }
 
-    &:hover::after,
-    &:focus::after {
+    &:hover::after{
       transform: scaleX(1);
       transform-origin: left;
     }
