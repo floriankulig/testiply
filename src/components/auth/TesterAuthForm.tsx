@@ -1,5 +1,5 @@
 import { Button } from "components/Button";
-import { AuthForm, FormikTextInput } from "components/forms";
+import { AuthForm, FormikTextInput, SwitchFormType } from "components/forms";
 import React, { useRef, useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { MdEmail, MdError } from "react-icons/md";
@@ -17,6 +17,9 @@ import { Loading } from "components/Loading";
 import { Overlay } from "components/Overlay";
 import { useAuthValue } from "context";
 import { useOnClickOutside } from "hooks";
+import { SpaceBetween } from "components/SpaceBetweenRow";
+import styled from "styled-components";
+import { FaChevronRight } from "react-icons/fa";
 
 interface TesterAuthFormProps {
   formType: FormType;
@@ -96,7 +99,23 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({
 
   const body = (
     <AuthForm ref={ref}>
-      <h1>{type === "register" ? "Register" : "Login"}</h1>
+      <SpaceBetween>
+        <h1>{type === "register" ? "Register" : "Login"}</h1>
+        {asModal && (
+          <SwitchFormType
+            className="link"
+            onClick={() => setType(type === "register" ? "login" : "register")}
+            onKeyDown={() =>
+              setType(type === "register" ? "login" : "register")
+            }
+            tabIndex={0}
+            aria-label="Switch form type."
+          >
+            Go to {type === "register" ? "Login" : "Register"}{" "}
+            <FaChevronRight />
+          </SwitchFormType>
+        )}
+      </SpaceBetween>
       <Formik
         initialValues={initialValues}
         onSubmit={async (values) => await handleSubmit(values)}
