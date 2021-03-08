@@ -12,7 +12,7 @@ export const AuthForm = styled.div`
   background-color: var(--layout-nav-background);
   box-shadow: 10px 30px 80px ${(p) => rgba(p.theme.navy, 0.1)};
   @media (${({ theme }) => theme.bp.small}) {
-    padding: 4em 6em;
+    padding: 5em;
   }
 
   h1 {
