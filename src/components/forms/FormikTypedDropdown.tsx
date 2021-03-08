@@ -1,5 +1,6 @@
 import { SVGChip } from "components/SVGChip";
 import { useField } from "formik";
+import { AnimatePresence, motion } from "framer-motion";
 import { useOnClickOutside } from "hooks";
 import { darken, rgba } from "polished";
 import { useEffect, useRef, useState } from "react";
@@ -42,25 +43,6 @@ const Dropdown = styled.ul`
     }
     transition: 0.5s background;
   }
-
-  &.dropdown-enter {
-    opacity: 0;
-    transform: translateY(-50%) scaleY(0.1);
-  }
-  &.dropdown-enter-active {
-    opacity: 1;
-    transform: translateY(0) scaleY(1);
-    transition: 0.25s all var(--easing);
-  }
-  &.dropdown-exit {
-    opacity: 1;
-    transform: translateY(0) scaleY(1);
-  }
-  &.dropdown-exit-active {
-    opacity: 0;
-    transform: translateY(-50%) scaleY(0.1);
-    transition: 0.25s all var(--easing);
-  }
 `;
 
 const StyledChips = styled.ul`
@@ -84,7 +66,7 @@ export const FormikTypedDropdown = ({
   const [filteredValues, setFilteredValues] = useState<DescriptiveObj[]>([]);
   const [dropdownOpens, setDropdownOpens] = useState<boolean>(false);
   const dropdownShouldOpen: boolean =
-    dropdownOpens && !!filteredValues && field.value.length < maxValues;
+    dropdownOpens && !!filteredValues.length && field.value.length < maxValues;
   const dropdownRef = useRef<HTMLDivElement>();
   useOnClickOutside(dropdownRef, () => setDropdownOpens(false));
 
@@ -119,49 +101,71 @@ export const FormikTypedDropdown = ({
           <span>{meta.error}</span>
         </CSSTransition>
       </StyledMetaInputInfo>
-      <div ref={dropdownRef}>
-        <StyledTextField
-          hasError={showsError}
-          onClick={() => setDropdownOpens(true)}
-          onKeyDown={() => setDropdownOpens(true)}
-          aria-label="Set the dropdown open"
-          tabIndex={0}
-          role="button"
-        >
-          <input
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder={restProps.placeholder}
-          />
-        </StyledTextField>
-        <CSSTransition
-          in={dropdownShouldOpen}
-          classNames="dropdown"
-          timeout={300}
-          unmountOnExit
-        >
-          <Dropdown>
-            {filteredValues
-              ?.filter((value) => !field.value.includes(value))
-              ?.map((value) => (
-                <li
-                  key={value.id}
-                  onClick={() => handleAdd(value)}
-                  onKeyDown={() => handleAdd(value)}
+      <AnimatePresence>
+        {field.value.length < maxValues && (
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0 }}
+            ref={dropdownRef}
+          >
+            <StyledTextField
+              hasError={showsError}
+              onClick={() => setDropdownOpens(true)}
+              onKeyDown={() => setDropdownOpens(true)}
+              aria-label="Set the dropdown open"
+              tabIndex={0}
+              role="button"
+            >
+              <input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder={restProps.placeholder}
+              />
+            </StyledTextField>
+            <AnimatePresence>
+              {dropdownShouldOpen && (
+                <Dropdown
+                  as={motion.ul}
+                  initial={{ scaleY: 0, y: "-45%", opacity: 0 }}
+                  animate={{ scaleY: 1, y: 0, opacity: 1 }}
+                  exit={{ scaleY: 0, y: "-45%", opacity: 0 }}
                 >
-                  {value.displayName}
-                </li>
-              ))}
-          </Dropdown>
-        </CSSTransition>
-      </div>
-      <StyledChips>
+                  {filteredValues
+                    ?.filter((value) => !field.value.includes(value))
+                    ?.map((value) => (
+                      <motion.li
+                        key={value.id}
+                        animate
+                        onClick={() => handleAdd(value)}
+                        onKeyDown={() => handleAdd(value)}
+                      >
+                        {value.displayName}
+                      </motion.li>
+                    ))}
+                </Dropdown>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <StyledChips as={motion.ul} layout>
         {field.value?.map((value: DescriptiveObj) => (
-          <li key={value.id}>
-            <SVGChip SVG={MdClose} svgClickHandler={() => handleRemove(value)}>
-              {value.displayName}
-            </SVGChip>
-          </li>
+          <AnimatePresence key={value.id}>
+            <motion.li
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0 }}
+              layout
+            >
+              <SVGChip
+                SVG={MdClose}
+                svgClickHandler={() => handleRemove(value)}
+              >
+                {value.displayName}
+              </SVGChip>
+            </motion.li>
+          </AnimatePresence>
         ))}
       </StyledChips>
     </StyledFormInput>
