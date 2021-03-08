@@ -1,5 +1,5 @@
 // import { useEffect, useState } from "react";
-export const placeholder = "prod_test";
+export const placeholder = "mulm";
 
 // export const useStaticJSON = (lang: "de" | "en", filename: string): any[] => {
 //   const [data, setData] = useState([]);
