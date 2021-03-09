@@ -18,7 +18,6 @@ import { Overlay } from "components/Overlay";
 import { useAuthValue } from "context";
 import { useOnClickOutside } from "hooks";
 import { SpaceBetween } from "components/SpaceBetweenRow";
-import styled from "styled-components";
 import { FaChevronRight } from "react-icons/fa";
 
 interface TesterAuthFormProps {
