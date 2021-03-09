@@ -1,6 +1,13 @@
 import styled from "styled-components";
-import { FaInstagram, FaTwitter, FaFacebook, FaDiscord } from "react-icons/fa";
+import {
+  FaInstagram,
+  FaTwitter,
+  FaFacebook,
+  FaDiscord,
+  FaGithub,
+} from "react-icons/fa";
 import Link from "next/link";
+import { Button } from "./Button";
 
 const StyledFooter = styled.footer`
   width: 100%;
@@ -19,6 +26,7 @@ const StyledFooter = styled.footer`
     text-align: center;
     width: 100%;
     color: #b0b0b0;
+    margin: 0;
     transform: translateY(200%);
   }
 `;
@@ -45,7 +53,6 @@ const FooterContentGrid = styled.div`
 const StyledSocials = styled.div`
   text-align: center;
   letter-spacing: 1.5px;
-  width: 200px;
   margin: 0 auto;
 
   @media (${({ theme }) => theme.bp.small}) {
@@ -54,18 +61,13 @@ const StyledSocials = styled.div`
 
   .social-icons {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
     a {
-      color: #ffffff;
-      transition: color 0.2s ease;
-      &:hover {
-        color: #bebebe;
-      }
       svg {
-        width: 25px;
-        height: 25px;
+        margin-right: 0.75em;
+        transform: scale(1.5);
       }
     }
   }
@@ -91,39 +93,15 @@ const StyledPolicies = styled.div`
 export const Socials: React.FC = () => {
   return (
     <StyledSocials>
-      <h3>Socials</h3>
+      <h3>View the Sourcecode</h3>
       <div className="social-icons">
         <a
-          href="https://www.instagram.com/betappstore/"
-          className="link"
-          target="_blank"
+          href="https://github.com/floriankulig/testiply"
           rel="noopener noreferrer"
         >
-          <FaInstagram />
-        </a>
-        <a
-          href="https://www.facebook.com/betaappstoree"
-          className="link"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FaFacebook />
-        </a>
-        <a
-          href="https://twitter.com/betaAppStoree"
-          className="link"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FaTwitter />
-        </a>
-        <a
-          href="https://discord.gg/EebKeM32RH"
-          className="link"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FaDiscord />
+          <Button bold basic color="white">
+            <FaGithub /> GitHub
+          </Button>
         </a>
       </div>
     </StyledSocials>
