@@ -2,6 +2,7 @@ import { Button } from "components/Button";
 import { Overlay } from "components/Overlay";
 import { motion } from "framer-motion";
 import { useCannotScroll, useOnClickOutside } from "hooks";
+import Link from "next/link";
 import { useRef } from "react";
 import { FaRegSadTear } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
@@ -107,7 +108,9 @@ export const IsSampleAppModal: React.FC<IsSampleAppModalProps> = ({
           >
             Close
           </Button>
-          <Button bold>Search for another app</Button>
+          <Link href="/store">
+            <Button bold>Search for another app</Button>
+          </Link>
         </BottomBar>
       </Modal>
     </Overlay>
