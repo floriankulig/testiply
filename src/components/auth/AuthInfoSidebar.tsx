@@ -1,11 +1,10 @@
 import styled from "styled-components";
 import { FormType } from "ts";
-import { getTextColor } from "helpers";
+import { capitalized, getTextColor, oppositeFormType } from "helpers";
 import { Policies, Socials } from "components/InfoFooter";
 import { Button } from "components/Button";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import { InfoPageHeader } from "components/InfoPageHeader";
 
 interface StyledAuthInfoSidebarProps {
@@ -72,12 +71,9 @@ export const AuthInfoSidebar: React.FC<AuthInfoSidebarProps> = ({ type }) => {
     return () => clearTimeout(timeout);
   }, []);
 
-  const handleFormToggle = () => {
+  const handleFormToggle = (newRoute: "dev/register" | FormType) => {
     setShows(false);
-    const timeout = setTimeout(
-      () => router.push(`/${type.includes("register") ? "login" : "register"}`),
-      550
-    );
+    const timeout = setTimeout(() => router.push(`/${newRoute}`), 550);
 
     return () => clearTimeout(timeout);
   };
@@ -98,11 +94,26 @@ export const AuthInfoSidebar: React.FC<AuthInfoSidebarProps> = ({ type }) => {
           color="white"
           big
           bold
-          onClick={() => handleFormToggle()}
-          onKeyDown={() => handleFormToggle()}
+          onClick={() => handleFormToggle(oppositeFormType(type))}
+          onKeyDown={() => handleFormToggle(oppositeFormType(type))}
         >
-          {type !== "login" ? "Go to Login" : "Go to Register"}
+          {`Go to ${capitalized(oppositeFormType(type))}`}
         </Button>
+        {type === "register" && (
+          <>
+            <h2>Want to publish your own app?</h2>
+            <Button
+              color="white"
+              big
+              bold
+              basic
+              onClick={() => handleFormToggle("dev/register")}
+              onKeyDown={() => handleFormToggle("dev/register")}
+            >
+              Register as a Publisher
+            </Button>
+          </>
+        )}
       </div>
       <Info>
         <div className="info-group">
