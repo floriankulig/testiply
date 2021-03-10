@@ -12,7 +12,7 @@ interface FormikStepperProps extends FormikConfig<FormikValues> {
   minLevel?: number;
   lastButtonText: string;
   errorMsg?: string;
-  setErrorMsg: React.Dispatch<React.SetStateAction<string>>;
+  setErrorMsg?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const FormikStepper = ({
