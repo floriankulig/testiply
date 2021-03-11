@@ -19,6 +19,7 @@ import { useAuthValue } from "context";
 import { useOnClickOutside } from "hooks";
 import { SpaceBetween } from "components/SpaceBetweenRow";
 import { FaChevronRight } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 interface TesterAuthFormProps {
   formType: FormType;
@@ -99,7 +100,12 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({
   };
 
   const body = (
-    <AuthForm ref={ref}>
+    <AuthForm
+      ref={ref}
+      as={motion.div}
+      layoutId="authForm"
+      style={{ borderRadius: "4em" }}
+    >
       <SpaceBetween>
         <h1>{type === "register" ? "Register" : "Login"}</h1>
         {asModal && (
