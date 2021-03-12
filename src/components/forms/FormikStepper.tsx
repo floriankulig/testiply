@@ -7,6 +7,7 @@ import { FormikValues, FormikConfig, Formik, Form, FormikProps } from "formik";
 import { AnimatePresence, motion } from "framer-motion";
 import { ErrorMessage } from "components/ErrorMessage";
 import { MdError } from "react-icons/md";
+import { Loading } from "components/Loading";
 
 interface FormikStepperProps extends FormikConfig<FormikValues> {
   minLevel?: number;
@@ -81,7 +82,15 @@ export const FormikStepper = ({
             >
               Go Back
             </Button>
-            <Button bold>{isLastStep ? lastButtonText : "Next Step"}</Button>
+            <Button bold>
+              {props.isSubmitting ? (
+                <Loading size={40} />
+              ) : isLastStep ? (
+                lastButtonText
+              ) : (
+                "Next Step"
+              )}
+            </Button>
           </ToggleFormButtons>
         </Form>
       )}
