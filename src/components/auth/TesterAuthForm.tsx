@@ -28,7 +28,7 @@ interface TesterAuthFormProps {
 }
 
 interface FormValues {
-  email: string;
+  mail: string;
   password: string;
   confirmPassword?: string;
   acceptedTAS?: boolean;
@@ -52,18 +52,18 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({
   const initialValues: FormValues =
     type === "login"
       ? {
-          email: "",
+          mail: "",
           password: "",
         }
       : {
-          email: "",
+          mail: "",
           password: "",
           confirmPassword: "",
           acceptedTAS: false,
         };
 
   const validationSchema = Yup.object({
-    email: Yup.string().email("Invalid format").required("Required").min(3),
+    mail: Yup.string().email("Invalid format").required("Required").min(3),
     password: Yup.string()
       .required("Required")
       .min(8, "Has to be at least 8 characters"),
@@ -76,9 +76,9 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({
     acceptedTAS: type === "register" ? Yup.boolean().oneOf([true]) : undefined,
   });
 
-  const handleSubmit = async (values: FormikValues) => {
+  const handleSubmit = async ({ mail, password }: FormikValues) => {
     setErrorMessage("");
-    const body = { mail: values.email, password: values.password };
+    const body = { mail, password };
     await axios
       .post(
         `${process.env.NEXT_PUBLIC_API_URL}/${
@@ -131,7 +131,7 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({
         {({ isSubmitting }) => (
           <Form autoComplete="off">
             <FormikTextInput
-              name="email"
+              name="mail"
               svg={<MdEmail />}
               label="E-Mail Address"
               placeholder="Enter your E-Mail Address"
