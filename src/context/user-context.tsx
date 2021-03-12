@@ -1,11 +1,10 @@
 import { useUser } from "hooks";
 import { createContext, useContext } from "react";
 import { User } from "ts";
-
 export type AuthContextType = {
   currentUser: User | null;
   logout: () => void;
-  renewUid: (token: { [name: string]: any }) => Promise<void>;
+  renewUid: (token: string) => Promise<void>;
 };
 
 const AuthContext = createContext<Partial<AuthContextType>>({});
