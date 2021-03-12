@@ -68,7 +68,7 @@ export interface User {
   mail: string;
   is_dev: boolean;
   _id: string;
-  ownedApps: Array<Object>;
+  ownedApps: Array<{ id: string; hasLeftFeedback: boolean }>;
   website: string;
   name: string;
 }
