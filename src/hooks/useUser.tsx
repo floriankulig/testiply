@@ -8,9 +8,7 @@ export const useUser = (): AuthContextType => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [cookie, setCookie] = useCookies(["uid"]);
 
-  const renewUid = async (currentUserId: {
-    [name: string]: any;
-  }): Promise<void> => {
+  const renewUid = async (currentUserId: string): Promise<void> => {
     await setCookie("uid", currentUserId, {
       sameSite: "strict",
       secure: true,
@@ -56,6 +54,10 @@ export const useUser = (): AuthContextType => {
       renewUid(currentUserId);
     }
   }, []);
+
+  useEffect(() => {
+    console.log(currentUser);
+  }, [currentUser]);
 
   // Set Cookie to date in past / non-existant date
   const logout = async (): Promise<void> => {
