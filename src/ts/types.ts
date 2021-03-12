@@ -65,10 +65,12 @@ export interface App {
 }
 
 export interface User {
-  email: string;
+  mail: string;
   is_dev: boolean;
   _id: string;
   ownedApps: Array<string>;
+  website: string;
+  name: string;
 }
 
 export type AppPreview = Readonly<
