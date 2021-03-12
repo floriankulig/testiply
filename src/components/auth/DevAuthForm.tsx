@@ -18,6 +18,9 @@ import { MdEmail } from "react-icons/md";
 import { FaUser, FaGlobe } from "react-icons/fa";
 import styled from "styled-components";
 import * as Yup from "yup";
+import { useAuthValue } from "context";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 const RemoveButtonRowStyles = styled.div`
   ${Button} {
@@ -67,7 +70,9 @@ export const DevAuthForm: React.FC<DevAuthFormProps> = ({
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [showPasswords, setShowPasswords] = useState<boolean>(false);
+  const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const { currentUser, renewUid } = useAuthValue();
   if (asModal) {
     useOnClickOutside(ref, () => setOpen(false));
   }
@@ -82,7 +87,30 @@ export const DevAuthForm: React.FC<DevAuthFormProps> = ({
   };
 
   const handleSubmit = async (values: FormikValues) => {
-    console.log(values);
+    if (hasUserRegistered && !currentUser) {
+      setErrorMessage(
+        "Must be logged in before upgrading to a developer account"
+      );
+      return;
+    }
+    if (hasUserRegistered) {
+      const { website, name } = values;
+      axios
+        .post(`${process.env.NEXT_PUBLIC_API_URL}/promoteDev`, {
+          userid: currentUser._id,
+          website,
+          name,
+        })
+        .then(async () => {
+          await renewUid(currentUser._id);
+          if (asModal) {
+            setOpen(false);
+          } else {
+            router.push("/store");
+          }
+        })
+        .catch((err) => setErrorMessage(err.response.data.err));
+    }
   };
 
   const body = (
@@ -136,14 +164,14 @@ export const DevAuthForm: React.FC<DevAuthFormProps> = ({
             <FormikTextInput
               name="name"
               label="Name"
-              placeholder="Provide your (company) name"
+              placeholder="Enter your (company) name"
               svg={<FaUser />}
               svgClickHandler={() => setShowPasswords((prev) => !prev)}
             />
             <FormikTextInput
               name="website"
               label="Website"
-              placeholder="Provide your personal/company website"
+              placeholder="Enter your personal/company website"
               svg={<FaGlobe />}
             />
             <FormikCheckbox name="acceptedTAS">
