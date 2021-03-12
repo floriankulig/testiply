@@ -18,6 +18,7 @@ import { TesterAuthForm } from "components/auth";
 import { useCannotScroll } from "hooks";
 import { MdError } from "react-icons/md";
 import axios from "axios";
+import { InfoNote } from "components/InfoNote";
 
 const Wrapper = styled.div<{ done: boolean }>`
   width: clamp(200px, 100%, 400px);
@@ -26,7 +27,6 @@ const Wrapper = styled.div<{ done: boolean }>`
 `;
 
 const FeedbackDone = styled.div`
-  margin-bottom: 3em;
   p {
     color: ${({ theme }) => rgba(theme.navy, 0.7)};
     margin: -0.5em 0 0;
@@ -54,6 +54,9 @@ const FeedbackDone = styled.div`
       }
     }
   }
+  .note-wrapper {
+    margin-top: 2em;
+  }
   @keyframes check {
     from {
       stroke-dashoffset: 70;
@@ -73,11 +76,13 @@ interface FormValues {
 interface FeedbackFormProps {
   appId: string;
   appName: string;
+  showsSampleInfo: boolean;
 }
 
 export const FeedbackForm: React.FC<FeedbackFormProps> = ({
   appId,
   appName,
+  showsSampleInfo,
 }) => {
   const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
   const [authModalOpen, setAuthModalOpen] = useState<boolean>(false);
@@ -107,6 +112,10 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({
   });
 
   const handleSubmit = async (values: FormikValues) => {
+    if (showsSampleInfo) {
+      setHasSubmitted(true);
+      return;
+    }
     if (!!currentUser) {
       await axios
         .post(`${process.env.NEXT_PUBLIC_API_URL}/feedback`, {
@@ -158,6 +167,18 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({
                 The Developers will thank you!
               </motion.p>
             </motion.div>
+            {showsSampleInfo && (
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.9 }}
+                className="note-wrapper"
+              >
+                <InfoNote>
+                  You could leave your Feedback because this is a sample app.
+                </InfoNote>
+              </motion.div>
+            )}
           </FeedbackDone>
         ) : (
           <Formik
