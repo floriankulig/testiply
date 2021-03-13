@@ -93,23 +93,23 @@ export const DevAuthForm: React.FC<DevAuthFormProps> = ({
       );
       return;
     }
-    if (hasUserRegistered) {
-      const { website, name } = values;
-      axios
-        .post(`${process.env.NEXT_PUBLIC_API_URL}/promoteDev`, {
+    try {
+      if (hasUserRegistered) {
+        const { website, name } = values;
+        await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/promoteDev`, {
           userid: currentUser._id,
           website,
           name,
-        })
-        .then(async () => {
-          await renewUid(currentUser._id);
-          if (asModal) {
-            setOpen(false);
-          } else {
-            router.push("/store");
-          }
-        })
-        .catch((err) => setErrorMessage(err.response.data.err));
+        });
+      }
+      await renewUid(currentUser._id);
+      if (asModal) {
+        setOpen(false);
+      } else {
+        router.push("/store");
+      }
+    } catch (err) {
+      setErrorMessage(err.response.data.err);
     }
   };
 
