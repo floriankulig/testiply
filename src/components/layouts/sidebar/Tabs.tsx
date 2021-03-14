@@ -4,6 +4,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { rgba } from "polished";
 import { useEffect, useState } from "react";
+import { FaLock } from "react-icons/fa";
 import styled from "styled-components";
 import { theme } from "styles";
 import { UserType } from "ts";
@@ -42,7 +43,7 @@ export const TabRow = styled.li<TabRowProps>`
       height: 1.3rem;
     }
   }
-  div {
+  div.tab-background {
     position: absolute;
     left: 0;
     background: ${(p) => rgba(p.theme.primary, 0.2)};
@@ -115,6 +116,7 @@ export const Tabs: React.FC<TabsProps> = ({ setSidebarOpen, tabTypes }) => {
               {tabName}
               {active === tabName && (
                 <motion.div
+                  className="tab-background"
                   style={{
                     borderTopRightRadius: "25px",
                     borderBottomRightRadius: "25px",
