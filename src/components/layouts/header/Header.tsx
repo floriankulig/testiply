@@ -29,6 +29,10 @@ const StyledHeader = styled.header<StyledHeaderProps>`
   transition: var(--sidebarDuration) all var(--easing);
 `;
 
+const StyledMenus = styled.div`
+  margin-left: auto;
+`;
+
 interface HeaderProps {
   sidebarOpen: boolean;
   setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -63,6 +67,7 @@ export const Header: React.FC<HeaderProps> = ({
     >
       {isMobile && <Burger setSidebarOpen={setSidebarOpen} />}
       <Searchbar />
+      <StyledMenus>usermenu</StyledMenus>
     </StyledHeader>
   );
 };
