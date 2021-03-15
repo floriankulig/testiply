@@ -1,9 +1,13 @@
 import { TesterAuthForm } from "components/auth";
 import { AuthLayout } from "components/layouts";
-import { NextPage } from "next";
+import { NextPage, NextPageContext } from "next";
 import Head from "next/head";
 
-const Register: NextPage = () => {
+interface RegisterProps {
+  hasUser: boolean;
+}
+
+const Register: NextPage<RegisterProps> = () => {
   return (
     <>
       <Head>
@@ -14,6 +18,15 @@ const Register: NextPage = () => {
       </AuthLayout>
     </>
   );
+};
+
+Register.getInitialProps = ({ res, req }: NextPageContext) => {
+  const hasUser = !!req?.headers.cookie?.slice(3);
+  if (res && hasUser) {
+    res.writeHead(302, { Location: "/store" });
+    res.end();
+  }
+  return { hasUser };
 };
 
 export default Register;
