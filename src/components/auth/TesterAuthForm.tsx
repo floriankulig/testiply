@@ -12,11 +12,11 @@ import { CSSTransition } from "react-transition-group";
 import { ErrorMessage } from "components/ErrorMessage";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { capitalized } from "helpers";
+import { capitalized, oppositeFormType } from "helpers";
 import { Loading } from "components/Loading";
 import { Overlay } from "components/Overlay";
 import { useAuthValue } from "context";
-import { useOnClickOutside } from "hooks";
+import { useIsMobile, useOnClickOutside } from "hooks";
 import { SpaceBetween } from "components/SpaceBetweenRow";
 import { FaChevronRight } from "react-icons/fa";
 import { motion } from "framer-motion";
@@ -43,6 +43,7 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [type, setType] = useState<FormType>(formType);
+  const isMobile = useIsMobile(1080);
   const { renewUid } = useAuthValue();
   const ref = useRef<HTMLDivElement>(null);
   if (asModal) {
@@ -100,95 +101,109 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({
   };
 
   const body = (
-    <AuthForm
-      ref={ref}
-      as={motion.div}
-      layoutId="authForm"
-      style={{ borderRadius: "4em" }}
-    >
-      <SpaceBetween>
-        <h1>{type === "register" ? "Register" : "Login"}</h1>
-        {asModal && (
-          <SwitchFormType
-            className="link"
-            onClick={() => setType(type === "register" ? "login" : "register")}
-            onKeyDown={() =>
-              setType(type === "register" ? "login" : "register")
-            }
-            tabIndex={0}
-            aria-label="Switch form type."
-          >
-            Go to {type === "register" ? "Login" : "Register"}{" "}
-            <FaChevronRight />
-          </SwitchFormType>
-        )}
-      </SpaceBetween>
-      <Formik
-        initialValues={initialValues}
-        onSubmit={async (values) => await handleSubmit(values)}
-        validationSchema={validationSchema}
+    <>
+      <AuthForm
+        ref={ref}
+        as={motion.div}
+        layoutId="authForm"
+        style={{ borderRadius: "4em" }}
       >
-        {({ isSubmitting }) => (
-          <Form autoComplete="off">
-            <FormikTextInput
-              name="mail"
-              svg={<MdEmail />}
-              label="E-Mail Address"
-              placeholder="Enter your E-Mail Address"
-            />
-            <FormikTextInput
-              name="password"
-              label="Password"
-              placeholder="Must be at least 8 characters"
-              type={showPasswords ? "text" : "password"}
-              svg={showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
-              svgClickHandler={() => setShowPasswords((prev) => !prev)}
-            />
-            {type === "register" && (
-              <>
-                <FormikTextInput
-                  name="confirmPassword"
-                  label="Confirm Password"
-                  placeholder="Must be at least 8 characters"
-                  type={showPasswords ? "text" : "password"}
-                  svg={showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
-                  svgClickHandler={() => setShowPasswords((prev) => !prev)}
-                />
-                <FormikCheckbox name="acceptedTAS">
-                  {/*LINK NEEDS TO POINT TO TERMS AND CONDITIONS LATER*/}I agree
-                  to the&nbsp;
-                  <Link href="/register">
-                    <span className="link">Terms and Conditions</span>
-                  </Link>
-                </FormikCheckbox>
-              </>
-            )}
-            <CSSTransition
-              in={!!errorMessage}
-              classNames="pop-in"
-              timeout={250}
-              unmountOnExit
+        <SpaceBetween>
+          <h1>{type === "register" ? "Register" : "Login"}</h1>
+          {asModal && (
+            <SwitchFormType
+              className="link"
+              onClick={() => setType(oppositeFormType(type))}
+              onKeyDown={() => setType(oppositeFormType(type))}
+              tabIndex={0}
+              aria-label="Switch form type."
             >
-              <ErrorMessage>
-                <MdError />
-                {capitalized(type)} error: {errorMessage}
-              </ErrorMessage>
-            </CSSTransition>
-            <Button bold type="submit">
-              {!isSubmitting ? (
-                type === "register" ? (
-                  "Register"
-                ) : (
-                  "Log In"
-                )
-              ) : (
-                <Loading size={40} />
+              Go to {type === "register" ? "Login" : "Register"}{" "}
+              <FaChevronRight />
+            </SwitchFormType>
+          )}
+        </SpaceBetween>
+        <Formik
+          initialValues={initialValues}
+          onSubmit={async (values) => await handleSubmit(values)}
+          validationSchema={validationSchema}
+        >
+          {({ isSubmitting }) => (
+            <Form autoComplete="off">
+              <FormikTextInput
+                name="mail"
+                svg={<MdEmail />}
+                label="E-Mail Address"
+                placeholder="Enter your E-Mail Address"
+              />
+              <FormikTextInput
+                name="password"
+                label="Password"
+                placeholder="Must be at least 8 characters"
+                type={showPasswords ? "text" : "password"}
+                svg={showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
+                svgClickHandler={() => setShowPasswords((prev) => !prev)}
+              />
+              {type === "register" && (
+                <>
+                  <FormikTextInput
+                    name="confirmPassword"
+                    label="Confirm Password"
+                    placeholder="Must be at least 8 characters"
+                    type={showPasswords ? "text" : "password"}
+                    svg={showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
+                    svgClickHandler={() => setShowPasswords((prev) => !prev)}
+                  />
+                  <FormikCheckbox name="acceptedTAS">
+                    {/*LINK NEEDS TO POINT TO TERMS AND CONDITIONS LATER*/}I
+                    agree to the&nbsp;
+                    <Link href="/register">
+                      <span className="link">Terms and Conditions</span>
+                    </Link>
+                  </FormikCheckbox>
+                </>
               )}
-            </Button>
-          </Form>
-        )}
-      </Formik>
-    </AuthForm>
+              <CSSTransition
+                in={!!errorMessage}
+                classNames="pop-in"
+                timeout={250}
+                unmountOnExit
+              >
+                <ErrorMessage>
+                  <MdError />
+                  {capitalized(type)} error: {errorMessage}
+                </ErrorMessage>
+              </CSSTransition>
+              <Button bold type="submit">
+                {!isSubmitting ? (
+                  type === "register" ? (
+                    "Register"
+                  ) : (
+                    "Log In"
+                  )
+                ) : (
+                  <Loading size={40} />
+                )}
+              </Button>
+            </Form>
+          )}
+        </Formik>
+      </AuthForm>
+      {type === "register" && isMobile && !asModal && (
+        <>
+          <h2>Want to publish your own app?</h2>
+          <Button
+            color="black"
+            big
+            bold
+            onClick={() => router.push("dev/register")}
+            onKeyDown={() => router.push("dev/register")}
+          >
+            Register as a Publisher
+          </Button>
+        </>
+      )}
+    </>
   );
 
   if (asModal) {
