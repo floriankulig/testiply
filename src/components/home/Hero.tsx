@@ -139,7 +139,7 @@ const Content = styled.div`
 
   p {
     margin-top: 25px;
-    color: #cacaca;
+    color: #c2c2c2;
     margin: 0;
     margin-bottom: 1.5em;
     max-width: clamp(200px, 75vw, 450px);
