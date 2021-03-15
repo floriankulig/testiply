@@ -7,6 +7,8 @@ import { useFiltersValue, useSelectedTabValue } from "context";
 import { CSSTransition } from "react-transition-group";
 import { useIsMobile } from "hooks";
 import { SVGWrapper } from "components/forms";
+import { useState } from "react";
+import { capitalized } from "helpers";
 
 interface SearchbarProps {
   hasInput: boolean;
@@ -14,8 +16,7 @@ interface SearchbarProps {
 
 const StyledSearchbar = styled.form<SearchbarProps>`
   height: 50px;
-  width: clamp(300px, 40%, 420px);
-  max-width: 100%;
+
   margin-right: 0.5em;
   background: var(--layout-nav-background);
   border: 2px solid var(--layout-content-background);
@@ -65,7 +66,8 @@ const StyledSearchbar = styled.form<SearchbarProps>`
 `;
 
 const SearchbarInput = styled.input`
-  width: 100%;
+  width: clamp(300px, 40%, 420px);
+  max-width: 100%;
   height: 100%;
   font-family: "Roboto";
   font-weight: bold;
@@ -85,8 +87,13 @@ export const Searchbar: React.FC = () => {
   const { selectedTab } = useSelectedTabValue();
   const { searchQuery, setSearchQuery } = useFiltersValue();
   const isMobile = useIsMobile(1200);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (
+    e:
+      | React.MouseEvent<HTMLDivElement | HTMLButtonElement, MouseEvent>
+      | React.KeyboardEvent<HTMLDivElement | HTMLButtonElement>
+  ) => {
     e.preventDefault();
     console.log("submitted");
   };
@@ -109,9 +116,7 @@ export const Searchbar: React.FC = () => {
           <IoSearch />
         </SVGWrapper>
         <SearchbarInput
-          placeholder={`Type to search in ${
-            selectedTab[0].toUpperCase() + selectedTab.slice(1)
-          }`}
+          placeholder={`Type to search in ${capitalized(selectedTab)}`}
           type="text"
           value={searchQuery}
           onChange={(e) => handleType(e)}
