@@ -93,6 +93,7 @@ export const Searchbar: React.FC = () => {
     e:
       | React.MouseEvent<HTMLDivElement | HTMLButtonElement, MouseEvent>
       | React.KeyboardEvent<HTMLDivElement | HTMLButtonElement>
+      | React.FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
     console.log("submitted");
