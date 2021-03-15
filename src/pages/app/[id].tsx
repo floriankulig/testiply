@@ -44,7 +44,6 @@ const AppDetail: NextPage<AppDetailProps> = ({
     name,
     description,
     platforms,
-    screenshots,
     rating,
     downloads,
     devName,
@@ -108,7 +107,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
             <Image
               width={200}
               height={200}
-              src={`https://media.beta-app-store.com/apps/icon/${_id}.webp`}
+              src={`https://api.testiply.n-mayr.net/static/${_id}/icon.png`}
               alt={`${name} app icon`}
             />
           </IconWrapper>
@@ -162,10 +161,10 @@ const AppDetail: NextPage<AppDetailProps> = ({
           Screenshots
         </motion.h1>
         <div className="screenshots">
-          {screenshots?.map((screenshot, i) => (
+          {[...Array(3)]?.map((_, i) => (
             <Screenshot
               key={`screenshot_${_id}_${i}`}
-              src={`https://media.beta-app-store.com/apps/screenshots/${_id}/${screenshot}`}
+              src={`https://api.testiply.n-mayr.net/static/${_id}/${i + 1}.png`}
               alt={`Screenshot ${i + 1} of ${name}`}
               style={{ animationDelay: `${i * 30 + 500}ms` }}
             />
