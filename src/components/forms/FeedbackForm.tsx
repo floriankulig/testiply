@@ -211,9 +211,9 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({
                           style={{ fontSize: "50px", width: "min-content" }}
                           clickable
                         >
-                          <div
+                          <motion.div
+                            animate={{ width: `${field.value * 20}%` }}
                             className="fill-ratings"
-                            style={{ width: `${field.value * 20}%` }}
                           >
                             <span>
                               {[...Array(5)].map((_, i) => (
@@ -230,7 +230,7 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({
                                 </i>
                               ))}
                             </span>
-                          </div>
+                          </motion.div>
                           <div className="empty-ratings">
                             <span>
                               {[...Array(5)].map((_, i) => (
