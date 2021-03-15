@@ -144,6 +144,8 @@ const Content = styled.div`
     margin-bottom: 1.5em;
     max-width: clamp(200px, 75vw, 450px);
     user-select: text;
+    opacity: 0;
+    animation: fadeUp 0.5s var(--easing) forwards 0.3s;
 
     a {
       text-decoration: underline;
@@ -154,7 +156,7 @@ const Content = styled.div`
     box-shadow: 4px 5px 15px rgba(110, 127, 218, 0.25);
     font-size: clamp(1rem, 2vw, 1.2rem);
     opacity: 0;
-    animation: fadeUp 0.5s var(--easing) forwards 0.3s;
+    animation: fadeUp 0.5s var(--easing) forwards 0.4s;
   }
 `;
 
