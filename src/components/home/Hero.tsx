@@ -143,6 +143,7 @@ const Content = styled.div`
     margin: 0;
     margin-bottom: 1.5em;
     max-width: clamp(200px, 75vw, 450px);
+    user-select: text;
 
     a {
       text-decoration: underline;
