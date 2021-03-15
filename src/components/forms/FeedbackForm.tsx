@@ -212,6 +212,7 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({
                           clickable
                         >
                           <motion.div
+                            initial={{ width: 0 }}
                             animate={{ width: `${field.value * 20}%` }}
                             className="fill-ratings"
                           >
