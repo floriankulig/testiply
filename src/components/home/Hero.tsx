@@ -128,13 +128,24 @@ const Content = styled.div`
   h1 {
     color: white;
     font-size: clamp(3.3rem, 6.3vw, 5rem);
-    margin: 0 0 0.25em 0;
+    margin: 0 0 0.2em 0;
     opacity: 0;
     animation: fadeUp 0.5s var(--easing) forwards 0.2s;
     &:last-of-type {
       color: #ff0000;
-      margin-bottom: 0.5em;
       animation-delay: 0.25s;
+    }
+  }
+
+  p {
+    margin-top: 25px;
+    color: #cacaca;
+    margin: 0;
+    margin-bottom: 1.5em;
+    max-width: clamp(200px, 75vw, 450px);
+
+    a {
+      text-decoration: underline;
     }
   }
 
@@ -191,6 +202,18 @@ export const Hero: React.FC = () => {
       <Content>
         <h1>Test Apps.</h1>
         <h1>Give Feedback.</h1>
+        <p>
+          Currently, only beta apps on iOS and macOS platforms are supported.
+          You can give users access to your app via a{" "}
+          <a
+            href="https://developer.apple.com/testflight/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            TestFlight
+          </a>{" "}
+          link.
+        </p>
         <Link href="/store">
           <Button rounded bold color="white">
             View Apps
