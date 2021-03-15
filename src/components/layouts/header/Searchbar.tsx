@@ -5,26 +5,39 @@ import { rgba } from "polished";
 import { Button } from "components/Button";
 import { useFiltersValue, useSelectedTabValue } from "context";
 import { CSSTransition } from "react-transition-group";
-import { useIsMobile } from "hooks";
+import { useIsMobile, useOnClickOutside } from "hooks";
 import { SVGWrapper } from "components/forms";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { capitalized } from "helpers";
+import { AnimatePresence } from "framer-motion";
 
 interface SearchbarProps {
   hasInput: boolean;
+  open: boolean;
 }
 
 const StyledSearchbar = styled.form<SearchbarProps>`
   height: 50px;
-
+  width: ${(p) => p.open && "clamp(300px, 40%, 420px)"};
+  padding: 5px ${(p) => (p.open ? "20px" : "12px")};
+  position: ${(p) => (p.open ? "absolute" : "relative")};
+  margin-left: ${(p) => p.open && "calc(30px + 1.5em)"};
+  z-index: 99;
+  @media (${({ theme }) => theme.bp.small}) {
+    width: clamp(300px, 40%, 420px);
+    padding: 5px 20px;
+    position: relative;
+    margin-left: 0;
+  }
+  max-width: 100%;
   margin-right: 0.5em;
   background: var(--layout-nav-background);
   border: 2px solid var(--layout-content-background);
   border-radius: 20px;
   display: flex;
-  padding: 5px 20px;
   align-items: center;
-  transition: 0.5s all;
+  transition: 0.5s;
+  transition-property: width, box-shadow;
   box-shadow: ${(p) =>
     p.hasInput ? `0px 2px 10px ${rgba(0, 0, 0, 0.05)}` : "none"};
 
@@ -66,8 +79,7 @@ const StyledSearchbar = styled.form<SearchbarProps>`
 `;
 
 const SearchbarInput = styled.input`
-  width: clamp(300px, 40%, 420px);
-  max-width: 100%;
+  width: 100%;
   height: 100%;
   font-family: "Roboto";
   font-weight: bold;
@@ -86,8 +98,11 @@ const SearchbarInput = styled.input`
 export const Searchbar: React.FC = () => {
   const { selectedTab } = useSelectedTabValue();
   const { searchQuery, setSearchQuery } = useFiltersValue();
-  const isMobile = useIsMobile(1200);
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const isMobile = useIsMobile(720);
+  const [open, setOpen] = useState<boolean>(false);
+  const inputVisible = open || !isMobile;
+  const ref = useRef<HTMLFormElement>(null);
+  useOnClickOutside(ref, () => setOpen(false));
 
   const handleSubmit = (
     e:
@@ -108,21 +123,28 @@ export const Searchbar: React.FC = () => {
       <StyledSearchbar
         hasInput={!!searchQuery}
         onSubmit={(e) => handleSubmit(e)}
+        open={open}
+        ref={ref}
       >
         <SVGWrapper
           clickable
-          onClick={(e) => handleSubmit(e)}
-          onKeyDown={(e) => handleSubmit(e)}
+          style={{ marginRight: !inputVisible && 0 }}
+          onClick={(e) => (inputVisible ? handleSubmit(e) : setOpen(!open))}
+          onKeyDown={(e) => (inputVisible ? handleSubmit(e) : setOpen(!open))}
         >
           <IoSearch />
         </SVGWrapper>
-        <SearchbarInput
-          placeholder={`Type to search in ${capitalized(selectedTab)}`}
-          type="text"
-          value={searchQuery}
-          onChange={(e) => handleType(e)}
-        />
-        {!!searchQuery && (
+        <AnimatePresence>
+          {inputVisible && (
+            <SearchbarInput
+              placeholder={`Type to search in ${capitalized(selectedTab)}`}
+              type="text"
+              value={searchQuery}
+              onChange={(e) => handleType(e)}
+            />
+          )}
+        </AnimatePresence>
+        {!!searchQuery && inputVisible && (
           <div
             className="search-cancel"
             onClick={() => setSearchQuery("")}
