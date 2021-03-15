@@ -104,7 +104,7 @@ export const FormikTypedDropdown = ({
       <AnimatePresence>
         {field.value.length < maxValues && (
           <motion.div
-            initial={{ scale: 0 }}
+            initial={{ scale: 1 }}
             animate={{ scale: 1 }}
             exit={{ scale: 0 }}
             ref={dropdownRef}
