@@ -164,7 +164,7 @@ export const AppTile: React.FC<AppTileProps> = ({
             <Image
               width={85}
               height={85}
-              src={`https://media.beta-app-store.com/apps/icon/${_id}.webp`}
+              src={`https://api.testiply.n-mayr.net/static/${_id}/icon.png`}
               className="icon"
               alt={`${name} app icon`}
             />
