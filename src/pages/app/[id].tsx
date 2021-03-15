@@ -70,7 +70,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
 
   //helper variables
   const cantLeaveFeedback =
-    !currentUser?.ownedApps.find((app) => app.id === _id) && !isSample;
+    !currentUser?.ownedApps?.find((app) => app.id === _id) && !isSample;
 
   //event handlers
   const handleDownload = (): void => {
