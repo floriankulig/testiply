@@ -219,7 +219,9 @@ const AppDetail: NextPage<AppDetailProps> = ({
                     marginRight: "1em",
                   }}
                 />
-                Leave your feedback
+                {rating < 1
+                  ? "Be the first to leave your feedback"
+                  : "Leave your feedback"}
               </motion.span>
             </Button>
           </div>
