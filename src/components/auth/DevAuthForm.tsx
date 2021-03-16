@@ -101,8 +101,20 @@ export const DevAuthForm: React.FC<DevAuthFormProps> = ({
           website,
           name,
         });
+        await renewUid(currentUser._id);
+      } else {
+        const { website, name, email, password } = values;
+        const res = await axios.post(
+          `${process.env.NEXT_PUBLIC_API_URL}/register`,
+          {
+            website,
+            name,
+            mail: email,
+            password,
+          }
+        );
+        await renewUid(res.data.userId);
       }
-      await renewUid(currentUser._id);
       if (asModal) {
         setOpen(false);
       } else {
