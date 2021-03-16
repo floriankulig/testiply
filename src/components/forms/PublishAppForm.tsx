@@ -48,8 +48,8 @@ const metaValidationSchema = Yup.object({
     .of(Yup.object({ id: Yup.string(), displayName: Yup.string() }))
     .required(),
   categories: Yup.array()
-    .of(Yup.object({ id: Yup.string(), displayName: Yup.string() }))
-    .required()
+    .of(Yup.object().shape({ id: Yup.string(), displayName: Yup.string() }))
+    .min(1, "Must select at least 1 category")
     .max(4, "Can't select more than 4 categories"),
 });
 const filesValidationSchema = Yup.object({
