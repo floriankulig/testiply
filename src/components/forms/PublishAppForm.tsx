@@ -11,10 +11,6 @@ import { useAuthValue } from "context";
 import { DevAuthForm, TesterAuthForm } from "components/auth";
 import { useCannotScroll } from "hooks";
 
-const availablePlatforms = platforms.filter(
-  (plat) => plat.id === "ios" || plat.id === "macos"
-);
-
 interface FormValues {
   name: string;
   description: string;
@@ -44,17 +40,12 @@ const baseValidationSchema = Yup.object({
     .max(1028, "Can't be longer than 1028 characters"),
 });
 const metaValidationSchema = Yup.object({
-  platforms: Yup.array()
-    .of(Yup.object({ id: Yup.string(), displayName: Yup.string() }))
-    .required(),
+  testflightIos: Yup.string(),
+  testflightMacos: Yup.string(),
   categories: Yup.array()
     .of(Yup.object().shape({ id: Yup.string(), displayName: Yup.string() }))
     .min(1, "Must select at least 1 category")
     .max(4, "Can't select more than 4 categories"),
-});
-const filesValidationSchema = Yup.object({
-  testflightIos: Yup.string(),
-  testflightMacos: Yup.string(),
 });
 
 export const PublishAppForm: React.FC = () => {
@@ -109,8 +100,6 @@ export const PublishAppForm: React.FC = () => {
             values={categories}
             maxValues={4}
           />
-        </FormikStep>
-        <FormikStep validationSchema={filesValidationSchema}>
           <FormikTextInput
             name="testflightIos"
             label="TestFlight Link for iOS"
