@@ -14,6 +14,7 @@ import { FormikTextArea } from "./FormikTextArea";
 import { FormikSelectionInput } from "./FormikSelectionInput";
 import { FormikCheckbox } from "./FormikCheckbox";
 import { FormikTypedDropdown } from "./FormikTypedDropdown";
+import { FormikFileUpload } from "./FormikFileUpload";
 import { FeedbackForm } from "./FeedbackForm";
 import { PublishAppForm } from "./PublishAppForm";
 
@@ -35,4 +36,5 @@ export {
   PublishAppForm,
   SwitchFormType,
   FormikTypedDropdown,
+  FormikFileUpload,
 };
