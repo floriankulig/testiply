@@ -1,21 +1,21 @@
 import { FormikValues } from "formik";
 import { FormikStepper } from "./FormikStepper";
 import * as Yup from "yup";
-import { PlatformID, CategoryID } from "ts/types";
 import { FormikStep, FormikTextInput } from ".";
 import { FormikTextArea } from "./FormikTextArea";
 import { FormikTypedDropdown } from "./FormikTypedDropdown";
-import { categories, platforms } from "ts";
+import { categories, CategoryID } from "ts";
 import { useState } from "react";
 import { useAuthValue } from "context";
 import { DevAuthForm, TesterAuthForm } from "components/auth";
 import { useCannotScroll } from "hooks";
+import { FormikFileUpload } from "./FormikFileUpload";
 
 interface FormValues {
   name: string;
   description: string;
-  platforms: PlatformID[];
   categories: CategoryID[];
+  screenshots: File[];
   testflightIos: string;
   testflightMacos: string;
 }
@@ -23,8 +23,8 @@ interface FormValues {
 const initialValues: FormValues = {
   name: "",
   description: "",
-  platforms: [],
   categories: [],
+  screenshots: [],
   testflightIos: "",
   testflightMacos: "",
 };
@@ -46,6 +46,12 @@ const metaValidationSchema = Yup.object({
     .of(Yup.object().shape({ id: Yup.string(), displayName: Yup.string() }))
     .min(1, "Must select at least 1 category")
     .max(4, "Can't select more than 4 categories"),
+});
+
+const fileValidationSchema = Yup.object({
+  screenshots: Yup.array()
+    .min(3, "Must select 3 screenshots")
+    .max(3, "Can't select more than 3 screenshots"),
 });
 
 export const PublishAppForm: React.FC = () => {
@@ -92,6 +98,9 @@ export const PublishAppForm: React.FC = () => {
             placeholder="Describe your app's functionality"
           />
         </FormikStep>
+        <FormikStep validationSchema={fileValidationSchema}>
+          <FormikFileUpload maxFiles={3} name="screenshots" />
+        </FormikStep>
         <FormikStep validationSchema={metaValidationSchema}>
           <FormikTypedDropdown
             name="categories"
@@ -117,7 +126,7 @@ export const PublishAppForm: React.FC = () => {
         <TesterAuthForm formType="login" asModal setOpen={setLoginModalOpen} />
       )}
       {devModalOpen && (
-        <DevAuthForm hasUserRegistered asModal setOpen={setLoginModalOpen} />
+        <DevAuthForm hasUserRegistered asModal setOpen={setDevModalOpen} />
       )}
     </>
   );
