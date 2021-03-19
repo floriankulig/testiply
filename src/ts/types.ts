@@ -4,7 +4,7 @@ export type PlatformID =
   | "ios"
   | "android"
   | "windows"
-  | "macos"
+  | "ipados"
   | "linux"
   | "all";
 
@@ -58,7 +58,7 @@ export interface App {
   devName: string;
   devWebsite: string;
   testflightIos?: string;
-  testflightMacos?: string;
+  testflightIpados?: string;
   isSample?: boolean;
   _id: string;
 }
@@ -67,7 +67,7 @@ export interface User {
   mail: string;
   is_dev: boolean;
   _id: string;
-  ownedApps: Array<{ id: string; hasLeftFeedback: boolean }>;
+  downloadedApps: Array<{ id: string; hasLeftFeedback: boolean }>;
   website: string;
   name: string;
 }
