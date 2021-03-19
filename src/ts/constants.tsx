@@ -41,7 +41,7 @@ export const platforms: Platform[] = [
   { displayName: "iOS", id: "ios" },
   { displayName: "Android", id: "android" },
   { displayName: "Windows", id: "windows" },
-  { displayName: "MacOS", id: "macos" },
+  { displayName: "iPadOS", id: "ipados" },
   { displayName: "Linux", id: "linux" },
   { displayName: "All", id: "all" },
 ];
