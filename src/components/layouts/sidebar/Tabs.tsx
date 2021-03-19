@@ -1,10 +1,9 @@
 import { useSelectedTabValue } from "context";
-import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import Head from "next/head";
 import Link from "next/link";
 import { rgba } from "polished";
 import { useEffect, useState } from "react";
-import { FaLock } from "react-icons/fa";
 import styled from "styled-components";
 import { theme } from "styles";
 import { UserType } from "ts";
