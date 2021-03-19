@@ -8,7 +8,6 @@ import {
 } from "react-icons/ai";
 import { FaComment, FaRegComment, FaRegNewspaper } from "react-icons/fa";
 import { HiOutlinePhotograph } from "react-icons/hi";
-import { GiArchiveResearch } from "react-icons/gi";
 import {
   IoGameControllerOutline,
   IoGameController,
@@ -36,6 +35,7 @@ import {
 import { BsCreditCard, BsGraphUp } from "react-icons/bs";
 import { Platform, Category } from ".";
 import { GoPackage } from "react-icons/go";
+import { FiLock } from "react-icons/fi";
 
 export const platforms: Platform[] = [
   { displayName: "iOS", id: "ios" },
@@ -133,7 +133,8 @@ export const categories: Category[] = [
 
 export const testerTabNames = ["today", "apps", "games", "categories"];
 export const testerTabIcons = [
-  [<AiOutlineHome />, <AiFillHome />],
+  // [<AiOutlineHome />, <AiFillHome />],
+  [<FiLock />, <FiLock />],
   [<AiOutlineAppstore />, <AiFillAppstore />],
   [<IoGameControllerOutline />, <IoGameController />],
   [<RiStackLine />, <RiStackFill />],
@@ -145,5 +146,3 @@ export const devTabIcons = [
   [<AiOutlineAppstore />, <AiFillAppstore />],
   [<FaRegComment />, <FaComment />],
 ];
-
-export const api_url = "https://api.beta-app-store.com";
