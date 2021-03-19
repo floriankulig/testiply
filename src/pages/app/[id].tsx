@@ -50,7 +50,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
     devWebsite,
     isSample,
     testflightIos,
-    testflightMacos,
+    testflightIpados,
     _id,
   },
 }) => {
@@ -70,7 +70,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
 
   //helper variables
   const cantLeaveFeedback =
-    !currentUser?.ownedApps?.find((app) => app.id === _id) && !isSample;
+    !currentUser?.downloadedApps?.find((app) => app.id === _id) && !isSample;
 
   //event handlers
   const handleDownload = (): void => {
@@ -80,8 +80,8 @@ const AppDetail: NextPage<AppDetailProps> = ({
     }
     if (downloadPlatform.id === "ios") {
       location.href = testflightIos;
-    } else if (downloadPlatform.id === "macos") {
-      location.href = testflightMacos;
+    } else if (downloadPlatform.id === "ipados") {
+      location.href = testflightIpados;
     }
   };
 
