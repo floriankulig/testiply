@@ -120,7 +120,7 @@ export const PublishAppForm: React.FC = () => {
           <FormikTextInput
             name="testflightIpados"
             label="TestFlight Link for iPadOS"
-            placeholder="Provide your TestFlight link for MacOS"
+            placeholder="Provide your TestFlight link for iPadOS"
           />
         </FormikStep>
       </FormikStepper>
