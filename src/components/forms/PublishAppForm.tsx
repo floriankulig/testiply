@@ -1,15 +1,18 @@
 import { FormikValues } from "formik";
 import { FormikStepper } from "./FormikStepper";
 import * as Yup from "yup";
-import { FormikStep, FormikTextInput } from ".";
-import { FormikTextArea } from "./FormikTextArea";
-import { FormikTypedDropdown } from "./FormikTypedDropdown";
+import {
+  FormikStep,
+  FormikTextInput,
+  FormikFileUpload,
+  FormikTextArea,
+  FormikTypedDropdown,
+} from ".";
 import { categories, CategoryID } from "ts";
 import { useState } from "react";
 import { useAuthValue } from "context";
 import { DevAuthForm, TesterAuthForm } from "components/auth";
 import { useCannotScroll } from "hooks";
-import { FormikFileUpload } from "./FormikFileUpload";
 
 interface FormValues {
   name: string;
@@ -17,7 +20,7 @@ interface FormValues {
   categories: CategoryID[];
   screenshots: File[];
   testflightIos: string;
-  testflightMacos: string;
+  testflightIpados: string;
 }
 
 const initialValues: FormValues = {
@@ -26,7 +29,7 @@ const initialValues: FormValues = {
   categories: [],
   screenshots: [],
   testflightIos: "",
-  testflightMacos: "",
+  testflightIpados: "",
 };
 
 const baseValidationSchema = Yup.object({
@@ -63,7 +66,7 @@ export const PublishAppForm: React.FC = () => {
 
   const handleSubmit = async (values: FormikValues) => {
     setErrorMessage("");
-    if (!values.testflightIos && !values.testflightMacos) {
+    if (!values.testflightIos && !values.testflightIpados) {
       setErrorMessage("Must provide at least one TestFlight link.");
       return;
     }
@@ -115,8 +118,8 @@ export const PublishAppForm: React.FC = () => {
             placeholder="Provide your TestFlight link for iOS"
           />
           <FormikTextInput
-            name="testflightMacos"
-            label="TestFlight Link for MacOS"
+            name="testflightIpados"
+            label="TestFlight Link for iPadOS"
             placeholder="Provide your TestFlight link for MacOS"
           />
         </FormikStep>
