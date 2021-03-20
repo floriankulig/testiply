@@ -167,14 +167,16 @@ export const DevAuthForm: React.FC<DevAuthFormProps> = ({
                 svgClickHandler={() => setShowPasswords((prev) => !prev)}
               />
             </motion.div>
-            <FormikTextInput
-              name="confirmPassword"
-              label="Confirm Password"
-              placeholder="Must be at least 8 characters"
-              type={showPasswords ? "text" : "password"}
-              svg={showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
-              svgClickHandler={() => setShowPasswords((prev) => !prev)}
-            />
+            <motion.div layoutId="authPasswordConfirmField">
+              <FormikTextInput
+                name="confirmPassword"
+                label="Confirm Password"
+                placeholder="Must be at least 8 characters"
+                type={showPasswords ? "text" : "password"}
+                svg={showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
+                svgClickHandler={() => setShowPasswords((prev) => !prev)}
+              />
+            </motion.div>
           </FormikStep>
           <FormikStep validationSchema={metaValidationSchema}>
             <FormikTextInput
