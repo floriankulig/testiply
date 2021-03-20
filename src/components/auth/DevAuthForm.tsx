@@ -149,20 +149,24 @@ export const DevAuthForm: React.FC<DevAuthFormProps> = ({
           onSubmit={async (values) => await handleSubmit(values)}
         >
           <FormikStep validationSchema={baseValidationSchema}>
-            <FormikTextInput
-              name="email"
-              svg={<MdEmail />}
-              label="E-Mail Address"
-              placeholder="Enter your E-Mail Address"
-            />
-            <FormikTextInput
-              name="password"
-              label="Password"
-              placeholder="Must be at least 8 characters"
-              type={showPasswords ? "text" : "password"}
-              svg={showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
-              svgClickHandler={() => setShowPasswords((prev) => !prev)}
-            />
+            <motion.div layoutId="authEmailField">
+              <FormikTextInput
+                name="email"
+                svg={<MdEmail />}
+                label="E-Mail Address"
+                placeholder="Enter your E-Mail Address"
+              />
+            </motion.div>
+            <motion.div layoutId="authPasswordField">
+              <FormikTextInput
+                name="password"
+                label="Password"
+                placeholder="Must be at least 8 characters"
+                type={showPasswords ? "text" : "password"}
+                svg={showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
+                svgClickHandler={() => setShowPasswords((prev) => !prev)}
+              />
+            </motion.div>
             <FormikTextInput
               name="confirmPassword"
               label="Confirm Password"
