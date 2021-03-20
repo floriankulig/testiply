@@ -206,7 +206,7 @@ export const Hero: React.FC = () => {
         <h1>Test Apps.</h1>
         <h1>Give Feedback.</h1>
         <p>
-          Currently, only beta apps on iOS and macOS platforms are supported.
+          Currently, only beta apps on iOS and iPadOS platforms are supported.
           You can give users access to your app via a{" "}
           <a
             href="https://developer.apple.com/testflight/"
