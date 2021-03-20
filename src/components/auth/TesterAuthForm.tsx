@@ -130,39 +130,47 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({
         >
           {({ isSubmitting }) => (
             <Form autoComplete="off">
-              <FormikTextInput
-                name="mail"
-                svg={<MdEmail />}
-                label="E-Mail Address"
-                placeholder="Enter your E-Mail Address"
-              />
-              <FormikTextInput
-                name="password"
-                label="Password"
-                placeholder="Must be at least 8 characters"
-                type={showPasswords ? "text" : "password"}
-                svg={showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
-                svgClickHandler={() => setShowPasswords((prev) => !prev)}
-              />
-              {type === "register" && (
-                <>
-                  <FormikTextInput
-                    name="confirmPassword"
-                    label="Confirm Password"
-                    placeholder="Must be at least 8 characters"
-                    type={showPasswords ? "text" : "password"}
-                    svg={showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
-                    svgClickHandler={() => setShowPasswords((prev) => !prev)}
-                  />
-                  <FormikCheckbox name="acceptedTAS">
-                    {/*LINK NEEDS TO POINT TO TERMS AND CONDITIONS LATER*/}I
-                    agree to the&nbsp;
-                    <Link href="/register">
-                      <span className="link">Terms and Conditions</span>
-                    </Link>
-                  </FormikCheckbox>
-                </>
-              )}
+              <motion.div layoutId="authEmailField">
+                <FormikTextInput
+                  name="mail"
+                  svg={<MdEmail />}
+                  label="E-Mail Address"
+                  placeholder="Enter your E-Mail Address"
+                />
+              </motion.div>
+              <motion.div layoutId="authPasswordField">
+                <FormikTextInput
+                  name="password"
+                  label="Password"
+                  placeholder="Must be at least 8 characters"
+                  type={showPasswords ? "text" : "password"}
+                  svg={showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />}
+                  svgClickHandler={() => setShowPasswords((prev) => !prev)}
+                />
+              </motion.div>
+              <motion.div layoutId="authPasswordConfirmField">
+                {type === "register" && (
+                  <>
+                    <FormikTextInput
+                      name="confirmPassword"
+                      label="Confirm Password"
+                      placeholder="Must be at least 8 characters"
+                      type={showPasswords ? "text" : "password"}
+                      svg={
+                        showPasswords ? <AiFillEyeInvisible /> : <AiFillEye />
+                      }
+                      svgClickHandler={() => setShowPasswords((prev) => !prev)}
+                    />
+                    <FormikCheckbox name="acceptedTAS">
+                      {/*LINK NEEDS TO POINT TO TERMS AND CONDITIONS LATER*/}I
+                      agree to the&nbsp;
+                      <Link href="/register">
+                        <span className="link">Terms and Conditions</span>
+                      </Link>
+                    </FormikCheckbox>
+                  </>
+                )}
+              </motion.div>
               <CSSTransition
                 in={!!errorMessage}
                 classNames="pop-in"
