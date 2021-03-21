@@ -1,9 +1,7 @@
-import { capitalized } from "helpers";
 import { useOnClickOutside } from "hooks";
 import { darken } from "polished";
 import { useEffect, useRef, useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
-import { CSSTransition } from "react-transition-group";
 import styled from "styled-components";
 import {
   StyledFormInput,
@@ -11,6 +9,7 @@ import {
   StyledTextField,
   StyledMetaInputInfo,
 } from "components/forms";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Dropdown = styled.ul`
   position: absolute;
@@ -37,25 +36,6 @@ const Dropdown = styled.ul`
       background: ${({ theme }) => darken(0.05, theme.layoutContentBg)};
     }
     transition: 0.5s background;
-  }
-
-  &.dropdown-enter {
-    opacity: 0;
-    transform: translateY(-50%) scaleY(0.1);
-  }
-  &.dropdown-enter-active {
-    opacity: 1;
-    transform: translateY(0) scaleY(1);
-    transition: 0.25s all var(--easing);
-  }
-  &.dropdown-exit {
-    opacity: 1;
-    transform: translateY(0) scaleY(1);
-  }
-  &.dropdown-exit-active {
-    opacity: 0;
-    transform: translateY(-50%) scaleY(0.1);
-    transition: 0.25s all var(--easing);
   }
 `;
 
@@ -135,35 +115,37 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({
             <FaChevronDown />
           </SVGWrapper>
         </StyledTextField>
-        <CSSTransition
-          in={dropdownShouldOpen}
-          classNames="dropdown"
-          timeout={300}
-          unmountOnExit
-        >
-          <Dropdown>
-            {values &&
-              values
-                .filter((value) => value.id !== selection.id)
-                .map((value) => (
-                  <li
-                    key={value.id}
-                    onClick={() => handleSelectionChange(value)}
-                    onKeyDown={() => handleSelectionChange(value)}
-                  >
-                    {value.displayName}
-                  </li>
-                ))}
-            {optional && selection !== null && (
-              <li
-                onClick={() => handleSelectionChange(null)}
-                onKeyDown={() => handleSelectionChange(null)}
-              >
-                No Selection
-              </li>
-            )}
-          </Dropdown>
-        </CSSTransition>
+        <AnimatePresence>
+          {dropdownShouldOpen && (
+            <Dropdown
+              as={motion.ul}
+              initial={{ scaleY: 0, y: "-45%", opacity: 0 }}
+              animate={{ scaleY: 1, y: 0, opacity: 1 }}
+              exit={{ scaleY: 0, y: "-45%", opacity: 0 }}
+            >
+              {values &&
+                values
+                  .filter((value) => value.id !== selection.id)
+                  .map((value) => (
+                    <li
+                      key={value.id}
+                      onClick={() => handleSelectionChange(value)}
+                      onKeyDown={() => handleSelectionChange(value)}
+                    >
+                      {value.displayName}
+                    </li>
+                  ))}
+              {optional && selection !== null && (
+                <li
+                  onClick={() => handleSelectionChange(null)}
+                  onKeyDown={() => handleSelectionChange(null)}
+                >
+                  No Selection
+                </li>
+              )}
+            </Dropdown>
+          )}
+        </AnimatePresence>
       </div>
     </StyledFormInput>
   );
