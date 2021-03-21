@@ -77,17 +77,19 @@ interface FeedbackFormProps {
   appId: string;
   appName: string;
   showsSampleInfo: boolean;
+  devId: string;
 }
 
 export const FeedbackForm: React.FC<FeedbackFormProps> = ({
   appId,
   appName,
   showsSampleInfo,
+  devId,
 }) => {
   const [hasSubmitted, setHasSubmitted] = useState<boolean>(false);
   const [authModalOpen, setAuthModalOpen] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const { currentUser } = useAuthValue();
+  const { currentUser, renewUid } = useAuthValue();
 
   useCannotScroll(authModalOpen);
 
@@ -117,6 +119,10 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({
       return;
     }
     if (!!currentUser) {
+      if (currentUser._id === devId) {
+        setHasSubmitted(true);
+        return;
+      }
       await axios
         .post(`${process.env.NEXT_PUBLIC_API_URL}/feedback`, {
           ...values,
@@ -126,6 +132,7 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({
         })
         .then(() => {
           setHasSubmitted(true);
+          renewUid(currentUser._id);
         })
         .catch((err) => {
           setErrorMessage(err.response.data.err);

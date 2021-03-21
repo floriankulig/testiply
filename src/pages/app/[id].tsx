@@ -48,6 +48,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
     downloads,
     devName,
     devWebsite,
+    devId,
     isSample,
     testflightIos,
     testflightIpados,
@@ -70,7 +71,11 @@ const AppDetail: NextPage<AppDetailProps> = ({
 
   //helper variables
   const cantLeaveFeedback =
-    !currentUser?.downloadedApps?.find((app) => app.id === _id) && !isSample;
+    currentUser &&
+    !currentUser.downloadedApps?.find((app) => app.id === _id) &&
+    !currentUser.downloadedApps?.find((app) => app.id === _id)
+      .hasLeftFeedback &&
+    !isSample;
 
   //event handlers
   const handleDownload = (): void => {
@@ -188,42 +193,49 @@ const AppDetail: NextPage<AppDetailProps> = ({
           </RatingBars>
         </RatingContent> */}
         {feedbackFormOpen ? (
-          <FeedbackForm appId={_id} appName={name} showsSampleInfo={isSample} />
+          <FeedbackForm
+            appId={_id}
+            appName={name}
+            devId={devId}
+            showsSampleInfo={isSample}
+          />
         ) : (
           <div className="full-grid-width">
-            <Button
-              big
-              bold
-              onClick={() => setFeedbackFormOpen(true)}
-              onKeyDown={() => setFeedbackFormOpen(true)}
-              aria-label="Open Feedback Modal"
-              tabIndex={0}
-              disabled={cantLeaveFeedback}
-              basic
-            >
-              <motion.span
-                layoutId="leaveFeedbackHead"
-                style={{
-                  marginLeft: "40px",
-                  position: "relative",
-                  display: "flex",
-                  alignItems: "center",
-                }}
+            {currentUser?._id === devId ? undefined : (
+              <Button
+                big
+                bold
+                onClick={() => setFeedbackFormOpen(true)}
+                onKeyDown={() => setFeedbackFormOpen(true)}
+                aria-label="Open Feedback Modal"
+                tabIndex={0}
+                disabled={cantLeaveFeedback}
+                basic
               >
-                <BiMessageAltDetail
+                <motion.span
+                  layoutId="leaveFeedbackHead"
                   style={{
-                    position: "absolute",
-                    left: "-45px",
-                    width: "30px",
-                    height: "30px",
-                    marginRight: "1em",
+                    marginLeft: "40px",
+                    position: "relative",
+                    display: "flex",
+                    alignItems: "center",
                   }}
-                />
-                {rating < 1
-                  ? "Be the first to leave your feedback"
-                  : "Leave your feedback"}
-              </motion.span>
-            </Button>
+                >
+                  <BiMessageAltDetail
+                    style={{
+                      position: "absolute",
+                      left: "-45px",
+                      width: "30px",
+                      height: "30px",
+                      marginRight: "1em",
+                    }}
+                  />
+                  {rating < 1
+                    ? "Be the first to leave your feedback"
+                    : "Leave your feedback"}
+                </motion.span>
+              </Button>
+            )}
           </div>
         )}
       </RatingSection>
