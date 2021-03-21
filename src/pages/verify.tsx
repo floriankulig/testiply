@@ -1,6 +1,5 @@
 import Head from "next/head";
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
-import { api_url } from "ts/constants";
 import { GoVerified } from "react-icons/go";
 import { MdError } from "react-icons/md";
 import { postData } from "api";
@@ -83,9 +82,11 @@ export const getServerSideProps: GetServerSideProps = async (
 ) => {
   const id = context.query.id;
   let isSuccess: boolean = true;
-  await postData(`${api_url}/verify`, { id }).catch(() => {
-    isSuccess = false;
-  });
+  await postData(`${process.env.NEXT_PUBLIC_API_URL}/verify`, { id }).catch(
+    () => {
+      isSuccess = false;
+    }
+  );
 
   return {
     props: {
