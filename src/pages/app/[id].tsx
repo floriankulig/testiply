@@ -74,7 +74,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
     currentUser &&
     !currentUser.downloadedApps?.find((app) => app.id === _id) &&
     !currentUser.downloadedApps?.find((app) => app.id === _id)
-      .hasLeftFeedback &&
+      ?.hasLeftFeedback &&
     !isSample;
 
   //event handlers
