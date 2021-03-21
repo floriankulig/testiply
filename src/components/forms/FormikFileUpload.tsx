@@ -3,13 +3,10 @@ import { useField } from "formik";
 import { useCallback, useEffect, useState } from "react";
 import { FileRejection, useDropzone } from "react-dropzone";
 
-export const FormikFileUpload = ({
-  name,
-  maxFiles,
-}: {
+export const FormikFileUpload: React.FC<{
   name: string;
   maxFiles: number;
-}) => {
+}> = ({ name, maxFiles }) => {
   const [field, meta, helpers] = useField(name);
 
   const [files, setFiles] = useState<File[]>(field.value);
