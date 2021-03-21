@@ -65,7 +65,7 @@ export interface App {
 
 export interface User {
   mail: string;
-  is_dev: boolean;
+  isDev: boolean;
   _id: string;
   downloadedApps: Array<{ id: string; hasLeftFeedback: boolean }>;
   website: string;
