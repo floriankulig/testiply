@@ -64,7 +64,9 @@ const StyledRow = styled.div<Partial<OpenProp>>`
     &__desc {
       max-height: 80px;
       max-width: 90%;
-      overflow-y: hidden;
+      height: auto;
+      overflow: hidden;
+      word-wrap: break;
     }
   }
 `;
@@ -164,7 +166,7 @@ export const AppTile: React.FC<AppTileProps> = ({
             <Image
               width={85}
               height={85}
-              src={`https://api.testiply.n-mayr.net/static/${_id}/icon.png`}
+              src={`${process.env.NEXT_PUBLIC_API_URL}/static/${_id}/icon.png`}
               className="icon"
               alt={`${name} app icon`}
             />
