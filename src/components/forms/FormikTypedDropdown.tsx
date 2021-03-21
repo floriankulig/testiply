@@ -48,7 +48,7 @@ const Dropdown = styled.ul`
 const StyledChips = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  margin-top: 0.5em;
+  margin: 0.5em 0;
   li {
     margin-right: 0.5em;
   }
