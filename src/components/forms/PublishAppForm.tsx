@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useAuthValue } from "context";
 import { DevAuthForm, TesterAuthForm } from "components/auth";
 import { useCannotScroll } from "hooks";
+import { createApp } from "api";
 
 interface FormValues {
   name: string;
@@ -73,11 +74,14 @@ export const PublishAppForm: React.FC = () => {
     if (!currentUser) {
       setLoginModalOpen(true);
       return;
-    } else if (!currentUser.is_dev) {
+    } else if (!currentUser.isDev) {
       setDevModalOpen(true);
       return;
     }
+
+    await createApp(currentUser, values, setErrorMessage);
     console.log({ values });
+    console.log("Successfully created App");
   };
 
   return (
