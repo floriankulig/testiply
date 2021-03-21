@@ -9,7 +9,7 @@ import {
   StyledTextField,
   StyledMetaInputInfo,
 } from "components/forms";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, Variants } from "framer-motion";
 
 const Dropdown = styled.ul`
   position: absolute;
@@ -38,6 +38,38 @@ const Dropdown = styled.ul`
     transition: 0.5s background;
   }
 `;
+
+const dropdownVariants: Variants = {
+  closed: {
+    scaleY: 0,
+    y: "-45%",
+    opacity: 0,
+    transition: {
+      staggerChildren: 0.01,
+      staggerDirection: -1,
+    },
+  },
+  open: {
+    scaleY: 1,
+    y: 0,
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.03,
+      staggerDirection: 1,
+    },
+  },
+};
+
+const dropdownItemVariants: Variants = {
+  closed: {
+    y: -20,
+    opacity: 0,
+  },
+  open: {
+    y: 0,
+    opacity: 1,
+  },
+};
 
 interface Value {
   id: string;
@@ -103,14 +135,13 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({
             clickable
             onClick={() => setDropdownOpens(!dropdownOpens)}
             onKeyDown={() => setDropdownOpens(!dropdownOpens)}
-            style={
-              dropdownOpens && dropdownShouldOpen
-                ? {
-                    transform: "rotate(180deg)",
-                    background: "transparent",
-                  }
-                : { background: "transparent" }
-            }
+            style={{
+              transform:
+                dropdownOpens && dropdownShouldOpen
+                  ? "rotate(180deg)"
+                  : "rotate(0)",
+              background: "transparent",
+            }}
           >
             <FaChevronDown />
           </SVGWrapper>
@@ -119,29 +150,34 @@ export const SelectionInput: React.FC<SelectionInputProps> = ({
           {dropdownShouldOpen && (
             <Dropdown
               as={motion.ul}
-              initial={{ scaleY: 0, y: "-45%", opacity: 0 }}
-              animate={{ scaleY: 1, y: 0, opacity: 1 }}
-              exit={{ scaleY: 0, y: "-45%", opacity: 0 }}
+              variants={dropdownVariants}
+              initial="closed"
+              animate="open"
+              exit="closed"
             >
               {values &&
                 values
                   .filter((value) => value.id !== selection.id)
                   .map((value) => (
-                    <li
+                    <motion.li
+                      variants={dropdownItemVariants}
+                      animate
                       key={value.id}
                       onClick={() => handleSelectionChange(value)}
                       onKeyDown={() => handleSelectionChange(value)}
                     >
                       {value.displayName}
-                    </li>
+                    </motion.li>
                   ))}
               {optional && selection !== null && (
-                <li
+                <motion.li
+                  variants={dropdownItemVariants}
+                  animate
                   onClick={() => handleSelectionChange(null)}
                   onKeyDown={() => handleSelectionChange(null)}
                 >
                   No Selection
-                </li>
+                </motion.li>
               )}
             </Dropdown>
           )}
