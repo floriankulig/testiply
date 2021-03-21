@@ -14,12 +14,14 @@ import { useAuthValue } from "context";
 import { DevAuthForm, TesterAuthForm } from "components/auth";
 import { useCannotScroll } from "hooks";
 import { createApp } from "api";
+import { Router, useRouter } from "next/router";
 
 interface FormValues {
   name: string;
   description: string;
   categories: CategoryID[];
   screenshots: File[];
+  icon: File[];
   testflightIos: string;
   testflightIpados: string;
 }
@@ -29,6 +31,7 @@ const initialValues: FormValues = {
   description: "",
   categories: [],
   screenshots: [],
+  icon: [],
   testflightIos: "",
   testflightIpados: "",
 };
@@ -41,7 +44,7 @@ const baseValidationSchema = Yup.object({
   description: Yup.string()
     .required("Required")
     .min(150, "Must be at least 150 characters")
-    .max(1028, "Can't be longer than 1028 characters"),
+    .max(750, "Can't be longer than 750 characters"),
 });
 const metaValidationSchema = Yup.object({
   testflightIos: Yup.string(),
@@ -53,6 +56,9 @@ const metaValidationSchema = Yup.object({
 });
 
 const fileValidationSchema = Yup.object({
+  icon: Yup.array()
+    .min(1, "Must select an icon")
+    .max(1, "Can't select more than one icon"),
   screenshots: Yup.array()
     .min(3, "Must select 3 screenshots")
     .max(3, "Can't select more than 3 screenshots"),
@@ -62,6 +68,7 @@ export const PublishAppForm: React.FC = () => {
   const [loginModalOpen, setLoginModalOpen] = useState<boolean>(false);
   const [devModalOpen, setDevModalOpen] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const router = useRouter();
   const { currentUser } = useAuthValue();
   useCannotScroll(loginModalOpen || devModalOpen);
 
@@ -79,9 +86,9 @@ export const PublishAppForm: React.FC = () => {
       return;
     }
 
-    await createApp(currentUser, values, setErrorMessage);
-    console.log({ values });
-    console.log("Successfully created App");
+    await createApp(currentUser, values, setErrorMessage).then((appId) =>
+      router.push(`/app/${appId}`)
+    );
   };
 
   return (
@@ -106,6 +113,7 @@ export const PublishAppForm: React.FC = () => {
           />
         </FormikStep>
         <FormikStep validationSchema={fileValidationSchema}>
+          <FormikFileUpload maxFiles={1} name="icon" />
           <FormikFileUpload maxFiles={3} name="screenshots" />
         </FormikStep>
         <FormikStep validationSchema={metaValidationSchema}>
