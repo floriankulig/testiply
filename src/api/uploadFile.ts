@@ -2,7 +2,7 @@ import axios from "axios";
 
 const uploadFile = (
   file: File,
-  i: number,
+  name: string,
   setErrorMessage: React.Dispatch<React.SetStateAction<string>>,
   appId: string
 ): Promise<string> =>
@@ -10,7 +10,7 @@ const uploadFile = (
     const formData = new FormData();
     let url: string;
 
-    formData.append("uploaded", file, `${i + 1}.png`);
+    formData.append("uploaded", file, `${name}.png`);
     formData.append("appid", appId);
 
     axios
