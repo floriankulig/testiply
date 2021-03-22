@@ -8,6 +8,7 @@ import { SelectionInput } from "components/SelectionInput";
 import { platforms } from "ts";
 import { useRouter } from "next/router";
 import { CSSTransition } from "react-transition-group";
+import { PublishAppCTA } from "./PublishAppCTA";
 
 interface StyledSidebarProps {
   open: boolean;
@@ -75,13 +76,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
           <div className="padd">
             {!isDevRoute && (
               <SelectionInput
-                style={{ marginBottom: "6em" }}
+                style={{ marginBottom: "4em" }}
                 selection={selectedPlatform}
                 setSelection={setSelectedPlatform}
                 label="Platform"
                 values={platforms}
               />
             )}
+            {currentUser?.isDev && <PublishAppCTA />}
           </div>
         </div>
         <CSSTransition
