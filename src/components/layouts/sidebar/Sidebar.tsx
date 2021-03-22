@@ -9,6 +9,7 @@ import { platforms } from "ts";
 import { useRouter } from "next/router";
 import { CSSTransition } from "react-transition-group";
 import { PublishAppCTA } from "./PublishAppCTA";
+import Link from "next/link";
 
 interface StyledSidebarProps {
   open: boolean;
@@ -35,6 +36,7 @@ const StyledSidebar = styled.div<StyledSidebarProps>`
     font-size: 1.5rem;
     width: max-content;
     margin: 0 50px;
+    cursor: pointer;
     height: var(--header-height);
   }
 `;
@@ -66,7 +68,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
 
   return (
     <StyledSidebar ref={ref} open={open}>
-      <div className="logo">Testiply </div>
+      <Link href="/">
+        <div className="logo">Testiply</div>
+      </Link>
       <SidebarContent>
         <div>
           <Tabs
