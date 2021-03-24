@@ -37,7 +37,7 @@ export const TabCurrentlyWorkedOn: React.FC = () => {
         height={900}
         alt="People working digitally"
       />
-      <h3>This tab is currently being worken on :/</h3>
+      <h3>This tab is currently being worked on :/</h3>
     </ViewContainer>
   );
 };
