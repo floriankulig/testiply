@@ -4,6 +4,7 @@ import { useOnClickOutside } from "hooks";
 import Link from "next/link";
 import { rgba } from "polished";
 import React, { useRef, useState } from "react";
+import { BiLogOut } from "react-icons/bi";
 import { FiArrowUp, FiUser, FiUserCheck, FiUserPlus } from "react-icons/fi";
 import styled from "styled-components";
 
@@ -11,7 +12,7 @@ const Dropdown = styled.ul`
   position: absolute;
   top: 15px;
   right: 15px;
-  padding: 1em 0;
+  padding: 0.5em 0;
   display: flex;
   flex-direction: column;
   min-width: max-content;
@@ -75,10 +76,6 @@ export const UserMenu = () => {
   const ref = useRef<HTMLDivElement>(null);
   useOnClickOutside(ref, () => setMenuOpen(false));
 
-  const dropdownOpens =
-    (menuOpen && currentUser && !currentUser.isDev) ||
-    (menuOpen && !currentUser);
-
   return (
     <div ref={ref} style={{ position: "relative" }}>
       <div
@@ -92,7 +89,7 @@ export const UserMenu = () => {
         <FiUser />
       </div>
       <AnimatePresence>
-        {dropdownOpens && (
+        {menuOpen && (
           <Dropdown
             as={motion.ul}
             variants={dropdownVariants}
@@ -120,6 +117,11 @@ export const UserMenu = () => {
                   <FiArrowUp /> Upgrade Account
                 </DropdownItem>
               </Link>
+            )}
+            {!!currentUser && (
+              <DropdownItem as={motion.li} variants={dropdownItemVariants}>
+                <BiLogOut /> Log Out
+              </DropdownItem>
             )}
           </Dropdown>
         )}
