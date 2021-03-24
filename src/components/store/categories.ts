@@ -10,7 +10,7 @@ const CategoryChip = styled.li<Props>`
   align-items: center;
   border-radius: 14px;
   background: ${({ theme }) => darken(0.02, theme.layoutContentBg)};
-  box-shadow: 0px 3px 7px ${({ theme }) => rgba(theme.navy, 0.3)};
+  box-shadow: 0px 3px 7px ${({ theme }) => rgba(theme.navy, 0.15)};
   cursor: pointer;
   font-size: clamp(1rem, 2vw, 1.2rem);
   transition: 350ms linear;
