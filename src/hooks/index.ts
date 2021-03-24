@@ -1,17 +1,23 @@
+//Helper Hooks for UI
 import { useIsMobile } from "./useIsMobile";
 import { useOnClickOutside } from "./useOnClickOutside";
+import { useCannotScroll } from "./useCannotScroll";
+
 // import { useStaticJSON } from "./useStaticJSON";
 import { useFilters } from "./useFilters";
-import { useCategory } from "./useCategory";
+
+//Data gathering hooks
 import { useUser } from "./useUser";
-import { useCannotScroll } from "./useCannotScroll";
+import { useCategory } from "./useCategory";
+import { useApps } from "./useApps";
 
 export {
   useIsMobile,
   useOnClickOutside,
+  useCannotScroll,
   // useStaticJSON,
   useFilters,
-  useCategory,
   useUser,
-  useCannotScroll,
+  useCategory,
+  useApps,
 };
