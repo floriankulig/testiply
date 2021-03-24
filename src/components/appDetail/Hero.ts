@@ -32,7 +32,7 @@ const IconWrapper = styled.div`
   min-height: 120px;
   border-radius: 20%;
   user-select: none;
-  img {
+  img.icon {
     border-radius: 20%;
   }
 `;

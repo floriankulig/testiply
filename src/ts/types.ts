@@ -52,7 +52,15 @@ export interface App {
   description: string;
   platforms: PlatformID[];
   categories: CategoryID[];
-  rating: number;
+  rating: {
+    total: number;
+    amount: number;
+    5: number;
+    4: number;
+    3: number;
+    2: number;
+    1: number;
+  };
   downloads: number;
   devId: string; // dev/dev_id
   devName: string;
@@ -67,7 +75,10 @@ export interface User {
   mail: string;
   isDev: boolean;
   _id: string;
-  downloadedApps: Array<{ id: string; hasLeftFeedback: boolean }>;
+  downloadedApps: Array<{
+    id: string;
+    hasLeftFeedback: boolean;
+  }>;
   website: string;
   name: string;
 }

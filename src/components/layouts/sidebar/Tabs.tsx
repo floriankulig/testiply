@@ -72,6 +72,12 @@ export const Tabs: React.FC<TabsProps> = ({ setSidebarOpen, tabTypes }) => {
     setSidebarOpen(false);
   };
 
+  // can be removed if today tab implemented
+  const disabledTabStyles: React.CSSProperties = {
+    color: "lightgrey",
+    cursor: "not-allowed",
+  };
+
   useEffect(() => {
     !tabs.includes(selectedTab)
       ? handleTabSwitch("today")
@@ -110,9 +116,15 @@ export const Tabs: React.FC<TabsProps> = ({ setSidebarOpen, tabTypes }) => {
               {active === tabName ? (
                 <span>{icons[i][1]}</span>
               ) : (
-                <span>{icons[i][0]}</span>
+                <span style={tabName === "today" ? disabledTabStyles : {}}>
+                  {icons[i][0]}
+                </span>
               )}
-              {tabName}
+              {tabName === "today" ? (
+                <div style={disabledTabStyles}>{tabName}</div>
+              ) : (
+                tabName
+              )}
               {active === tabName && (
                 <motion.div
                   className="tab-background"

@@ -112,6 +112,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
             <Image
               width={200}
               height={200}
+              className="icon"
               src={`https://api.testiply.n-mayr.net/static/${_id}/icon.png`}
               alt={`${name} app icon`}
             />
@@ -230,7 +231,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
                       marginRight: "1em",
                     }}
                   />
-                  {rating < 1
+                  {rating.total < 1
                     ? "Be the first to leave your feedback"
                     : "Leave your feedback"}
                 </motion.span>
