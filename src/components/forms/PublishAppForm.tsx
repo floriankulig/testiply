@@ -113,8 +113,12 @@ export const PublishAppForm: React.FC = () => {
           />
         </FormikStep>
         <FormikStep validationSchema={fileValidationSchema}>
-          <FormikFileUpload maxFiles={1} name="icon" />
-          <FormikFileUpload maxFiles={3} name="screenshots" />
+          <FormikFileUpload label="App Icon" maxFiles={1} name="icon" />
+          <FormikFileUpload
+            label="Screenshots"
+            maxFiles={3}
+            name="screenshots"
+          />
         </FormikStep>
         <FormikStep validationSchema={metaValidationSchema}>
           <FormikTypedDropdown
