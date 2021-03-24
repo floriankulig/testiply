@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Burger } from "./Burger";
 import { Searchbar } from "./Searchbar";
+import { UserMenu } from "./UserMenu";
 
 interface StyledHeaderProps {
   sidebarOpen: boolean;
@@ -31,6 +32,30 @@ const StyledHeader = styled.header<StyledHeaderProps>`
 
 const StyledMenus = styled.div`
   margin-left: auto;
+
+  .menu-icon-wrapper {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    border: 2px solid ${(p) => rgba(p.theme.navy, 0.4)};
+    display: grid;
+    place-items: center;
+    position: relative;
+    cursor: pointer;
+    transition: border 0.3s;
+
+    &:hover {
+      border-color: var(--primary);
+      svg {
+        color: var(--primary);
+      }
+    }
+    svg {
+      width: 70%;
+      height: 70%;
+      transition: color 0.2s;
+    }
+  }
 `;
 
 interface HeaderProps {
@@ -67,7 +92,9 @@ export const Header: React.FC<HeaderProps> = ({
     >
       {isMobile && <Burger setSidebarOpen={setSidebarOpen} />}
       <Searchbar />
-      <StyledMenus>usermenu</StyledMenus>
+      <StyledMenus>
+        <UserMenu />
+      </StyledMenus>
     </StyledHeader>
   );
 };
