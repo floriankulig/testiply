@@ -138,7 +138,7 @@ const Content = styled.div`
   }
 
   p {
-    color: #c2c2c2;
+    color: #d3d3d3;
     margin: 0 0 1.5em 5px;
     max-width: clamp(200px, 75vw, 450px);
     user-select: text;
