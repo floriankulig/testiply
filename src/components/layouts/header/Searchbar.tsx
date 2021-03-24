@@ -157,7 +157,7 @@ export const Searchbar: React.FC = () => {
           </div>
         )}
       </StyledSearchbar>
-      <CSSTransition
+      {/* <CSSTransition
         in={!!searchQuery && !isMobile}
         timeout={300}
         classNames="button"
@@ -170,7 +170,7 @@ export const Searchbar: React.FC = () => {
         >
           Search all categories
         </Button>
-      </CSSTransition>
+      </CSSTransition> */}
     </>
   );
 };

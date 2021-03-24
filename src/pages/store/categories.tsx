@@ -105,8 +105,10 @@ const Categories = () => {
           unmountOnExit
         >
           <AppGrid>
-            {!filteredApps[0] ? (
-              <NoAppsView hasApps={!!apps[0]} />
+            {!filteredApps.length ? (
+              <NoAppsView hasApps={!!apps[0]}>
+                No apps in this category yet.
+              </NoAppsView>
             ) : (
               <>
                 {filteredApps.map((app, i) => (
