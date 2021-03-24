@@ -29,11 +29,15 @@ const ViewContainer = styled.div`
 
 interface NoAppsViewProps {
   hasApps: boolean;
+  children: React.ReactNode;
 }
-export const NoAppsView: React.FC<NoAppsViewProps> = ({ hasApps }) => {
+export const NoAppsView: React.FC<NoAppsViewProps> = ({
+  hasApps,
+  children,
+}) => {
   const msg = hasApps
     ? "No apps corresponding to this search."
-    : "No apps in this category yet.";
+    : children.toString();
   return (
     <ViewContainer>
       <Image
