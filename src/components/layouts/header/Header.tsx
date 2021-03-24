@@ -67,7 +67,7 @@ export const Header: React.FC<HeaderProps> = ({
     >
       {isMobile && <Burger setSidebarOpen={setSidebarOpen} />}
       <Searchbar />
-      <StyledMenus>usermenu</StyledMenus>
+      <StyledMenus></StyledMenus>
     </StyledHeader>
   );
 };
