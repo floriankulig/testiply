@@ -181,7 +181,7 @@ export const AppTile: React.FC<AppTileProps> = ({
             <motion.div
               className="app__rating"
               layout
-              style={{ color: rating > 0 && "orange" }}
+              style={{ color: rating.total > 0 && "orange" }}
             >
               {rating} <FaStar />
             </motion.div>
