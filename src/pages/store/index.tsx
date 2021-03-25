@@ -8,7 +8,7 @@ const Today = () => {
   const router = useRouter();
   // Make sure we're in the browser
   if (typeof window !== "undefined") {
-    router.push("/store/categories");
+    router.push("/store/apps");
   }
   return (
     <>
@@ -24,7 +24,7 @@ Today.Layout = Layout;
 
 Today.getInitialProps = (ctx: NextPageContext) => {
   if (ctx.res) {
-    ctx.res.writeHead(302, { Location: "/store/categories" });
+    ctx.res.writeHead(302, { Location: "/store/apps" });
     ctx.res.end();
   }
   return {};
