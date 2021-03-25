@@ -8,12 +8,12 @@ interface ReturnType {
   filteredApps: App[];
 }
 
-export const useApps = (): ReturnType => {
+export const useApps = (initialApps: App[]): ReturnType => {
   //Helper Hooks
   const { selectedPlatform, searchQuery } = useFiltersValue();
 
   // Requesting Apps Logic
-  const [apps, setApps] = useState<App[]>([]);
+  const [apps, setApps] = useState<App[]>(initialApps);
   const [filteredApps, setFilteredApps] = useState<App[]>(apps);
   const [loading, setLoading] = useState<boolean>(true);
 
