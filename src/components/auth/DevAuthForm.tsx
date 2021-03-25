@@ -42,9 +42,7 @@ const metaValidationSchema = Yup.object({
     .required("Required")
     .min(2, "Has to be at least 2 characters")
     .max(64, "Can't be longer than 64 characters"),
-  website: Yup.string()
-    .required("Required")
-    .min(2, "Has to be at least 2 characters"),
+  website: Yup.string().url("Must be a valid URL").required("Required"),
   acceptedTAS: Yup.boolean().oneOf([true]),
 });
 
