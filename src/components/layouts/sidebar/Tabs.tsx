@@ -67,6 +67,7 @@ export const Tabs: React.FC<TabsProps> = ({ setSidebarOpen, tabTypes }) => {
   const [active, setActive] = useState<string>(selectedTab);
 
   const handleTabSwitch = (newActive: string) => {
+    if (newActive === "today") return;
     setActive(newActive);
     setSelectedTab(newActive);
     setSidebarOpen(false);
@@ -107,6 +108,7 @@ export const Tabs: React.FC<TabsProps> = ({ setSidebarOpen, tabTypes }) => {
               icon={!!icons[i]}
               role="button"
               as={motion.li}
+              style={tabName === "today" ? disabledTabStyles : {}}
               animate={{
                 color: active === tabName ? theme.primary : theme.navy,
                 fontWeight: active === tabName ? "bold" : "normal",
