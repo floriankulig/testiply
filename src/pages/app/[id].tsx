@@ -121,7 +121,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
             <motion.h1 layoutId={`appTitle-${_id}`}>{name}</motion.h1>
             <motion.h3 layoutId={`appDevName-${_id}`} className="link">
               <a
-                href={`http://${devWebsite}`}
+                href={`${devWebsite}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
