@@ -1,12 +1,15 @@
+import axios from "axios";
 import { AppGrid, Layout } from "components/layouts";
 import { Loading } from "components/Loading";
 import { AppTile, NoAppsView } from "components/store";
 import { TabHeader } from "components/TabHeader";
 import { useApps } from "hooks";
+import { NextPageContext } from "next";
 import Head from "next/head";
+import { App } from "ts";
 
-const Apps = () => {
-  const { filteredApps, loading } = useApps();
+const Apps = ({ initialApps }: { initialApps: App[] }) => {
+  const { filteredApps, loading } = useApps(initialApps);
 
   return (
     <>
@@ -44,5 +47,17 @@ const Apps = () => {
 };
 
 Apps.Layout = Layout;
+
+Apps.getInitialProps = async (ctx: NextPageContext) => {
+  try {
+    const apps = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/getAllApps?platform=all`,
+      { headers: { api_key: process.env.NEXT_PUBLIC_API_KEY } }
+    );
+    return { initialApps: apps.data.apps };
+  } catch (err) {
+    return { initialApps: [] };
+  }
+};
 
 export default Apps;
