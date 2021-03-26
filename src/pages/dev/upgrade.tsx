@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 import { DevAuthForm } from "components/auth";
 import { useRouter } from "next/router";
+import { useAuthValue } from "context";
 
 interface DevUpgradeProps {
   hasUser: boolean;
@@ -16,13 +17,13 @@ interface DevUpgradeProps {
 const FormWrapper = styled.div`
   margin: 8em auto;
   width: clamp(1px, 90%, 700px);
-  /* height: 550px; */
 `;
 
 const DevUpgrade: NextPage<DevUpgradeProps> = ({ hasUser }) => {
   const router = useRouter();
+  const { currentUser } = useAuthValue();
   // Make sure we're in the browser
-  if (typeof window !== "undefined" && !hasUser) {
+  if (typeof window !== "undefined" && !currentUser) {
     router.push("/login");
   }
   return (
