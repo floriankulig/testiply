@@ -43,7 +43,7 @@ const DevUpgrade: NextPage<DevUpgradeProps> = ({ hasUser }) => {
         }}
       />
       <FormWrapper as={motion.div} animate>
-        <DevAuthForm hasUserRegistered={hasUser} />
+        <DevAuthForm hasUserRegistered={!!currentUser} />
       </FormWrapper>
       <Footer />
     </>
