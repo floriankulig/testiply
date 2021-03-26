@@ -182,7 +182,6 @@ export const DevAuthForm: React.FC<DevAuthFormProps> = ({
               label="Name"
               placeholder="Enter your (company) name"
               svg={<FaUser />}
-              svgClickHandler={() => setShowPasswords((prev) => !prev)}
             />
             <FormikTextInput
               name="website"
