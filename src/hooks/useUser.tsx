@@ -55,10 +55,6 @@ export const useUser = (): AuthContextType => {
     }
   }, []);
 
-  useEffect(() => {
-    console.log(currentUser);
-  }, [currentUser]);
-
   // Set Cookie to date in past / non-existant date
   const logout = async (): Promise<void> => {
     await setCookie("uid", "asdasd", {
