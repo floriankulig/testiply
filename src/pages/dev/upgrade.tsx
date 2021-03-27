@@ -34,7 +34,7 @@ const DevUpgrade: NextPage<DevUpgradeProps> = ({ hasUser }) => {
           href="favicons/favicon.ico"
           type="image/x-icon"
         />
-        <title>Upgrade to a publisher account| Testiply</title>
+        <title>Upgrade to a publisher account | Testiply</title>
       </Head>
       <InfoPageHeader
         className="container-small"
