@@ -23,8 +23,12 @@ const DevUpgrade: NextPage<DevUpgradeProps> = ({ hasUser }) => {
   const router = useRouter();
   const { currentUser } = useAuthValue();
   // Make sure we're in the browser
-  if (typeof window !== "undefined" && !currentUser) {
-    router.push("/login");
+  if (typeof window !== "undefined") {
+    if (!hasUser) {
+      router.push("/login");
+    } else if (currentUser?.isDev) {
+      router.push("/store");
+    }
   }
   return (
     <>
@@ -51,7 +55,7 @@ const DevUpgrade: NextPage<DevUpgradeProps> = ({ hasUser }) => {
 };
 
 DevUpgrade.getInitialProps = ({ res, req }: NextPageContext) => {
-  const hasUser = !!req?.headers.cookie?.slice(3);
+  const hasUser = !!req?.headers.cookie?.slice(4);
   if (res && !hasUser) {
     res.writeHead(302, { Location: "/login" });
     res.end();
