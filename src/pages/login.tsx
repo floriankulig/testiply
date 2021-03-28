@@ -1,8 +1,10 @@
 import { TesterAuthForm } from "components/auth";
 import { AuthLayout } from "components/layouts";
+import { useAuthValue } from "context";
 import { NextPage, NextPageContext } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 interface LoginProps {
   hasUser: boolean;
@@ -10,7 +12,8 @@ interface LoginProps {
 
 const Login: NextPage<LoginProps> = ({ hasUser }) => {
   const router = useRouter();
-  if (typeof window !== "undefined" && hasUser) {
+
+  if (typeof window !== "undefined" && !!hasUser) {
     router.push("/store");
   }
 
@@ -27,7 +30,7 @@ const Login: NextPage<LoginProps> = ({ hasUser }) => {
 };
 
 Login.getInitialProps = ({ res, req }: NextPageContext) => {
-  const hasUser = !!req?.headers.cookie?.slice(3);
+  const hasUser = !!req?.headers.cookie?.slice(4);
   if (res && hasUser) {
     res.writeHead(302, { Location: "/store" });
     res.end();
