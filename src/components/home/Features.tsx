@@ -111,7 +111,7 @@ const Feature = styled.li`
 `;
 
 export const Features: React.FC = () => {
-  const features = useRef([]);
+  const features = useRef<HTMLLIElement[]>([]);
 
   useEffect(() => {
     ScrollOut({ targets: features.current, once: true, threshold: 0.5 });
