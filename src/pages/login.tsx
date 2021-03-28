@@ -1,10 +1,8 @@
 import { TesterAuthForm } from "components/auth";
 import { AuthLayout } from "components/layouts";
-import { useAuthValue } from "context";
 import { NextPage, NextPageContext } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 
 interface LoginProps {
   hasUser: boolean;
