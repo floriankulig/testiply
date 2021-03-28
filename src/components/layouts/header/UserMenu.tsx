@@ -71,7 +71,7 @@ const dropdownItemVariants: Variants = {
 };
 
 export const UserMenu = () => {
-  const { currentUser } = useAuthValue();
+  const { currentUser, logout } = useAuthValue();
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>(null);
   useOnClickOutside(ref, () => setMenuOpen(false));
@@ -119,7 +119,12 @@ export const UserMenu = () => {
               </Link>
             )}
             {!!currentUser && (
-              <DropdownItem as={motion.li} variants={dropdownItemVariants}>
+              <DropdownItem
+                as={motion.li}
+                variants={dropdownItemVariants}
+                onClick={() => logout()}
+                onKeyDown={() => logout()}
+              >
                 <BiLogOut /> Log Out
               </DropdownItem>
             )}
