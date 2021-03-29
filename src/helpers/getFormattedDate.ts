@@ -1,4 +1,5 @@
-const getFormattedDate = (date: Date) => {
+const getFormattedDate = (stringDate: string) => {
+  const date = new Date(stringDate);
   const days = date.getDate() < 10 ? `0${date.getDate()}` : `${date.getDate()}`;
   const month =
     date.getMonth() + 1 < 10
