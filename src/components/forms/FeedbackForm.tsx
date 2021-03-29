@@ -126,7 +126,7 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({
       await axios
         .post(`${process.env.NEXT_PUBLIC_API_URL}/feedback`, {
           ...values,
-          date: getFormattedDate(new Date()),
+          date: new Date(),
           appId,
           appName,
         })
