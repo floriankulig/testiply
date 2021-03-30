@@ -5,6 +5,7 @@ import Link from "next/link";
 import { rgba } from "polished";
 import React, { useRef, useState } from "react";
 import { BiLogOut } from "react-icons/bi";
+import { FaRegComment } from "react-icons/fa";
 import { FiArrowUp, FiUser, FiUserCheck, FiUserPlus } from "react-icons/fi";
 import styled from "styled-components";
 
@@ -111,10 +112,17 @@ export const UserMenu = () => {
                 </Link>
               </>
             )}
-            {currentUser && !currentUser.isDev && (
+            {!!currentUser && !currentUser.isDev && (
               <Link href="/dev/upgrade">
                 <DropdownItem as={motion.li} variants={dropdownItemVariants}>
                   <FiArrowUp /> Upgrade Account
+                </DropdownItem>
+              </Link>
+            )}
+            {!!currentUser?.isDev && (
+              <Link href="/dev/feedback">
+                <DropdownItem as={motion.li} variants={dropdownItemVariants}>
+                  <FaRegComment /> View Feedbacks
                 </DropdownItem>
               </Link>
             )}
