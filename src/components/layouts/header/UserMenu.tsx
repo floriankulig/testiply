@@ -132,6 +132,8 @@ export const UserMenu = () => {
                 variants={dropdownItemVariants}
                 onClick={() => logout()}
                 onKeyDown={() => logout()}
+                role="button"
+                tabIndex={-1}
               >
                 <BiLogOut /> Log Out
               </DropdownItem>
