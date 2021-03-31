@@ -1,5 +1,6 @@
 import { Overlay } from "components/Overlay";
 import { AnimatePresence, motion } from "framer-motion";
+import { getFormattedDate } from "helpers";
 import { useOnClickOutside } from "hooks";
 import { darken, rgba } from "polished";
 import React, { useRef, useState } from "react";
@@ -134,12 +135,14 @@ export const FeedbackTile: React.FC<{ feedback: Feedback }> = ({
               {heading}
             </motion.h3>
             <MetaData as={motion.div} layoutId={`feedbackTile-meta-${_id}`}>
-              <motion.span
-                className="feedback__date"
-                layoutId={`feedbackTile-metaDate-${_id}`}
-              >
-                {date}
-              </motion.span>
+              {!!date && (
+                <motion.span
+                  className="feedback__date"
+                  layoutId={`feedbackTile-metaDate-${_id}`}
+                >
+                  {getFormattedDate(date)}
+                </motion.span>
+              )}
               <motion.div layoutId={`feedbackTile-rating-${_id}`}>
                 <StarPercentageRating percentage={rating} />
               </motion.div>
@@ -165,7 +168,6 @@ export const FeedbackTile: React.FC<{ feedback: Feedback }> = ({
           </ShowMoreButton>
         </div>
       </StyledFeedbackTile>
-      {isOpen && <Overlay style={{ zIndex: 2 }}></Overlay>}
       <AnimatePresence>
         {isOpen && (
           <Overlay style={{ background: "none" }}>
@@ -188,12 +190,14 @@ export const FeedbackTile: React.FC<{ feedback: Feedback }> = ({
                 >
                   {heading}
                 </motion.h3>
-                <motion.span
-                  className="feedback-detail__date"
-                  layoutId={`feedbackTile-metaDate-${_id}`}
-                >
-                  {date}
-                </motion.span>
+                {!!date && (
+                  <motion.span
+                    className="feedback-detail__date"
+                    layoutId={`feedbackTile-metaDate-${_id}`}
+                  >
+                    {getFormattedDate(date)}
+                  </motion.span>
+                )}
               </TopBar>
               <motion.div
                 layoutId={`feedbackTile-text-${_id}`}
