@@ -69,6 +69,7 @@ const MyApp = ({ Component, pageProps }: any) => {
         <CookiesProvider>
           <AuthProvider>
             <AnimateSharedLayout type="crossfade">
+              <div id="overlay-entry" />
               {Layout === StoreLayout ? (
                 <SelectedTabProvider>
                   <Layout>
