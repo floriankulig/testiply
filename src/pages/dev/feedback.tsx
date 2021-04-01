@@ -1,8 +1,9 @@
 import axios from "axios";
-import { Layout } from "components/layouts";
+import { FeedbackTile } from "components/appDetail";
+import { AppGrid, Layout } from "components/layouts";
 import { TabHeader } from "components/TabHeader";
 import { useAuthValue } from "context";
-import { NextPageContext } from "next";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -10,17 +11,26 @@ import { Feedback } from "ts";
 
 interface DevFeedbackProps {
   feedbacks: Feedback[];
+  hasUser: boolean;
+  isDev: boolean;
 }
 
-const DevFeedback = ({ feedbacks }: DevFeedbackProps) => {
+const DevFeedback = ({ feedbacks, hasUser, isDev }: DevFeedbackProps) => {
   const router = useRouter();
   const { currentUser } = useAuthValue();
   useEffect(() => {
+    console.log({ hasUser });
     if (typeof window !== "undefined") {
-      if (!currentUser) {
-        router.push("/login");
-      } else if (!currentUser.isDev) {
-        router.push("/dev/upgrade");
+      if (!!currentUser) {
+        if (!currentUser.isDev) {
+          router.push("/dev/upgrade");
+        }
+      } else {
+        if (!hasUser) {
+          router.push("/login");
+        } else if (!isDev) {
+          router.push("/dev/upgrade");
+        }
       }
     }
   }, [currentUser]);
@@ -30,16 +40,21 @@ const DevFeedback = ({ feedbacks }: DevFeedbackProps) => {
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
       </Head>
       <TabHeader>Your Latest Feedbacks</TabHeader>
+      <AppGrid>
+        {/* {feedbacks?.map((feedback) => (
+          <FeedbackTile feedback={feedback} />
+        ))} */}
+      </AppGrid>
     </>
   );
 };
 DevFeedback.Layout = Layout;
 
-DevFeedback.getInitialProps = async ({
+export const getServerSideProps: GetServerSideProps = async ({
   req,
   res,
-}: NextPageContext): Promise<any> => {
-  const uid = req?.headers.cookie?.slice(4);
+}: GetServerSidePropsContext) => {
+  const uid = await req?.headers.cookie?.toString().slice(4);
   console.log({ uid });
 
   const config = { headers: { api_key: process.env.NEXT_PUBLIC_API_KEY } };
@@ -50,6 +65,7 @@ DevFeedback.getInitialProps = async ({
   }
   console.log("hasUser");
   let feedbacks: Feedback[] = [];
+  let isDev: boolean = true;
   try {
     const apiRes = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URL}/dev/getFeedbacks`,
@@ -57,20 +73,21 @@ DevFeedback.getInitialProps = async ({
       config
     );
     feedbacks = apiRes.data.feedbacks;
-    console.log({ feedbacks });
   } catch (err) {
     console.log(err.response.data);
     if (res && err.response.data.err === "User is not a Developer.") {
-      res.writeHead(302, { Location: "/dev/upgrade" });
-      res.end();
-      return;
+      isDev = false;
     } else if (err.response.data.err === "No Feedbacks found.") {
       console.log("No feedbacks");
       feedbacks = undefined;
     }
   }
   return {
-    feedbacks,
+    props: {
+      feedbacks,
+      hasUser: !!uid,
+      isDev,
+    },
   };
 };
 
