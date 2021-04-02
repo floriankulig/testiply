@@ -18,6 +18,7 @@ const StyledFeedbackTile = styled.li`
   display: flex;
   flex-direction: column;
   background: #fefeff;
+  box-shadow: 2px 8px 20px ${({ theme }) => rgba(theme.primary, 0.07)};
   & .content-wrapper {
     position: relative;
     height: 100%;
@@ -123,7 +124,7 @@ export const FeedbackTile: React.FC<{ feedback: Feedback }> = ({
     <>
       <StyledFeedbackTile
         as={motion.li}
-        style={{ borderRadius: "1em" }}
+        style={{ borderRadius: "1.25em" }}
         layoutId={`feedbackTile-${_id}`}
       >
         <div className="content-wrapper">
