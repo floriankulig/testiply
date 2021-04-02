@@ -41,9 +41,9 @@ const DevFeedback = ({ feedbacks, hasUser, isDev }: DevFeedbackProps) => {
       </Head>
       <TabHeader>Your Latest Feedbacks</TabHeader>
       <AppGrid>
-        {/* {feedbacks?.map((feedback) => (
+        {feedbacks?.map((feedback) => (
           <FeedbackTile feedback={feedback} />
-        ))} */}
+        ))}
       </AppGrid>
     </>
   );
