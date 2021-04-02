@@ -2,10 +2,11 @@ import { Overlay } from "components/Overlay";
 import { AnimatePresence, motion } from "framer-motion";
 import { getFormattedDate } from "helpers";
 import { useOnClickOutside } from "hooks";
-import { darken, rgba } from "polished";
+import { rgba } from "polished";
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { Feedback } from "ts";
+import { fadeInOutVariants } from "ts/constants";
 import { StarPercentageRating } from "./Rating";
 
 const StyledFeedbackTile = styled.li`
@@ -16,8 +17,7 @@ const StyledFeedbackTile = styled.li`
   }
   display: flex;
   flex-direction: column;
-  background: var(--layout-content-background);
-  /* max-height: 300px; */
+  background: #fefeff;
   & .content-wrapper {
     position: relative;
     height: 100%;
@@ -65,9 +65,9 @@ const ShowMoreButton = styled.button`
   color: var(--primary);
   background: linear-gradient(
     to right,
-    ${({ theme }) => rgba(theme.layoutContentBg, 0.05)},
-    ${({ theme }) => rgba(theme.layoutContentBg, 1)} 50%,
-    ${({ theme }) => rgba(theme.layoutContentBg, 1)}
+    ${rgba("#fefeff", 0.05)},
+    ${rgba("#fefeff", 1)} 50%,
+    ${rgba("#fefeff", 1)}
   );
   border: none;
   padding: 0.25em 0 0 0.25em;
@@ -170,7 +170,14 @@ export const FeedbackTile: React.FC<{ feedback: Feedback }> = ({
       </StyledFeedbackTile>
       <AnimatePresence>
         {isOpen && (
-          <Overlay style={{ background: "none" }}>
+          <Overlay
+            as={motion.div}
+            asPortal
+            initial="closed"
+            animate="open"
+            exit="closed"
+            variants={fadeInOutVariants}
+          >
             <StyledFeedbackDetail
               style={{ borderRadius: "2em" }}
               ref={detailRef}
