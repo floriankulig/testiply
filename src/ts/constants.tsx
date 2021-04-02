@@ -1,6 +1,4 @@
 import {
-  AiOutlineHome,
-  AiFillHome,
   AiOutlineAppstore,
   AiFillAppstore,
   AiOutlineDashboard,
@@ -11,10 +9,7 @@ import { HiOutlinePhotograph } from "react-icons/hi";
 import {
   IoGameControllerOutline,
   IoGameController,
-  IoNewspaperOutline,
-  IoNewspaper,
   IoFootballOutline,
-  IoGlasses,
 } from "react-icons/io5";
 import {
   RiStackLine,
@@ -32,7 +27,7 @@ import {
   RiMedicineBottleLine,
   RiToolsLine,
 } from "react-icons/ri";
-import { BsCreditCard, BsGraphUp } from "react-icons/bs";
+import { BsCreditCard } from "react-icons/bs";
 import { Platform, Category } from ".";
 import { GoPackage } from "react-icons/go";
 import { FiLock } from "react-icons/fi";
