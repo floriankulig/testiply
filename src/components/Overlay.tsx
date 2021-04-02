@@ -1,5 +1,6 @@
 import { rgba } from "polished";
 import styled from "styled-components";
+import * as Motion from "framer-motion";
 import { createPortal } from "react-dom";
 
 const StyledOverlay = styled.div`
@@ -18,15 +19,26 @@ const StyledOverlay = styled.div`
 interface OverlayProps {
   style?: React.CSSProperties;
   children?: React.ReactNode;
+  as?: Motion.ForwardRefComponent<
+    HTMLDivElement,
+    Motion.HTMLMotionProps<"div">
+  >;
   asPortal?: boolean;
+  [x: string]: any;
 }
 
 export const Overlay: React.FC<OverlayProps> = ({
   style,
   children,
+  as,
   asPortal,
+  ...motionProps
 }) => {
-  const body = <StyledOverlay style={style}>{children}</StyledOverlay>;
+  const body = (
+    <StyledOverlay {...motionProps} as={as} style={style}>
+      {children}
+    </StyledOverlay>
+  );
 
   return asPortal
     ? createPortal(body, document.getElementById("overlay-entry"))
