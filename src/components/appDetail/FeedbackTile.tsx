@@ -1,7 +1,10 @@
+import { Button } from "components/Button";
+import { Loading } from "components/Loading";
 import { Overlay } from "components/Overlay";
 import { AnimatePresence, motion } from "framer-motion";
 import { getFormattedDate } from "helpers";
 import { useOnClickOutside } from "hooks";
+import Link from "next/link";
 import { rgba } from "polished";
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
@@ -51,6 +54,12 @@ const TopBar = styled.div`
   justify-content: space-between;
   align-items: flex-end;
   margin: 0 0 1.5em;
+`;
+
+const BottomBar = styled.div`
+  display: flex;
+  margin-top: 1.5em;
+  justify-content: flex-end;
 `;
 
 const MetaData = styled.div`
@@ -114,9 +123,10 @@ const StyledFeedbackDetail = styled.div`
 `;
 
 export const FeedbackTile: React.FC<{ feedback: Feedback }> = ({
-  feedback: { text, date, heading, rating, _id },
+  feedback: { text, date, heading, rating, _id, appId, appName },
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isRedirecting, setIsRedirecting] = useState<boolean>(false);
   const detailRef = useRef<HTMLDivElement>(null);
   useOnClickOutside(detailRef, () => setIsOpen(false));
 
@@ -213,6 +223,18 @@ export const FeedbackTile: React.FC<{ feedback: Feedback }> = ({
               >
                 <p>{text}</p>
               </motion.div>
+              <BottomBar>
+                <Link href={`/app/${appId}`}>
+                  <Button
+                    disableElevation
+                    onClick={() => setIsRedirecting(true)}
+                    onKeyDown={() => setIsRedirecting(true)}
+                    aria-label={`See the detail page for ${appName}`}
+                  >
+                    {!isRedirecting ? `View ${appName}` : <Loading size={40} />}
+                  </Button>
+                </Link>
+              </BottomBar>
             </StyledFeedbackDetail>
           </Overlay>
         )}
