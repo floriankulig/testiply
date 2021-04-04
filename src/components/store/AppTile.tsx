@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { MockAppDetailView } from "components/appDetail";
+import { AnimatePresence, motion } from "framer-motion";
 import { useIsMobile } from "hooks";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,7 +16,6 @@ interface OpenProp {
 const APPSTACKWIDTH = 640;
 
 const StyledAppTile = styled.li`
-  border-radius: 1.5em;
   position: relative;
   box-shadow: 2px 8px 20px ${({ theme }) => rgba(theme.navy, 0.1)};
   padding: 1em;
@@ -138,6 +138,8 @@ export const AppTile: React.FC<AppTileProps> = ({
   const { name, description, _id, devName, rating } = appInfo;
   const appsStack = useIsMobile(APPSTACKWIDTH - 1); //Apps stack with less than 640px
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [detailOpened, setDetailOpened] = useState<boolean>(false);
+  const iconURL = `${process.env.NEXT_PUBLIC_API_URL}/static/${_id}/icon.png`;
 
   useEffect(() => {
     // open apps if apps are not stacking in grid
@@ -145,70 +147,85 @@ export const AppTile: React.FC<AppTileProps> = ({
   }, [appsStack]);
 
   return (
-    <StyledAppTile
-      style={{ ...style }}
-      className={className}
-      as={motion.li}
-      layout
-    >
-      <Link href={`/app/${_id}`}>
-        <StyledRow
-          open={isOpen}
-          aria-label={`View details for ${name}.`}
-          tabIndex={0}
-          role="button"
-        >
-          <IconWrapper
-            as={motion.div}
-            layoutId={`appIcon-${_id}`}
-            style={{ borderRadius: "25%" }}
+    <>
+      <StyledAppTile
+        style={{ ...style, borderRadius: "1.5em" }}
+        className={className}
+        as={motion.li}
+        layout
+        layoutId={`appTile-${_id}`}
+      >
+        <Link href={`/app/${_id}`}>
+          <StyledRow
+            open={isOpen}
+            aria-label={`View details for ${name}.`}
+            onClick={() => setDetailOpened(true)}
+            onKeyDown={() => setDetailOpened(true)}
+            tabIndex={0}
+            role="button"
           >
-            <Image
-              width={85}
-              height={85}
-              src={`${process.env.NEXT_PUBLIC_API_URL}/static/${_id}/icon.png`}
-              className="icon"
-              alt={`${name} app icon`}
-            />
-          </IconWrapper>
-          <StyledAppInfo>
-            <motion.p layoutId={`appTitle-${_id}`} className="app__name">
-              {name}
-            </motion.p>
-            <motion.p layoutId={`appDevName-${_id}`} className="app__dev">
-              {devName}
-            </motion.p>
-            <motion.div
-              className="app__rating"
-              layout
-              style={{ color: rating.total > 0 && "orange" }}
+            <IconWrapper
+              as={motion.div}
+              layoutId={`appIcon-${_id}`}
+              style={{ borderRadius: "25%" }}
             >
-              {rating.total} <FaStar />
-            </motion.div>
-          </StyledAppInfo>
-        </StyledRow>
-      </Link>
-      {appsStack && (
-        <SVGOpenerWrapper
-          onClick={() => setIsOpen((prev) => !prev)}
-          onKeyDown={() => setIsOpen((prev) => !prev)}
-          aria-label={`Open Description for ${name}.`}
-          tabIndex={0}
-          role="button"
-          open={appsStack ? isOpen : true}
-        >
-          <FaChevronDown />
-        </SVGOpenerWrapper>
-      )}
-      <div className="edge-fader" />
-      {isOpen && (
-        <StyledRow>
-          <motion.p className="app__desc" layoutId={`appDesc-${_id}`}>
-            {description.slice(0, 150)}
-            {description.length > 150 && "..."}
-          </motion.p>
-        </StyledRow>
-      )}
-    </StyledAppTile>
+              <Image
+                width={85}
+                height={85}
+                src={iconURL}
+                className="icon"
+                alt={`${name} app icon`}
+              />
+            </IconWrapper>
+            <StyledAppInfo>
+              <motion.p layoutId={`appTitle-${_id}`} className="app__name">
+                {name}
+              </motion.p>
+              <motion.p layoutId={`appDevName-${_id}`} className="app__dev">
+                {devName}
+              </motion.p>
+              <motion.div
+                className="app__rating"
+                layout
+                style={{ color: rating.total > 0 && "orange" }}
+              >
+                {rating.total} <FaStar />
+              </motion.div>
+            </StyledAppInfo>
+          </StyledRow>
+        </Link>
+        {appsStack && (
+          <SVGOpenerWrapper
+            onClick={() => setIsOpen((prev) => !prev)}
+            onKeyDown={() => setIsOpen((prev) => !prev)}
+            aria-label={`Open Description for ${name}.`}
+            tabIndex={0}
+            role="button"
+            open={appsStack ? isOpen : true}
+          >
+            <FaChevronDown />
+          </SVGOpenerWrapper>
+        )}
+        <div className="edge-fader" />
+        {isOpen && (
+          <StyledRow>
+            <motion.p className="app__desc" layoutId={`appDesc-${_id}`}>
+              {description.slice(0, 150)}
+              {description.length > 150 && "..."}
+            </motion.p>
+          </StyledRow>
+        )}
+      </StyledAppTile>
+      <AnimatePresence>
+        {detailOpened && (
+          <MockAppDetailView
+            _id={_id}
+            appName={name}
+            devName={devName}
+            iconURL={iconURL}
+          />
+        )}
+      </AnimatePresence>
+    </>
   );
 };
