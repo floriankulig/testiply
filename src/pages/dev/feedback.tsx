@@ -42,7 +42,7 @@ const DevFeedback = ({ feedbacks, hasUser, isDev }: DevFeedbackProps) => {
       <TabHeader>Your Latest Feedbacks</TabHeader>
       <AppGrid>
         {feedbacks?.map((feedback) => (
-          <FeedbackTile feedback={feedback} />
+          <FeedbackTile key={feedback._id} feedback={feedback} />
         ))}
       </AppGrid>
     </>
@@ -63,7 +63,6 @@ export const getServerSideProps: GetServerSideProps = async ({
     res.end();
     return;
   }
-  console.log("hasUser");
   let feedbacks: Feedback[] = [];
   let isDev: boolean = true;
   try {
@@ -74,11 +73,9 @@ export const getServerSideProps: GetServerSideProps = async ({
     );
     feedbacks = apiRes.data.feedbacks;
   } catch (err) {
-    console.log(err.response.data);
     if (res && err.response.data.err === "User is not a Developer.") {
       isDev = false;
     } else if (err.response.data.err === "No Feedbacks found.") {
-      console.log("No feedbacks");
       feedbacks = undefined;
     }
   }
