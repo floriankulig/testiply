@@ -25,7 +25,7 @@ const StyledSidebar = styled.div<StyledSidebarProps>`
   }
   height: 100vh;
   position: fixed;
-  z-index: 999;
+  z-index: 1001;
   transition: var(--sidebarDuration) transform var(--easing);
   overflow-y: auto;
 
