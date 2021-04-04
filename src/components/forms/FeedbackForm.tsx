@@ -182,7 +182,8 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({
                 className="note-wrapper"
               >
                 <InfoNote>
-                  You could leave your Feedback because this is a sample app.
+                  You could leave your feedback without downloading because this
+                  is a sample app.
                 </InfoNote>
               </motion.div>
             )}
