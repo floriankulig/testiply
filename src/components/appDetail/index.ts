@@ -7,6 +7,7 @@ import {
   Description,
 } from "./Hero";
 import { FeedbackTile } from "./FeedbackTile";
+import { MockAppDetailView } from "./MockAppDetailView";
 import { IsSampleAppModal } from "./IsSampleAppModal";
 import {
   RatingBar,
@@ -35,4 +36,5 @@ export {
   StarRatings,
   Description,
   IsSampleAppModal,
+  MockAppDetailView,
 };
