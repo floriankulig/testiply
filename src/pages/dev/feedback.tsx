@@ -54,8 +54,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   req,
   res,
 }: GetServerSidePropsContext) => {
-  const uid = await req?.headers.cookie?.toString().slice(4);
-  console.log({ uid });
+  const uid = req?.headers.cookie?.toString().slice(4);
 
   const config = { headers: { api_key: process.env.NEXT_PUBLIC_API_KEY } };
   if (res && !uid) {
