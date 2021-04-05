@@ -62,11 +62,13 @@ const StyledRow = styled.div<Partial<OpenProp>>`
       }
     }
     &__desc {
-      max-height: 80px;
-      max-width: 90%;
+      max-width: 95%;
       height: auto;
-      overflow: hidden;
       word-wrap: break;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
   }
 `;
@@ -209,9 +211,12 @@ export const AppTile: React.FC<AppTileProps> = ({
         <div className="edge-fader" />
         {isOpen && (
           <StyledRow>
-            <motion.p className="app__desc">
-              {description.slice(0, 150)}
-              {description.length > 150 && "..."}
+            <motion.p
+              className="app__desc"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
+            >
+              {description}
             </motion.p>
           </StyledRow>
         )}
