@@ -135,7 +135,15 @@ export const IsSampleAppModal: React.FC<IsSampleAppModalProps> = ({
             Close
           </Button>
           <Link href="/store">
-            <Button bold>Search for another app</Button>
+            <Button
+              bold
+              onClick={() => setOpen(false)}
+              onKeyDown={() => setOpen(false)}
+              tabIndex={0}
+              aria-label="Go back to store"
+            >
+              Search for another app
+            </Button>
           </Link>
         </BottomBar>
       </Modal>
