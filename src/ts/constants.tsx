@@ -149,3 +149,11 @@ export const fadeInOutVariants: Variants = {
   },
   closed: { opacity: 0 },
 };
+
+export const fadeUpVariants: Variants = {
+  show: {
+    opacity: 1,
+    y: 0,
+  },
+  hidden: { opacity: 0, y: 50 },
+};
