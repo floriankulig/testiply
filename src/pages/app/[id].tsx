@@ -29,11 +29,12 @@ import { useIsMobile } from "hooks";
 import { Footer } from "components/home";
 import { theme } from "styles";
 import { InfoPageHeader } from "components/InfoPageHeader";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Button } from "components/Button";
 import { BiMessageAltDetail } from "react-icons/bi";
 import { FeedbackForm } from "components/forms";
 import { useAuthValue } from "context";
+import { fadeUpVariants } from "ts/constants";
 
 interface AppDetailProps {
   appInfo: App;
@@ -155,24 +156,42 @@ const AppDetail: NextPage<AppDetailProps> = ({
             }}
           />
         </StyledRow>
-        <motion.h1 animate className="section-header">
-          Description
-        </motion.h1>
-        <Description as={motion.p} layoutId={`appDesc-${_id}`}>
-          {description}
-        </Description>
+        <motion.div
+          initial="hidden"
+          animate="show"
+          transition={{
+            delayChildren: 0.5,
+            staggerChildren: 0.05,
+          }}
+        >
+          <motion.h1 variants={fadeUpVariants} className="section-header">
+            Description
+          </motion.h1>
+          <Description as={motion.p} variants={fadeUpVariants}>
+            {description}
+          </Description>
+        </motion.div>
       </HeroSection>
-      <ScreenshotSection>
-        <motion.h1 animate className="section-header">
+      <ScreenshotSection
+        as={motion.section}
+        initial="hidden"
+        animate="show"
+        transition={{
+          delayChildren: 0.7,
+          staggerChildren: 0.05,
+        }}
+      >
+        <motion.h1 variants={fadeUpVariants} className="section-header">
           Screenshots
         </motion.h1>
         <div className="screenshots">
           {[...Array(3)]?.map((_, i) => (
             <Screenshot
+              as={motion.img}
+              variants={fadeUpVariants}
               key={`screenshot_${_id}_${i}`}
               src={`https://api.testiply.n-mayr.net/static/${_id}/${i + 1}.png`}
               alt={`Screenshot ${i + 1} of ${name}`}
-              style={{ animationDelay: `${i * 30 + 500}ms` }}
             />
           ))}
         </div>
