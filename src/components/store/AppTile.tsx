@@ -137,7 +137,7 @@ export const AppTile: React.FC<AppTileProps> = ({
 }) => {
   const { name, description, _id, devName, rating } = appInfo;
   const appsStack = useIsMobile(APPSTACKWIDTH - 1); //Apps stack with less than 640px
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
   const [detailOpened, setDetailOpened] = useState<boolean>(false);
   const iconURL = `${process.env.NEXT_PUBLIC_API_URL}/static/${_id}/icon.png`;
 
@@ -209,7 +209,7 @@ export const AppTile: React.FC<AppTileProps> = ({
         <div className="edge-fader" />
         {isOpen && (
           <StyledRow>
-            <motion.p className="app__desc" layoutId={`appDesc-${_id}`}>
+            <motion.p className="app__desc">
               {description.slice(0, 150)}
               {description.length > 150 && "..."}
             </motion.p>
