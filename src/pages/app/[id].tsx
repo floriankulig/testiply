@@ -109,7 +109,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
       />
       <HeroSection className="container-small">
         <StyledRow>
-          <IconWrapper as={motion.div} layoutId={`appIcon-${_id}`}>
+          <IconWrapper>
             <Image
               width={200}
               height={200}
@@ -119,8 +119,8 @@ const AppDetail: NextPage<AppDetailProps> = ({
             />
           </IconWrapper>
           <MetaInfo>
-            <motion.h1 layoutId={`appTitle-${_id}`}>{name}</motion.h1>
-            <motion.h3 layoutId={`appDevName-${_id}`} className="link">
+            <h1>{name}</h1>
+            <h3 className="link">
               <a
                 href={`${devWebsite}`}
                 target="_blank"
@@ -128,7 +128,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
               >
                 {devName}
               </a>
-            </motion.h3>
+            </h3>
             <ClickableDropdown
               label="Download for "
               selection={downloadPlatform}
