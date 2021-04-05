@@ -1,12 +1,35 @@
 import { Button } from "components/Button";
 import { Overlay } from "components/Overlay";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { useCannotScroll, useOnClickOutside } from "hooks";
 import Link from "next/link";
 import { useRef } from "react";
 import { FaRegSadTear } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import styled from "styled-components";
+import { fadeInOutVariants } from "ts/constants";
+
+const modalVariants: Variants = {
+  closed: {
+    scale: 0,
+    opacity: 0,
+  },
+  open: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      delayChildren: 0.15,
+      staggerChildren: 0.05,
+    },
+  },
+};
+const scaleIn: Variants = {
+  open: {
+    opacity: 1,
+    y: 0,
+  },
+  closed: { opacity: 0, y: 10 },
+};
 
 const Modal = styled.div`
   background: var(--layout-nav-background);
@@ -68,18 +91,20 @@ export const IsSampleAppModal: React.FC<IsSampleAppModalProps> = ({
   useCannotScroll(true);
   useOnClickOutside(ref, () => setOpen(false));
   return (
-    <Overlay>
-      <Modal
-        as={motion.div}
-        initial={{ scale: 0.1, y: 100 }}
-        animate={{ scale: 1, y: 0 }}
-        ref={ref}
-      >
+    <Overlay
+      asPortal
+      as={motion.div}
+      variants={fadeInOutVariants}
+      initial="closed"
+      animate="open"
+      exit="closed"
+    >
+      <Modal as={motion.div} variants={modalVariants} ref={ref}>
         <TopBar>
-          <h2>
+          <motion.h2 variants={scaleIn}>
             <FaRegSadTear />
             We're sorry!
-          </h2>
+          </motion.h2>
           <motion.div
             className="close-svg-wrapper"
             onClick={() => setOpen(false)}
@@ -89,16 +114,17 @@ export const IsSampleAppModal: React.FC<IsSampleAppModalProps> = ({
             aria-label="Close this modal."
             whileHover={{ rotate: 180, scale: 1.05 }}
             whileTap={{ scale: 0.75 }}
+            variants={scaleIn}
           >
             <MdClose />
           </motion.div>
         </TopBar>
-        <p>
+        <motion.p variants={scaleIn}>
           Unfortunately, you can't test this App. This app is a sample app
           provided by Testiply to showcase the platform's functionality. We
           appreciate your understanding.
-        </p>
-        <BottomBar>
+        </motion.p>
+        <BottomBar as={motion.div} variants={scaleIn}>
           <Button
             transparent
             onClick={() => setOpen(false)}
