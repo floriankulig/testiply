@@ -1,6 +1,7 @@
 import { StyledClickableDropdown } from "components/ClickableDropdown";
 import { rgba } from "polished";
 import styled from "styled-components";
+
 const HeroSection = styled.section`
   margin-top: 3em;
   margin-bottom: 2em;
@@ -9,9 +10,8 @@ const HeroSection = styled.section`
     margin-bottom: 4em;
   }
   ${StyledClickableDropdown} {
-    // after name and dev
     opacity: 0;
-    animation: fadeUp 0.5s var(--easing) forwards 0.4s;
+    animation: fadeUp 0.4s var(--easing) forwards 0.2s;
   }
   h1.section-header {
     margin-top: 2em;
