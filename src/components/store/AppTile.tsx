@@ -138,7 +138,7 @@ export const AppTile: React.FC<AppTileProps> = ({
   style,
 }) => {
   const { name, description, _id, devName, rating } = appInfo;
-  const appsStack = useIsMobile(APPSTACKWIDTH - 1); //Apps stack with less than 640px
+  const appsStack = useIsMobile(APPSTACKWIDTH - 1, false); //Apps stack with less than 640px
   const [isOpen, setIsOpen] = useState<boolean>(true);
   const [detailOpened, setDetailOpened] = useState<boolean>(false);
   const iconURL = `${process.env.NEXT_PUBLIC_API_URL}/static/${_id}/icon.png`;
@@ -201,7 +201,7 @@ export const AppTile: React.FC<AppTileProps> = ({
             onClick={() => setIsOpen((prev) => !prev)}
             onKeyDown={() => setIsOpen((prev) => !prev)}
             aria-label={`Open Description for ${name}.`}
-            tabIndex={0}
+            tabIndex={-1}
             role="button"
             open={appsStack ? isOpen : true}
           >
@@ -210,11 +210,17 @@ export const AppTile: React.FC<AppTileProps> = ({
         )}
         <div className="edge-fader" />
         {isOpen && (
-          <StyledRow>
+          <StyledRow
+            as={motion.div}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, transition: { delay: 0.1 } }}
+            layout
+          >
             <motion.p
               className="app__desc"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1, transition: { delay: 0.1 } }}
+              layout
             >
               {description}
             </motion.p>
