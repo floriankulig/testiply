@@ -29,7 +29,7 @@ import { useIsMobile } from "hooks";
 import { Footer } from "components/home";
 import { theme } from "styles";
 import { InfoPageHeader } from "components/InfoPageHeader";
-import { motion, Variants } from "framer-motion";
+import { AnimatePresence, motion, Variants } from "framer-motion";
 import { Button } from "components/Button";
 import { BiMessageAltDetail } from "react-icons/bi";
 import { FeedbackForm } from "components/forms";
@@ -138,9 +138,11 @@ const AppDetail: NextPage<AppDetailProps> = ({
               style={{ visibility: !isMobile ? "visible" : "hidden" }}
             />
           </MetaInfo>
-          {sampleAppModalOpen && (
-            <IsSampleAppModal setOpen={setSampleAppModalOpen} />
-          )}
+          <AnimatePresence>
+            {sampleAppModalOpen && (
+              <IsSampleAppModal setOpen={setSampleAppModalOpen} />
+            )}
+          </AnimatePresence>
         </StyledRow>
         <StyledRow>
           <ClickableDropdown
