@@ -1,7 +1,7 @@
 import { Button } from "components/Button";
 import { Loading } from "components/Loading";
 import { Overlay } from "components/Overlay";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, Variants } from "framer-motion";
 import { getFormattedDate } from "helpers";
 import { useOnClickOutside } from "hooks";
 import Link from "next/link";
@@ -11,6 +11,14 @@ import styled from "styled-components";
 import { Feedback } from "ts";
 import { fadeInOutVariants } from "ts/constants";
 import { StarPercentageRating } from "./Rating";
+
+export const feedbackVariants: Variants = {
+  open: {
+    opacity: 1,
+    scale: 1,
+  },
+  closed: { opacity: 0, scale: 0 },
+};
 
 const StyledFeedbackTile = styled.li`
   position: relative;
@@ -136,6 +144,10 @@ export const FeedbackTile: React.FC<{ feedback: Feedback }> = ({
         as={motion.li}
         style={{ borderRadius: "1.25em" }}
         layoutId={`feedbackTile-${_id}`}
+        initial="closed"
+        animate="open"
+        exit="closed"
+        variants={feedbackVariants}
       >
         <div className="content-wrapper">
           <TopBar>
