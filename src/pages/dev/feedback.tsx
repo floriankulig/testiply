@@ -1,6 +1,7 @@
 import axios from "axios";
 import { FeedbackTile } from "components/appDetail";
 import { AppGrid, Layout } from "components/layouts";
+import { NoAppsView } from "components/store";
 import { TabHeader } from "components/TabHeader";
 import { useAuthValue, useFiltersValue } from "context";
 import { AnimatePresence } from "framer-motion";
@@ -60,6 +61,11 @@ const DevFeedback = ({ feedbacks, hasUser, isDev }: DevFeedbackProps) => {
               )
           )}
         </AnimatePresence>
+        {!feedbacks && (
+          <NoAppsView hasApps={false}>
+            No feedbacks for your apps yet ...
+          </NoAppsView>
+        )}
       </AppGrid>
     </>
   );
