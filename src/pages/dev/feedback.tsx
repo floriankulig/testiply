@@ -2,11 +2,12 @@ import axios from "axios";
 import { FeedbackTile } from "components/appDetail";
 import { AppGrid, Layout } from "components/layouts";
 import { TabHeader } from "components/TabHeader";
-import { useAuthValue } from "context";
+import { useAuthValue, useFiltersValue } from "context";
+import { AnimatePresence } from "framer-motion";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Feedback } from "ts";
 
 interface DevFeedbackProps {
@@ -18,6 +19,8 @@ interface DevFeedbackProps {
 const DevFeedback = ({ feedbacks, hasUser, isDev }: DevFeedbackProps) => {
   const router = useRouter();
   const { currentUser } = useAuthValue();
+  const { searchQuery } = useFiltersValue();
+
   useEffect(() => {
     console.log({ hasUser });
     if (typeof window !== "undefined") {
@@ -34,6 +37,14 @@ const DevFeedback = ({ feedbacks, hasUser, isDev }: DevFeedbackProps) => {
       }
     }
   }, [currentUser]);
+
+  const correspondsToSearch = ({ heading, rating, text }: Feedback): boolean =>
+    heading.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    rating.toString() === searchQuery.toLowerCase() ||
+    text.toLowerCase().includes(searchQuery.toLowerCase())
+      ? true
+      : false;
+
   return (
     <>
       <Head>
@@ -41,9 +52,14 @@ const DevFeedback = ({ feedbacks, hasUser, isDev }: DevFeedbackProps) => {
       </Head>
       <TabHeader>Your Latest Feedbacks</TabHeader>
       <AppGrid>
-        {feedbacks?.map((feedback) => (
-          <FeedbackTile key={feedback._id} feedback={feedback} />
-        ))}
+        <AnimatePresence>
+          {feedbacks?.map(
+            (feedback) =>
+              correspondsToSearch(feedback) && (
+                <FeedbackTile key={feedback._id} feedback={feedback} />
+              )
+          )}
+        </AnimatePresence>
       </AppGrid>
     </>
   );
