@@ -39,8 +39,14 @@ const DevFeedback = ({ feedbacks, hasUser, isDev }: DevFeedbackProps) => {
     }
   }, [currentUser]);
 
-  const correspondsToSearch = ({ heading, rating, text }: Feedback): boolean =>
+  const correspondsToSearch = ({
+    heading,
+    rating,
+    text,
+    appName,
+  }: Feedback): boolean =>
     heading.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    appName.toLowerCase().includes(searchQuery.toLowerCase()) ||
     rating.toString() === searchQuery.toLowerCase() ||
     text.toLowerCase().includes(searchQuery.toLowerCase())
       ? true
