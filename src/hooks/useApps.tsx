@@ -27,14 +27,14 @@ export const useApps = (initialApps: App[]): ReturnType => {
         if (JSON.stringify(res.data.apps) !== JSON.stringify(apps)) {
           setApps(res.data.apps);
         }
+        setLoading(false);
       })
-      .catch(
-        (err) =>
-          err.response.status === 404 &&
+      .catch((err) => {
+        err.response.status === 404 &&
           err.response.data.err === "No Apps found." &&
-          setApps([])
-      );
-    setLoading(false);
+          setApps([]);
+        setLoading(false);
+      });
   }, [selectedPlatform]);
 
   useEffect(() => {
