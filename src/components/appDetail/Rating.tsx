@@ -1,5 +1,7 @@
+import { motion, Variants } from "framer-motion";
 import { rgba } from "polished";
 import styled from "styled-components";
+import { fadeUpVariants } from "ts/constants";
 
 export const RatingSection = styled.section`
   margin-top: 5em;
@@ -65,23 +67,14 @@ export const RatingSummary = styled.div`
     padding-top: 0;
   }
 
-  & > * {
-    opacity: 0; //for animations
-  }
-
   h2 {
     font-size: clamp(3rem, 5vw, 4.5rem);
     margin: 0 0 0.1em;
-    animation: fadeUp 0.5s var(--easing) forwards;
-  }
-  ${StarRatings} {
-    animation: fadeUp 0.5s var(--easing) forwards 0.05s;
   }
   span.rating__amount {
     color: ${({ theme }) => rgba(theme.navy, 0.7)};
     display: inline-flex;
     align-items: center;
-    animation: fadeUp 0.5s var(--easing) forwards 0.1s;
     svg {
       margin-right: 5px;
     }
@@ -90,7 +83,7 @@ export const RatingSummary = styled.div`
 
 export const RatingBars = styled.ul`
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   justify-content: space-between;
   width: 100%;
   max-width: 300px;
@@ -119,9 +112,6 @@ const StyledRatingBar = styled.div`
     background-color: var(--primary);
     height: var(--height);
     border-radius: calc(var(--height) / 2);
-    animation: growRight 0.8s var(--easing) forwards;
-    transform-origin: left;
-    transform: scaleX(0);
   }
 
   @media (${({ theme }) => theme.bp.medium}) {
@@ -133,21 +123,29 @@ interface RatingBarProps {
   progress: number;
   i: number;
 }
+const ratingbarVariants: Variants = {
+  show: {
+    scaleX: 1,
+    transformOrigin: "left",
+  },
+  hidden: { scaleX: 0 },
+};
 
 export const RatingBar: React.FC<RatingBarProps> = ({ progress, i }) => {
   return (
-    <li>
-      <span>{5 - i}</span>
+    <motion.li variants={fadeUpVariants}>
+      <span>{i + 1}</span>
       <StyledRatingBar>
-        <div
+        <motion.div
+          variants={ratingbarVariants}
+          transition={{ delay: 1.75 + i / 20, duration: 0.8 }}
           className="progress"
           style={{
-            width: `${progress * 100 + 10}%`,
-            animationDelay: `${i * 200}ms`,
+            width: `${progress}%`,
           }}
         />
       </StyledRatingBar>
-    </li>
+    </motion.li>
   );
 };
 
@@ -160,7 +158,11 @@ export const StarPercentageRating: React.FC<StarpercentageRatingProps> = ({
   size = 20,
 }) => {
   return (
-    <StarRatings style={{ fontSize: `${size}px` }}>
+    <StarRatings
+      as={motion.div}
+      variants={fadeUpVariants}
+      style={{ fontSize: `${size}px` }}
+    >
       <div className="fill-ratings" style={{ width: `${percentage * 20}%` }}>
         <span>★★★★★</span>
       </div>
