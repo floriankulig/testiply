@@ -175,7 +175,7 @@ export const FeedbackTile: React.FC<{ feedback: Feedback }> = ({
             layoutId={`feedbackTile-text-${_id}`}
             className="feedback__text"
           >
-            <p>{text}</p>
+            <motion.p>{text}</motion.p>
           </motion.div>
           <ShowMoreButton>
             <span
@@ -233,7 +233,7 @@ export const FeedbackTile: React.FC<{ feedback: Feedback }> = ({
                 layoutId={`feedbackTile-text-${_id}`}
                 className="feedback-detail__text"
               >
-                <p>{text}</p>
+                <motion.p>{text}</motion.p>
               </motion.div>
               <BottomBar>
                 <Link href={`/app/${appId}`}>
