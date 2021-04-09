@@ -2,9 +2,10 @@ import { useAuthValue } from "context";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import { useOnClickOutside } from "hooks";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { rgba } from "polished";
 import React, { useRef, useState } from "react";
-import { BiLogOut } from "react-icons/bi";
+import { BiLogOut, BiStore } from "react-icons/bi";
 import { FaRegComment } from "react-icons/fa";
 import { FiArrowUp, FiUser, FiUserCheck, FiUserPlus } from "react-icons/fi";
 import styled from "styled-components";
@@ -77,6 +78,9 @@ export const UserMenu = () => {
   const ref = useRef<HTMLDivElement>(null);
   useOnClickOutside(ref, () => setMenuOpen(false));
 
+  const { pathname } = useRouter();
+  const isStoreView = pathname.split("/")[1] === "store" ? true : false;
+
   return (
     <div ref={ref} style={{ position: "relative" }}>
       <div
@@ -119,12 +123,27 @@ export const UserMenu = () => {
                 </DropdownItem>
               </Link>
             )}
-            {!!currentUser?.isDev && (
-              <Link href="/dev/feedback">
-                <DropdownItem as={motion.li} variants={dropdownItemVariants}>
-                  <FaRegComment /> View Feedbacks
-                </DropdownItem>
-              </Link>
+            {isStoreView ? (
+              <>
+                {!!currentUser?.isDev && (
+                  <Link href="/dev/feedback">
+                    <DropdownItem
+                      as={motion.li}
+                      variants={dropdownItemVariants}
+                    >
+                      <FaRegComment /> View Feedbacks
+                    </DropdownItem>
+                  </Link>
+                )}
+              </>
+            ) : (
+              <>
+                <Link href="/store">
+                  <DropdownItem as={motion.li} variants={dropdownItemVariants}>
+                    <BiStore /> Go to store
+                  </DropdownItem>
+                </Link>
+              </>
             )}
             {!!currentUser && (
               <DropdownItem
