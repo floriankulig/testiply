@@ -163,7 +163,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
           animate="show"
           transition={{
             delayChildren: 0.5,
-            staggerChildren: 0.05,
+            staggerChildren: 0.1,
           }}
         >
           <motion.h1 variants={fadeUpVariants} className="section-header">
@@ -180,7 +180,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
         animate="show"
         transition={{
           delayChildren: 0.7,
-          staggerChildren: 0.05,
+          staggerChildren: 0.1,
         }}
       >
         <motion.h1 variants={fadeUpVariants} className="section-header">
@@ -198,22 +198,33 @@ const AppDetail: NextPage<AppDetailProps> = ({
           ))}
         </div>
       </ScreenshotSection>
-      <RatingSection className="container-small">
-        {/* <motion.h1 animate className="section-header">Rating</motion.h1>
+      <RatingSection
+        className="container-small"
+        as={motion.section}
+        initial="hidden"
+        animate="show"
+        transition={{
+          delayChildren: 1,
+          staggerChildren: 0.1,
+        }}
+      >
+        <motion.h1 variants={fadeUpVariants} className="section-header">
+          Rating
+        </motion.h1>
         <RatingContent>
           <RatingSummary>
-            <h2>{rating}</h2>
-            <StarPercentageRating percentage={rating} />
-            <span className="rating__amount">
-              <IoPeople /> 1.065.564
-            </span>
+            <motion.h2 variants={fadeUpVariants}>{rating.total}</motion.h2>
+            <StarPercentageRating percentage={rating.total} />
+            <motion.span variants={fadeUpVariants} className="rating__amount">
+              <IoPeople /> {rating.amount}
+            </motion.span>
           </RatingSummary>
           <RatingBars>
-            {["", "", "", "", ""].map((_, i) => (
-              <RatingBar key={i} progress={i / 5} i={i} />
+            {[...Array(5)].map((_, i) => (
+              <RatingBar key={i} progress={rating[`${i + 1}`]} i={i} />
             ))}
           </RatingBars>
-        </RatingContent> */}
+        </RatingContent>
         {feedbackFormOpen ? (
           <FeedbackForm
             appId={_id}
