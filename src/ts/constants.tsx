@@ -154,6 +154,7 @@ export const fadeUpVariants: Variants = {
   show: {
     opacity: 1,
     y: 0,
+    transition: { duration: 0.25 },
   },
-  hidden: { opacity: 0, y: 50 },
+  hidden: { opacity: 0, y: 25 },
 };
