@@ -15,7 +15,7 @@ export const useApps = (initialApps: App[]): ReturnType => {
   // Requesting Apps Logic
   const [apps, setApps] = useState<App[]>(initialApps);
   const [filteredApps, setFilteredApps] = useState<App[]>(apps);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     setLoading(true);
@@ -27,7 +27,6 @@ export const useApps = (initialApps: App[]): ReturnType => {
         if (JSON.stringify(res.data.apps) !== JSON.stringify(apps)) {
           setApps(res.data.apps);
         }
-        setLoading(false);
       })
       .catch(
         (err) =>
@@ -35,6 +34,7 @@ export const useApps = (initialApps: App[]): ReturnType => {
           err.response.data.err === "No Apps found." &&
           setApps([])
       );
+    setLoading(false);
   }, [selectedPlatform]);
 
   useEffect(() => {
