@@ -283,7 +283,6 @@ export const getServerSideProps: GetServerSideProps = async (
 ) => {
   const id = ctx?.params.id as string;
   const appInfo = await getAppInfo(id);
-  console.log(appInfo);
 
   return {
     props: {
