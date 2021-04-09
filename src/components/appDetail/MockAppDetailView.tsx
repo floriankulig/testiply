@@ -1,4 +1,5 @@
 import { InfoPageHeader } from "components/InfoPageHeader";
+import { Loading } from "components/Loading";
 import { Overlay } from "components/Overlay";
 import { motion } from "framer-motion";
 import { getTextColor } from "helpers";
@@ -12,6 +13,12 @@ const BodyOverlay = styled.div`
   width: 100vw;
   height: 100vh;
   background: var(--layout-nav-background);
+  h4 {
+    margin-top: 4em;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #b6b6b6;
+  }
 `;
 
 interface MockAppDetailViewProps {
@@ -55,6 +62,9 @@ export const MockAppDetailView: React.FC<MockAppDetailViewProps> = ({
             </MetaInfo>
           </StyledRow>
         </HeroSection>
+        <h4>
+          Loading details <Loading color="#b6b6b6" />
+        </h4>
       </BodyOverlay>
     </Overlay>
   );
