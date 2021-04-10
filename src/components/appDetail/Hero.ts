@@ -1,5 +1,5 @@
 import { StyledClickableDropdown } from "components/ClickableDropdown";
-import { rgba } from "polished";
+import { lighten, rgba } from "polished";
 import styled from "styled-components";
 
 const HeroSection = styled.section`
@@ -32,8 +32,21 @@ const IconWrapper = styled.div`
   min-height: 120px;
   border-radius: 20%;
   user-select: none;
+  position: relative;
   img.icon {
     border-radius: 20%;
+  }
+  div.sample-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    background: ${({ theme }) => lighten(0.25, theme.primary)};
+    padding: 0.3em 0.7em;
+    border-radius: 2em;
+    color: #fff;
+    font-size: clamp(0.75rem, 2vw, 1rem);
+    transform: rotate(45deg) translateX(25%);
   }
 `;
 
