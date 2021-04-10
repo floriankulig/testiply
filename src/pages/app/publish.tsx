@@ -33,9 +33,7 @@ const PublishApp: NextPage = () => {
         }}
       />
       <FormWrapper as={motion.div} animate>
-        <TabHeader as={motion.h1} animate layoutId="publishApp-heading">
-          Publish your app.
-        </TabHeader>
+        <TabHeader>Publish your app.</TabHeader>
         <PublishAppForm />
       </FormWrapper>
       <Footer />

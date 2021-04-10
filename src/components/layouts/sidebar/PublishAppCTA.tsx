@@ -22,7 +22,7 @@ const Container = styled.div`
 export const PublishAppCTA: React.FC = () => {
   return (
     <Container as={motion.div} layout>
-      <motion.p layoutId="publishApp-heading">Publish your own app</motion.p>
+      <p>Publish your own app</p>
       <Link href="/app/publish">
         <Button big bold color="white" disableElevation>
           Publish App
