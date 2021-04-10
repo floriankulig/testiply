@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { fadeUpVariants } from "ts/constants";
 
 export const RatingSection = styled.section`
-  margin-top: 5em;
+  margin-top: 3em;
   overflow-y: hidden;
   h1.section-header {
     font-size: clamp(1.4rem, 3vw, 2rem);
