@@ -34,7 +34,7 @@ import { Button } from "components/Button";
 import { BiMessageAltDetail } from "react-icons/bi";
 import { FeedbackForm } from "components/forms";
 import { useAuthValue } from "context";
-import { fadeUpVariants } from "ts/constants";
+import { fadeInOutVariants, fadeUpVariants } from "ts/constants";
 
 interface AppDetailProps {
   appInfo: App;
@@ -110,6 +110,17 @@ const AppDetail: NextPage<AppDetailProps> = ({
       <HeroSection className="container-small">
         <StyledRow>
           <IconWrapper>
+            {isSample && (
+              <motion.div
+                className="sample-badge"
+                initial="closed"
+                animate="open"
+                variants={fadeInOutVariants}
+                transition={{ delay: 0.5 }}
+              >
+                Sample
+              </motion.div>
+            )}
             <Image
               width={200}
               height={200}
