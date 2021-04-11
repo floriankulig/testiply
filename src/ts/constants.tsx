@@ -31,7 +31,6 @@ import { BsCreditCard } from "react-icons/bs";
 import { Platform, Category } from ".";
 import { GoPackage } from "react-icons/go";
 import { FiLock } from "react-icons/fi";
-import { Variants } from "framer-motion";
 
 export const platforms: Platform[] = [
   { displayName: "iOS", id: "ios" },
@@ -142,19 +141,3 @@ export const devTabIcons = [
   [<AiOutlineAppstore />, <AiFillAppstore />],
   [<FaRegComment />, <FaComment />],
 ];
-
-export const fadeInOutVariants: Variants = {
-  open: {
-    opacity: 1,
-  },
-  closed: { opacity: 0 },
-};
-
-export const fadeUpVariants: Variants = {
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.25 },
-  },
-  hidden: { opacity: 0, y: 25 },
-};
