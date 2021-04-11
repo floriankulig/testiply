@@ -34,7 +34,7 @@ import { Button } from "components/Button";
 import { BiMessageAltDetail } from "react-icons/bi";
 import { FeedbackForm } from "components/forms";
 import { useAuthValue } from "context";
-import { fadeInOutVariants, fadeUpVariants } from "ts/constants";
+import { fadeInOutVariants, fadeUpVariants } from "styles";
 
 interface AppDetailProps {
   appInfo: App;
