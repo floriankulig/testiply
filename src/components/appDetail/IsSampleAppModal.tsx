@@ -7,7 +7,7 @@ import { useRef } from "react";
 import { FaRegSadTear } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import styled from "styled-components";
-import { fadeInOutVariants } from "ts/constants";
+import { fadeInOutVariants } from "styles";
 
 const modalVariants: Variants = {
   closed: {
