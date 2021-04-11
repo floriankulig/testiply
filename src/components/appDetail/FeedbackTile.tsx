@@ -9,7 +9,7 @@ import { rgba } from "polished";
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { Feedback } from "ts";
-import { fadeInOutVariants } from "ts/constants";
+import { fadeInOutVariants } from "styles";
 import { StarPercentageRating } from "./Rating";
 
 export const feedbackVariants: Variants = {
