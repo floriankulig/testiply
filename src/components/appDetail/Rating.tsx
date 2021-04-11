@@ -1,7 +1,7 @@
 import { motion, Variants } from "framer-motion";
 import { rgba } from "polished";
 import styled from "styled-components";
-import { fadeUpVariants } from "ts/constants";
+import { fadeUpVariants } from "styles";
 
 export const RatingSection = styled.section`
   margin-top: 3em;
