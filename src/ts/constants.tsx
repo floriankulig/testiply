@@ -28,7 +28,7 @@ import {
   RiToolsLine,
 } from "react-icons/ri";
 import { BsCreditCard } from "react-icons/bs";
-import { Platform, Category } from ".";
+import { Platform, Category, App } from ".";
 import { GoPackage } from "react-icons/go";
 import { FiLock } from "react-icons/fi";
 
@@ -141,3 +141,20 @@ export const devTabIcons = [
   [<AiOutlineAppstore />, <AiFillAppstore />],
   [<FaRegComment />, <FaComment />],
 ];
+
+export const sampleApp: App = {
+  _id: "605b8651367f8f49f0c00caf",
+  categories: ["productivity", "utilities", "addons"],
+  description:
+    'Join 25 million people and teams that organize, plan, and collaborate on tasks and projects with Todoist. Honored to be called "The best to-do list" by The Verge.',
+  devId: "605b555d34e5ba3ec24feb5c",
+  devName: "Testiply",
+  devWebsite: "https://testiply.vercel.app/",
+  downloads: 0,
+  isSample: true,
+  name: "Todoist",
+  platforms: ["ios", "ipados"],
+  rating: { 1: 40, 2: 0, 3: 20, 4: 20, 5: 20, amount: 5, total: 2.8 },
+  testflightIos: "https://testiply.vercel.app/store",
+  testflightIpados: "https://testiply.vercel.app/store",
+};
