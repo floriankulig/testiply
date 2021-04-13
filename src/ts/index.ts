@@ -12,9 +12,9 @@ import {
   DescriptiveObj,
 } from "./types";
 
-import { platforms, categories } from "./constants";
+import { platforms, categories, sampleApp } from "./constants";
 
-export { platforms, categories };
+export { platforms, categories, sampleApp };
 export type {
   Category,
   Platform,
