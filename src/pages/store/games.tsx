@@ -2,6 +2,7 @@ import { AppGrid, Layout } from "components/layouts";
 import { TabCurrentlyWorkedOn } from "components/store/TabCurrentlyWorkedOn";
 import { TabHeader } from "components/TabHeader";
 import Head from "next/head";
+import { GamesRows } from "components/store/GamesRows";
 
 const Games = () => {
   return (
@@ -13,6 +14,7 @@ const Games = () => {
       <AppGrid>
         <TabCurrentlyWorkedOn />
       </AppGrid>
+      {/* <GamesRows /> */}
     </>
   );
 };
