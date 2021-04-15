@@ -1,4 +1,5 @@
 import { Button } from "components/Button";
+import { rgba } from "polished";
 import { FaChevronRight } from "react-icons/fa";
 import styled from "styled-components";
 
@@ -17,7 +18,15 @@ export const StyledAppRowHeader = styled.div`
   h2.tab-name {
     color: var(--navy);
     font-size: 1.6rem;
+    font-weight: normal;
     margin: 0;
+    display: flex;
+    align-items: center;
+    svg {
+      margin-right: 0.5em;
+      color: ${({ theme }) => rgba(theme.navy, 0.5)};
+      font-size: 1.8rem;
+    }
   }
   ${Button} {
     display: flex;
