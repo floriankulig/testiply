@@ -1,5 +1,6 @@
 import { NoAppsView } from "./NoAppsView";
 import { AppTile } from "./AppTile";
+import { GamesRows } from "./GamesRows";
 import {
   StyledAppRow,
   StyledAppRowHeader,
@@ -14,4 +15,5 @@ export {
   StyledAppRowHeader,
   ViewAllButton,
   StyledAppStoreRow,
+  GamesRows,
 };
