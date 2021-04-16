@@ -2,10 +2,10 @@ import axios from "axios";
 import { useFiltersValue } from "context";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import { App } from "ts";
+import { App, AppRowCategory } from "ts";
 
 interface ReturnType {
-  selectedCategory: string;
+  selectedCategory: AppRowCategory;
   loading: boolean;
   apps: App[];
 }
@@ -16,9 +16,11 @@ export const useGamesApps = (): ReturnType => {
   const { selectedPlatform } = useFiltersValue();
 
   // Getting current category from url => support for url sharing
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [selectedCategory, setSelectedCategory] = useState<AppRowCategory>(
+    null
+  );
   useEffect(() => {
-    setSelectedCategory("");
+    setSelectedCategory(null);
   }, [query]);
 
   // Requesting Apps Logic
