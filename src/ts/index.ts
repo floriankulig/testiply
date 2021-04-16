@@ -11,6 +11,7 @@ import {
   User,
   DescriptiveObj,
   AppRowCategory,
+  AppRowCategoryID,
 } from "./types";
 
 import { platforms, categories, sampleApp } from "./constants";
@@ -29,4 +30,5 @@ export type {
   User,
   DescriptiveObj,
   AppRowCategory,
+  AppRowCategoryID,
 };
