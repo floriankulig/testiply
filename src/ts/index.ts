@@ -10,6 +10,7 @@ import {
   Feedback,
   User,
   DescriptiveObj,
+  AppRowCategory,
 } from "./types";
 
 import { platforms, categories, sampleApp } from "./constants";
@@ -27,4 +28,5 @@ export type {
   Feedback,
   User,
   DescriptiveObj,
+  AppRowCategory,
 };
