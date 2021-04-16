@@ -1,10 +1,16 @@
+import { MenuTransition } from "components/MenuTransition";
 import React from "react";
 import { FiClock, FiDownload, FiStar } from "react-icons/fi";
+import { App } from "ts";
 import { StyledAppRowHeader, StyledAppStoreRow, ViewAllButton } from "./AppRow";
 
-export const GamesRows: React.FC = () => {
+interface GamesRowsProps {
+  apps: App[];
+}
+
+export const GamesRows: React.FC<GamesRowsProps> = () => {
   return (
-    <>
+    <MenuTransition>
       <StyledAppStoreRow>
         <StyledAppRowHeader>
           <h2 className="tab-name">
@@ -32,6 +38,6 @@ export const GamesRows: React.FC = () => {
           <ViewAllButton clickHandler={() => {}} />
         </StyledAppRowHeader>
       </StyledAppStoreRow>
-    </>
+    </MenuTransition>
   );
 };
