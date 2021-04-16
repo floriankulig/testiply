@@ -10,6 +10,7 @@ import { useFilters } from "./useFilters";
 import { useUser } from "./useUser";
 import { useCategory } from "./useCategory";
 import { useApps } from "./useApps";
+import { useGamesApps } from "./useGamesApps";
 
 export {
   useIsMobile,
@@ -20,4 +21,5 @@ export {
   useUser,
   useCategory,
   useApps,
+  useGamesApps,
 };
