@@ -1,11 +1,12 @@
 import { MenuTransition } from "components/MenuTransition";
 import React from "react";
 import { FiClock, FiDownload, FiStar } from "react-icons/fi";
-import { App } from "ts";
+import { App, AppRowCategory } from "ts";
 import { StyledAppRowHeader, StyledAppStoreRow, ViewAllButton } from "./AppRow";
 
 interface GamesRowsProps {
   apps: App[];
+  selectedCategory: AppRowCategory;
 }
 
 export const GamesRows: React.FC<GamesRowsProps> = () => {
