@@ -104,4 +104,9 @@ export interface Feedback {
   _id: string;
 }
 
+export interface AppRowCategory {
+  id: "latest" | "best_rating" | "most_downloads";
+  displayName: "Latest" | "Best Rating" | "Most Downloads";
+}
+
 export type UserType = "tester" | "dev";
