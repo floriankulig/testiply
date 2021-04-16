@@ -6,7 +6,7 @@ import { GamesRows } from "components/store";
 import { useGamesApps } from "hooks";
 
 const Games = () => {
-  const { apps } = useGamesApps();
+  const { apps, selectedCategory } = useGamesApps();
 
   return (
     <>
@@ -14,10 +14,10 @@ const Games = () => {
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
       </Head>
       <TabHeader>Games</TabHeader>
-      {/* <AppGrid>
+      <AppGrid>
         <TabCurrentlyWorkedOn />
-      </AppGrid> */}
-      <GamesRows apps={apps} />
+      </AppGrid>
+      {/* <GamesRows selectedCategory={selectedCategory} apps={apps} /> */}
     </>
   );
 };
