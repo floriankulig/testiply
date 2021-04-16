@@ -103,9 +103,9 @@ export interface Feedback {
   appName: string;
   _id: string;
 }
-
+export type AppRowCategoryID = "latest" | "best_rating" | "most_downloads";
 export interface AppRowCategory {
-  id: "latest" | "best_rating" | "most_downloads";
+  id: AppRowCategoryID;
   displayName: "Latest" | "Best Rating" | "Most Downloads";
 }
 
