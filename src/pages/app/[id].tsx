@@ -1,6 +1,5 @@
 import getAppInfo from "api/getAppInfo";
 import {
-  FeedbackTile,
   HeroSection,
   IconWrapper,
   MetaInfo,
@@ -16,7 +15,6 @@ import {
   Description,
   IsSampleAppModal,
 } from "components/appDetail";
-import { AppGrid } from "components/layouts";
 import { capitalized, getTextColor } from "helpers";
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
 import Head from "next/head";
@@ -29,7 +27,7 @@ import { useIsMobile } from "hooks";
 import { Footer } from "components/home";
 import { theme } from "styles";
 import { InfoPageHeader } from "components/InfoPageHeader";
-import { AnimatePresence, motion, Variants } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "components/Button";
 import { BiMessageAltDetail } from "react-icons/bi";
 import { FeedbackForm } from "components/forms";
