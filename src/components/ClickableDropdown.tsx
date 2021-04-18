@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
 import { CSSTransition } from "react-transition-group";
 import styled from "styled-components";
+import { Loading } from "./Loading";
 
 interface DropdownOpenProps {
   open: boolean;
@@ -119,6 +120,7 @@ interface ClickableDropdownProps {
   setSelection: React.Dispatch<React.SetStateAction<Value>>;
   values: Array<Value>;
   ctaClickHandler: () => void;
+  loading?: boolean;
 }
 
 export const ClickableDropdown: React.FC<ClickableDropdownProps> = ({
@@ -129,6 +131,7 @@ export const ClickableDropdown: React.FC<ClickableDropdownProps> = ({
   setSelection,
   values,
   ctaClickHandler,
+  loading,
 }) => {
   const [dropdownOpens, setDropdownOpens] = useState<boolean>(false);
   const dropdownShouldOpen: boolean =
@@ -148,6 +151,12 @@ export const ClickableDropdown: React.FC<ClickableDropdownProps> = ({
     setDropdownOpens(false);
   };
 
+  const innerButtonText = loading ? (
+    <Loading size={40} />
+  ) : (
+    label + selection.displayName
+  );
+
   return (
     <StyledClickableDropdown
       style={{ position: "relative", ...style }}
@@ -163,8 +172,7 @@ export const ClickableDropdown: React.FC<ClickableDropdownProps> = ({
         tabIndex={0}
         style={{ width: !hasMultipleApps && "100%" }}
       >
-        {label}
-        {selection.displayName}
+        {innerButtonText}
       </ClickableSelection>
       {hasMultipleApps && (
         <DropdownOpenerWrapper
