@@ -65,7 +65,7 @@ const MetaInfo = styled.div`
     color: var(--primary);
     font-size: clamp(16px, 2vw, 20px);
     margin: 0.75em 0;
-    margin-left: clamp(0.01em, 1vw, 0.4em);
+    margin-left: clamp(0.01em, 1vw, 0.2em);
     width: max-content;
     flex-wrap: wrap;
   }
