@@ -11,8 +11,11 @@ import { fadeInOutVariants } from "styles";
 
 const modalVariants: Variants = {
   closed: {
-    scale: 0,
+    scale: 1.4,
     opacity: 0,
+    transition: {
+      duration: 0.2,
+    },
   },
   open: {
     scale: 1,
