@@ -33,6 +33,8 @@ import { BiMessageAltDetail } from "react-icons/bi";
 import { FeedbackForm } from "components/forms";
 import { useAuthValue } from "context";
 import { fadeInOutVariants, fadeUpVariants } from "styles";
+import { TesterAuthForm } from "components/auth";
+import axios from "axios";
 
 interface AppDetailProps {
   appInfo: App;
@@ -57,7 +59,9 @@ const AppDetail: NextPage<AppDetailProps> = ({
   //helper state
   const [feedbackFormOpen, setFeedbackFormOpen] = useState<boolean>(false);
   const [sampleAppModalOpen, setSampleAppModalOpen] = useState<boolean>(false);
-  const { currentUser } = useAuthValue();
+  const [authModalOpen, setAuthModalOpen] = useState<boolean>(false);
+  const [ctaLoading, setCTALoading] = useState<boolean>(false);
+  const { currentUser, renewUid } = useAuthValue();
   const isMobile = useIsMobile(550);
 
   //platform availability filtering
@@ -77,16 +81,30 @@ const AppDetail: NextPage<AppDetailProps> = ({
     !isSample;
 
   //event handlers
-  const handleDownload = (): void => {
+  const handleDownload = async (): Promise<void> => {
+    setCTALoading(true);
     if (isSample) {
       setSampleAppModalOpen(true);
+      setCTALoading(false);
       return;
     }
-    if (downloadPlatform.id === "ios") {
-      location.href = testflightIos;
-    } else if (downloadPlatform.id === "ipados") {
-      location.href = testflightIpados;
+    if (!currentUser) {
+      setAuthModalOpen(true);
+      setCTALoading(false);
+      return;
     }
+    try {
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/download?appId=${_id}&userId=${currentUser._id}`
+      );
+      await renewUid(currentUser._id);
+      if (downloadPlatform.id === "ios") {
+        location.href = testflightIos;
+      } else if (downloadPlatform.id === "ipados") {
+        location.href = testflightIpados;
+      }
+    } catch (err) {}
+    setCTALoading(false);
   };
 
   return (
@@ -139,6 +157,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
               </a>
             </h3>
             <ClickableDropdown
+              loading={ctaLoading}
               label="Download for "
               selection={downloadPlatform}
               setSelection={setDownloadPlatform}
@@ -155,6 +174,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
         </StyledRow>
         <StyledRow>
           <ClickableDropdown
+            loading={ctaLoading}
             label="Download for "
             selection={downloadPlatform}
             setSelection={setDownloadPlatform}
@@ -290,7 +310,9 @@ const AppDetail: NextPage<AppDetailProps> = ({
           </div>
         )}
       </RatingSection>
-
+      {authModalOpen && (
+        <TesterAuthForm formType="login" asModal setOpen={setAuthModalOpen} />
+      )}
       <Footer />
     </>
   );
