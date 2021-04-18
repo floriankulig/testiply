@@ -262,6 +262,8 @@ const AppDetail: NextPage<AppDetailProps> = ({
                 tabIndex={0}
                 disabled={cantLeaveFeedback}
                 basic
+                as={motion.button}
+                variants={fadeUpVariants}
               >
                 <motion.span
                   layoutId="leaveFeedbackHead"
