@@ -12,11 +12,17 @@ import {
   DescriptiveObj,
   AppRowCategory,
   AppRowCategoryID,
+  GameRowApps,
 } from "./types";
 
-import { platforms, categories, sampleApp } from "./constants";
+import {
+  platforms,
+  categories,
+  gameRowCategories,
+  sampleApp,
+} from "./constants";
 
-export { platforms, categories, sampleApp };
+export { platforms, categories, gameRowCategories, sampleApp };
 export type {
   Category,
   Platform,
@@ -31,4 +37,5 @@ export type {
   DescriptiveObj,
   AppRowCategory,
   AppRowCategoryID,
+  GameRowApps,
 };
