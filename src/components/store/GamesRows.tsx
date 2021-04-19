@@ -1,4 +1,5 @@
 import { MenuTransition } from "components/MenuTransition";
+import { useRouter } from "next/router";
 import React from "react";
 import { FiClock, FiDownload, FiStar } from "react-icons/fi";
 import { App, AppRowCategory } from "ts";
@@ -10,6 +11,7 @@ interface GamesRowsProps {
 }
 
 export const GamesRows: React.FC<GamesRowsProps> = () => {
+  const router = useRouter();
   return (
     <MenuTransition>
       <StyledAppStoreRow>
@@ -18,7 +20,9 @@ export const GamesRows: React.FC<GamesRowsProps> = () => {
             <FiClock />
             Latest
           </h2>
-          <ViewAllButton clickHandler={() => {}} />
+          <ViewAllButton
+            clickHandler={() => router.push("/store/games?category=latest")}
+          />
         </StyledAppRowHeader>
       </StyledAppStoreRow>
       <StyledAppStoreRow>
@@ -27,7 +31,9 @@ export const GamesRows: React.FC<GamesRowsProps> = () => {
             <FiStar />
             Best rating
           </h2>
-          <ViewAllButton clickHandler={() => {}} />
+          <ViewAllButton
+            clickHandler={() => router.push("/store/games?category=rating")}
+          />
         </StyledAppRowHeader>
       </StyledAppStoreRow>
       <StyledAppStoreRow>
@@ -36,7 +42,9 @@ export const GamesRows: React.FC<GamesRowsProps> = () => {
             <FiDownload />
             Most Downloads
           </h2>
-          <ViewAllButton clickHandler={() => {}} />
+          <ViewAllButton
+            clickHandler={() => router.push("/store/games?category=downloads")}
+          />
         </StyledAppRowHeader>
       </StyledAppStoreRow>
     </MenuTransition>
