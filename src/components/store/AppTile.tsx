@@ -85,6 +85,7 @@ const IconWrapper = styled.div`
     height: 100%;
     width: 100%;
     border-radius: 20%;
+    object-fit: cover;
   }
 `;
 
