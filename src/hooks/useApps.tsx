@@ -23,7 +23,6 @@ export const useApps = (initialApps: App[]): ReturnType => {
     axios
       .get(`${process.env.NEXT_PUBLIC_API_URL}/getAllApps${query}`)
       .then((res) => {
-        console.log(res.data);
         if (JSON.stringify(res.data.apps) !== JSON.stringify(apps)) {
           setApps(res.data.apps);
         }
