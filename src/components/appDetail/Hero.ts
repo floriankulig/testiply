@@ -35,6 +35,7 @@ const IconWrapper = styled.div`
   position: relative;
   img.icon {
     border-radius: 20%;
+    object-fit: cover;
   }
   div.sample-badge {
     position: absolute;
