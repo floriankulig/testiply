@@ -108,5 +108,10 @@ export interface AppRowCategory {
   id: AppRowCategoryID;
   displayName: "Latest" | "Best Rating" | "Most Downloads";
 }
+export interface GameRowApps {
+  latest: App[];
+  rating: App[];
+  downloads: App[];
+}
 
 export type UserType = "tester" | "dev";
