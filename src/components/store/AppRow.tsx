@@ -24,7 +24,7 @@ export const StyledAppRowHeader = styled.div`
     align-items: center;
     svg {
       margin-right: 0.5em;
-      color: ${({ theme }) => rgba(theme.navy, 0.5)};
+      color: ${({ theme }) => rgba(theme.navy, 0.6)};
       font-size: 1.8rem;
     }
   }
@@ -49,15 +49,17 @@ export const StyledAppRow = styled.ul`
 `;
 
 interface ViewAllButtonProps {
-  clickHandler: () => void;
+  clickHandler?: () => void;
 }
 export const ViewAllButton: React.FC<ViewAllButtonProps> = ({
   clickHandler,
 }) => {
+  const noCall = () => {};
+
   return (
     <Button
-      onClick={clickHandler}
-      onKeyDown={clickHandler}
+      onClick={clickHandler || noCall}
+      onKeyDown={clickHandler || noCall}
       tabIndex={-1}
       aria-label="View all apps of this tab"
       transparent
