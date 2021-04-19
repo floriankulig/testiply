@@ -1,13 +1,15 @@
 import axios from "axios";
 import { useFiltersValue } from "context";
+import { getCurrentGameCategoryFromRoute } from "helpers";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import { App, AppRowCategory } from "ts";
+import { App, AppRowCategory, GameRowApps } from "ts";
 
 interface ReturnType {
   selectedCategory: AppRowCategory;
   loading: boolean;
   apps: App[];
+  initialApps: GameRowApps;
 }
 
 export const useGamesApps = (): ReturnType => {
@@ -17,37 +19,40 @@ export const useGamesApps = (): ReturnType => {
 
   // Getting current category from url => support for url sharing
   const [selectedCategory, setSelectedCategory] = useState<AppRowCategory>(
-    null
+    getCurrentGameCategoryFromRoute(query)
   );
   useEffect(() => {
-    setSelectedCategory(null);
+    setSelectedCategory(getCurrentGameCategoryFromRoute(query));
   }, [query]);
 
-  // Requesting Apps Logic
+  //API requests
+  const getInitialApps = async (): Promise<GameRowApps> => {
+    try {
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/games?platform=${selectedPlatform.id}`
+      );
+      console.log(res.data);
+      return res.data;
+    } catch (err) {
+      console.log(err.response.data.err);
+    }
+  };
+
+  // Apps for 3 different Rows
+  const [initialApps, setInitialApps] = useState<GameRowApps>();
+  // Apps when user selected a tab/category
   const [apps, setApps] = useState<App[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  //   useEffect(() => {
-  //     if (selectedCategory === null) {
-  //       setApps([]);
-  //       return;
-  //     }
-  //     setLoading(true);
-  //     const query: string = `?category=${selectedCategory.id}&platform=${selectedPlatform.id}`;
-  //     axios
-  //       .get(`${process.env.NEXT_PUBLIC_API_URL}/getCategoryApps${query}`)
-  //       .then((res) => {
-  //         if (JSON.stringify(res.data.apps) !== JSON.stringify(apps)) {
-  //           setApps(res.data.apps);
-  //         }
-  //         setLoading(false);
-  //       })
-  //       .catch(
-  //         (err) =>
-  //           err.response.status === 404 &&
-  //           err.response.data.err === "No Apps found." &&
-  //           setApps([])
-  //       );
-  //   }, [selectedCategory, selectedPlatform]);
 
-  return { selectedCategory, loading, apps };
+  // Listeners for Re-requesting apps
+  useEffect(() => {
+    (async () => {
+      const newApps = await getInitialApps();
+      if (JSON.stringify(newApps) !== JSON.stringify(initialApps)) {
+        setInitialApps(newApps);
+      }
+    })();
+  }, [selectedCategory, selectedPlatform]);
+
+  return { selectedCategory, loading, apps, initialApps };
 };
