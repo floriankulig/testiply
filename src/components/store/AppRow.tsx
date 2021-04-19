@@ -49,17 +49,15 @@ export const StyledAppRow = styled.ul`
 `;
 
 interface ViewAllButtonProps {
-  clickHandler?: () => void;
+  clickHandler: () => void;
 }
 export const ViewAllButton: React.FC<ViewAllButtonProps> = ({
   clickHandler,
 }) => {
-  const noCall = () => {};
-
   return (
     <Button
-      onClick={clickHandler || noCall}
-      onKeyDown={clickHandler || noCall}
+      onClick={clickHandler}
+      onKeyDown={clickHandler}
       tabIndex={-1}
       aria-label="View all apps of this tab"
       transparent
