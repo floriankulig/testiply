@@ -28,7 +28,7 @@ import {
   RiToolsLine,
 } from "react-icons/ri";
 import { BsCreditCard } from "react-icons/bs";
-import { Platform, Category, App } from ".";
+import { Platform, Category, App, AppRowCategory } from ".";
 import { GoPackage } from "react-icons/go";
 import { FiLock } from "react-icons/fi";
 
@@ -39,6 +39,21 @@ export const platforms: Platform[] = [
   { displayName: "iPadOS", id: "ipados" },
   { displayName: "Linux", id: "linux" },
   { displayName: "All", id: "all" },
+];
+
+export const gameRowCategories: AppRowCategory[] = [
+  {
+    id: "latest",
+    displayName: "Latest",
+  },
+  {
+    id: "rating",
+    displayName: "Best Rating",
+  },
+  {
+    id: "downloads",
+    displayName: "Most Downloads",
+  },
 ];
 
 export const categories: Category[] = [
