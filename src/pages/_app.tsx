@@ -7,6 +7,7 @@ import { GlobalStyle, theme } from "styles";
 import { AnimateSharedLayout } from "framer-motion";
 import { useEffect } from "react";
 import axios from "axios";
+import { setAPIHeaders } from "api";
 
 interface EmptyLayoutProps {
   children: React.ReactNode;
@@ -19,7 +20,7 @@ const MyApp = ({ Component, pageProps }: any) => {
   const Layout = Component.Layout || EmptyLayout;
 
   useEffect(() => {
-    axios.defaults.headers.common["api_key"] = process.env.NEXT_PUBLIC_API_KEY;
+    setAPIHeaders();
   }, []);
 
   return (
