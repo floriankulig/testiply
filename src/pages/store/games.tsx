@@ -6,7 +6,7 @@ import { GamesRows } from "components/store";
 import { useGamesApps } from "hooks";
 
 const Games = () => {
-  const { apps, selectedCategory } = useGamesApps();
+  const props = useGamesApps();
 
   return (
     <>
@@ -17,7 +17,7 @@ const Games = () => {
       <AppGrid>
         <TabCurrentlyWorkedOn />
       </AppGrid>
-      {/* <GamesRows selectedCategory={selectedCategory} apps={apps} /> */}
+      {/* <GamesRows {...props} /> */}
     </>
   );
 };
