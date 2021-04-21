@@ -1,4 +1,5 @@
-import axios from "axios";
+import { setAPIHeaders } from "api";
+import axios, { AxiosResponse } from "axios";
 import { useFiltersValue } from "context";
 import { getCurrentGameCategoryFromRoute } from "helpers";
 import { useRouter } from "next/router";
@@ -26,15 +27,18 @@ export const useGamesApps = (): ReturnType => {
   }, [query]);
 
   //API requests
+  const [loading, setLoading] = useState<boolean>(true);
   const getInitialApps = async (): Promise<GameRowApps> => {
+    setLoading(true);
     try {
-      const res = await axios.post(
+      const res: AxiosResponse<{ apps: GameRowApps }> = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/games?platform=${selectedPlatform.id}`
       );
-      console.log(res.data);
-      return res.data;
+      setLoading(false);
+      return res.data.apps;
     } catch (err) {
       console.log(err.response.data.err);
+      setLoading(false);
     }
   };
 
@@ -42,11 +46,11 @@ export const useGamesApps = (): ReturnType => {
   const [initialApps, setInitialApps] = useState<GameRowApps>();
   // Apps when user selected a tab/category
   const [apps, setApps] = useState<App[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
 
   // Listeners for Re-requesting apps
   useEffect(() => {
     (async () => {
+      setAPIHeaders();
       const newApps = await getInitialApps();
       if (JSON.stringify(newApps) !== JSON.stringify(initialApps)) {
         setInitialApps(newApps);
