@@ -34,7 +34,7 @@ const Games = () => {
             >
               <FiChevronLeft />
             </CSSTransition>
-            Categories
+            Games
           </BasePath>
         </Link>
         <CSSTransition
