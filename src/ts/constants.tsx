@@ -30,7 +30,7 @@ import {
 import { BsCreditCard } from "react-icons/bs";
 import { Platform, Category, App, AppRowCategory } from ".";
 import { GoPackage } from "react-icons/go";
-import { FiLock } from "react-icons/fi";
+import { FiClock, FiDownload, FiLock, FiStar } from "react-icons/fi";
 
 export const platforms: Platform[] = [
   { displayName: "iOS", id: "ios" },
@@ -45,14 +45,17 @@ export const gameRowCategories: AppRowCategory[] = [
   {
     id: "latest",
     displayName: "Latest",
+    icon: FiClock,
   },
   {
     id: "rating",
     displayName: "Best Rating",
+    icon: FiStar,
   },
   {
     id: "downloads",
     displayName: "Most Downloads",
+    icon: FiDownload,
   },
 ];
 
