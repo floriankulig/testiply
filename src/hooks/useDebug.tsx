@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 
-export const useDebug = (value: any): void => {
+export const useDebug = (value: any, text?: string): void => {
   useEffect(() => {
-    console.log({ value });
+    console.log(
+      text ? text + ": " + JSON.stringify(value) : JSON.stringify(value)
+    );
   }, [value]);
 };
