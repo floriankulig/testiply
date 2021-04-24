@@ -29,6 +29,7 @@ export const AuthForm = styled.div`
 
   ${Button} {
     margin-top: 2em;
+    float: right;
     @media (${({ theme }) => theme.bp.small}) {
       margin-top: 3em;
     }
