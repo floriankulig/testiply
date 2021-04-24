@@ -25,11 +25,7 @@ const Apps = ({ initialApps }: { initialApps: App[] }) => {
         ) : (
           <>
             {filteredApps.map((app, i) => (
-              <AppTile
-                key={app._id}
-                style={{ animationDelay: `${i * 15}ms` }}
-                appInfo={app}
-              />
+              <AppTile key={app._id} appInfo={app} />
             ))}
             <div className="full-grid-width">
               {loading && (
