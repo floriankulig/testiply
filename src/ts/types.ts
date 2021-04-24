@@ -107,6 +107,7 @@ export type AppRowCategoryID = "latest" | "rating" | "downloads";
 export interface AppRowCategory {
   id: AppRowCategoryID;
   displayName: "Latest" | "Best Rating" | "Most Downloads";
+  icon: IconType;
 }
 export interface GameRowApps {
   latest: App[];
