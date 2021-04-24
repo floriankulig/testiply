@@ -31,7 +31,6 @@ export const useUser = (): AuthContextType => {
       setCurrentUser(null);
       return;
     }
-    console.log("asking for user");
     const timeout = setTimeout(() => {
       axios
         .post(`${process.env.NEXT_PUBLIC_API_URL}/getUser`, {
