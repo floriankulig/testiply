@@ -4,13 +4,18 @@ import { useFiltersValue } from "context";
 import { getCurrentGameCategoryFromRoute } from "helpers";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import { App, AppRowCategory, GameRowApps } from "ts";
+import { App, AppRowCategory, AppRowCategoryID, GameRowApps } from "ts";
+import { useDebug } from "./useDebug";
 
 interface ReturnType {
   selectedCategory: AppRowCategory;
   loading: boolean;
   apps: App[];
   initialApps: GameRowApps;
+}
+
+interface CategoryApps {
+  [x: string]: App[];
 }
 
 export const useGamesApps = (): ReturnType => {
@@ -41,6 +46,19 @@ export const useGamesApps = (): ReturnType => {
       setLoading(false);
     }
   };
+  const getCategoryApps = async (): Promise<App[]> => {
+    setLoading(true);
+    try {
+      const res: AxiosResponse<{ apps: CategoryApps }> = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/games?platform=${selectedPlatform.id}&sort=${selectedCategory.id}`
+      );
+      setLoading(false);
+      return res.data.apps[`${selectedCategory.id}`];
+    } catch (err) {
+      console.log(err.response.data.err);
+      setLoading(false);
+    }
+  };
 
   // Apps for 3 different Rows
   const [initialApps, setInitialApps] = useState<GameRowApps>();
@@ -56,7 +74,21 @@ export const useGamesApps = (): ReturnType => {
         setInitialApps(newApps);
       }
     })();
-  }, [selectedCategory, selectedPlatform]);
+  }, [selectedPlatform]);
+
+  useEffect(() => {
+    if (!selectedCategory) {
+      setApps([]);
+      return;
+    }
+
+    (async () => {
+      const newApps = await getCategoryApps();
+      if (JSON.stringify(newApps) !== JSON.stringify(apps)) {
+        setApps(newApps);
+      }
+    })();
+  }, [selectedPlatform, selectedCategory]);
 
   return { selectedCategory, loading, apps, initialApps };
 };
