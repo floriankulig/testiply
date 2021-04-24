@@ -67,6 +67,7 @@ const DevFeedback = ({ feedbacks, hasUser, isDev }: DevFeedbackProps) => {
               )
           )}
         </AnimatePresence>
+        <div className="full-grid-width separator"></div>
         {!feedbacks && (
           <NoAppsView hasApps={false}>
             No feedbacks for your apps yet ...
