@@ -35,19 +35,9 @@ export const GamesRows: React.FC<GamesRowsProps> = ({
   selectedCategory,
   loading,
 }) => {
-  // if (loading) {
-  //   return (
-  //     <div className="full-grid-width">
-  //       <h2 className="loading">
-  //         Loading
-  //         <Loading size={60} />
-  //       </h2>
-  //     </div>
-  //   );
-  // }
-  // if (!initialApps?.latest[0] || !initialApps) {
-  //   return <NoAppsView hasApps={false}>No Games uploaded yet.</NoAppsView>;
-  // }
+  if (!initialApps?.latest[0] || !initialApps) {
+    return <NoAppsView hasApps={false}>No Games uploaded yet.</NoAppsView>;
+  }
   const router = useRouter();
 
   return (
