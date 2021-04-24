@@ -5,6 +5,7 @@ import { useCannotScroll } from "./useCannotScroll";
 
 // import { useStaticJSON } from "./useStaticJSON";
 import { useFilters } from "./useFilters";
+import { useDebug } from "./useDebug";
 
 //Data gathering hooks
 import { useUser } from "./useUser";
@@ -18,6 +19,7 @@ export {
   useCannotScroll,
   // useStaticJSON,
   useFilters,
+  useDebug,
   useUser,
   useCategory,
   useApps,
