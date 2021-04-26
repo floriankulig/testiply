@@ -1,15 +1,14 @@
 import { useOnClickOutside } from "hooks";
 import { useRef } from "react";
 import styled from "styled-components";
-import { TabRow, Tabs } from "./Tabs";
-import { BiLogOut } from "react-icons/bi";
+import { Tabs } from "./Tabs";
 import { useAuthValue, useFiltersValue } from "context";
 import { SelectionInput } from "components/SelectionInput";
 import { platforms } from "ts";
 import { useRouter } from "next/router";
-import { CSSTransition } from "react-transition-group";
 import { PublishAppCTA } from "./PublishAppCTA";
 import Link from "next/link";
+import { AnimatePresence } from "framer-motion";
 
 interface StyledSidebarProps {
   open: boolean;
@@ -63,7 +62,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
   const isDevRoute = pathname.split("/")[1] === "dev";
 
   const ref = useRef<HTMLDivElement>();
-  const { currentUser, logout } = useAuthValue();
+  const { currentUser } = useAuthValue();
   useOnClickOutside(ref, () => setOpen(false));
 
   return (
@@ -87,28 +86,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
                 values={platforms}
               />
             )}
-            {currentUser?.isDev && <PublishAppCTA />}
           </div>
         </div>
-        <CSSTransition
-          in={!!currentUser}
-          classNames="pop-in"
-          timeout={250}
-          appear
-          unmountOnExit
-        >
-          <TabRow
-            icon
-            style={{ marginTop: "3em" }}
-            onClick={() => logout()}
-            onKeyDown={() => logout()}
-          >
-            <span>
-              <BiLogOut />
-            </span>
-            Logout
-          </TabRow>
-        </CSSTransition>
+        <div className="padd">
+          <AnimatePresence>
+            {currentUser?.isDev && <PublishAppCTA />}
+          </AnimatePresence>
+        </div>
       </SidebarContent>
     </StyledSidebar>
   );
