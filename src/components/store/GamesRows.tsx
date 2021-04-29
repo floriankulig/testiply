@@ -72,7 +72,7 @@ export const GamesRows: React.FC<GamesRowsProps> = ({
                   </StyledAppRowHeader>
                   <StyledAppRow>
                     {rowApps?.map((app) => (
-                      <AppTile key={app._id} appInfo={app} />
+                      <AppTile key={app._id} customID={row.id} appInfo={app} />
                     ))}
                   </StyledAppRow>
                 </StyledAppStoreRow>
