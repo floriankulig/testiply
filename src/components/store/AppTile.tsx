@@ -131,18 +131,22 @@ interface AppTileProps {
   style?: React.CSSProperties;
   className?: string;
   appInfo: AppPreview;
+  customID?: string;
 }
 
 export const AppTile: React.FC<AppTileProps> = ({
   appInfo,
   className,
   style,
+  customID = "",
 }) => {
   const { name, description, _id, devName, rating } = appInfo;
   const appsStack = useIsMobile(APPSTACKWIDTH - 1, false); //Apps stack with less than 640px
   const [isOpen, setIsOpen] = useState<boolean>(true);
   const [detailOpened, setDetailOpened] = useState<boolean>(false);
   const iconURL = `${process.env.NEXT_PUBLIC_API_URL}/static/${_id}/icon.png`;
+
+  const layID = _id + customID;
 
   useEffect(() => {
     // open apps if apps are not stacking in grid
@@ -156,7 +160,7 @@ export const AppTile: React.FC<AppTileProps> = ({
         className={className}
         as={motion.li}
         layout
-        layoutId={`appTile-${_id}`}
+        layoutId={`appTile-${layID}`}
       >
         <Link href={`/app/${_id}`}>
           <StyledRow
@@ -169,7 +173,7 @@ export const AppTile: React.FC<AppTileProps> = ({
           >
             <IconWrapper
               as={motion.div}
-              layoutId={`appIcon-${_id}`}
+              layoutId={`appIcon-${layID}`}
               style={{ borderRadius: "25%" }}
             >
               <Image
@@ -181,10 +185,10 @@ export const AppTile: React.FC<AppTileProps> = ({
               />
             </IconWrapper>
             <StyledAppInfo>
-              <motion.p layoutId={`appTitle-${_id}`} className="app__name">
+              <motion.p layoutId={`appTitle-${layID}`} className="app__name">
                 {name}
               </motion.p>
-              <motion.p layoutId={`appDevName-${_id}`} className="app__dev">
+              <motion.p layoutId={`appDevName-${layID}`} className="app__dev">
                 {devName}
               </motion.p>
               <motion.div
