@@ -50,6 +50,7 @@ const DropdownItem = styled.li`
   cursor: pointer;
   transition: color 0.3s;
   word-wrap: none;
+  color: var(--navy);
   svg {
     margin-right: 1em;
     width: 25px;
