@@ -21,6 +21,7 @@ const Dropdown = styled.ul`
   background: ${(p) => rgba(p.theme.layoutNavBg, 0.95)};
   border: 2px solid ${(p) => rgba(p.theme.navy, 0.4)};
   border-radius: 0.75em;
+  z-index: 100;
   box-shadow: -5px 10px 20px ${(p) => rgba(p.theme.navy, 0.1)};
 `;
 
