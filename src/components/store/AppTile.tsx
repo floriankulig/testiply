@@ -235,7 +235,7 @@ export const AppTile: React.FC<AppTileProps> = ({
       <AnimatePresence>
         {detailOpened && (
           <MockAppDetailView
-            _id={_id}
+            _id={layID}
             appName={name}
             devName={devName}
             iconURL={iconURL}
