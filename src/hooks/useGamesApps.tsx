@@ -37,7 +37,7 @@ export const useGamesApps = (): ReturnType => {
     setLoading(true);
     try {
       const res: AxiosResponse<{ apps: GameRowApps }> = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/games?platform=${selectedPlatform.id}`
+        `${process.env.NEXT_PUBLIC_API_URL}/testGetGames?platform=${selectedPlatform.id}`
       );
       setLoading(false);
       return res.data.apps;
@@ -50,7 +50,7 @@ export const useGamesApps = (): ReturnType => {
     setLoading(true);
     try {
       const res: AxiosResponse<{ apps: CategoryApps }> = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/games?platform=${selectedPlatform.id}&sort=${selectedCategory.id}`
+        `${process.env.NEXT_PUBLIC_API_URL}/testGetGames?platform=${selectedPlatform.id}&sort=${selectedCategory.id}`
       );
       setLoading(false);
       return res.data.apps[`${selectedCategory.id}`];
