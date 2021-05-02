@@ -132,6 +132,7 @@ interface AppTileProps {
   className?: string;
   appInfo: AppPreview;
   customID?: string;
+  simple?: boolean;
 }
 
 export const AppTile: React.FC<AppTileProps> = ({
@@ -139,6 +140,7 @@ export const AppTile: React.FC<AppTileProps> = ({
   className,
   style,
   customID = "",
+  simple,
 }) => {
   const { name, description, _id, devName, rating } = appInfo;
   const appsStack = useIsMobile(APPSTACKWIDTH - 1, false); //Apps stack with less than 640px
