@@ -4,7 +4,6 @@ import { MenuTransition } from "components/MenuTransition";
 import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 import React from "react";
-import { FiClock, FiDownload, FiStar } from "react-icons/fi";
 import { CSSTransition } from "react-transition-group";
 import {
   App,
