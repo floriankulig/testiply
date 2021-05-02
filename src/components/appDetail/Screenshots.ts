@@ -13,10 +13,12 @@ const ScreenshotSection = styled.section`
   .screenshots {
     padding-top: 1em;
     padding-bottom: 2em;
-    overflow-y: auto;
     white-space: nowrap;
     display: flex;
     gap: 3em;
+    overflow-y: auto;
+    scrollbar-color: #fff;
+    scrollbar-width: thin;
   }
   h1.section-header {
     font-size: clamp(1.4rem, 3vw, 2rem);

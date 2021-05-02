@@ -27,6 +27,8 @@ const StyledSidebar = styled.div<StyledSidebarProps>`
   z-index: 1001;
   transition: var(--sidebarDuration) transform var(--easing);
   overflow-y: auto;
+  scrollbar-color: #fff;
+  scrollbar-width: thin;
 
   .logo {
     display: inline-flex;
