@@ -46,6 +46,8 @@ export const StyledAppRow = styled.ul`
   overflow-x: auto;
   overflow-y: hidden;
   gap: clamp(1em, 3vw, 2.5em);
+  scrollbar-color: #fff;
+  scrollbar-width: thin;
 `;
 
 interface ViewAllButtonProps {
