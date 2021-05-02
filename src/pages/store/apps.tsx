@@ -46,11 +46,14 @@ Apps.Layout = Layout;
 
 Apps.getInitialProps = async (ctx: NextPageContext) => {
   try {
-    const apps = await axios.get(
+    const res = await axios.get(
       `${process.env.NEXT_PUBLIC_API_URL}/getAllApps?platform=all`,
       { headers: { api_key: process.env.NEXT_PUBLIC_API_KEY } }
     );
-    return { initialApps: apps.data.apps };
+    const newApps = res.data.apps.filter(
+      (app: App) => !app.categories.includes("games")
+    );
+    return { initialApps: newApps };
   } catch (err) {
     return { initialApps: [] };
   }
