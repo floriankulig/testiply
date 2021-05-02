@@ -45,6 +45,10 @@ const StyledFeedbackTile = styled.li`
     &__heading {
       margin: 0;
       font-size: 1.5rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
     &__text {
       overflow-y: hidden;
@@ -52,6 +56,10 @@ const StyledFeedbackTile = styled.li`
       height: 72px;
       p {
         margin: 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
       }
     }
   }
@@ -171,12 +179,9 @@ export const FeedbackTile: React.FC<{ feedback: Feedback }> = ({
               </motion.div>
             </MetaData>
           </TopBar>
-          <motion.div
-            layoutId={`feedbackTile-text-${_id}`}
-            className="feedback__text"
-          >
-            <motion.p>{text}</motion.p>
-          </motion.div>
+          <div className="feedback__text">
+            <motion.p layoutId={`feedbackTile-text-${_id}`}>{text}</motion.p>
+          </div>
           <ShowMoreButton>
             <span
               className="link"
@@ -229,12 +234,11 @@ export const FeedbackTile: React.FC<{ feedback: Feedback }> = ({
                   </motion.span>
                 )}
               </TopBar>
-              <motion.div
-                layoutId={`feedbackTile-text-${_id}`}
-                className="feedback-detail__text"
-              >
-                <motion.p>{text}</motion.p>
-              </motion.div>
+              <div className="feedback-detail__text">
+                <motion.p layoutId={`feedbackTile-text-${_id}`}>
+                  {text}
+                </motion.p>
+              </div>
               <BottomBar>
                 <Link href={`/app/${appId}`}>
                   <Button
