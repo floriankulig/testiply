@@ -23,8 +23,11 @@ export const useApps = (initialApps: App[]): ReturnType => {
     axios
       .get(`${process.env.NEXT_PUBLIC_API_URL}/getAllApps${query}`)
       .then((res) => {
-        if (JSON.stringify(res.data.apps) !== JSON.stringify(apps)) {
-          setApps(res.data.apps);
+        const newApps = res.data.apps.filter(
+          (app: App) => !app.categories.includes("games")
+        );
+        if (JSON.stringify(newApps) !== JSON.stringify(apps)) {
+          setApps(newApps);
         }
         setLoading(false);
       })
