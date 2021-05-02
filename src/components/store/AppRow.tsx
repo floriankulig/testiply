@@ -15,6 +15,7 @@ export const StyledAppRowHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 0.25em;
   h2.tab-name {
     color: var(--navy);
     font-size: 1.6rem;
