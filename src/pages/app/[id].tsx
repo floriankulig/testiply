@@ -221,7 +221,9 @@ const AppDetail: NextPage<AppDetailProps> = ({
               as={motion.img}
               variants={fadeUpVariants}
               key={`screenshot_${_id}_${i}`}
-              src={`https://api.testiply.n-mayr.net/static/${_id}/${i + 1}.png`}
+              src={`${process.env.NEXT_PUBLIC_API_URL}/static/${_id}/${
+                i + 1
+              }.png`}
               alt={`Screenshot ${i + 1} of ${name}`}
             />
           ))}
