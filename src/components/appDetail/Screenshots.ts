@@ -27,6 +27,7 @@ const Screenshot = styled.img`
   user-select: none;
   box-shadow: 3px 10px 20px ${({ theme }) => rgba(theme.navy, 0.1)};
   z-index: -1;
+  pointer-events: none;
 `;
 
 export { Screenshot, ScreenshotSection };
