@@ -2,23 +2,15 @@ import { rgba } from "polished";
 import styled from "styled-components";
 
 const ScreenshotSection = styled.section`
-  width: 100%;
   color: var(--navy);
-  & > * {
-    padding: 0 5%;
-    @media (${({ theme }) => theme.bp.medium}) {
-      padding: 0 20%;
-    }
-  }
   .screenshots {
     padding-top: 1em;
     padding-bottom: 2em;
     white-space: nowrap;
+    width: max-content;
     display: flex;
     gap: 3em;
-    overflow-y: auto;
-    scrollbar-color: #fff;
-    scrollbar-width: thin;
+    overflow: visible;
   }
   h1.section-header {
     font-size: clamp(1.4rem, 3vw, 2rem);
