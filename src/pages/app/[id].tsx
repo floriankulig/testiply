@@ -19,7 +19,7 @@ import { capitalized, getTextColor } from "helpers";
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
 import Head from "next/head";
 import { App, Platform, platforms as allPlatforms } from "ts";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { IoPeople } from "react-icons/io5";
 import Image from "next/image";
 import { ClickableDropdown } from "components/ClickableDropdown";
@@ -63,6 +63,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
   const [ctaLoading, setCTALoading] = useState<boolean>(false);
   const { currentUser, renewUid } = useAuthValue();
   const isMobile = useIsMobile(550);
+  const screenshotRef = useRef(null);
 
   //platform availability filtering
   const downloadablePlatforms = platforms?.map((platformID) =>
@@ -204,7 +205,9 @@ const AppDetail: NextPage<AppDetailProps> = ({
         </motion.div>
       </HeroSection>
       <ScreenshotSection
+        className="container-small"
         as={motion.section}
+        ref={screenshotRef}
         initial="hidden"
         animate="show"
         transition={{
@@ -215,7 +218,11 @@ const AppDetail: NextPage<AppDetailProps> = ({
         <motion.h1 variants={fadeUpVariants} className="section-header">
           Screenshots
         </motion.h1>
-        <div className="screenshots">
+        <motion.ul
+          className="screenshots"
+          drag={"x"}
+          dragConstraints={screenshotRef}
+        >
           {[...Array(3)]?.map((_, i) => (
             <Screenshot
               as={motion.img}
@@ -227,7 +234,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
               alt={`Screenshot ${i + 1} of ${name}`}
             />
           ))}
-        </div>
+        </motion.ul>
       </ScreenshotSection>
       <RatingSection
         className="container-small"
