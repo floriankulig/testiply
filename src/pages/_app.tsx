@@ -6,7 +6,6 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyle, theme } from "styles";
 import { AnimateSharedLayout } from "framer-motion";
 import { useEffect } from "react";
-import axios from "axios";
 import { setAPIHeaders } from "api";
 
 interface EmptyLayoutProps {
