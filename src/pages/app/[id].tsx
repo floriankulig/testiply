@@ -109,7 +109,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
   };
 
   return (
-    <>
+    <div style={{ maxWidth: "100vw", overflowX: "hidden" }}>
       <Head>
         <link
           rel="shortcut icon"
@@ -323,7 +323,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
         <TesterAuthForm formType="login" asModal setOpen={setAuthModalOpen} />
       )}
       <Footer />
-    </>
+    </div>
   );
 };
 
