@@ -154,7 +154,6 @@ export const DetailAppTile: React.FC<AppTileProps> = ({
         as={motion.li}
         layout
         layoutId={`appTile-${layID}`}
-        whileTap={{ scale: 0.97 }}
         whileHover={{ scale: 1.03 }}
       >
         <Link href={`/app/${_id}`}>
