@@ -3,9 +3,30 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useIsMobile } from "hooks";
 import Image from "next/image";
 import Link from "next/link";
+import { rgba } from "polished";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { AppTileProps } from "./AppTile";
+
+const StyledAppTile = styled.li`
+  display: flex;
+`;
+
+const IconWrapper = styled.div`
+  height: 85px;
+  width: 85px;
+  min-height: 85px;
+  min-width: 85px;
+  box-shadow: 0px 0px 20px ${({ theme }) => rgba(theme.navy, 0.05)};
+  border-radius: 20%;
+  user-select: none;
+  .icon {
+    height: 100%;
+    width: 100%;
+    border-radius: 20%;
+    object-fit: cover;
+  }
+`;
 
 export const SimpleAppTile: React.FC<AppTileProps> = ({
   appInfo: { name, description, _id, devName, rating },
@@ -21,6 +42,21 @@ export const SimpleAppTile: React.FC<AppTileProps> = ({
 
   return (
     <>
+      <StyledAppTile>
+        <IconWrapper
+          as={motion.div}
+          layoutId={`appIcon-${layID}`}
+          style={{ borderRadius: "25%" }}
+        >
+          <Image
+            width={85}
+            height={85}
+            src={iconURL}
+            className="icon"
+            alt={`${name} app icon`}
+          />
+        </IconWrapper>
+      </StyledAppTile>
       <AnimatePresence>
         {detailOpened && (
           <MockAppDetailView
