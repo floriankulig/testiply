@@ -127,13 +127,12 @@ const SVGOpenerWrapper = styled.span<OpenProp>`
   }
 `;
 export const DetailAppTile: React.FC<AppTileProps> = ({
-  appInfo,
+  appInfo: { name, description, _id, devName, rating },
   className,
   style,
   customID = "",
   simple,
 }) => {
-  const { name, description, _id, devName, rating } = appInfo;
   const appsStack = useIsMobile(APPSTACKWIDTH - 1, false); //Apps stack with less than 640px
   const [isOpen, setIsOpen] = useState<boolean>(true);
   const [detailOpened, setDetailOpened] = useState<boolean>(false);
