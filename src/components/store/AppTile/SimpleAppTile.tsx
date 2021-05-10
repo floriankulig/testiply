@@ -13,10 +13,10 @@ const StyledAppTile = styled.li`
 `;
 
 const IconWrapper = styled.div`
-  height: 85px;
-  width: 85px;
-  min-height: 85px;
-  min-width: 85px;
+  height: 100px;
+  width: 100px;
+  min-height: 100px;
+  min-width: 100px;
   box-shadow: 0px 0px 20px ${({ theme }) => rgba(theme.navy, 0.05)};
   border-radius: 20%;
   user-select: none;
@@ -49,8 +49,8 @@ export const SimpleAppTile: React.FC<AppTileProps> = ({
           style={{ borderRadius: "25%" }}
         >
           <Image
-            width={85}
-            height={85}
+            width={100}
+            height={100}
             src={iconURL}
             className="icon"
             alt={`${name} app icon`}
