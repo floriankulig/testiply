@@ -222,6 +222,10 @@ const AppDetail: NextPage<AppDetailProps> = ({
           className="screenshots"
           drag={"x"}
           dragConstraints={screenshotRef}
+          dragTransition={{
+            bounceStiffness: 400,
+            bounceDamping: 50,
+          }}
         >
           {[...Array(3)]?.map((_, i) => (
             <Screenshot
