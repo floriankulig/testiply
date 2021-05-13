@@ -24,14 +24,14 @@ const BodyOverlay = styled.div`
 interface MockAppDetailViewProps {
   appName: string;
   devName: string;
-  iconURL: string;
+  Icon: JSX.Element;
   _id: string;
 }
 
 export const MockAppDetailView: React.FC<MockAppDetailViewProps> = ({
   appName,
   devName,
-  iconURL,
+  Icon,
   _id,
 }) => {
   return (
@@ -46,13 +46,7 @@ export const MockAppDetailView: React.FC<MockAppDetailViewProps> = ({
         <HeroSection className="container-small">
           <StyledRow>
             <IconWrapper as={motion.div} layoutId={`appIcon-${_id}`}>
-              <Image
-                width={200}
-                height={200}
-                className="icon"
-                src={iconURL}
-                alt={`${appName} app icon`}
-              />
+              {Icon}
             </IconWrapper>
             <MetaInfo>
               <motion.h1 layoutId={`appTitle-${_id}`}>{appName}</motion.h1>
