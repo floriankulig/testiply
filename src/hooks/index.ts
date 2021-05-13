@@ -2,6 +2,7 @@
 import { useIsMobile } from "./useIsMobile";
 import { useOnClickOutside } from "./useOnClickOutside";
 import { useCannotScroll } from "./useCannotScroll";
+import { useHorizontalScroll } from "./useHorizontalScroll";
 
 // import { useStaticJSON } from "./useStaticJSON";
 import { useFilters } from "./useFilters";
@@ -17,6 +18,7 @@ export {
   useIsMobile,
   useOnClickOutside,
   useCannotScroll,
+  useHorizontalScroll,
   // useStaticJSON,
   useFilters,
   useDebug,
