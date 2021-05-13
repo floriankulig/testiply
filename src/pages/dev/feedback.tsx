@@ -8,7 +8,7 @@ import { AnimatePresence } from "framer-motion";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Feedback } from "ts";
 
 interface DevFeedbackProps {
