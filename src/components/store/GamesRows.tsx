@@ -1,9 +1,9 @@
 import { AppGrid } from "components/layouts";
 import { Loading } from "components/Loading";
 import { MenuTransition } from "components/MenuTransition";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 import {
   App,
@@ -38,6 +38,7 @@ export const GamesRows: React.FC<GamesRowsProps> = ({
     return <NoAppsView hasApps={false}>No Games uploaded yet.</NoAppsView>;
   }
   const router = useRouter();
+  const scrollRef = useRef<HTMLDivElement>();
 
   return (
     <MenuTransition>
@@ -48,7 +49,7 @@ export const GamesRows: React.FC<GamesRowsProps> = ({
         unmountOnExit
         appear
       >
-        <div>
+        <div ref={scrollRef}>
           {!!initialApps &&
             Object.keys(initialApps)?.map((key: AppRowCategoryID) => {
               const row: AppRowCategory = gameRowCategories.find(
@@ -69,7 +70,11 @@ export const GamesRows: React.FC<GamesRowsProps> = ({
                       }
                     />
                   </StyledAppRowHeader>
-                  <StyledAppRow>
+                  <StyledAppRow
+                    as={motion.ul}
+                    drag={"x"}
+                    dragConstraints={scrollRef}
+                  >
                     {rowApps?.map((app) => (
                       <AppTile
                         key={app._id}
