@@ -47,8 +47,6 @@ export const GamesRows: React.FC<GamesRowsProps> = ({
     scrollingRef.current[0]
   );
 
-  useDebug(scrollable, "Scrollable");
-
   return (
     <MenuTransition>
       <CSSTransition
