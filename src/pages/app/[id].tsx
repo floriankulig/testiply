@@ -23,7 +23,7 @@ import { useRef, useState } from "react";
 import { IoPeople } from "react-icons/io5";
 import Image from "next/image";
 import { ClickableDropdown } from "components/ClickableDropdown";
-import { useIsMobile } from "hooks";
+import { useHorizontalScroll, useIsMobile } from "hooks";
 import { Footer } from "components/home";
 import { theme } from "styles";
 import { InfoPageHeader } from "components/InfoPageHeader";
@@ -63,8 +63,13 @@ const AppDetail: NextPage<AppDetailProps> = ({
   const [ctaLoading, setCTALoading] = useState<boolean>(false);
   const { currentUser, renewUid } = useAuthValue();
   const isMobile = useIsMobile(550);
-  const screenshotRef = useRef(null);
 
+  const screenshotsParentRef = useRef(null);
+  const screenshotsListRef = useRef<HTMLUListElement>(null);
+  const { scrollable } = useHorizontalScroll(
+    screenshotsParentRef.current,
+    screenshotsListRef.current
+  );
   //platform availability filtering
   const downloadablePlatforms = platforms?.map((platformID) =>
     allPlatforms.find((p) => p.id === platformID)
@@ -207,7 +212,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
       <ScreenshotSection
         className="container-small"
         as={motion.section}
-        ref={screenshotRef}
+        ref={screenshotsParentRef}
         initial="hidden"
         animate="show"
         transition={{
@@ -220,12 +225,13 @@ const AppDetail: NextPage<AppDetailProps> = ({
         </motion.h1>
         <motion.ul
           className="screenshots"
-          drag={"x"}
-          dragConstraints={screenshotRef}
+          drag={scrollable ? "x" : false}
+          dragConstraints={screenshotsParentRef}
           dragTransition={{
             bounceStiffness: 400,
             bounceDamping: 50,
           }}
+          ref={screenshotsListRef}
         >
           {[...Array(3)]?.map((_, i) => (
             <Screenshot
