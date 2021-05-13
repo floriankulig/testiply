@@ -1,10 +1,9 @@
 import { MockAppDetailView } from "components/appDetail";
 import { AnimatePresence, motion } from "framer-motion";
-import { useIsMobile } from "hooks";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/router";
 import { rgba } from "polished";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import styled from "styled-components";
 import { AppTileProps } from "./AppTile";
@@ -22,7 +21,7 @@ const StyledAppTileMeta = styled.div`
   h3 {
     font-size: 1.05rem;
     line-height: 1.2;
-    margin: 0.3em 0;
+    margin: 0.3em 0 0.2em;
     color: ${({ theme }) => rgba(theme.navy, 0.95)};
     font-weight: normal;
     display: -webkit-box;
@@ -79,9 +78,15 @@ export const SimpleAppTile: React.FC<AppTileProps> = ({
   customID = "",
 }) => {
   const [detailOpened, setDetailOpened] = useState<boolean>(false);
+  const router = useRouter();
   const iconURL = `${process.env.NEXT_PUBLIC_API_URL}/static/${_id}/icon.png`;
 
   const layID = _id + customID;
+
+  const handleClick = () => {
+    setDetailOpened(true);
+    router.push(`/app/${_id}`);
+  };
 
   return (
     <>
@@ -92,24 +97,21 @@ export const SimpleAppTile: React.FC<AppTileProps> = ({
         layout
         layoutId={`appTile-${layID}`}
       >
-        <Link href={`/app/${_id}`}>
-          <IconWrapper
-            onClick={() => setDetailOpened(true)}
-            onKeyDown={() => setDetailOpened(true)}
-            as={motion.div}
-            layoutId={`appIcon-${layID}`}
-            style={{ borderRadius: "20%" }}
-          >
-            <div className="image-cursor-overlay"></div>
-            <Image
-              width={110}
-              height={110}
-              src={iconURL}
-              className="icon"
-              alt={`${name} app icon`}
-            />
-          </IconWrapper>
-        </Link>
+        <IconWrapper
+          onTap={handleClick}
+          as={motion.div}
+          layoutId={`appIcon-${layID}`}
+          style={{ borderRadius: "20%" }}
+        >
+          <div className="image-cursor-overlay"></div>
+          <Image
+            width={110}
+            height={110}
+            src={iconURL}
+            className="icon"
+            alt={`${name} app icon`}
+          />
+        </IconWrapper>
         <StyledAppTileMeta>
           <motion.h3 layoutId={`appTitle-${layID}`}>{name}</motion.h3>
           <span>
