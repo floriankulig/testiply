@@ -7,7 +7,7 @@ const theme = {
   authSidebarWidth: `30vw`,
   headerHeight: `90px`,
   layoutNavBg: `#ffffff`,
-  layoutContentBg: `#f7f9ff`,
+  layoutContentBg: `#f7f8fa`,
   bp: {
     small: `min-width: 721px`,
     medium: `min-width: 1081px`,
