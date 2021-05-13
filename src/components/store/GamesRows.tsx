@@ -2,9 +2,9 @@ import { AppGrid } from "components/layouts";
 import { Loading } from "components/Loading";
 import { MenuTransition } from "components/MenuTransition";
 import { AnimatePresence, motion } from "framer-motion";
-import { useDebug, useHorizontalScroll } from "hooks";
+import { useHorizontalScroll } from "hooks";
 import { useRouter } from "next/router";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 import {
   App,
