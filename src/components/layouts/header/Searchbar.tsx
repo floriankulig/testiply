@@ -111,7 +111,6 @@ export const Searchbar: React.FC = () => {
       | React.FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
-    console.log("submitted");
   };
 
   const handleType = (event: React.ChangeEvent<HTMLInputElement>): void => {
