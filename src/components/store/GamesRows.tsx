@@ -2,8 +2,9 @@ import { AppGrid } from "components/layouts";
 import { Loading } from "components/Loading";
 import { MenuTransition } from "components/MenuTransition";
 import { AnimatePresence, motion } from "framer-motion";
+import { useDebug, useHorizontalScroll } from "hooks";
 import { useRouter } from "next/router";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { CSSTransition } from "react-transition-group";
 import {
   App,
@@ -38,7 +39,15 @@ export const GamesRows: React.FC<GamesRowsProps> = ({
     return <NoAppsView hasApps={false}>No Games uploaded yet.</NoAppsView>;
   }
   const router = useRouter();
-  const scrollRef = useRef<HTMLDivElement>();
+
+  const scrollParentRef = useRef<HTMLDivElement>(null);
+  const scrollingRef = useRef<HTMLUListElement[]>([]);
+  const { scrollable } = useHorizontalScroll(
+    scrollParentRef.current,
+    scrollingRef.current[0]
+  );
+
+  useDebug(scrollable, "Scrollable");
 
   return (
     <MenuTransition>
@@ -49,48 +58,53 @@ export const GamesRows: React.FC<GamesRowsProps> = ({
         unmountOnExit
         appear
       >
-        <div ref={scrollRef}>
+        <div ref={scrollParentRef}>
           {!!initialApps &&
-            Object.keys(initialApps)?.map((key: AppRowCategoryID) => {
-              const row: AppRowCategory = gameRowCategories.find(
-                (cat) => cat.id === key
-              );
-              const rowApps: App[] = initialApps[key];
+            Object.keys(initialApps)?.map(
+              (key: AppRowCategoryID, i: number) => {
+                const row: AppRowCategory = gameRowCategories.find(
+                  (cat) => cat.id === key
+                );
+                const rowApps: App[] = initialApps[key];
 
-              return (
-                <StyledAppStoreRow key={row.id}>
-                  <StyledAppRowHeader>
-                    <h2 className="tab-name">
-                      <row.icon />
-                      {row.displayName}
-                    </h2>
-                    <ViewAllButton
-                      clickHandler={() =>
-                        router.push(`/store/games?category=${row.id}`)
-                      }
-                    />
-                  </StyledAppRowHeader>
-                  <StyledAppRow
-                    as={motion.ul}
-                    drag={"x"}
-                    dragConstraints={scrollRef}
-                    dragTransition={{
-                      bounceStiffness: 400,
-                      bounceDamping: 50,
-                    }}
-                  >
-                    {rowApps?.map((app) => (
-                      <AppTile
-                        key={app._id}
-                        customID={row.id}
-                        simple
-                        appInfo={app}
+                return (
+                  <StyledAppStoreRow key={row.id}>
+                    <StyledAppRowHeader>
+                      <h2 className="tab-name">
+                        <row.icon />
+                        {row.displayName}
+                      </h2>
+                      <ViewAllButton
+                        clickHandler={() =>
+                          router.push(`/store/games?category=${row.id}`)
+                        }
                       />
-                    ))}
-                  </StyledAppRow>
-                </StyledAppStoreRow>
-              );
-            })}
+                    </StyledAppRowHeader>
+                    <StyledAppRow
+                      as={motion.ul}
+                      drag={scrollable ? "x" : false}
+                      dragConstraints={scrollParentRef}
+                      dragTransition={{
+                        bounceStiffness: 400,
+                        bounceDamping: 50,
+                      }}
+                      ref={(el: HTMLUListElement) =>
+                        (scrollingRef.current[i] = el)
+                      }
+                    >
+                      {rowApps?.map((app) => (
+                        <AppTile
+                          key={app._id}
+                          customID={row.id}
+                          simple
+                          appInfo={app}
+                        />
+                      ))}
+                    </StyledAppRow>
+                  </StyledAppStoreRow>
+                );
+              }
+            )}
           {loading && (
             <div className="full-grid-width">
               <h2 className="loading">
