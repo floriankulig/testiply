@@ -74,6 +74,10 @@ export const GamesRows: React.FC<GamesRowsProps> = ({
                     as={motion.ul}
                     drag={"x"}
                     dragConstraints={scrollRef}
+                    dragTransition={{
+                      bounceStiffness: 400,
+                      bounceDamping: 50,
+                    }}
                   >
                     {rowApps?.map((app) => (
                       <AppTile
