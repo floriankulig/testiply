@@ -8,14 +8,14 @@ export const StyledAppStoreRow = styled.div`
   flex-direction: column;
   width: 100%;
   overflow-x: visible;
-  margin-bottom: 4em;
+  margin-bottom: 2.5em;
 `;
 
 export const StyledAppRowHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.25em;
+  margin-bottom: 0.5em;
   h2.tab-name {
     color: var(--navy);
     font-size: 1.6rem;
@@ -41,14 +41,16 @@ export const StyledAppRowHeader = styled.div`
   }
 `;
 export const StyledAppRow = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(5, 350px);
-  width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
-  gap: clamp(1em, 3vw, 2.5em);
-  scrollbar-color: #fff;
-  scrollbar-width: thin;
+  display: flex;
+  width: max-content;
+  height: 100%;
+  li {
+    margin-right: 1.5em;
+
+    &:last-of-type {
+      margin: 0;
+    }
+  }
 `;
 
 interface ViewAllButtonProps {
