@@ -94,6 +94,16 @@ export const SimpleAppTile: React.FC<AppTileProps> = ({
 
   const layID = _id + customID;
 
+  const Icon = (
+    <Image
+      width={detailOpened ? 200 : 130}
+      height={detailOpened ? 200 : 130}
+      src={iconURL}
+      className="icon"
+      alt={`${name} app icon`}
+    />
+  );
+
   const handleClick = () => {
     setDetailOpened(true);
     router.push(`/app/${_id}`);
@@ -117,13 +127,7 @@ export const SimpleAppTile: React.FC<AppTileProps> = ({
           isMobile={isMobile}
         >
           <div className="image-cursor-overlay"></div>
-          <Image
-            width={130}
-            height={130}
-            src={iconURL}
-            className="icon"
-            alt={`${name} app icon`}
-          />
+          {Icon}
         </IconWrapper>
         <StyledAppTileMeta isMobile={isMobile}>
           <motion.h3 layoutId={`appTitle-${layID}`}>{name}</motion.h3>
@@ -145,7 +149,7 @@ export const SimpleAppTile: React.FC<AppTileProps> = ({
             _id={layID}
             appName={name}
             devName={devName}
-            iconURL={iconURL}
+            Icon={Icon}
           />
         )}
       </AnimatePresence>

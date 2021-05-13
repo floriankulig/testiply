@@ -140,6 +140,16 @@ export const DetailAppTile: React.FC<AppTileProps> = ({
 
   const layID = _id + customID;
 
+  const Icon = (
+    <Image
+      width={detailOpened ? 200 : 85}
+      height={detailOpened ? 200 : 85}
+      src={iconURL}
+      className="icon"
+      alt={`${name} app icon`}
+    />
+  );
+
   useEffect(() => {
     // open apps if apps are not stacking in grid
     setIsOpen(!appsStack);
@@ -169,13 +179,7 @@ export const DetailAppTile: React.FC<AppTileProps> = ({
               layoutId={`appIcon-${layID}`}
               style={{ borderRadius: "25%" }}
             >
-              <Image
-                width={85}
-                height={85}
-                src={iconURL}
-                className="icon"
-                alt={`${name} app icon`}
-              />
+              {Icon}
             </IconWrapper>
             <StyledAppInfo>
               <motion.p layoutId={`appTitle-${layID}`} className="app__name">
@@ -231,7 +235,7 @@ export const DetailAppTile: React.FC<AppTileProps> = ({
             _id={layID}
             appName={name}
             devName={devName}
-            iconURL={iconURL}
+            Icon={Icon}
           />
         )}
       </AnimatePresence>
