@@ -18,7 +18,7 @@ export const StyledAppRowHeader = styled.div`
   margin-bottom: 0.5em;
   h2.tab-name {
     color: var(--navy);
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: normal;
     margin: 0;
     display: flex;
@@ -45,7 +45,7 @@ export const StyledAppRow = styled.ul`
   width: max-content;
   height: 100%;
   li {
-    margin-right: 1.5em;
+    margin-right: 1.8em;
 
     &:last-of-type {
       margin: 0;
