@@ -80,6 +80,7 @@ export const GamesRows: React.FC<GamesRowsProps> = ({
                     </StyledAppRowHeader>
                     <StyledAppRow
                       as={motion.ul}
+                      animate={{ x: !scrollable && 0 }}
                       drag={scrollable ? "x" : false}
                       dragConstraints={scrollParentRef}
                       dragTransition={{
