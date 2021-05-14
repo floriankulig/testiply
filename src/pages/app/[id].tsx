@@ -225,6 +225,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
         </motion.h1>
         <motion.ul
           className="screenshots"
+          animate={{ x: !scrollable && 0 }}
           drag={scrollable ? "x" : false}
           dragConstraints={screenshotsParentRef}
           dragTransition={{
