@@ -4,7 +4,7 @@ export const useHorizontalScroll = (
   parentContainer: HTMLElement,
   scrollingContainer: HTMLElement
 ) => {
-  const [scrollable, setScrollable] = useState<boolean>(false);
+  const [scrollable, setScrollable] = useState<boolean>(true);
 
   useEffect(() => {
     if (!parentContainer || !scrollingContainer) return;
