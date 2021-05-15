@@ -64,7 +64,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
   const { currentUser, renewUid } = useAuthValue();
   const isMobile = useIsMobile(550);
 
-  const screenshotsParentRef = useRef(null);
+  const screenshotsParentRef = useRef<HTMLHeadingElement>(null);
   const screenshotsListRef = useRef<HTMLUListElement>(null);
   const { scrollable } = useHorizontalScroll(
     screenshotsParentRef.current,
@@ -212,7 +212,6 @@ const AppDetail: NextPage<AppDetailProps> = ({
       <ScreenshotSection
         className="container-small"
         as={motion.section}
-        ref={screenshotsParentRef}
         initial="hidden"
         animate="show"
         transition={{
@@ -220,7 +219,11 @@ const AppDetail: NextPage<AppDetailProps> = ({
           staggerChildren: 0.1,
         }}
       >
-        <motion.h1 variants={fadeUpVariants} className="section-header">
+        <motion.h1
+          ref={screenshotsParentRef}
+          variants={fadeUpVariants}
+          className="section-header"
+        >
           Screenshots
         </motion.h1>
         <motion.ul
