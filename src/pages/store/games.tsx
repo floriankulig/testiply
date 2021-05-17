@@ -49,10 +49,7 @@ const Games = () => {
           </div>
         </CSSTransition>
       </TabHeader>
-      <AppGrid>
-        <TabCurrentlyWorkedOn />
-      </AppGrid>
-      {/* <GamesRows {...props} /> */}
+      <GamesRows {...props} />
     </>
   );
 };
