@@ -36,7 +36,7 @@ export const GamesRows: React.FC<GamesRowsProps> = ({
   loading,
 }) => {
   if (!initialApps?.latest[0] || !initialApps) {
-    return <NoAppsView hasApps={false}>No Games uploaded yet.</NoAppsView>;
+    return <NoAppsView hasApps={false}>No games uploaded yet.</NoAppsView>;
   }
   const router = useRouter();
 
