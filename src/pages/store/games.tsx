@@ -1,5 +1,4 @@
-import { AppGrid, Layout } from "components/layouts";
-import { TabCurrentlyWorkedOn } from "components/store/TabCurrentlyWorkedOn";
+import { Layout } from "components/layouts";
 import { BasePath, CustomPath, TabHeader } from "components/TabHeader";
 import Head from "next/head";
 import { GamesRows } from "components/store";
