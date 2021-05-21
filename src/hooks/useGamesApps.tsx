@@ -81,6 +81,9 @@ export const useGamesApps = (): ReturnType => {
       setApps([]);
       return;
     }
+    if (!apps.length) {
+      setSelectedCategory(null);
+    }
 
     (async () => {
       const newApps = await getCategoryApps();
