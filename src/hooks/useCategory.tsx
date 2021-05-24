@@ -33,9 +33,11 @@ export const useCategory = (): ReturnType => {
       );
       return res.data.apps;
     } catch (err) {
-      err.response.status === 404 &&
-        err.response.data.err === "No Apps found." &&
-        setApps([]);
+      if (
+        err.response.status === 404 &&
+        err.response.data.err === "No Apps found."
+      )
+        return [];
     }
   };
 
