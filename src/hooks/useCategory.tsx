@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { useFiltersValue } from "context";
 import { getCurrentCategoryFromRoute } from "helpers";
 import { useRouter } from "next/router";
@@ -25,6 +25,20 @@ export const useCategory = (): ReturnType => {
     setSelectedCategory(getCurrentCategoryFromRoute(query));
   }, [query]);
 
+  const getMatchingApps = async (): Promise<App[]> => {
+    const query: string = `?category=${selectedCategory.id}&platform=${selectedPlatform.id}`;
+    try {
+      const res: AxiosResponse<{ apps: App[] }> = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/getCategoryApps${query}`
+      );
+      return res.data.apps;
+    } catch (err) {
+      err.response.status === 404 &&
+        err.response.data.err === "No Apps found." &&
+        setApps([]);
+    }
+  };
+
   // Requesting Apps Logic
   const [apps, setApps] = useState<App[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -33,22 +47,15 @@ export const useCategory = (): ReturnType => {
       setApps([]);
       return;
     }
-    setLoading(true);
-    const query: string = `?category=${selectedCategory.id}&platform=${selectedPlatform.id}`;
-    axios
-      .get(`${process.env.NEXT_PUBLIC_API_URL}/getCategoryApps${query}`)
-      .then((res) => {
-        if (JSON.stringify(res.data.apps) !== JSON.stringify(apps)) {
-          setApps(res.data.apps);
-        }
-        setLoading(false);
-      })
-      .catch(
-        (err) =>
-          err.response.status === 404 &&
-          err.response.data.err === "No Apps found." &&
-          setApps([])
-      );
+
+    (async () => {
+      setLoading(true);
+      const newApps = await getMatchingApps();
+      if (JSON.stringify(newApps) !== JSON.stringify(apps)) {
+        setApps(newApps);
+      }
+      setLoading(false);
+    })();
   }, [selectedCategory, selectedPlatform]);
 
   return { selectedCategory, loading, apps };
