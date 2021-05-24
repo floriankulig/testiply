@@ -4,8 +4,7 @@ import { useFiltersValue } from "context";
 import { getCurrentGameCategoryFromRoute } from "helpers";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import { App, AppRowCategory, AppRowCategoryID, GameRowApps } from "ts";
-import { useDebug } from "./useDebug";
+import { App, AppRowCategory, GameRowApps } from "ts";
 
 interface ReturnType {
   selectedCategory: AppRowCategory;
