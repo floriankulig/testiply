@@ -1,3 +1,4 @@
+import { useAuthValue } from "context";
 import { useIsMobile } from "hooks";
 import { rgba } from "polished";
 import { useEffect, useState } from "react";
@@ -32,6 +33,8 @@ const StyledHeader = styled.header<StyledHeaderProps>`
 
 const StyledMenus = styled.div`
   margin-left: auto;
+  display: flex;
+  align-items: center;
 
   .menu-icon-wrapper {
     border-radius: 50%;
@@ -43,6 +46,7 @@ const StyledMenus = styled.div`
     position: relative;
     cursor: pointer;
     transition: border 0.3s;
+    margin-left: 2em;
 
     &:hover {
       border-color: var(--primary);
@@ -69,6 +73,7 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const [scrolled, setScrolled] = useState<boolean>(false);
   const isMobile = useIsMobile(1200);
+  const { currentUser } = useAuthValue();
 
   const handleScroll = () => {
     setScrolled(window.pageYOffset >= 80);
@@ -93,6 +98,7 @@ export const Header: React.FC<HeaderProps> = ({
       {isMobile && <Burger setSidebarOpen={setSidebarOpen} />}
       <Searchbar />
       <StyledMenus>
+        {currentUser?.name}
         <UserMenu />
       </StyledMenus>
     </StyledHeader>
