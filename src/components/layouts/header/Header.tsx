@@ -98,7 +98,7 @@ export const Header: React.FC<HeaderProps> = ({
       {isMobile && <Burger setSidebarOpen={setSidebarOpen} />}
       <Searchbar />
       <StyledMenus>
-        {currentUser?.name}
+        {currentUser?.name || ""}
         <UserMenu />
       </StyledMenus>
     </StyledHeader>
