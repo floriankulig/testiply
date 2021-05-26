@@ -42,12 +42,15 @@ const IconWrapper = styled.div`
     top: 0;
     right: 0;
     z-index: 1;
-    background: ${({ theme }) => lighten(0.25, theme.primary)};
     padding: 0.3em 0.7em;
-    border-radius: 2em;
-    color: #fff;
-    font-size: clamp(0.75rem, 2vw, 1rem);
     transform: rotate(45deg) translateX(25%);
+    background: ${rgba("#e3eaff", 0.9)};
+    border-radius: 2em;
+    border: 1px solid ${rgba("#e3eaff", 0.92)};
+    color: ${({ theme }) => rgba(theme.navy, 0.5)};
+    font-size: clamp(0.75rem, 2vw, 1rem);
+    font-weight: bold;
+    box-shadow: var(--btn-shadow-hover);
   }
 `;
 
