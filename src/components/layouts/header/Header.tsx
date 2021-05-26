@@ -65,6 +65,12 @@ const StyledMenus = styled.div`
   }
 `;
 
+const StyledDisplayName = styled.h3`
+  font-size: 1.15rem;
+  font-weight: normal;
+  color: var(--navy);
+`;
+
 interface HeaderProps {
   sidebarOpen: boolean;
   setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -101,7 +107,7 @@ export const Header: React.FC<HeaderProps> = ({
       {isMobile && <Burger setSidebarOpen={setSidebarOpen} />}
       <Searchbar />
       <StyledMenus>
-        {currentUser?.name || ""}
+        <StyledDisplayName>{currentUser?.name || ""}</StyledDisplayName>
         <UserMenu />
       </StyledMenus>
     </StyledHeader>
