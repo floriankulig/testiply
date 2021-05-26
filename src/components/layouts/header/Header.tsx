@@ -36,6 +36,10 @@ const StyledMenus = styled.div`
   display: flex;
   align-items: center;
 
+  & > * {
+    margin-left: 1.5em;
+  }
+
   .menu-icon-wrapper {
     border-radius: 50%;
     width: 40px;
@@ -46,7 +50,6 @@ const StyledMenus = styled.div`
     position: relative;
     cursor: pointer;
     transition: border 0.3s;
-    margin-left: 2em;
 
     &:hover {
       border-color: var(--primary);
