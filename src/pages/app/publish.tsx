@@ -40,5 +40,3 @@ const PublishApp: NextPage = () => {
     </>
   );
 };
-
-export default PublishApp;
