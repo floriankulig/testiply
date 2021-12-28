@@ -84,7 +84,6 @@ export const getServerSideProps: GetServerSideProps = async ({
   res,
 }: GetServerSidePropsContext) => {
   const uid = req?.headers.cookie?.toString().slice(4);
-
   const config = { headers: { api_key: process.env.NEXT_PUBLIC_API_KEY } };
   if (res && !uid) {
     res.writeHead(302, { Location: "/login" });
