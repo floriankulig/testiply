@@ -4,7 +4,7 @@ export const AppGrid = styled.ul<{ small?: boolean }>`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   @media (${({ theme }) => theme.bp.small}) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 2;
   }
   @media (${({ theme }) => theme.bp.big}) {
     grid-template-columns: repeat(
