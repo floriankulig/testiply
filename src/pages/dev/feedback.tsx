@@ -23,18 +23,16 @@ const DevFeedback = ({ feedbacks, hasUser, isDev }: DevFeedbackProps) => {
   const { searchQuery } = useFiltersValue();
 
   useEffect(() => {
-    console.log({ hasUser });
     if (typeof window !== "undefined") {
       if (!!currentUser) {
         if (!currentUser.isDev) {
           router.push("/dev/upgrade");
         }
       } else {
-        if (!hasUser) {
-          router.push("/login");
-        } else if (!isDev) {
+        if (!isDev) {
           router.push("/dev/upgrade");
         }
+        router.push("/login");
       }
     }
   }, [currentUser]);
@@ -88,7 +86,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   if (res && !uid) {
     res.writeHead(302, { Location: "/login" });
     res.end();
-    return;
+    return { props: {} };
   }
   let feedbacks: Feedback[] = [];
   let isDev: boolean = true;
