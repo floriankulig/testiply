@@ -347,11 +347,6 @@ export const getServerSideProps: GetServerSideProps = async ({
   params,
 }: GetServerSidePropsContext) => {
   const id = params.id as string;
-  if (!id) {
-    res.writeHead(302, { Location: "/app/notFound" });
-    res.end();
-    return;
-  }
   try {
     const appInfo = await getAppInfo(id);
     return {
