@@ -342,7 +342,6 @@ const AppDetail: NextPage<AppDetailProps> = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async ({
-  req,
   res,
   params,
 }: GetServerSidePropsContext) => {
