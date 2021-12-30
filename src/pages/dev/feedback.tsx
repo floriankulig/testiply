@@ -1,14 +1,13 @@
 import axios from "axios";
 import { FeedbackTile } from "components/appDetail";
+import { DevAuthorisation } from "components/auth";
 import { AppGrid, Layout } from "components/layouts";
 import { NoAppsView } from "components/store";
 import { TabHeader } from "components/TabHeader";
-import { useAuthValue, useFiltersValue } from "context";
+import { useFiltersValue } from "context";
 import { AnimatePresence } from "framer-motion";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import Head from "next/head";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
 import { Feedback } from "ts";
 
 interface DevFeedbackProps {
@@ -18,24 +17,7 @@ interface DevFeedbackProps {
 }
 
 const DevFeedback = ({ feedbacks, hasUser, isDev }: DevFeedbackProps) => {
-  const router = useRouter();
-  const { currentUser } = useAuthValue();
   const { searchQuery } = useFiltersValue();
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      if (!!currentUser) {
-        if (!currentUser.isDev) {
-          router.push("/dev/upgrade");
-        }
-      } else {
-        if (!isDev) {
-          router.push("/dev/upgrade");
-        }
-        router.push("/login");
-      }
-    }
-  }, [currentUser]);
 
   const correspondsToSearch = ({
     heading,
@@ -51,7 +33,7 @@ const DevFeedback = ({ feedbacks, hasUser, isDev }: DevFeedbackProps) => {
       : false;
 
   return (
-    <>
+    <DevAuthorisation serverSideLoggedIn={hasUser} serverSideDev={isDev}>
       <Head>
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
       </Head>
@@ -72,7 +54,7 @@ const DevFeedback = ({ feedbacks, hasUser, isDev }: DevFeedbackProps) => {
           </NoAppsView>
         )}
       </AppGrid>
-    </>
+    </DevAuthorisation>
   );
 };
 DevFeedback.Layout = Layout;
