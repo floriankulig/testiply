@@ -356,7 +356,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   } catch (err) {
     res.writeHead(302, { Location: "/app/notFound" });
     res.end();
-    return;
+    return { props: {} };
   }
 };
 
