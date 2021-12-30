@@ -341,17 +341,29 @@ const AppDetail: NextPage<AppDetailProps> = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (
-  ctx: GetServerSidePropsContext
-) => {
-  const id = ctx?.params.id as string;
-  const appInfo = await getAppInfo(id);
-
-  return {
-    props: {
-      appInfo,
-    },
-  };
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  res,
+  params,
+}: GetServerSidePropsContext) => {
+  const id = params.id as string;
+  if (!id) {
+    res.writeHead(302, { Location: "/app/notFound" });
+    res.end();
+    return;
+  }
+  try {
+    const appInfo = await getAppInfo(id);
+    return {
+      props: {
+        appInfo,
+      },
+    };
+  } catch (err) {
+    res.writeHead(302, { Location: "/app/notFound" });
+    res.end();
+    return;
+  }
 };
 
 export default AppDetail;
