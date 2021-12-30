@@ -3,6 +3,7 @@ import { createContext, useContext } from "react";
 import { User } from "ts";
 export type AuthContextType = {
   currentUser: User | null;
+  canHaveUser: boolean;
   logout: () => void;
   renewUid: (token: string) => Promise<void>;
 };
