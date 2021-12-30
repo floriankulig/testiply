@@ -6,6 +6,7 @@ import axios from "axios";
 
 export const useUser = (): AuthContextType => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [canHaveUser, setCanHaveUser] = useState<boolean>(false);
   const [cookie, setCookie] = useCookies(["uid"]);
 
   const renewUid = async (currentUserId: string): Promise<void> => {
@@ -36,7 +37,10 @@ export const useUser = (): AuthContextType => {
         .post(`${process.env.NEXT_PUBLIC_API_URL}/getUser`, {
           userid: currentUserId,
         })
-        .then((res) => setCurrentUser({ ...res.data.user }))
+        .then((res) => {
+          setCurrentUser({ ...res.data.user });
+          setCanHaveUser(true);
+        })
         .catch((error) => {
           console.log(error.response.data.err);
         });
@@ -65,5 +69,5 @@ export const useUser = (): AuthContextType => {
     await setCurrentUser(null);
   };
 
-  return { currentUser, logout, renewUid };
+  return { currentUser, canHaveUser, logout, renewUid };
 };
