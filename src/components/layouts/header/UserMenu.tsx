@@ -74,7 +74,7 @@ const dropdownItemVariants: Variants = {
   },
 };
 
-export const UserMenu = () => {
+export const UserMenu: React.FC = () => {
   const { currentUser, logout } = useAuthValue();
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>(null);
