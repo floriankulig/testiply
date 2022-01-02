@@ -17,8 +17,6 @@ export const DevAuthorisation: React.FC<DevAuthorisationProps> = ({
   const router = useRouter();
 
   useEffect(() => {
-    console.log({ canHaveUser });
-    console.log({ currentUser });
     if (canHaveUser) {
       if (!currentUser) router.push("/store");
       else if (!currentUser.isDev) router.push("/dev/upgrade");
