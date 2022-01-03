@@ -20,17 +20,21 @@ export const StyledAppDevRow = styled.div`
 export const StyledAppDevRowHeader = styled.div`
   display: flex;
   width: 100%;
+  height: 40px;
+  position: relative;
+  overflow-x: clip;
 
   h2.app-name {
     display: flex;
     color: var(--navy);
-    font-size: 1.8rem;
     font-weight: 500;
     margin: 0;
     position: relative;
     white-space: nowrap;
     align-items: center;
     width: 100%;
+    font-size: clamp(20px, 4vw, 28px);
+
     &:after {
       content: "";
       display: block;
@@ -40,6 +44,17 @@ export const StyledAppDevRowHeader = styled.div`
       margin-top: 2px;
     }
   }
+`;
+
+export const StyledHeaderButtons = styled.div`
+  display: flex;
+  background: var(--layout-content-background);
+  position: absolute;
+  right: 0;
+
+  @media (min-width: 400px) {
+    position: relative;
+  } ;
 `;
 
 const StyledButtonWrapper = styled.div`
