@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useOnClickOutside } from "hooks";
 import { GoLinkExternal, GoTrashcan } from "react-icons/go";
 import { DeleteAppModal } from "components/DeleteAppModal";
+import { App } from "ts";
 
 export const StyledAppDevRow = styled.div`
   display: flex;
@@ -184,18 +185,21 @@ export const ExpandButton: React.FC<ExpandButtonProps> = ({
   );
 };
 
+const disabledTabStyles: React.CSSProperties = {
+  color: "lightgrey",
+  cursor: "not-allowed",
+};
+
 interface OptionsButtonProps {
-  appId: string;
-  appName: string;
+  app: App;
 }
 
-export const OptionsButton: React.FC<OptionsButtonProps> = ({
-  appId,
-  appName,
-}) => {
+export const OptionsButton: React.FC<OptionsButtonProps> = ({ app }) => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>(null);
+
+  const { name, _id, isSample, ...restApp } = app;
 
   const handleClickOutside = (): void => !deleteModalOpen && setMenuOpen(false);
   useOnClickOutside(ref, handleClickOutside);
@@ -204,8 +208,8 @@ export const OptionsButton: React.FC<OptionsButtonProps> = ({
       <AnimatePresence>
         {deleteModalOpen && (
           <DeleteAppModal
-            appName={appName}
-            appId={appId}
+            appName={name}
+            appId={_id}
             setOpen={setDeleteModalOpen}
           />
         )}
@@ -217,7 +221,7 @@ export const OptionsButton: React.FC<OptionsButtonProps> = ({
         onTap={() => setMenuOpen(true)}
         tabIndex={0}
         role="button"
-        aria-label={`Open options for app "${appName}"`}
+        aria-label={`Open options for app "${name}"`}
       >
         <StyledIconWrapper>
           <BsThreeDotsVertical />
@@ -232,9 +236,9 @@ export const OptionsButton: React.FC<OptionsButtonProps> = ({
               exit="closed"
             >
               <DropdownHeader as={motion.h4} variants={dropdownItemVariants}>
-                {appName}
+                {name}
               </DropdownHeader>
-              <Link href={`/app/${appId}`}>
+              <Link href={`/app/${_id}`}>
                 <DropdownItem as={motion.li} variants={dropdownItemVariants}>
                   <GoLinkExternal /> View App
                 </DropdownItem>
@@ -242,8 +246,10 @@ export const OptionsButton: React.FC<OptionsButtonProps> = ({
               <DropdownItem
                 as={motion.li}
                 variants={dropdownItemVariants}
-                color={"red"}
+                color={!isSample ? "red" : "lightgrey"}
+                style={isSample && disabledTabStyles}
                 onTap={() => {
+                  if (isSample) return;
                   setDeleteModalOpen(true);
                 }}
               >
