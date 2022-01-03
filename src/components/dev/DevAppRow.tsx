@@ -158,12 +158,26 @@ const dropdownItemVariants: Variants = {
 
 interface ExpandButtonProps {
   action: React.Dispatch<React.SetStateAction<void>>;
+  isExpanded: boolean;
 }
 
-export const ExpandButton: React.FC<ExpandButtonProps> = ({ action }) => {
+export const ExpandButton: React.FC<ExpandButtonProps> = ({
+  action,
+  isExpanded,
+}) => {
   return (
     <StyledButtonWrapper as={motion.div} onTap={() => action()}>
-      <StyledIconWrapper smallIcon>
+      <StyledIconWrapper
+        smallIcon
+        as={motion.div}
+        tabIndex={0}
+        role="button"
+        animate={{
+          rotate: isExpanded ? 180 : 0,
+          transition: { duration: 0.15 },
+        }}
+        aria-label={`Expand App"`}
+      >
         <FaChevronDown />
       </StyledIconWrapper>
     </StyledButtonWrapper>
