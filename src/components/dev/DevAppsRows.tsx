@@ -6,6 +6,7 @@ import {
   OptionsButton,
   StyledAppDevRow,
   StyledAppDevRowHeader,
+  StyledHeaderButtons,
 } from "./DevAppRow";
 
 interface DevAppsRowsProps {
@@ -32,11 +33,13 @@ export const DevAppsRows: React.FC<DevAppsRowsProps> = ({ apps }) => {
         <StyledAppDevRow key={app._id}>
           <StyledAppDevRowHeader>
             <h2 className="app-name">{app.name}</h2>
-            <ExpandButton
-              action={() => handleExpand(app._id)}
-              isExpanded={expandedApp === app._id}
-            />
-            <OptionsButton appId={app._id} appName={app.name} />
+            <StyledHeaderButtons>
+              <ExpandButton
+                action={() => handleExpand(app._id)}
+                isExpanded={expandedApp === app._id}
+              />
+              <OptionsButton app={app} />
+            </StyledHeaderButtons>
           </StyledAppDevRowHeader>
         </StyledAppDevRow>
       ))}
