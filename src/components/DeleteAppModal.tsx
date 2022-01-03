@@ -1,12 +1,17 @@
-import { motion, Variants } from "framer-motion";
+import axios from "axios";
+import { AnimatePresence, motion, Variants } from "framer-motion";
+import { useRouter } from "next/router";
 import { rgba } from "polished";
-import React from "react";
-import { FaTrashAlt } from "react-icons/fa";
+import React, { useState } from "react";
 import { GoTrashcan } from "react-icons/go";
-import { MdClose } from "react-icons/md";
+import { MdClose, MdError } from "react-icons/md";
+import { CSSTransition } from "react-transition-group";
 import styled from "styled-components";
 import { fadeInOutVariants, scaleInVariants, theme } from "styles";
+import { scaleInOutVariants } from "styles/variants";
 import { Button } from "./Button";
+import { ErrorMessage } from "./ErrorMessage";
+import { Loading } from "./Loading";
 import { Overlay } from "./Overlay";
 
 const Modal = styled.div`
@@ -17,7 +22,7 @@ const Modal = styled.div`
   position: relative;
   z-index: 2;
 
-  p {
+  p.modal-text {
     margin: 2em 0;
     color: ${({ theme }) => rgba(theme.navy, 0.95)};
   }
@@ -127,7 +132,27 @@ export const DeleteAppModal: React.FC<DeleteAppModalProps> = ({
   appName,
   setOpen,
 }) => {
-  const handleDelete = (): void => {};
+  const [loading, setLoading] = useState<boolean>(false);
+  const [hasError, setHasError] = useState<boolean>(false);
+
+  const router = useRouter();
+
+  const handleDelete = (): void => {
+    setLoading(true);
+    setHasError(false);
+    axios
+      .post(`${process.env.NEXT_PUBLIC_API_URL}/removeApp`, {
+        appId,
+      })
+      .then(() => {
+        setLoading(false);
+        router.reload();
+      })
+      .catch(() => {
+        setHasError(true);
+        setLoading(false);
+      });
+  };
 
   return (
     <Overlay
@@ -138,8 +163,8 @@ export const DeleteAppModal: React.FC<DeleteAppModalProps> = ({
       animate="open"
       exit="closed"
     >
-      <Modal as={motion.div} variants={modalVariants}>
-        <TopBar>
+      <Modal as={motion.div} animate variants={modalVariants} layout>
+        <TopBar as={motion.div} animate layout>
           <motion.h2 variants={scaleInVariants}>Delete "{appName}"?</motion.h2>
           <motion.div
             className="close-svg-wrapper"
@@ -155,11 +180,11 @@ export const DeleteAppModal: React.FC<DeleteAppModalProps> = ({
             <MdClose />
           </motion.div>
         </TopBar>
-        <motion.p variants={scaleInVariants}>
+        <motion.p layout className="modal-text" variants={scaleInVariants}>
           Are you sure you want to delete this app? This action is unreversible
           and will make the app no longer downloadable.
         </motion.p>
-        <BottomBar as={motion.div} variants={scaleInVariants}>
+        <BottomBar as={motion.div} variants={scaleInVariants} layout>
           <Button
             as={motion.button}
             variants={scaleInVariants}
@@ -184,9 +209,26 @@ export const DeleteAppModal: React.FC<DeleteAppModalProps> = ({
             disableElevation
             aria-label={`Delete your app called ${appName}.`}
           >
-            <GoTrashcan /> Delete
+            {loading ? (
+              <Loading size={40} />
+            ) : (
+              <>
+                <GoTrashcan /> Delete
+              </>
+            )}
           </Button>
         </BottomBar>
+        <CSSTransition
+          in={!!hasError}
+          classNames="pop-in"
+          timeout={250}
+          unmountOnExit
+        >
+          <ErrorMessage>
+            <MdError />
+            Error while deleting. Please try again.
+          </ErrorMessage>
+        </CSSTransition>
         <StyledModalBackground
           as={motion.div}
           variants={backgroundVariants}
