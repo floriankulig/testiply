@@ -40,7 +40,7 @@ const baseValidationSchema = Yup.object({
   name: Yup.string()
     .required("Required")
     .min(2, "Must be at least 2 characters")
-    .max(30, "Can't be longer than 30 characters"),
+    .max(25, "Can't be longer than 25 characters"),
   description: Yup.string()
     .required("Required")
     .min(150, "Must be at least 150 characters")
