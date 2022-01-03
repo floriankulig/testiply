@@ -13,6 +13,14 @@ export const fadeInOutVariants: Variants = {
   closed: { opacity: 0 },
 };
 
+export const scaleInVariants: Variants = {
+  open: {
+    opacity: 1,
+    y: 0,
+  },
+  closed: { opacity: 0, y: 10 },
+};
+
 export const fadeUpVariants: Variants = {
   show: {
     opacity: 1,
