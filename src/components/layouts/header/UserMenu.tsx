@@ -29,12 +29,18 @@ const dropdownVariants: Variants = {
   closed: {
     scale: 0,
     opacity: 0,
+    transition: {
+      delay: 0.1,
+      staggerChildren: 0.05,
+      staggerDirection: -1,
+    },
   },
   open: {
     scale: 1,
     opacity: 1,
     transformOrigin: "top right",
     transition: {
+      delayChildren: 0.2,
       staggerChildren: 0.05,
       staggerDirection: 1,
     },
