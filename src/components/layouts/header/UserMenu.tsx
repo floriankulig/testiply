@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { rgba } from "polished";
 import React, { useRef, useState } from "react";
+import { AiOutlineAppstore } from "react-icons/ai";
 import { BiLogOut, BiStore } from "react-icons/bi";
 import { FaRegComment } from "react-icons/fa";
 import { FiArrowUp, FiUser, FiUserCheck, FiUserPlus } from "react-icons/fi";
@@ -134,14 +135,24 @@ export const UserMenu: React.FC = () => {
             {isStoreView ? (
               <>
                 {!!currentUser?.isDev && (
-                  <Link href="/dev/feedback">
-                    <DropdownItem
-                      as={motion.li}
-                      variants={dropdownItemVariants}
-                    >
-                      <FaRegComment /> View Feedbacks
-                    </DropdownItem>
-                  </Link>
+                  <>
+                    <Link href="/dev/apps">
+                      <DropdownItem
+                        as={motion.li}
+                        variants={dropdownItemVariants}
+                      >
+                        <AiOutlineAppstore /> View Your Apps
+                      </DropdownItem>
+                    </Link>
+                    <Link href="/dev/feedback">
+                      <DropdownItem
+                        as={motion.li}
+                        variants={dropdownItemVariants}
+                      >
+                        <FaRegComment /> View Feedbacks
+                      </DropdownItem>
+                    </Link>
+                  </>
                 )}
               </>
             ) : (
