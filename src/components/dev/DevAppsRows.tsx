@@ -32,7 +32,7 @@ export const DevAppsRows: React.FC<DevAppsRowsProps> = ({ apps }) => {
       <StyledAppDevRowHeader>
         <h2 className="app-name">App Name</h2>
         <ExpandButton action={() => handleExpand(appId)} />
-        <OptionsButton appId={appId} appName="todoIsts" />
+        <OptionsButton appId={appId} appName="Todoist" />
       </StyledAppDevRowHeader>
     </StyledAppDevRow>
   );
