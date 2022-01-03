@@ -7,7 +7,7 @@ import { useRef } from "react";
 import { FaRegSadTear } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import styled from "styled-components";
-import { fadeInOutVariants } from "styles";
+import { fadeInOutVariants, scaleInVariants } from "styles";
 
 const modalVariants: Variants = {
   closed: {
@@ -25,13 +25,6 @@ const modalVariants: Variants = {
       staggerChildren: 0.05,
     },
   },
-};
-const scaleIn: Variants = {
-  open: {
-    opacity: 1,
-    y: 0,
-  },
-  closed: { opacity: 0, y: 10 },
 };
 
 const Modal = styled.div`
@@ -104,7 +97,7 @@ export const IsSampleAppModal: React.FC<IsSampleAppModalProps> = ({
     >
       <Modal as={motion.div} variants={modalVariants} ref={ref}>
         <TopBar>
-          <motion.h2 variants={scaleIn}>
+          <motion.h2 variants={scaleInVariants}>
             <FaRegSadTear />
             We're sorry!
           </motion.h2>
@@ -117,17 +110,17 @@ export const IsSampleAppModal: React.FC<IsSampleAppModalProps> = ({
             aria-label="Close this modal."
             whileHover={{ rotate: 180, scale: 1.05 }}
             whileTap={{ scale: 0.75 }}
-            variants={scaleIn}
+            variants={scaleInVariants}
           >
             <MdClose />
           </motion.div>
         </TopBar>
-        <motion.p variants={scaleIn}>
+        <motion.p variants={scaleInVariants}>
           Unfortunately, you can't test this App. This app is a sample app
           provided by Testiply to showcase the platform's functionality. We
           appreciate your understanding.
         </motion.p>
-        <BottomBar as={motion.div} variants={scaleIn}>
+        <BottomBar as={motion.div} variants={scaleInVariants}>
           <Button
             transparent
             onClick={() => setOpen(false)}
