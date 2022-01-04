@@ -24,12 +24,17 @@ const Wrapper = styled.div<{ done: boolean }>`
   width: clamp(200px, 100%, 400px);
   margin: 0 ${(p) => p.done && "auto"};
   text-align: ${(p) => (p.done ? "center" : "left")};
+  h1.section-header {
+    font-weight: 500;
+    color: var(--navy);
+  }
 `;
 
 const FeedbackDone = styled.div`
   p {
-    color: ${({ theme }) => rgba(theme.navy, 0.7)};
+    color: ${({ theme }) => rgba(theme.navy, 0.6)};
     margin: -0.5em 0 0;
+    font-weight: 500;
   }
   .svg-wrapper {
     width: 70%;

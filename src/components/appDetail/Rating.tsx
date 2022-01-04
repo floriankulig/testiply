@@ -7,6 +7,7 @@ export const RatingSection = styled.section`
   margin-top: 3em;
   overflow-y: hidden;
   h1.section-header {
+    font-weight: 500;
     font-size: clamp(1.4rem, 3vw, 2rem);
     color: ${({ theme }) => rgba(theme.navy, 0.8)};
   }

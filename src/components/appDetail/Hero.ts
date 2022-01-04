@@ -15,6 +15,7 @@ const HeroSection = styled.section`
   }
   h1.section-header {
     margin-top: 2em;
+    font-weight: 500;
     font-size: clamp(1.4rem, 3vw, 2rem);
     color: ${({ theme }) => rgba(theme.navy, 0.8)};
   }

@@ -19,6 +19,10 @@ export const StyledMetaInputInfo = styled.div`
   display: flex;
   justify-content: space-between;
 
+  span {
+    font-weight: 500;
+  }
+
   .error-enter {
     color: grey;
     transform: translateY(100%);
