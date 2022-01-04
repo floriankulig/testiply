@@ -81,9 +81,16 @@ const dropdownItemVariants: Variants = {
   },
 };
 
-export const UserMenu: React.FC = () => {
+interface UserMenuProps {
+  menuOpen: boolean;
+  setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const UserMenu: React.FC<UserMenuProps> = ({
+  menuOpen,
+  setMenuOpen,
+}) => {
   const { currentUser, logout } = useAuthValue();
-  const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const ref = useRef<HTMLDivElement>(null);
   useOnClickOutside(ref, () => setMenuOpen(false));
 
@@ -92,14 +99,7 @@ export const UserMenu: React.FC = () => {
 
   return (
     <div ref={ref} style={{ position: "relative" }}>
-      <div
-        className="menu-icon-wrapper"
-        onClick={() => setMenuOpen(true)}
-        onKeyDown={() => setMenuOpen(true)}
-        tabIndex={0}
-        role="button"
-        aria-label="Open user menu"
-      >
+      <div className="menu-icon-wrapper">
         <FiUser />
       </div>
       <AnimatePresence>
