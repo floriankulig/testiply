@@ -21,6 +21,7 @@ export const useHorizontalScroll = (
     return () => window.removeEventListener("resize", onResize);
   }, [parentContainer, scrollingContainer]);
 
+  //for rechecking scrollability when refs haven't loaded first time
   const retriggerScrollCheck = () => {
     setScrollable(scrollingContainer.offsetWidth > parentContainer.offsetWidth);
   };
