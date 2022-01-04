@@ -55,10 +55,10 @@ const DividerWrapper = styled.div`
       ${rgba("#ffffff", 0.05)}
     );
 
+    animation: 15s ease infinite;
     &-1 {
       top: 15%;
       left: 2%;
-      border-radius: 31% 69% 31% 69% / 20% 27% 73% 80%;
       width: 300px;
       height: 370px;
       background: linear-gradient(
@@ -66,23 +66,70 @@ const DividerWrapper = styled.div`
         ${rgba("#ffffff", 0.2)},
         ${rgba("#ffffff", 0.01)}
       );
+      animation-name: borderOne;
     }
     &-2 {
       top: 15%;
       right: 4%;
-      border-radius: 75% 25% 80% 20% / 46% 36% 64% 54%;
       width: 300px;
       height: 300px;
+      animation-name: borderTwo;
+      animation-delay: 0.2s;
     }
     &-3 {
       top: 0.5%;
       right: 8%;
-      border-radius: 19% 81% 27% 73% / 70% 70% 30% 30%;
       width: 400px;
       height: 325px;
       visibility: hidden;
+      animation-name: borderThree;
+      animation-delay: 0.4s;
       @media (${({ theme }) => theme.bp.small}) {
         visibility: visible;
+      }
+    }
+
+    @keyframes borderOne {
+      from {
+        border-radius: 75% 25% 80% 20% / 46% 36% 64% 54%;
+      }
+      30% {
+        border-radius: 75% 25% 80% 20% / 46% 36% 64% 54%;
+      }
+      60% {
+        border-radius: 51% 49% 34% 66% / 43% 30% 70% 57%;
+      }
+      to {
+        border-radius: 75% 25% 80% 20% / 46% 36% 64% 54%;
+      }
+    }
+
+    @keyframes borderTwo {
+      from {
+        border-radius: 31% 69% 31% 69% / 20% 27% 73% 80%;
+      }
+      30% {
+        border-radius: 74% 26% 34% 66% / 54% 18% 82% 46%;
+      }
+      60% {
+        border-radius: 65% 35% 34% 66% / 36% 45% 55% 64%;
+      }
+      to {
+        border-radius: 31% 69% 31% 69% / 20% 27% 73% 80%;
+      }
+    }
+    @keyframes borderThree {
+      from {
+        border-radius: 19% 81% 27% 73% / 70% 70% 30% 30%;
+      }
+      30% {
+        border-radius: 74% 26% 34% 66% / 54% 18% 82% 46%;
+      }
+      60% {
+        border-radius: 65% 35% 34% 66% / 36% 45% 55% 64%;
+      }
+      to {
+        border-radius: 19% 81% 27% 73% / 70% 70% 30% 30%;
       }
     }
   }
