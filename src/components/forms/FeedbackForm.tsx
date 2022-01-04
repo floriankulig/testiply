@@ -134,6 +134,7 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({
           date: new Date(),
           appId,
           appName,
+          userId: currentUser._id,
         })
         .then(() => {
           setHasSubmitted(true);
