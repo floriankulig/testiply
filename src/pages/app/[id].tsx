@@ -229,7 +229,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
         <motion.ul
           className="screenshots"
           animate={{ x: !scrollable && 0 }}
-          onClick={() => retriggerScrollCheck()}
+          onMouseEnter={() => retriggerScrollCheck()}
           drag={scrollable ? "x" : false}
           dragConstraints={screenshotsParentRef}
           dragTransition={{
