@@ -122,7 +122,14 @@ export const Policies: React.FC = () => {
         </a>
       </h3>
       <h3>
-        <a className="link">Privacy Policy</a>
+        <a
+          className="link"
+          href="https://n-mayr.net/datenschutz"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Privacy Policy
+        </a>
       </h3>
     </StyledPolicies>
   );
