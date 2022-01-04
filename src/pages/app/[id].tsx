@@ -66,7 +66,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
 
   const screenshotsParentRef = useRef<HTMLHeadingElement>(null);
   const screenshotsListRef = useRef<HTMLUListElement>(null);
-  const { scrollable } = useHorizontalScroll(
+  const { scrollable, retriggerScrollCheck } = useHorizontalScroll(
     screenshotsParentRef.current,
     screenshotsListRef.current
   );
@@ -229,6 +229,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
         <motion.ul
           className="screenshots"
           animate={{ x: !scrollable && 0 }}
+          onClick={() => retriggerScrollCheck()}
           drag={scrollable ? "x" : false}
           dragConstraints={screenshotsParentRef}
           dragTransition={{
