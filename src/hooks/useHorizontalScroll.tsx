@@ -23,6 +23,8 @@ export const useHorizontalScroll = (
 
   //for rechecking scrollability when refs haven't loaded first time
   const retriggerScrollCheck = () => {
+    if (!parentContainer || !scrollingContainer) return;
+
     setScrollable(scrollingContainer.offsetWidth > parentContainer.offsetWidth);
   };
   return { scrollable, retriggerScrollCheck };
