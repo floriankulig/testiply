@@ -1,9 +1,13 @@
 import Head from "next/head";
 import { Hero, Features, Benefits, Footer } from "components/home";
 import { InfoPageHeader } from "components/InfoPageHeader";
-import { NextPage } from "next";
+import { NextPage, NextPageContext } from "next";
 
-const Home: NextPage = () => {
+interface HomeProps {
+  wasLoggedIn: boolean;
+}
+
+const Home: NextPage<HomeProps> = ({ wasLoggedIn }) => {
   return (
     <>
       <Head>
@@ -11,12 +15,17 @@ const Home: NextPage = () => {
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
       </Head>
       <InfoPageHeader className="container" hasLogoBackground={true} />
-      <Hero />
+      <Hero wasLoggedIn={wasLoggedIn} />
       <Features />
       <Benefits />
       <Footer />
     </>
   );
+};
+
+Home.getInitialProps = ({ res, req }: NextPageContext) => {
+  const wasLoggedIn = !!req?.headers.cookie?.slice(4);
+  return { wasLoggedIn };
 };
 
 export default Home;
