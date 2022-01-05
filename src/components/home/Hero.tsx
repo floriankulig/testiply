@@ -5,6 +5,9 @@ import styled from "styled-components";
 import { CSSTransition } from "react-transition-group";
 import { rgba } from "polished";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { Introduction } from "./Introduction";
+import { AnimatePresence } from "framer-motion";
 
 const HeroSection = styled.section`
   margin-top: 10em;
@@ -205,8 +208,20 @@ const Content = styled.div`
   }
 `;
 
-export const Hero: React.FC = () => {
+interface HeroProps {
+  wasLoggedIn: boolean;
+}
+
+export const Hero: React.FC<HeroProps> = ({ wasLoggedIn }) => {
   const isMobile = useIsMobile(1080);
+
+  const [introShows, setIntroShows] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (wasLoggedIn) return;
+    const timeout = setTimeout(() => setIntroShows(true), 3000);
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <HeroSection className="container">
@@ -283,6 +298,9 @@ export const Hero: React.FC = () => {
           />
         </div>
       </CSSTransition>
+      <AnimatePresence>
+        {introShows && <Introduction close={() => setIntroShows(false)} />}
+      </AnimatePresence>
     </HeroSection>
   );
 };
