@@ -358,11 +358,21 @@ const RatingAmountIcon: React.FC<{ color: string }> = (props) => {
 interface StatFieldProps {
   value: string;
   type: "feedbacks" | "total_rating" | "downloads" | "rating_amount";
+  clickHandler?: () => void;
 }
 
-export const StatField: React.FC<StatFieldProps> = ({ value, type }) => {
+export const StatField: React.FC<StatFieldProps> = ({
+  value,
+  type,
+  clickHandler,
+}) => {
   return (
-    <StyledStatField>
+    <StyledStatField
+      as={motion.div}
+      style={{ cursor: clickHandler ? "pointer" : "default" }}
+      onTap={clickHandler}
+      whileTap={{ scale: clickHandler ? 0.95 : 1 }}
+    >
       <StyledStatFieldIconWrapper
         color={
           type === "total_rating"

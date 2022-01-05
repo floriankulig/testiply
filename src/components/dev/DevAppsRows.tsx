@@ -1,7 +1,6 @@
-import { AppGrid } from "components/layouts";
+import { useFiltersValue } from "context";
+import { useRouter } from "next/router";
 import React, { Fragment, useEffect, useState } from "react";
-import { FaStar } from "react-icons/fa";
-import { FiDownload } from "react-icons/fi";
 import { App } from "ts";
 
 import {
@@ -13,16 +12,15 @@ import {
   StyledHeaderButtons,
 } from "./DevAppRow";
 
-interface DevApp extends App {
-  feedbackAmount: number;
-}
-
 interface DevAppsRowsProps {
-  apps: DevApp[];
+  apps: App[];
 }
 
 export const DevAppsRows: React.FC<DevAppsRowsProps> = ({ apps }) => {
   const [expandedApp, setExpandedApp] = useState<string>("");
+
+  const router = useRouter();
+  const { setSearchQuery } = useFiltersValue();
 
   const handleExpand = (clickedAppId: string) => {
     if (expandedApp === clickedAppId) {
@@ -32,12 +30,17 @@ export const DevAppsRows: React.FC<DevAppsRowsProps> = ({ apps }) => {
     }
   };
 
+  const handleFeedbackClick = (appName: string) => {
+    setSearchQuery(appName);
+    router.push("/dev/feedback");
+  };
+
   useEffect(() => {
     console.log(expandedApp);
   }, [expandedApp]);
   return (
     <Fragment>
-      {apps?.map((app: DevApp) => (
+      {apps?.map((app: App) => (
         <StyledAppDevRow key={app._id}>
           <StyledAppDevRowHeader>
             <h2 className="app-name">{app.name}</h2>
@@ -54,7 +57,7 @@ export const DevAppsRows: React.FC<DevAppsRowsProps> = ({ apps }) => {
             type="downloads"
           />
           <StatField
-            value={app.rating.total?.toString() || "0"}
+            value={app.rating.total?.toString() || "0.0"}
             type="total_rating"
           />
           <StatField
@@ -62,8 +65,10 @@ export const DevAppsRows: React.FC<DevAppsRowsProps> = ({ apps }) => {
             type="rating_amount"
           />
           <StatField
-            value={app.feedbackAmount?.toString() || "0"}
+            value={app.rating.amount?.toString() || "0"}
             type="feedbacks"
+            clickHandler={() => handleFeedbackClick(app.name)}
+            aria-label={`View Feedbacks for ${app.name}`}
           />
         </StyledAppDevRow>
       ))}
