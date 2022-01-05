@@ -163,7 +163,7 @@ export const DetailAppTile: React.FC<AppTileProps> = ({
         as={motion.li}
         layout
         layoutId={`appTile-${layID}`}
-        whileHover={{ scale: 1.03 }}
+        whileHover={{ scale: !appsStack ? 1.02 : 1 }}
       >
         <Link href={`/app/${_id}`}>
           <StyledRow
@@ -173,6 +173,8 @@ export const DetailAppTile: React.FC<AppTileProps> = ({
             onKeyDown={() => setDetailOpened(true)}
             tabIndex={0}
             role="button"
+            as={motion.div}
+            layout
           >
             <IconWrapper
               as={motion.div}
