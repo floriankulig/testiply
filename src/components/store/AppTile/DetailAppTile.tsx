@@ -163,7 +163,10 @@ export const DetailAppTile: React.FC<AppTileProps> = ({
         as={motion.li}
         layout
         layoutId={`appTile-${layID}`}
-        whileHover={{ scale: !appsStack ? 1.02 : 1 }}
+        whileHover={{
+          scale: !appsStack ? 1.02 : 1,
+          transition: { duration: 0.15 },
+        }}
       >
         <Link href={`/app/${_id}`}>
           <StyledRow
