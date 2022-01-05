@@ -17,7 +17,8 @@ interface OpenProp {
 
 const StyledAppTile = styled.li`
   position: relative;
-  box-shadow: 2px 8px 20px ${({ theme }) => rgba(theme.navy, 0.1)};
+  border: 1px solid ${(p) => rgba(p.theme.primary, 0.05)};
+  box-shadow: ${(p) => rgba(p.theme.navy, 0.05)} 0px 0px 15px;
   padding: 1em;
   display: flex;
   flex-direction: column;
@@ -158,7 +159,7 @@ export const DetailAppTile: React.FC<AppTileProps> = ({
   return (
     <>
       <StyledAppTile
-        style={{ ...style, borderRadius: "1.5em" }}
+        style={{ ...style, borderRadius: "1em" }}
         className={className}
         as={motion.li}
         layout
