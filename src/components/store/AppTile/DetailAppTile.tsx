@@ -50,7 +50,7 @@ const StyledRow = styled.div<Partial<OpenProp>>`
   .app {
     &__name {
       color: ${({ theme }) => rgba(theme.navy, 0.8)};
-      font-weight: bold;
+      font-weight: 900;
       font-size: 1.2rem;
       overflow: hidden;
     }
