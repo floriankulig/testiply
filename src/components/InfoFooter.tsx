@@ -113,7 +113,7 @@ export const Policies: React.FC = () => {
     <StyledPolicies>
       <h3>
         <a
-          href="https://n-mayr.net/datenschutz"
+          href="https://api.testiply.n-mayr.net/imprint"
           className="link"
           target="_blank"
           rel="noopener noreferrer"
@@ -124,7 +124,7 @@ export const Policies: React.FC = () => {
       <h3>
         <a
           className="link"
-          href="https://n-mayr.net/datenschutz"
+          href="https://api.testiply.n-mayr.net/privacy"
           target="_blank"
           rel="noopener noreferrer"
         >
