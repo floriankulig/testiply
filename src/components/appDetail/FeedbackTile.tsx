@@ -152,6 +152,7 @@ export const FeedbackTile: React.FC<{ feedback: Feedback }> = ({
         as={motion.li}
         style={{ borderRadius: "1.25em" }}
         layoutId={`feedbackTile-${_id}`}
+        key={`feedbackTile-${_id}`}
         initial="closed"
         animate="open"
         exit="closed"
@@ -211,6 +212,7 @@ export const FeedbackTile: React.FC<{ feedback: Feedback }> = ({
               ref={detailRef}
               as={motion.div}
               layoutId={`feedbackTile-${_id}`}
+              key={`feedbackTile-${_id}`}
             >
               <motion.div
                 className="feedback-detail__rating"
