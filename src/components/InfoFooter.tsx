@@ -115,7 +115,6 @@ export const Policies: React.FC = () => {
         <a
           href="https://api.testiply.n-mayr.net/imprint"
           className="link"
-          target="_blank"
           rel="noopener noreferrer"
         >
           Imprint
@@ -125,7 +124,6 @@ export const Policies: React.FC = () => {
         <a
           className="link"
           href="https://api.testiply.n-mayr.net/privacy"
-          target="_blank"
           rel="noopener noreferrer"
         >
           Privacy Policy
