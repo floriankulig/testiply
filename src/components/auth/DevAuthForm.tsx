@@ -128,6 +128,7 @@ export const DevAuthForm: React.FC<DevAuthFormProps> = ({
       ref={ref}
       as={motion.div}
       layoutId="authForm"
+      key="devAuthForm"
       style={{ borderRadius: "4em" }}
     >
       <RemoveButtonRowStyles>

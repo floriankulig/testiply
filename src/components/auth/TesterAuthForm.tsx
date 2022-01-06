@@ -106,6 +106,7 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({
         ref={ref}
         as={motion.div}
         layoutId="authForm"
+        key="testerAuthForm"
         style={{ borderRadius: "4em" }}
       >
         <SpaceBetween>
