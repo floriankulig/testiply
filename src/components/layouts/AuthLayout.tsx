@@ -1,6 +1,7 @@
 import { AuthInfoSidebar } from "components/auth";
 import { InfoFooter } from "components/InfoFooter";
 import { InfoPageHeader } from "components/InfoPageHeader";
+import { motion } from "framer-motion";
 import { getTextColor } from "helpers";
 import { useIsMobile } from "hooks";
 import styled from "styled-components";
@@ -55,7 +56,12 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({
       {formType.includes("register") && !isMobile && (
         <AuthInfoSidebar type={formType} />
       )}
-      <ContentContainer>
+      <ContentContainer
+        as={motion.div}
+        animate
+        layoutId="authFormContentContainer"
+        key="authFormContentContainer"
+      >
         {isMobile && (
           <InfoPageHeader
             style={{
@@ -64,7 +70,14 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({
             }}
           />
         )}
-        <FormContainer>{children}</FormContainer>
+        <FormContainer
+          as={motion.div}
+          key="authFormContentContainer"
+          animate
+          layoutId="authFormFormContainer"
+        >
+          {children}
+        </FormContainer>
       </ContentContainer>
       {formType === "login" && !isMobile && <AuthInfoSidebar type={formType} />}
       {isMobile && <InfoFooter />}
