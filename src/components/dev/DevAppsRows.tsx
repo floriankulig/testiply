@@ -1,9 +1,12 @@
+import { useFiltersValue } from "context";
+import { useRouter } from "next/router";
 import React, { Fragment, useEffect, useState } from "react";
 import { App } from "ts";
 
 import {
   ExpandButton,
   OptionsButton,
+  StatField,
   StyledAppDevRow,
   StyledAppDevRowHeader,
   StyledHeaderButtons,
@@ -16,12 +19,20 @@ interface DevAppsRowsProps {
 export const DevAppsRows: React.FC<DevAppsRowsProps> = ({ apps }) => {
   const [expandedApp, setExpandedApp] = useState<string>("");
 
+  const router = useRouter();
+  const { setSearchQuery } = useFiltersValue();
+
   const handleExpand = (clickedAppId: string) => {
     if (expandedApp === clickedAppId) {
       setExpandedApp("");
     } else {
       setExpandedApp(clickedAppId);
     }
+  };
+
+  const handleFeedbackClick = (appName: string) => {
+    setSearchQuery(appName);
+    router.push("/dev/feedback");
   };
 
   useEffect(() => {
@@ -41,6 +52,24 @@ export const DevAppsRows: React.FC<DevAppsRowsProps> = ({ apps }) => {
               <OptionsButton app={app} />
             </StyledHeaderButtons>
           </StyledAppDevRowHeader>
+          <StatField
+            value={app.downloads?.toString() || "0"}
+            type="downloads"
+          />
+          <StatField
+            value={app.rating.total?.toString() || "0.0"}
+            type="total_rating"
+          />
+          <StatField
+            value={app.rating.amount?.toString() || "0"}
+            type="rating_amount"
+          />
+          <StatField
+            value={app.rating.amount?.toString() || "0"}
+            type="feedbacks"
+            clickHandler={() => handleFeedbackClick(app.name)}
+            aria-label={`View Feedbacks for ${app.name}`}
+          />
         </StyledAppDevRow>
       ))}
     </Fragment>

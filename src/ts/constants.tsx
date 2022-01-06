@@ -176,3 +176,5 @@ export const sampleApp: App = {
   testflightIos: "https://testiply.vercel.app/store",
   testflightIpados: "https://testiply.vercel.app/store",
 };
+
+export const testUserId = "61d4a2589c6bcbc4f383acd1";

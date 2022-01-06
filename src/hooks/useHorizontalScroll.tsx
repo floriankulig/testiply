@@ -9,16 +9,23 @@ export const useHorizontalScroll = (
   useEffect(() => {
     if (!parentContainer || !scrollingContainer) return;
 
+    setScrollable(scrollingContainer.offsetWidth > parentContainer.offsetWidth);
+
     const onResize = () => {
       setScrollable(
         scrollingContainer.offsetWidth > parentContainer.offsetWidth
       );
     };
 
-    setScrollable(scrollingContainer.offsetWidth > parentContainer.offsetWidth);
-
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, [parentContainer, scrollingContainer]);
-  return { scrollable };
+
+  //for rechecking scrollability when refs haven't loaded first time
+  const retriggerScrollCheck = () => {
+    if (!parentContainer || !scrollingContainer) return;
+
+    setScrollable(scrollingContainer.offsetWidth > parentContainer.offsetWidth);
+  };
+  return { scrollable, retriggerScrollCheck };
 };

@@ -47,8 +47,8 @@ const baseValidationSchema = Yup.object({
     .max(750, "Can't be longer than 750 characters"),
 });
 const metaValidationSchema = Yup.object({
-  testflightIos: Yup.string(),
-  testflightMacos: Yup.string(),
+  testflightIos: Yup.string().url("Must be a valid Testflight URL"),
+  testflightMacos: Yup.string().url("Must be a valid Testflight URL"),
   categories: Yup.array()
     .of(Yup.object().shape({ id: Yup.string(), displayName: Yup.string() }))
     .min(1, "Must select at least 1 category")

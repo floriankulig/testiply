@@ -146,7 +146,7 @@ export const DeleteAppModal: React.FC<DeleteAppModalProps> = ({
       })
       .then(() => {
         setLoading(false);
-        router.reload();
+        router.push("/dev/apps");
       })
       .catch(() => {
         setHasError(true);

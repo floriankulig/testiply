@@ -17,7 +17,8 @@ interface OpenProp {
 
 const StyledAppTile = styled.li`
   position: relative;
-  box-shadow: 2px 8px 20px ${({ theme }) => rgba(theme.navy, 0.1)};
+  border: 1px solid ${(p) => rgba(p.theme.primary, 0.05)};
+  box-shadow: ${(p) => rgba(p.theme.navy, 0.05)} 0px 0px 15px;
   padding: 1em;
   display: flex;
   flex-direction: column;
@@ -49,7 +50,7 @@ const StyledRow = styled.div<Partial<OpenProp>>`
   .app {
     &__name {
       color: ${({ theme }) => rgba(theme.navy, 0.8)};
-      font-weight: bold;
+      font-weight: 900;
       font-size: 1.2rem;
       overflow: hidden;
     }
@@ -158,12 +159,15 @@ export const DetailAppTile: React.FC<AppTileProps> = ({
   return (
     <>
       <StyledAppTile
-        style={{ ...style, borderRadius: "1.5em" }}
+        style={{ ...style, borderRadius: "1em" }}
         className={className}
         as={motion.li}
         layout
         layoutId={`appTile-${layID}`}
-        whileHover={{ scale: 1.03 }}
+        whileHover={{
+          scale: !appsStack ? 1.02 : 1,
+          transition: { duration: 0.15 },
+        }}
       >
         <Link href={`/app/${_id}`}>
           <StyledRow
@@ -173,6 +177,8 @@ export const DetailAppTile: React.FC<AppTileProps> = ({
             onKeyDown={() => setDetailOpened(true)}
             tabIndex={0}
             role="button"
+            as={motion.div}
+            layout
           >
             <IconWrapper
               as={motion.div}

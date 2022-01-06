@@ -1,20 +1,23 @@
 import { AnimatePresence, motion, Variants } from "framer-motion";
-import { rgba } from "polished";
+import { darken, rgba } from "polished";
 import styled from "styled-components";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { FaChevronDown } from "react-icons/fa";
+import { FaChevronDown, FaStar } from "react-icons/fa";
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { useOnClickOutside } from "hooks";
 import { GoLinkExternal, GoTrashcan } from "react-icons/go";
 import { DeleteAppModal } from "components/DeleteAppModal";
 import { App } from "ts";
+import { FiDownload } from "react-icons/fi";
+import { BiCommentDetail } from "react-icons/bi";
+import { AiOutlineNumber } from "react-icons/ai";
 
 export const StyledAppDevRow = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-bottom: 2.5em;
+  margin-bottom: 3em;
 `;
 
 export const StyledAppDevRowHeader = styled.div`
@@ -23,6 +26,7 @@ export const StyledAppDevRowHeader = styled.div`
   height: 40px;
   position: relative;
   overflow-x: clip;
+  margin-bottom: 0.75em;
 
   h2.app-name {
     display: flex;
@@ -275,5 +279,125 @@ export const OptionsButton: React.FC<OptionsButtonProps> = ({ app }) => {
         </AnimatePresence>
       </StyledButtonWrapper>
     </>
+  );
+};
+
+const StyledStatField = styled.div`
+  background: var(--layout-nav-background);
+  position: relative;
+  border-radius: 8px;
+  height: 150px;
+  width: clamp(275px, 100%, 300px);
+  padding: 1em 2em;
+  border: 1px solid ${(p) => rgba(p.theme.primary, 0.05)};
+  box-shadow: ${rgba(0, 0, 0, 0.01)} 0px 0px 15px;
+  display: flex;
+  align-items: center;
+`;
+
+const StyledStatFieldIconWrapper = styled.div<{ color: string }>`
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  background: ${(p) => rgba(p.color, 0.1)};
+  display: grid;
+  place-items: center;
+  & > * {
+    color: ${(p) => p.color};
+    height: max-content;
+    width: 28px;
+  }
+`;
+
+const StyledStatFieldText = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 2.5em;
+
+  h5.heading {
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #afb5c4;
+    margin: 0;
+  }
+  h4.value {
+    font-weight: 900;
+    color: var(--navy);
+    margin: 0.2em 0 0;
+    font-size: 2.5rem;
+  }
+`;
+
+const StyledRatingAmountIcon = styled.div<{ color: string }>`
+  position: relative;
+  svg:first-of-type {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  svg:last-of-type {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 60%;
+    height: max-content;
+    color: ${(p) => darken(0.25, p.color)};
+  }
+`;
+
+const RatingAmountIcon: React.FC<{ color: string }> = (props) => {
+  return (
+    <StyledRatingAmountIcon {...props}>
+      <FaStar />
+      <AiOutlineNumber />
+    </StyledRatingAmountIcon>
+  );
+};
+
+interface StatFieldProps {
+  value: string;
+  type: "feedbacks" | "total_rating" | "downloads" | "rating_amount";
+  clickHandler?: () => void;
+}
+
+export const StatField: React.FC<StatFieldProps> = ({
+  value,
+  type,
+  clickHandler,
+}) => {
+  return (
+    <StyledStatField
+      as={motion.div}
+      style={{ cursor: clickHandler ? "pointer" : "default" }}
+      onTap={clickHandler}
+      whileTap={{ scale: clickHandler ? 0.95 : 1 }}
+    >
+      <StyledStatFieldIconWrapper
+        color={
+          type === "total_rating"
+            ? "#e6cf07"
+            : type === "feedbacks"
+            ? "#c115ff"
+            : type === "downloads"
+            ? "#0faa21"
+            : "#0078FF"
+        }
+      >
+        {type === "total_rating" ? (
+          <FaStar />
+        ) : type === "feedbacks" ? (
+          <BiCommentDetail />
+        ) : type === "downloads" ? (
+          <FiDownload />
+        ) : (
+          <RatingAmountIcon color="#0078FF" />
+        )}
+      </StyledStatFieldIconWrapper>
+      <StyledStatFieldText>
+        <h5 className="heading">{type.replace("_", " ")}</h5>
+        <h4 className="value">{value}</h4>
+      </StyledStatFieldText>
+    </StyledStatField>
   );
 };

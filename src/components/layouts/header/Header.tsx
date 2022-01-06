@@ -69,6 +69,7 @@ const StyledDisplayName = styled.h3`
   font-size: 1.15rem;
   font-weight: normal;
   color: var(--navy);
+  cursor: pointer;
 `;
 
 interface HeaderProps {
@@ -83,6 +84,7 @@ export const Header: React.FC<HeaderProps> = ({
   const [scrolled, setScrolled] = useState<boolean>(false);
   const isMobile = useIsMobile(1200);
   const { currentUser } = useAuthValue();
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   const handleScroll = () => {
     setScrolled(window.pageYOffset >= 80);
@@ -106,9 +108,15 @@ export const Header: React.FC<HeaderProps> = ({
     >
       {isMobile && <Burger setSidebarOpen={setSidebarOpen} />}
       <Searchbar />
-      <StyledMenus>
+      <StyledMenus
+        onClick={() => setMenuOpen(true)}
+        onKeyDown={() => setMenuOpen(true)}
+        tabIndex={0}
+        role="button"
+        aria-label="Open user menu"
+      >
         <StyledDisplayName>{currentUser?.name || ""}</StyledDisplayName>
-        <UserMenu />
+        <UserMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
       </StyledMenus>
     </StyledHeader>
   );
