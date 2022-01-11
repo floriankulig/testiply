@@ -25,7 +25,7 @@ export const StyledAppDevRowHeader = styled.div`
   width: 100%;
   height: 40px;
   position: relative;
-  overflow-x: clip;
+  /* overflow-x: clip; */
   margin-bottom: 0.75em;
 
   h2.app-name {
@@ -68,7 +68,8 @@ const StyledButtonWrapper = styled.div`
   align-items: center;
   justify-content: center;
   margin-left: 20px;
-  transition: all 0.3s;
+  transition: 0.3s;
+  transition-property: background-color, border-radius;
   color: var(--primary);
   border-radius: 50%;
 
@@ -90,7 +91,6 @@ const StyledIconWrapper = styled.div<{ smallIcon?: boolean }>`
   height: 40px;
   display: grid;
   place-items: center;
-  transition: all 0.3s;
   svg {
     width: ${({ smallIcon }) => (smallIcon ? "20px" : "26px")};
     height: ${({ smallIcon }) => (smallIcon ? "20px" : "26px")};
@@ -176,6 +176,11 @@ const dropdownItemVariants: Variants = {
   },
 };
 
+const buttonVariants: Variants = {
+  initial: { x: -80, opacity: 0 },
+  animate: { x: 0, opacity: 1, transition: { type: "spring" } },
+};
+
 interface ExpandButtonProps {
   action: React.Dispatch<React.SetStateAction<void>>;
   isExpanded: boolean;
@@ -186,7 +191,12 @@ export const ExpandButton: React.FC<ExpandButtonProps> = ({
   isExpanded,
 }) => {
   return (
-    <StyledButtonWrapper as={motion.div} onTap={() => action()}>
+    <StyledButtonWrapper
+      as={motion.div}
+      animate
+      variants={buttonVariants}
+      onTap={() => action()}
+    >
       <StyledIconWrapper
         smallIcon
         as={motion.div}
@@ -238,6 +248,7 @@ export const OptionsButton: React.FC<OptionsButtonProps> = ({ app }) => {
         style={{ position: "relative" }}
         as={motion.div}
         onTap={() => setMenuOpen(true)}
+        variants={buttonVariants}
         tabIndex={0}
         role="button"
         aria-label={`Open options for app "${name}"`}
@@ -282,12 +293,37 @@ export const OptionsButton: React.FC<OptionsButtonProps> = ({ app }) => {
   );
 };
 
+// we hardcode the values here because there is no suitable grid/flexbox solution
+const bp1 = "600px";
+const bp2 = "995px";
+
+export const StatFieldGrid = styled.div`
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+  gap: 0.5em;
+  @media (min-width: ${bp1}) {
+    gap: 1em;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: ${bp2}) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+`;
+
 const StyledStatField = styled.div`
   background: var(--layout-nav-background);
   position: relative;
-  border-radius: 8px;
   height: 150px;
-  width: clamp(275px, 100%, 300px);
+  width: 90%;
+  min-width: 275px;
+  @media (min-width: ${bp1}) {
+    width: clamp(275px, 100%, 300px);
+  }
   padding: 1em 2em;
   border: 1px solid ${(p) => rgba(p.theme.primary, 0.05)};
   box-shadow: ${rgba(0, 0, 0, 0.01)} 0px 0px 15px;
@@ -361,6 +397,33 @@ const RatingAmountIcon: React.FC<{ color: string }> = (props) => {
   );
 };
 
+const fieldVariants: Variants = {
+  initial: { scale: 0, opacity: 0 },
+  animate: {
+    scale: 1,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      type: "spring",
+      staggerChildren: 0.15,
+      delayChildren: 0.3,
+    },
+  },
+};
+
+const textVariants: Variants = {
+  initial: { y: -15, opacity: 0 },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.3 },
+  },
+};
+const iconVariants: Variants = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { duration: 0.3 } },
+};
+
 interface StatFieldProps {
   value: string;
   type: "feedbacks" | "total_rating" | "downloads" | "rating_amount";
@@ -375,11 +438,17 @@ export const StatField: React.FC<StatFieldProps> = ({
   return (
     <StyledStatField
       as={motion.div}
-      style={{ cursor: clickHandler ? "pointer" : "default" }}
+      style={{
+        cursor: clickHandler ? "pointer" : "default",
+        borderRadius: 8,
+      }}
       onTap={clickHandler}
       whileTap={{ scale: clickHandler ? 0.95 : 1 }}
+      variants={fieldVariants}
     >
       <StyledStatFieldIconWrapper
+        as={motion.div}
+        variants={iconVariants}
         color={
           type === "total_rating"
             ? "#e6cf07"
@@ -403,8 +472,12 @@ export const StatField: React.FC<StatFieldProps> = ({
         </div>
       </StyledStatFieldIconWrapper>
       <StyledStatFieldText>
-        <h5 className="heading">{type.replace("_", " ")}</h5>
-        <h4 className="value">{value}</h4>
+        <motion.h5 variants={textVariants} className="heading">
+          {type.replace("_", " ")}
+        </motion.h5>
+        <motion.h4 variants={textVariants} className="value">
+          {value}
+        </motion.h4>
       </StyledStatFieldText>
     </StyledStatField>
   );
