@@ -302,10 +302,16 @@ const StyledStatFieldIconWrapper = styled.div<{ color: string }>`
   background: ${(p) => rgba(p.color, 0.1)};
   display: grid;
   place-items: center;
-  & > * {
+  & > div {
     color: ${(p) => p.color};
     height: max-content;
     width: 28px;
+    position: relative;
+    svg {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
   }
 `;
 
@@ -384,15 +390,17 @@ export const StatField: React.FC<StatFieldProps> = ({
             : "#0078FF"
         }
       >
-        {type === "total_rating" ? (
-          <FaStar />
-        ) : type === "feedbacks" ? (
-          <BiCommentDetail />
-        ) : type === "downloads" ? (
-          <FiDownload />
-        ) : (
-          <RatingAmountIcon color="#0078FF" />
-        )}
+        <div>
+          {type === "total_rating" ? (
+            <FaStar />
+          ) : type === "feedbacks" ? (
+            <BiCommentDetail />
+          ) : type === "downloads" ? (
+            <FiDownload />
+          ) : (
+            <RatingAmountIcon color="#0078FF" />
+          )}
+        </div>
       </StyledStatFieldIconWrapper>
       <StyledStatFieldText>
         <h5 className="heading">{type.replace("_", " ")}</h5>
