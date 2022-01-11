@@ -204,7 +204,7 @@ export const ExpandButton: React.FC<ExpandButtonProps> = ({
         role="button"
         animate={{
           rotate: isExpanded ? 180 : 0,
-          transition: { duration: 0.15 },
+          transition: { duration: 0.5, type: "spring" },
         }}
         aria-label={`Expand App"`}
       >
