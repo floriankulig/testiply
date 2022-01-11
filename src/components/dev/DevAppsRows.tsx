@@ -1,4 +1,5 @@
 import { useFiltersValue } from "context";
+import { motion, Variants } from "framer-motion";
 import { useRouter } from "next/router";
 import React, { Fragment, useEffect, useState } from "react";
 import { App } from "ts";
@@ -7,10 +8,20 @@ import {
   ExpandButton,
   OptionsButton,
   StatField,
+  StatFieldGrid,
   StyledAppDevRow,
   StyledAppDevRowHeader,
   StyledHeaderButtons,
 } from "./DevAppRow";
+
+const headerVariants: Variants = {
+  initial: { scaleX: 0 },
+  animate: {
+    scaleX: 1,
+    transformOrigin: "left",
+    transition: { duration: 0.2, when: "beforeChildren" },
+  },
+};
 
 interface DevAppsRowsProps {
   apps: App[];
@@ -40,10 +51,19 @@ export const DevAppsRows: React.FC<DevAppsRowsProps> = ({ apps }) => {
   }, [expandedApp]);
   return (
     <Fragment>
-      {apps?.map((app: App) => (
-        <StyledAppDevRow key={app._id}>
+      {apps?.map((app: App, i: number) => (
+        <StyledAppDevRow
+          key={app._id}
+          as={motion.div}
+          transition={{ staggerChildren: 0.075, delayChildren: i / 2 + 0.5 }}
+          initial="initial"
+          animate="animate"
+          layout
+        >
           <StyledAppDevRowHeader>
-            <h2 className="app-name">{app.name}</h2>
+            <motion.h2 className="app-name" variants={headerVariants}>
+              {app.name}
+            </motion.h2>
             <StyledHeaderButtons>
               <ExpandButton
                 action={() => handleExpand(app._id)}
@@ -52,24 +72,26 @@ export const DevAppsRows: React.FC<DevAppsRowsProps> = ({ apps }) => {
               <OptionsButton app={app} />
             </StyledHeaderButtons>
           </StyledAppDevRowHeader>
-          <StatField
-            value={app.downloads?.toString() || "0"}
-            type="downloads"
-          />
-          <StatField
-            value={app.rating.total?.toString() || "0.0"}
-            type="total_rating"
-          />
-          <StatField
-            value={app.rating.amount?.toString() || "0"}
-            type="rating_amount"
-          />
-          <StatField
-            value={app.rating.amount?.toString() || "0"}
-            type="feedbacks"
-            clickHandler={() => handleFeedbackClick(app.name)}
-            aria-label={`View Feedbacks for ${app.name}`}
-          />
+          <StatFieldGrid as={motion.div} layout>
+            <StatField
+              value={app.downloads?.toString() || "0"}
+              type="downloads"
+            />
+            <StatField
+              value={app.rating.total?.toString() || "0.0"}
+              type="total_rating"
+            />
+            <StatField
+              value={app.rating.amount?.toString() || "0"}
+              type="rating_amount"
+            />
+            <StatField
+              value={app.rating.amount?.toString() || "0"}
+              type="feedbacks"
+              clickHandler={() => handleFeedbackClick(app.name)}
+              aria-label={`View Feedbacks for ${app.name}`}
+            />
+          </StatFieldGrid>
         </StyledAppDevRow>
       ))}
     </Fragment>
