@@ -383,7 +383,7 @@ const StyledRatingAmountIcon = styled.div<{ color: string }>`
     right: 0;
     bottom: 0;
     width: 60%;
-    height: max-content;
+    height: 60%;
     color: ${(p) => darken(0.25, p.color)};
   }
 `;
