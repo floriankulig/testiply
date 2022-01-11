@@ -19,7 +19,6 @@ interface DevAppsProps {
 }
 
 const DevApps = ({ apps, hasUser, isDev }: DevAppsProps) => {
-  console.log({ apps });
   return (
     <DevAuthorisation>
       <Head>
