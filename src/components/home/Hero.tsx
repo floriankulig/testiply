@@ -218,9 +218,9 @@ export const Hero: React.FC<HeroProps> = ({ wasLoggedIn }) => {
   const [introShows, setIntroShows] = useState<boolean>(false);
 
   useEffect(() => {
-    // if (wasLoggedIn) return;
-    // const timeout = setTimeout(() => setIntroShows(true), 2000);
-    // return () => clearTimeout(timeout);
+    if (wasLoggedIn) return;
+    const timeout = setTimeout(() => setIntroShows(true), 2000);
+    return () => clearTimeout(timeout);
   }, []);
 
   return (
@@ -282,7 +282,6 @@ export const Hero: React.FC<HeroProps> = ({ wasLoggedIn }) => {
             View Apps
           </Button>
         </Link>
-        <Button onClick={() => setIntroShows(true)}>Open Modal</Button>
       </Content>
       <CSSTransition
         in={!isMobile}
