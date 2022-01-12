@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Introduction } from "./Introduction";
 import { AnimatePresence } from "framer-motion";
+import { useAuthValue } from "context";
 
 const HeroSection = styled.section`
   margin-top: 10em;
@@ -214,11 +215,12 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ wasLoggedIn }) => {
   const isMobile = useIsMobile(1080);
+  const { currentUser } = useAuthValue();
 
   const [introShows, setIntroShows] = useState<boolean>(false);
 
   useEffect(() => {
-    if (wasLoggedIn) return;
+    if (wasLoggedIn || !!currentUser) return;
     const timeout = setTimeout(() => setIntroShows(true), 2000);
     return () => clearTimeout(timeout);
   }, []);
