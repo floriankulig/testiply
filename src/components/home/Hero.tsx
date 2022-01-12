@@ -6,7 +6,7 @@ import { CSSTransition } from "react-transition-group";
 import { rgba } from "polished";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-// import { Introduction } from "./Introduction";
+import { Introduction } from "./Introduction";
 import { AnimatePresence } from "framer-motion";
 
 const HeroSection = styled.section`
@@ -218,9 +218,9 @@ export const Hero: React.FC<HeroProps> = ({ wasLoggedIn }) => {
   const [introShows, setIntroShows] = useState<boolean>(false);
 
   useEffect(() => {
-    if (wasLoggedIn) return;
-    const timeout = setTimeout(() => setIntroShows(true), 3000);
-    return () => clearTimeout(timeout);
+    // if (wasLoggedIn) return;
+    // const timeout = setTimeout(() => setIntroShows(true), 2000);
+    // return () => clearTimeout(timeout);
   }, []);
 
   return (
@@ -282,6 +282,7 @@ export const Hero: React.FC<HeroProps> = ({ wasLoggedIn }) => {
             View Apps
           </Button>
         </Link>
+        <Button onClick={() => setIntroShows(true)}>Open Modal</Button>
       </Content>
       <CSSTransition
         in={!isMobile}
@@ -298,9 +299,9 @@ export const Hero: React.FC<HeroProps> = ({ wasLoggedIn }) => {
           />
         </div>
       </CSSTransition>
-      {/* <AnimatePresence>
+      <AnimatePresence>
         {introShows && <Introduction close={() => setIntroShows(false)} />}
-      </AnimatePresence> */}
+      </AnimatePresence>
     </HeroSection>
   );
 };
