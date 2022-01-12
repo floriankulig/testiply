@@ -35,9 +35,9 @@ export const GamesRows: React.FC<GamesRowsProps> = ({
   selectedCategory,
   loading,
 }) => {
-  if (!initialApps?.latest[0] || !initialApps) {
-    return <NoAppsView hasApps={false}>No games uploaded yet.</NoAppsView>;
-  }
+  // if (!initialApps?.latest[0] || !initialApps) {
+  return <NoAppsView hasApps={false}>No games uploaded yet.</NoAppsView>;
+  // }
   const router = useRouter();
 
   const scrollParentRef = useRef<HTMLDivElement>(null);
