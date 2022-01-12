@@ -357,8 +357,8 @@ export const Introduction: React.FC<IntroductionProps> = ({ close }) => {
                 Viel Spaß <span className="wish">wünschen</span>
               </motion.p>
               <motion.p variants={fadeUp}>
-                <span className="name">Flo</span> und{" "}
-                <span className="name">Noel</span>
+                <span className="name">Noel</span> und{" "}
+                <span className="name">Flo</span>
               </motion.p>
               <BottomBar
                 as={motion.div}
