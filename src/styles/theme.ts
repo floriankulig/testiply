@@ -6,7 +6,7 @@ const theme = {
   sidebarWidth: `250px`,
   authSidebarWidth: `30vw`,
   headerHeight: `90px`,
-  layoutNavBg: `#ffffff`,
+  layoutNavBg: `#fdfdfd`,
   layoutContentBg: `#f7f8fa`,
   bp: {
     small: `min-width: 721px`,
