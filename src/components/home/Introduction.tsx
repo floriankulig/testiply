@@ -5,7 +5,7 @@ import { useCannotScroll, useOnClickOutside } from "hooks";
 import { rgba } from "polished";
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { fadeInOutVariants } from "styles";
+import { fadeInOutVariants, theme } from "styles";
 import { Button } from "components/Button";
 import { useAuthValue } from "context";
 import axios from "axios";
@@ -79,9 +79,17 @@ const StyledModal = styled.div<{ maxWidth: number }>`
 const BottomBar = styled.div`
   display: flex;
   justify-content: center;
+  flex-direction: column-reverse;
   margin: 1em 0 0.5em;
-  @media (min-width: 400px) {
-    justify-content: flex-end;
+  ${Button}:first-of-type {
+    margin-top: 1em;
+  }
+  @media (${({ theme }) => theme.bp.medium}) {
+    justify-content: space-between;
+    flex-direction: row;
+    ${Button}:first-of-type {
+      margin: 0 1em 0 0;
+    }
   }
 `;
 
@@ -248,10 +256,6 @@ export const Introduction: React.FC<IntroductionProps> = ({ close }) => {
 
   useCannotScroll(true);
 
-  //dev only
-  const ref = useRef<HTMLDivElement>(null);
-  useOnClickOutside(ref, () => close());
-
   const handleClick = async (e: MouseEvent) => {
     e.preventDefault();
 
@@ -288,7 +292,6 @@ export const Introduction: React.FC<IntroductionProps> = ({ close }) => {
     >
       <StyledModal
         as={motion.div}
-        ref={ref}
         maxWidth={animState >= 1 ? 600 : 500}
         layout
         variants={modalVariants}
@@ -360,11 +363,27 @@ export const Introduction: React.FC<IntroductionProps> = ({ close }) => {
               <BottomBar
                 as={motion.div}
                 variants={fadeUp}
-                onTap={handleClick}
-                whileTap={{ scale: 0.95 }}
                 onAnimationEnd={() => setAnimState((prev) => prev + 1)}
               >
-                <Button big bold disableElevation>
+                <Button
+                  as={motion.button}
+                  onTap={() => close()}
+                  whileTap={{ scale: 0.95 }}
+                  bold
+                  color={theme.navy}
+                  transparent
+                  disableElevation
+                  type="button"
+                >
+                  Ausgeloggt Bleiben
+                </Button>
+                <Button
+                  as={motion.button}
+                  onTap={handleClick}
+                  whileTap={{ scale: 0.95 }}
+                  bold
+                  disableElevation
+                >
                   Mit Sample Account Einloggen
                 </Button>
               </BottomBar>
