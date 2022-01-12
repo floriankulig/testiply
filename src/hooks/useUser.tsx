@@ -9,7 +9,10 @@ export const useUser = (): AuthContextType => {
   const [canHaveUser, setCanHaveUser] = useState<boolean>(false);
   const [cookie, setCookie] = useCookies(["uid"]);
 
-  const renewUid = async (currentUserId: string): Promise<void> => {
+  const renewUid = async (
+    currentUserId: string,
+    expiresTomorrow = false
+  ): Promise<void> => {
     await setCookie("uid", currentUserId, {
       sameSite: "strict",
       secure: true,
@@ -17,7 +20,8 @@ export const useUser = (): AuthContextType => {
       expires: new Date("1900-01-01"),
     });
     let newExpireDate = new Date();
-    newExpireDate.setDate(newExpireDate.getDate() + 30);
+    const daysUntilExpiry = expiresTomorrow ? 1 : 30;
+    newExpireDate.setDate(newExpireDate.getDate() + daysUntilExpiry);
     await setCookie("uid", currentUserId, {
       sameSite: "strict",
       secure: true,

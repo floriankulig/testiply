@@ -5,7 +5,7 @@ export type AuthContextType = {
   currentUser: User | null;
   canHaveUser: boolean;
   logout: () => void;
-  renewUid: (token: string) => Promise<void>;
+  renewUid: (token: string, expiresTomorrow?: boolean) => Promise<void>;
 };
 
 const AuthContext = createContext<Partial<AuthContextType>>({});
