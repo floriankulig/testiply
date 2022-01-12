@@ -79,12 +79,24 @@ const AppDetail: NextPage<AppDetailProps> = ({
   );
 
   //helper variables
-  const cantLeaveFeedback =
-    currentUser &&
-    !currentUser.downloadedApps?.find((app) => app.id === _id) &&
-    !currentUser.downloadedApps?.find((app) => app.id === _id)
-      ?.hasLeftFeedback &&
-    !isSample;
+  let cantLeaveFeedback = false;
+
+  if (!!currentUser) {
+    //hasnt downloaded
+    if (!currentUser.downloadedApps?.find((app) => app.id === _id)) {
+      cantLeaveFeedback = true;
+    }
+    //has downloaded but already left feedback
+    else if (
+      !!currentUser.downloadedApps?.find((app) => app.id === _id) &&
+      currentUser.downloadedApps?.find((app) => app.id === _id).hasLeftFeedback
+    ) {
+      cantLeaveFeedback = true;
+    }
+  }
+  if (isSample) {
+    cantLeaveFeedback = false;
+  }
 
   //event handlers
   const handleDownload = async (): Promise<void> => {
