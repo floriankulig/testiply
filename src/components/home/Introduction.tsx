@@ -349,8 +349,8 @@ export const Introduction: React.FC<IntroductionProps> = ({ close }) => {
               </motion.p>
               <motion.p variants={fadeUp}>
                 Damit ihr nicht "ins kalte Wasser geschmissen werdet", haben wir
-                euch einen Account erstellt, mit dem ihr sämtlich Funktionen der
-                Website ausprobieren könnt. Dazu müsst ihr nur unten auf den
+                euch einen Account erstellt, mit dem ihr sämtliche Funktionen
+                der Website ausprobieren könnt. Dazu müsst ihr nur unten auf den
                 Button clicken.
               </motion.p>
               <motion.p variants={fadeUp} style={{ margin: "1.2em 0 0.1em" }}>
