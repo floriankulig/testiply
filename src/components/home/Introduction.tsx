@@ -7,6 +7,8 @@ import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { fadeInOutVariants } from "styles";
 import { Button } from "components/Button";
+import { useAuthValue } from "context";
+import axios from "axios";
 
 const StyledModal = styled.div<{ maxWidth: number }>`
   background: #f1f3ff;
@@ -15,7 +17,6 @@ const StyledModal = styled.div<{ maxWidth: number }>`
   max-height: 90vh;
   border-radius: 2em;
   overflow-x: hidden;
-  overflow-y: auto;
   position: relative;
   padding: 4em 4em;
   h3 {
@@ -243,14 +244,28 @@ interface IntroductionProps {
 export const Introduction: React.FC<IntroductionProps> = ({ close }) => {
   const [introAnimationDone, setIntroAnimationDone] = useState<boolean>(false);
   const [animState, setAnimState] = useState<number>(0);
+  const { renewUid } = useAuthValue();
+
   useCannotScroll(true);
 
   //dev only
   const ref = useRef<HTMLDivElement>(null);
   useOnClickOutside(ref, () => close());
 
-  const handleClick = (e: MouseEvent) => {
+  const handleClick = async (e: MouseEvent) => {
     e.preventDefault();
+
+    const body = {
+      mail: process.env.NEXT_PUBLIC_SAMPLE_USER_MAIL,
+      password: process.env.NEXT_PUBLIC_SAMPLE_USER_PASSWORD,
+    };
+    await axios
+      .post(`${process.env.NEXT_PUBLIC_API_URL}/login`, body)
+      .then(async (res) => {
+        await renewUid(res.data.userId, true);
+      });
+
+    close();
   };
 
   useEffect(() => {
@@ -342,16 +357,14 @@ export const Introduction: React.FC<IntroductionProps> = ({ close }) => {
                 <span className="name">Flo</span> und{" "}
                 <span className="name">Noel</span>
               </motion.p>
-              <BottomBar>
-                <Button
-                  big
-                  bold
-                  as={motion.button}
-                  variants={fadeUp}
-                  onTap={handleClick}
-                  whileTap={{ scale: 0.95 }}
-                  onAnimationEnd={() => setAnimState((prev) => prev + 1)}
-                >
+              <BottomBar
+                as={motion.div}
+                variants={fadeUp}
+                onTap={handleClick}
+                whileTap={{ scale: 0.95 }}
+                onAnimationEnd={() => setAnimState((prev) => prev + 1)}
+              >
+                <Button big bold disableElevation>
                   Mit Sample Account Einloggen
                 </Button>
               </BottomBar>
