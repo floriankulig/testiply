@@ -35,8 +35,9 @@ import { FiClock, FiDownload, FiLock, FiStar } from "react-icons/fi";
 export const platforms: Platform[] = [
   { displayName: "iOS", id: "ios" },
   { displayName: "Android", id: "android" },
-  { displayName: "Windows", id: "windows" },
   { displayName: "iPadOS", id: "ipados" },
+  { displayName: "Web", id: "web" },
+  { displayName: "Windows", id: "windows" },
   { displayName: "Linux", id: "linux" },
   { displayName: "All", id: "all" },
 ];
