@@ -6,6 +6,7 @@ export type PlatformID =
   | "windows"
   | "ipados"
   | "linux"
+  | "web"
   | "all";
 
 export interface Platform {
