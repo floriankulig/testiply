@@ -1,4 +1,5 @@
 import { useAuthValue } from "context";
+import { motion } from "framer-motion";
 import { getTextColor } from "helpers";
 import { useIsMobile } from "hooks";
 import Image from "next/image";
@@ -82,6 +83,10 @@ export const InfoPageHeader: React.FC<InfoPageHeaderProps> = ({
       className={className}
       style={style}
       hasLogoBackground={hasLogoBackground}
+      as={motion.div}
+      initial={{ y: "-100%" }}
+      animate={{ y: 0 }}
+      exit={{ y: "-100%" }}
     >
       <Link href="/">
         <div className="logo">
