@@ -217,6 +217,7 @@ export const ExpandButton: React.FC<ExpandButtonProps> = ({
 const disabledTabStyles: React.CSSProperties = {
   color: "lightgrey",
   cursor: "not-allowed",
+  userSelect: "none",
 };
 
 interface OptionsButtonProps {
