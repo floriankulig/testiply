@@ -201,8 +201,14 @@ const AppDetail: NextPage<AppDetailProps> = ({
         <StyledRow>
           <ClickableDropdown
             loading={ctaLoading}
-            label="Download for "
-            selection={downloadPlatform}
+            label={
+              downloadPlatform.id === "web" ? "Visit Website" : "Download for "
+            }
+            selection={
+              downloadPlatform.id === "web"
+                ? { id: "web", displayName: "" }
+                : downloadPlatform
+            }
             setSelection={setDownloadPlatform}
             values={downloadablePlatforms}
             ctaClickHandler={handleDownload}
