@@ -8,6 +8,7 @@ interface ButtonProps {
   transparent?: boolean;
   rounded?: boolean;
   bold?: boolean;
+  midBold?: boolean;
   disableElevation?: boolean;
   color?: string;
 }
@@ -17,7 +18,7 @@ export const Button = styled.button<ButtonProps>`
   cursor: pointer;
   font-family: "Roboto";
   transition: 0.25s all;
-  ${(p) => p.bold && "font-weight: bold"};
+  font-weight: ${(p) => (p.bold ? "bold" : p.midBold ? 500 : null)};
   ${(p) =>
     p.big
       ? css`
