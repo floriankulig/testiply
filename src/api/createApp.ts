@@ -22,11 +22,13 @@ const createApp = async (
     icon,
     testflightIos,
     testflightIpados,
+    website,
   } = appData;
   // set up Platforms array
   let platforms: PlatformID[] = [];
   if (!!testflightIos) platforms.push("ios");
   if (!!testflightIpados) platforms.push("ipados");
+  if (!!website) platforms.push("web");
 
   // set up appId for uploading screenshots later
   let appId: string;
@@ -41,6 +43,7 @@ const createApp = async (
     categories: categories.map((cat: Category) => cat.id),
     testflightIos,
     testflightIpados,
+    website,
   };
 
   try {
