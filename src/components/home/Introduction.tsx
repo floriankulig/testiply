@@ -18,10 +18,10 @@ const StyledModal = styled.div<{ maxWidth: number }>`
   border-radius: 2em;
   overflow-x: hidden;
   position: relative;
-  padding: 4em 4em;
+  padding: 3.5em 3em 2em;
 
-  @media (${({theme}) => theme.bp.small}){
-    padding: 4em 3em;
+  @media (${({ theme }) => theme.bp.medium}) {
+    padding: 4em 3.5em;
   }
 
   h3 {
@@ -50,7 +50,7 @@ const StyledModal = styled.div<{ maxWidth: number }>`
 
     p {
       margin: 0;
-      font-size: clamp(1.5rem, 3vw, 1.7rem);
+      font-size: clamp(1.5rem, 3vw, 1.8rem);
       font-weight: 500;
 
       &:first-of-type {
@@ -62,9 +62,14 @@ const StyledModal = styled.div<{ maxWidth: number }>`
     }
   }
 
+  .stepTwo {
+    scrollbar-color: #fff;
+    scrollbar-width: thin;
+  }
+
   p {
     margin: 0 0 0.6em;
-    font-size: clamp(1rem, 2vw, 1.1rem);
+    font-size: clamp(0.95rem, 2vw, 1.075rem);
     color: ${({ theme }) => rgba(theme.navy, 0.7)};
     color: var(--navy);
 
@@ -326,6 +331,7 @@ export const Introduction: React.FC<IntroductionProps> = ({ close }) => {
               initial="initial"
               animate="animate"
               exit="exit"
+              className="stepTwo"
               style={{ overflowY: animState >= 2 ? "auto" : "hidden" }}
               variants={stepVariants}
               transition={{ delayChildren: 0.6, staggerChildren: 0.15 }}
@@ -358,6 +364,11 @@ export const Introduction: React.FC<IntroductionProps> = ({ close }) => {
                 der Website ausprobieren könnt. Dazu müsst ihr nur unten auf den
                 Button clicken.
               </motion.p>
+              <motion.p variants={fadeUp}>
+                Wenn ihr eure eigene (Web-)App hochladen wollt, so erstellt euch
+                bitte einen eigenen Account. Ansonsten haben auch alle anderen
+                Gewalt über eure App.
+              </motion.p>
               <motion.p variants={fadeUp} style={{ margin: "1.2em 0 0.1em" }}>
                 Viel Spaß <span className="wish">wünschen</span>
               </motion.p>
@@ -374,7 +385,7 @@ export const Introduction: React.FC<IntroductionProps> = ({ close }) => {
                   as={motion.button}
                   onTap={() => close()}
                   whileTap={{ scale: 0.95 }}
-                  bold
+                  midBold
                   color={theme.navy}
                   transparent
                   disableElevation
@@ -386,7 +397,7 @@ export const Introduction: React.FC<IntroductionProps> = ({ close }) => {
                   as={motion.button}
                   onTap={handleClick}
                   whileTap={{ scale: 0.95 }}
-                  bold
+                  midBold
                   disableElevation
                 >
                   Mit Sample Account Einloggen
