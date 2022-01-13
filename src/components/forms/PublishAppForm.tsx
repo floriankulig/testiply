@@ -14,7 +14,7 @@ import { useAuthValue } from "context";
 import { DevAuthForm, TesterAuthForm } from "components/auth";
 import { useCannotScroll } from "hooks";
 import { createApp } from "api";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 interface FormValues {
   name: string;
@@ -24,6 +24,7 @@ interface FormValues {
   icon: File[];
   testflightIos: string;
   testflightIpados: string;
+  website: string;
 }
 
 const initialValues: FormValues = {
@@ -34,6 +35,7 @@ const initialValues: FormValues = {
   icon: [],
   testflightIos: "",
   testflightIpados: "",
+  website: "",
 };
 
 const baseValidationSchema = Yup.object({
@@ -48,7 +50,8 @@ const baseValidationSchema = Yup.object({
 });
 const metaValidationSchema = Yup.object({
   testflightIos: Yup.string().url("Must be a valid Testflight URL"),
-  testflightMacos: Yup.string().url("Must be a valid Testflight URL"),
+  testflightIpados: Yup.string().url("Must be a valid Testflight URL"),
+  website: Yup.string().url("Must be a valid Website URL"),
   categories: Yup.array()
     .of(Yup.object().shape({ id: Yup.string(), displayName: Yup.string() }))
     .min(1, "Must select at least 1 category")
@@ -74,8 +77,8 @@ export const PublishAppForm: React.FC = () => {
 
   const handleSubmit = async (values: FormikValues) => {
     setErrorMessage("");
-    if (!values.testflightIos && !values.testflightIpados) {
-      setErrorMessage("Must provide at least one TestFlight link.");
+    if (!values.testflightIos && !values.testflightIpados && !values.website) {
+      setErrorMessage("Must provide at least one link.");
       return;
     }
     if (!currentUser) {
@@ -137,6 +140,11 @@ export const PublishAppForm: React.FC = () => {
             name="testflightIpados"
             label="TestFlight Link for iPadOS"
             placeholder="Provide your TestFlight link for iPadOS"
+          />
+          <FormikTextInput
+            name="website"
+            label="Link for a Website"
+            placeholder="Provide link for your WebApp"
           />
         </FormikStep>
       </FormikStepper>
