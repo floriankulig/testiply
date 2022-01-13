@@ -19,6 +19,11 @@ const StyledModal = styled.div<{ maxWidth: number }>`
   overflow-x: hidden;
   position: relative;
   padding: 4em 4em;
+
+  @media (${({theme}) => theme.bp.small}){
+    padding: 4em 3em;
+  }
+
   h3 {
     font-size: 1.5rem;
     color: ${({ theme }) => rgba(theme.navy, 0.7)};
