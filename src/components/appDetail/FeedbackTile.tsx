@@ -183,7 +183,10 @@ export const FeedbackTile: React.FC<{ feedback: Feedback }> = ({
           <div className="feedback__text">
             <motion.p layoutId={`feedbackTile-text-${_id}`}>{text}</motion.p>
           </div>
-          <ShowMoreButton>
+          <ShowMoreButton
+            as={motion.button}
+            layoutId={`feedbackTile-button-${_id}`}
+          >
             <span
               className="link"
               onClick={() => setIsOpen(!isOpen)}
@@ -241,10 +244,14 @@ export const FeedbackTile: React.FC<{ feedback: Feedback }> = ({
                   {text}
                 </motion.p>
               </div>
-              <BottomBar>
+              <BottomBar
+                as={motion.div}
+                layoutId={`feedbackTile-button-${_id}`}
+              >
                 <Link href={`/app/${appId}`}>
                   <Button
                     disableElevation
+                    midBold
                     onClick={() => setIsRedirecting(true)}
                     onKeyDown={() => setIsRedirecting(true)}
                     aria-label={`See the detail page for ${appName}`}
