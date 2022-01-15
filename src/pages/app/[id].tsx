@@ -53,6 +53,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
     isSample,
     testflightIos,
     testflightIpados,
+    website,
     _id,
   },
 }) => {
@@ -120,6 +121,8 @@ const AppDetail: NextPage<AppDetailProps> = ({
         location.href = testflightIos;
       } else if (downloadPlatform.id === "ipados") {
         location.href = testflightIpados;
+      } else if (downloadPlatform.id === "web") {
+        location.href = website;
       }
     } catch (err) {}
     setCTALoading(false);
