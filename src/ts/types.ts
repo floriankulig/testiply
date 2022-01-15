@@ -68,6 +68,7 @@ export interface App {
   devWebsite: string;
   testflightIos?: string;
   testflightIpados?: string;
+  website?: string;
   isSample?: boolean;
   _id: string;
 }
