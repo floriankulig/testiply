@@ -111,12 +111,12 @@ export const categories: Category[] = [
     color: "#fc6602",
   },
   { id: "travel", displayName: "Travel", icon: RiPlaneLine, color: "#99f9ff" },
-  {
-    id: "games",
-    displayName: "Games",
-    icon: IoGameControllerOutline,
-    color: "#b608c9",
-  },
+  // {
+  //   id: "games",
+  //   displayName: "Games",
+  //   icon: IoGameControllerOutline,
+  //   color: "#b608c9",
+  // },
   {
     id: "weather",
     displayName: "Weather",
