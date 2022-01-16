@@ -103,13 +103,18 @@ export const InfoPageHeader: React.FC<InfoPageHeaderProps> = ({
         </div>
       </Link>
       <ul className="nav-links">
-        {!router.pathname.endsWith("/") && (
-          <Link href="/store">
+        {currentUser?.isDev && (
+          <Link href="/dev/apps">
             <li>
-              <a>Store</a>
+              <a>Dashboard</a>
             </li>
           </Link>
         )}
+        <Link href="/store">
+          <li>
+            <a>Store</a>
+          </li>
+        </Link>
         {!!currentUser && (
           <li
             role="button"
