@@ -1,6 +1,6 @@
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import { darken, rgba } from "polished";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaChevronDown, FaStar } from "react-icons/fa";
 import { useRef, useState } from "react";
@@ -25,7 +25,6 @@ export const StyledAppDevRowHeader = styled.div`
   width: 100%;
   height: 40px;
   position: relative;
-  /* overflow-x: clip; */
   margin-bottom: 0.75em;
 
   h2.app-name {
@@ -295,37 +294,62 @@ export const OptionsButton: React.FC<OptionsButtonProps> = ({ app }) => {
 };
 
 // we hardcode the values here because there is no suitable grid/flexbox solution
-const bp1 = "600px";
-const bp2 = "995px";
+const bp1 = "620px";
+const bp2 = "960px";
+const bp3 = "1310px";
 
-export const StatFieldGrid = styled.div`
+export const StyledAppDevRowBody = styled.div`
+  display: flex;
   width: 100%;
+`;
+
+export const StatFieldGrid = styled.div<{ expanded: boolean }>`
   display: grid;
-  grid-template-columns: 1fr;
   place-items: center;
   gap: 0.5em;
+  width: 100%;
+  background-color: red;
   @media (min-width: ${bp1}) {
-    gap: 1em;
+    gap: clamp(0.5em, 1vw, 1em);
     grid-template-columns: repeat(2, 1fr);
   }
-  @media (min-width: ${bp2}) {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
+
+  ${(p) =>
+    !p.expanded &&
+    css`
+      grid-template-columns: 1fr;
+
+      @media (${({ theme }) => theme.bp.big}) {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+    `}
+
+  ${(p) =>
+    p.expanded &&
+    css`
+      @media (min-width: ${bp2}) {
+        width: min-content;
+      }
+    `}
 `;
 
 const StyledStatField = styled.div`
   background: var(--layout-nav-background);
   position: relative;
-  height: 150px;
+  height: clamp(125px, 12.5vw, 150px);
   width: 90%;
-  min-width: 275px;
+  min-width: 265px;
   @media (min-width: ${bp1}) {
-    width: clamp(275px, 100%, 300px);
+    width: 265px;
   }
-  padding: 1em 2em;
+  @media (min-width: ${bp3}) {
+    min-width: 300px;
+    width: 300px;
+  }
+  padding: 1em 1.5em 1em 2em;
   border: 1px solid ${(p) => rgba(p.theme.primary, 0.05)};
   box-shadow: ${rgba(0, 0, 0, 0.01)} 0px 0px 15px;
   display: flex;
@@ -356,6 +380,9 @@ const StyledStatFieldText = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 2.5em;
+  @media (min-width: ${bp1}) {
+    margin-left: clamp(1.5em, 2.5vw, 2.5em);
+  }
 
   h5.heading {
     text-transform: uppercase;
@@ -446,10 +473,12 @@ export const StatField: React.FC<StatFieldProps> = ({
       onTap={clickHandler}
       whileTap={{ scale: clickHandler ? 0.95 : 1 }}
       variants={fieldVariants}
+      layout
     >
       <StyledStatFieldIconWrapper
         as={motion.div}
         variants={iconVariants}
+        layout
         color={
           type === "total_rating"
             ? "#e6cf07"
@@ -473,10 +502,10 @@ export const StatField: React.FC<StatFieldProps> = ({
         </div>
       </StyledStatFieldIconWrapper>
       <StyledStatFieldText>
-        <motion.h5 variants={textVariants} className="heading">
+        <motion.h5 layout variants={textVariants} className="heading">
           {type.replace("_", " ")}
         </motion.h5>
-        <motion.h4 variants={textVariants} className="value">
+        <motion.h4 layout variants={textVariants} className="value">
           {value}
         </motion.h4>
       </StyledStatFieldText>
