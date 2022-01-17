@@ -10,6 +10,7 @@ import {
   StatField,
   StatFieldGrid,
   StyledAppDevRow,
+  StyledAppDevRowBody,
   StyledAppDevRowHeader,
   StyledHeaderButtons,
 } from "./DevAppRow";
@@ -60,7 +61,7 @@ export const DevAppsRows: React.FC<DevAppsRowsProps> = ({ apps }) => {
           animate="animate"
           layout
         >
-          <StyledAppDevRowHeader>
+          <StyledAppDevRowHeader as={motion.div} animate layout>
             <motion.h2 className="app-name" variants={headerVariants}>
               {app.name}
             </motion.h2>
@@ -72,26 +73,33 @@ export const DevAppsRows: React.FC<DevAppsRowsProps> = ({ apps }) => {
               <OptionsButton app={app} />
             </StyledHeaderButtons>
           </StyledAppDevRowHeader>
-          <StatFieldGrid as={motion.div} layout>
-            <StatField
-              value={app.downloads?.toString() || "0"}
-              type="downloads"
-            />
-            <StatField
-              value={app.rating.total?.toString() || "0.0"}
-              type="total_rating"
-            />
-            <StatField
-              value={app.rating.amount?.toString() || "0"}
-              type="rating_amount"
-            />
-            <StatField
-              value={app.rating.amount?.toString() || "0"}
-              type="feedbacks"
-              clickHandler={() => handleFeedbackClick(app.name)}
-              aria-label={`View Feedbacks for ${app.name}`}
-            />
-          </StatFieldGrid>
+          <StyledAppDevRowBody as={motion.div} layout animate>
+            <StatFieldGrid
+              as={motion.div}
+              layout
+              animate
+              expanded={expandedApp === app._id}
+            >
+              <StatField
+                value={app.downloads?.toString() || "0"}
+                type="downloads"
+              />
+              <StatField
+                value={app.rating.total?.toString() || "0.0"}
+                type="total_rating"
+              />
+              <StatField
+                value={app.rating.amount?.toString() || "0"}
+                type="rating_amount"
+              />
+              <StatField
+                value={app.rating.amount?.toString() || "0"}
+                type="feedbacks"
+                clickHandler={() => handleFeedbackClick(app.name)}
+                aria-label={`View Feedbacks for ${app.name}`}
+              />
+            </StatFieldGrid>
+          </StyledAppDevRowBody>
         </StyledAppDevRow>
       ))}
     </Fragment>
