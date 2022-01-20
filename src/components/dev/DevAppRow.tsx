@@ -300,7 +300,17 @@ const bp3 = "1310px";
 
 export const StyledAppDevRowBody = styled.div`
   display: flex;
-  width: 100%;
+  width: 90%;
+  flex-direction: column;
+  margin: 0 auto;
+  @media (min-width: ${bp1}) {
+    width: 100%;
+  }
+  @media (min-width: ${bp2}) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
 `;
 
 export const StatFieldGrid = styled.div<{ expanded: boolean }>`
@@ -331,7 +341,7 @@ export const StatFieldGrid = styled.div<{ expanded: boolean }>`
     p.expanded &&
     css`
       @media (min-width: ${bp2}) {
-        width: min-content;
+        width: fit-content;
       }
     `}
 `;
@@ -340,7 +350,7 @@ const StyledStatField = styled.div`
   background: var(--layout-nav-background);
   position: relative;
   height: clamp(125px, 12.5vw, 150px);
-  width: 90%;
+  width: 100%;
   min-width: 265px;
   @media (min-width: ${bp1}) {
     width: 265px;
@@ -446,6 +456,7 @@ const textVariants: Variants = {
     opacity: 1,
     transition: { duration: 0.3 },
   },
+  exit: { y: 15, opacity: 0 },
 };
 const iconVariants: Variants = {
   initial: { opacity: 0 },
@@ -471,9 +482,9 @@ export const StatField: React.FC<StatFieldProps> = ({
         borderRadius: 8,
       }}
       onTap={clickHandler}
-      whileTap={{ scale: clickHandler ? 0.95 : 1 }}
       variants={fieldVariants}
       layout
+      animate
     >
       <StyledStatFieldIconWrapper
         as={motion.div}
@@ -510,5 +521,60 @@ export const StatField: React.FC<StatFieldProps> = ({
         </motion.h4>
       </StyledStatFieldText>
     </StyledStatField>
+  );
+};
+
+const linksContainer: Variants = {
+  animate: {
+    transition: {
+      delayChildren: 0.6,
+      staggerChildren: 0.1,
+      staggerDirection: 1,
+    },
+  },
+  exit: {
+    opacity: 0,
+    transition: { staggerChildren: 0.1, staggerDirection: -1 },
+  },
+};
+
+const StyledLinks = styled.div`
+  width: 100%;
+
+  @media (min-width: ${bp1}) {
+    width: 90%;
+    margin: 0 auto;
+  }
+  @media (min-width: ${bp2}) {
+    margin-left: clamp(2em, 4vw, 5em);
+  }
+
+  h3.links-header {
+  }
+`;
+
+interface LinksProps {
+  app: App;
+}
+
+export const Links: React.FC<LinksProps> = ({ app }) => {
+  return (
+    <StyledLinks
+      as={motion.div}
+      initial="initial"
+      animate="animate"
+      // exit="exit"
+      layout
+      variants={linksContainer}
+      key={`appLinks-${app._id}`}
+    >
+      <motion.h3 className="links-header" variants={textVariants}>
+        Links
+      </motion.h3>
+      <motion.p variants={textVariants}>aasdas</motion.p>
+      <motion.p variants={textVariants}>aasdas</motion.p>
+      <motion.p variants={textVariants}>aasdas</motion.p>
+      <motion.p variants={textVariants}>aasdas</motion.p>
+    </StyledLinks>
   );
 };

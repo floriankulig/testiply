@@ -1,11 +1,12 @@
 import { useFiltersValue } from "context";
-import { motion, Variants } from "framer-motion";
+import { AnimatePresence, motion, Variants } from "framer-motion";
 import { useRouter } from "next/router";
 import React, { Fragment, useEffect, useState } from "react";
 import { App } from "ts";
 
 import {
   ExpandButton,
+  Links,
   OptionsButton,
   StatField,
   StatFieldGrid,
@@ -99,6 +100,9 @@ export const DevAppsRows: React.FC<DevAppsRowsProps> = ({ apps }) => {
                 aria-label={`View Feedbacks for ${app.name}`}
               />
             </StatFieldGrid>
+            <AnimatePresence>
+              {expandedApp === app._id && <Links app={app} />}
+            </AnimatePresence>
           </StyledAppDevRowBody>
         </StyledAppDevRow>
       ))}
