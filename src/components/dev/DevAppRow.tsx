@@ -550,6 +550,9 @@ const StyledLinks = styled.div`
   }
 
   h3.links-header {
+    font-size: clamp(1.3rem, 3vw, 1.5rem);
+    font-weight: 500;
+    color: var(--navy);
   }
 `;
 
