@@ -107,8 +107,8 @@ const ShowMoreButton = styled.button`
 
 const StyledFeedbackDetail = styled.div`
   background: #fefeff;
-  width: clamp(100px, 85%, 500px);
-  padding: 3em 3em 3.5em;
+  width: clamp(100px, 90%, 500px);
+  padding: 3em 2.5em 3.5em;
   z-index: 3;
 
   & .feedback-detail {
