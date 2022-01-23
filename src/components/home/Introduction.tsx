@@ -365,7 +365,7 @@ export const Introduction: React.FC<IntroductionProps> = ({ close }) => {
                 Button clicken.
               </motion.p>
               <motion.p variants={fadeUp}>
-                Wenn ihr eure eigene (Web-)App hochladen wollt, so erstellt euch
+                Wenn ihr eure eigene (Web-)App hochladen/verlinken wollt, so erstellt euch
                 bitte einen eigenen Account. Ansonsten haben auch alle anderen
                 Gewalt über eure App.
               </motion.p>
