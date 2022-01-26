@@ -308,42 +308,28 @@ export const StyledAppDevRowBody = styled.div`
   }
   @media (min-width: ${bp2}) {
     flex-direction: row;
-    justify-content: space-between;
     align-items: flex-start;
   }
 `;
 
-export const StatFieldGrid = styled.div<{ expanded: boolean }>`
+export const StatFieldGrid = styled.div`
   display: grid;
   place-items: center;
   gap: 0.5em;
   width: 100%;
-  background-color: red;
   @media (min-width: ${bp1}) {
     gap: clamp(0.5em, 1vw, 1em);
     grid-template-columns: repeat(2, 1fr);
   }
 
-  ${(p) =>
-    !p.expanded &&
-    css`
-      grid-template-columns: 1fr;
+  grid-template-columns: 1fr;
 
-      @media (${({ theme }) => theme.bp.big}) {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-      }
-    `}
-
-  ${(p) =>
-    p.expanded &&
-    css`
-      @media (min-width: ${bp2}) {
-        width: fit-content;
-      }
-    `}
+  @media (${({ theme }) => theme.bp.big}) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
 `;
 
 const StyledStatField = styled.div`
@@ -483,13 +469,10 @@ export const StatField: React.FC<StatFieldProps> = ({
       }}
       onTap={clickHandler}
       variants={fieldVariants}
-      layout
-      animate
     >
       <StyledStatFieldIconWrapper
         as={motion.div}
         variants={iconVariants}
-        layout
         color={
           type === "total_rating"
             ? "#e6cf07"
@@ -513,29 +496,15 @@ export const StatField: React.FC<StatFieldProps> = ({
         </div>
       </StyledStatFieldIconWrapper>
       <StyledStatFieldText>
-        <motion.h5 layout variants={textVariants} className="heading">
+        <motion.h5 variants={textVariants} className="heading">
           {type.replace("_", " ")}
         </motion.h5>
-        <motion.h4 layout variants={textVariants} className="value">
+        <motion.h4 variants={textVariants} className="value">
           {value}
         </motion.h4>
       </StyledStatFieldText>
     </StyledStatField>
   );
-};
-
-const linksContainer: Variants = {
-  animate: {
-    transition: {
-      delayChildren: 0.6,
-      staggerChildren: 0.1,
-      staggerDirection: 1,
-    },
-  },
-  exit: {
-    opacity: 0,
-    transition: { staggerChildren: 0.1, staggerDirection: -1 },
-  },
 };
 
 const StyledLinks = styled.div`
@@ -562,15 +531,7 @@ interface LinksProps {
 
 export const Links: React.FC<LinksProps> = ({ app }) => {
   return (
-    <StyledLinks
-      as={motion.div}
-      initial="initial"
-      animate="animate"
-      // exit="exit"
-      layout
-      variants={linksContainer}
-      key={`appLinks-${app._id}`}
-    >
+    <StyledLinks as={motion.div}>
       <motion.h3 className="links-header" variants={textVariants}>
         Links
       </motion.h3>
