@@ -53,59 +53,69 @@ export const DevAppsRows: React.FC<DevAppsRowsProps> = ({ apps }) => {
   }, [expandedApp]);
   return (
     <Fragment>
-      {apps?.map((app: App, i: number) => (
-        <StyledAppDevRow
-          key={app._id}
-          as={motion.div}
-          transition={{ staggerChildren: 0.075, delayChildren: i / 2 + 0.5 }}
-          initial="initial"
-          animate="animate"
-          layout
-        >
-          <StyledAppDevRowHeader as={motion.div} animate layout>
-            <motion.h2 className="app-name" variants={headerVariants}>
-              {app.name}
-            </motion.h2>
-            <StyledHeaderButtons>
-              <ExpandButton
-                action={() => handleExpand(app._id)}
-                isExpanded={expandedApp === app._id}
-              />
-              <OptionsButton app={app} />
-            </StyledHeaderButtons>
-          </StyledAppDevRowHeader>
-          <StyledAppDevRowBody as={motion.div} layout animate>
-            <StatFieldGrid
-              as={motion.div}
-              layout
-              animate
-              expanded={expandedApp === app._id}
-            >
-              <StatField
-                value={app.downloads?.toString() || "0"}
-                type="downloads"
-              />
-              <StatField
-                value={app.rating.total?.toString() || "0.0"}
-                type="total_rating"
-              />
-              <StatField
-                value={app.rating.amount?.toString() || "0"}
-                type="rating_amount"
-              />
-              <StatField
-                value={app.rating.amount?.toString() || "0"}
-                type="feedbacks"
-                clickHandler={() => handleFeedbackClick(app.name)}
-                aria-label={`View Feedbacks for ${app.name}`}
-              />
-            </StatFieldGrid>
-            <AnimatePresence>
-              {expandedApp === app._id && <Links app={app} />}
-            </AnimatePresence>
-          </StyledAppDevRowBody>
-        </StyledAppDevRow>
-      ))}
+      {apps?.map((app: App, i: number) => {
+        const statFields = (
+          <Fragment>
+            <StatField
+              value={app.downloads?.toString() || "0"}
+              type="downloads"
+            />
+            <StatField
+              value={app.rating.total?.toString() || "0.0"}
+              type="total_rating"
+            />
+            <StatField
+              value={app.rating.amount?.toString() || "0"}
+              type="rating_amount"
+            />
+            <StatField
+              value={app.rating.amount?.toString() || "0"}
+              type="feedbacks"
+              clickHandler={() => handleFeedbackClick(app.name)}
+              aria-label={`View Feedbacks for ${app.name}`}
+            />
+          </Fragment>
+        );
+        return (
+          <StyledAppDevRow
+            key={app._id}
+            as={motion.div}
+            transition={{ staggerChildren: 0.075, delayChildren: i / 2 + 0.5 }}
+            initial="initial"
+            animate="animate"
+            layout
+          >
+            <StyledAppDevRowHeader as={motion.div} animate layout>
+              <motion.h2 className="app-name" variants={headerVariants}>
+                {app.name}
+              </motion.h2>
+              <StyledHeaderButtons>
+                <ExpandButton
+                  action={() => handleExpand(app._id)}
+                  isExpanded={expandedApp === app._id}
+                />
+                <OptionsButton app={app} />
+              </StyledHeaderButtons>
+            </StyledAppDevRowHeader>
+            <StyledAppDevRowBody as={motion.div} layout>
+              <AnimatePresence>
+                {expandedApp === app._id ? (
+                  <>
+                    <StatFieldGrid as={motion.div} layout expanded={true}>
+                      {statFields}
+                    </StatFieldGrid>
+                    <Links app={app} />
+                  </>
+                ) : (
+                  <StatFieldGrid as={motion.div} layout expanded={false}>
+                    {statFields}
+                  </StatFieldGrid>
+                )}
+              </AnimatePresence>
+            </StyledAppDevRowBody>
+          </StyledAppDevRow>
+        );
+      })}
     </Fragment>
   );
 };
