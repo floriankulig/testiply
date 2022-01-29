@@ -312,7 +312,7 @@ export const StyledAppDevRowBody = styled.div`
   }
 `;
 
-export const StatFieldGrid = styled.div`
+export const StatFieldGrid = styled.div<{ expanded: boolean }>`
   display: grid;
   place-items: center;
   gap: 0.5em;
@@ -324,12 +324,25 @@ export const StatFieldGrid = styled.div`
 
   grid-template-columns: 1fr;
 
-  @media (${({ theme }) => theme.bp.big}) {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
+  ${(p) =>
+    !p.expanded &&
+    css`
+      grid-template-columns: 1fr;
+      @media (${({ theme }) => theme.bp.big}) {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+    `}
+
+  ${(p) =>
+    p.expanded &&
+    css`
+      @media (min-width: ${bp2}) {
+        width: min-content;
+      }
+    `}
 `;
 
 const StyledStatField = styled.div`
@@ -469,6 +482,7 @@ export const StatField: React.FC<StatFieldProps> = ({
       }}
       onTap={clickHandler}
       variants={fieldVariants}
+      layout
     >
       <StyledStatFieldIconWrapper
         as={motion.div}
@@ -525,13 +539,18 @@ const StyledLinks = styled.div`
   }
 `;
 
+const linksContainer: Variants = {
+  animate: { transition: { delayChildren: 0.4, staggerChildren: 0.1 } },
+  exit: { transition: { staggerChildren: 0.05, staggerDirection: -1 } },
+};
+
 interface LinksProps {
   app: App;
 }
 
 export const Links: React.FC<LinksProps> = ({ app }) => {
   return (
-    <StyledLinks as={motion.div}>
+    <StyledLinks as={motion.div} variants={linksContainer}>
       <motion.h3 className="links-header" variants={textVariants}>
         Links
       </motion.h3>
