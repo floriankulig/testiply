@@ -435,7 +435,7 @@ const RatingAmountIcon: React.FC<{ color: string }> = (props) => {
 };
 
 const fieldVariants: Variants = {
-  initial: { scale: 0, opacity: 0 },
+  initial: { scale: 0.1, opacity: 0 },
   animate: {
     scale: 1,
     opacity: 1,
@@ -541,7 +541,6 @@ const StyledLinks = styled.div`
 
 const linksContainer: Variants = {
   animate: { transition: { delayChildren: 0.4, staggerChildren: 0.1 } },
-  exit: { transition: { staggerChildren: 0.05, staggerDirection: -1 } },
 };
 
 interface LinksProps {
