@@ -131,6 +131,12 @@ const GlobalStyle = createGlobalStyle`
     text-align: center;
   }
 
+  .flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center
+  }
+
   ${transitions}
 `;
 
