@@ -94,6 +94,7 @@ export const AuthInfoSidebar: React.FC<AuthInfoSidebarProps> = ({ type }) => {
           color="white"
           big
           bold
+          style={{ margin: "0 auto" }}
           onClick={() => handleFormToggle(oppositeFormType(type))}
           onKeyDown={() => handleFormToggle(oppositeFormType(type))}
         >
@@ -107,6 +108,7 @@ export const AuthInfoSidebar: React.FC<AuthInfoSidebarProps> = ({ type }) => {
               big
               bold
               basic
+              style={{ margin: "0 auto" }}
               onClick={() => handleFormToggle("dev/register")}
               onKeyDown={() => handleFormToggle("dev/register")}
             >
