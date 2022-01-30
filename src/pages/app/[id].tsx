@@ -322,7 +322,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
             showsSampleInfo={isSample}
           />
         ) : (
-          <div className="full-grid-width">
+          <>
             {currentUser?._id === devId ? undefined : (
               <Button
                 big
@@ -333,6 +333,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
                 tabIndex={0}
                 disabled={cantLeaveFeedback}
                 basic
+                style={{ margin: "0 auto" }}
                 as={motion.button}
                 variants={fadeUpVariants}
               >
@@ -360,7 +361,7 @@ const AppDetail: NextPage<AppDetailProps> = ({
                 </motion.span>
               </Button>
             )}
-          </div>
+          </>
         )}
       </RatingSection>
       {authModalOpen && (
