@@ -6,12 +6,14 @@ import { FaChevronDown, FaStar } from "react-icons/fa";
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { useOnClickOutside } from "hooks";
-import { GoLinkExternal, GoTrashcan } from "react-icons/go";
+import { GoCheck, GoLinkExternal, GoTrashcan } from "react-icons/go";
 import { DeleteAppModal } from "components/DeleteAppModal";
 import { App } from "ts";
+import { Button } from "components/Button";
 import { FiDownload } from "react-icons/fi";
-import { BiCommentDetail } from "react-icons/bi";
-import { AiOutlineNumber } from "react-icons/ai";
+import { BiCheck, BiCommentDetail } from "react-icons/bi";
+import { AiOutlineNumber, AiOutlineEdit } from "react-icons/ai";
+import { theme } from "styles";
 
 export const StyledAppDevRow = styled.div`
   display: flex;
@@ -455,7 +457,7 @@ const textVariants: Variants = {
     opacity: 1,
     transition: { duration: 0.3 },
   },
-  exit: { y: 15, opacity: 0 },
+  exit: { y: -15, opacity: 0 },
 };
 const iconVariants: Variants = {
   initial: { opacity: 0 },
@@ -523,24 +525,51 @@ export const StatField: React.FC<StatFieldProps> = ({
 
 const StyledLinks = styled.div`
   width: 100%;
+  margin-top: 1.5em;
 
   @media (min-width: ${bp1}) {
-    width: 90%;
-    margin: 0 auto;
+    width: 80%;
+    margin: 1.5em auto 0;
   }
   @media (min-width: ${bp2}) {
+    margin: 0;
     margin-left: clamp(2em, 4vw, 5em);
   }
 
   h3.links-header {
-    font-size: clamp(1.3rem, 3vw, 1.5rem);
+    font-size: clamp(1.4rem, 3vw, 1.5rem);
     font-weight: 500;
     color: var(--navy);
+    margin: 0;
   }
 `;
 
+const StyledLinksTopRow = styled.div`
+  margin: 0.5em 0 1.5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  ${Button} {
+    font-size: 0.9rem;
+    span.edit-btn-svg {
+      font-size: 1.1rem;
+      margin: 0 0.5em 0 -0.2em;
+    }
+  }
+`;
+
+const linksContainerOuter: Variants = {
+  animate: { transition: { delayChildren: 0.3 } },
+};
 const linksContainer: Variants = {
   animate: { transition: { delayChildren: 0.4, staggerChildren: 0.1 } },
+  exit: {
+    transition: {
+      staggerChildren: 0.05,
+      staggerDirection: -1,
+    },
+  },
 };
 
 interface LinksProps {
@@ -548,15 +577,122 @@ interface LinksProps {
 }
 
 export const Links: React.FC<LinksProps> = ({ app }) => {
+  const [editModeOn, setEditModeOn] = useState<boolean>(false);
+
+  const toggleEdit = async () => {
+    if (!editModeOn) {
+      setEditModeOn(true);
+      return;
+    }
+    // handle app update
+    setEditModeOn(false);
+  };
+
   return (
-    <StyledLinks as={motion.div} variants={linksContainer}>
-      <motion.h3 className="links-header" variants={textVariants}>
-        Links
-      </motion.h3>
-      <motion.p variants={textVariants}>aasdas</motion.p>
-      <motion.p variants={textVariants}>aasdas</motion.p>
-      <motion.p variants={textVariants}>aasdas</motion.p>
-      <motion.p variants={textVariants}>aasdas</motion.p>
+    <StyledLinks as={motion.div} layout variants={linksContainerOuter}>
+      <StyledLinksTopRow as={motion.div} layout variants={textVariants}>
+        <h3 className="links-header">Links</h3>
+        <Button
+          rounded
+          as={motion.button}
+          disableElevation
+          aria-label={`Toggle edit mode for app: ${app.name}`}
+          onTap={() => toggleEdit()}
+          whileTap={{ scale: 0.85 }}
+          animate={{
+            backgroundColor: editModeOn ? "#15a126" : theme.primary,
+            transition: { duration: 0.3 },
+          }}
+        >
+          <AnimatePresence exitBeforeEnter>
+            {!!editModeOn && (
+              <motion.div
+                className="flex-center"
+                key="editOn"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: 20, opacity: 0 }}
+                transition={{ duration: 0.15 }}
+              >
+                <span className="edit-btn-svg">
+                  <GoCheck />
+                </span>{" "}
+                <span>SAVE</span>
+              </motion.div>
+            )}
+            {!editModeOn && (
+              <motion.div
+                className="flex-center"
+                key="editOff"
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -20, opacity: 0 }}
+                transition={{ duration: 0.15 }}
+              >
+                <span className="edit-btn-svg">
+                  <AiOutlineEdit />
+                </span>{" "}
+                <span>EDIT</span>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </Button>
+      </StyledLinksTopRow>
+      <AnimatePresence exitBeforeEnter>
+        {editModeOn ? (
+          <motion.div
+            key={`links-editOff-${app._id}`}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            variants={linksContainer}
+            layout
+          >
+            <motion.p variants={textVariants}>aasdas</motion.p>
+            <motion.p variants={textVariants}>aasdas</motion.p>
+            <motion.p variants={textVariants}>aasdas</motion.p>
+            <motion.p variants={textVariants}>aasdas</motion.p>
+          </motion.div>
+        ) : (
+          <motion.div
+            key={`links-editOn-${app._id}`}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            variants={linksContainer}
+            layout
+          >
+            {app.testflightIos && (
+              <LinkEditOff link={app.testflightIos} label="iOS" />
+            )}
+            {app.testflightIpados && (
+              <LinkEditOff link={app.testflightIpados} label="iPadOS" />
+            )}
+            {app.website && <LinkEditOff link={app.website} label="Web" />}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </StyledLinks>
+  );
+};
+
+interface LinkEditOffProps {
+  link: string;
+  label: string;
+}
+
+const LinkEditOff: React.FC<LinkEditOffProps> = ({ link, label }) => {
+  return (
+    <motion.div variants={textVariants} layout>
+      <motion.a
+        target="_blank"
+        rel="noopener noreferrer"
+        className="link"
+        href={link}
+        whileHover={{ color: theme.primary }}
+      >
+        {link}
+      </motion.a>
+    </motion.div>
   );
 };
