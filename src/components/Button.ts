@@ -19,6 +19,9 @@ export const Button = styled.button<ButtonProps>`
   font-family: "Roboto";
   transition: 0.25s all;
   font-weight: ${(p) => (p.bold ? "bold" : p.midBold ? 500 : null)};
+  display: flex;
+  justify-content: center;
+  align-items: center;
   ${(p) =>
     p.big
       ? css`
