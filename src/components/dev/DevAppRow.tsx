@@ -558,6 +558,9 @@ const StyledLinksTopRow = styled.div`
     }
   }
 `;
+const StyledLinksContainerEditOff = styled.div`
+  width: fit-content;
+`;
 
 const linksContainerOuter: Variants = {
   animate: { transition: { delayChildren: 0.3 } },
@@ -604,7 +607,7 @@ export const Links: React.FC<LinksProps> = ({ app }) => {
             transition: { duration: 0.3 },
           }}
         >
-          <AnimatePresence exitBeforeEnter>
+          <AnimatePresence exitBeforeEnter initial={false}>
             {!!editModeOn && (
               <motion.div
                 className="flex-center"
@@ -641,7 +644,7 @@ export const Links: React.FC<LinksProps> = ({ app }) => {
       <AnimatePresence exitBeforeEnter>
         {editModeOn ? (
           <motion.div
-            key={`links-editOff-${app._id}`}
+            key={`links-editOn-${app._id}`}
             initial="initial"
             animate="animate"
             exit="exit"
@@ -654,8 +657,9 @@ export const Links: React.FC<LinksProps> = ({ app }) => {
             <motion.p variants={textVariants}>aasdas</motion.p>
           </motion.div>
         ) : (
-          <motion.div
-            key={`links-editOn-${app._id}`}
+          <StyledLinksContainerEditOff
+            as={motion.div}
+            key={`links-editOff-${app._id}`}
             initial="initial"
             animate="animate"
             exit="exit"
@@ -669,12 +673,29 @@ export const Links: React.FC<LinksProps> = ({ app }) => {
               <LinkEditOff link={app.testflightIpados} label="iPadOS" />
             )}
             {app.website && <LinkEditOff link={app.website} label="Web" />}
-          </motion.div>
+          </StyledLinksContainerEditOff>
         )}
       </AnimatePresence>
     </StyledLinks>
   );
 };
+
+const StyledLink = styled.div`
+  background: var(--layout-nav-background);
+  border: 1px solid ${(p) => rgba(p.theme.primary, 0.05)};
+  border-radius: 6px;
+  margin-bottom: 1em;
+  padding: 0.5em;
+  box-shadow: ${rgba(0, 0, 0, 0.01)} 0px 0px 15px;
+  display: flex;
+  flex-direction: column;
+
+  a.link {
+    font-weight: 500;
+  }
+`;
+const StyledLinkLabel = styled.label``;
+const StyledLinkBody = styled.div``;
 
 interface LinkEditOffProps {
   link: string;
@@ -683,16 +704,19 @@ interface LinkEditOffProps {
 
 const LinkEditOff: React.FC<LinkEditOffProps> = ({ link, label }) => {
   return (
-    <motion.div variants={textVariants} layout>
-      <motion.a
-        target="_blank"
-        rel="noopener noreferrer"
-        className="link"
-        href={link}
-        whileHover={{ color: theme.primary }}
-      >
-        {link}
-      </motion.a>
-    </motion.div>
+    <StyledLink as={motion.div} variants={textVariants} layout>
+      <StyledLinkLabel>{label}</StyledLinkLabel>
+      <StyledLinkBody>
+        <motion.a
+          target="_blank"
+          rel="noopener noreferrer"
+          className="link"
+          href={link}
+          whileHover={{ color: theme.primary }}
+        >
+          {link}
+        </motion.a>
+      </StyledLinkBody>
+    </StyledLink>
   );
 };
