@@ -11,8 +11,9 @@ import { DeleteAppModal } from "components/DeleteAppModal";
 import { App } from "ts";
 import { Button } from "components/Button";
 import { FiDownload } from "react-icons/fi";
-import { BiCheck, BiCommentDetail } from "react-icons/bi";
+import { BiCommentDetail } from "react-icons/bi";
 import { AiOutlineNumber, AiOutlineEdit } from "react-icons/ai";
+import { IoMdLink } from "react-icons/io";
 import { theme } from "styles";
 
 export const StyledAppDevRow = styled.div`
@@ -524,7 +525,6 @@ export const StatField: React.FC<StatFieldProps> = ({
 };
 
 const StyledLinks = styled.div`
-  width: 100%;
   margin-top: 1.5em;
 
   @media (min-width: ${bp1}) {
@@ -545,7 +545,7 @@ const StyledLinks = styled.div`
 `;
 
 const StyledLinksTopRow = styled.div`
-  margin: 0.5em 0 1.5em;
+  margin: 0.25em 0 1em;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -559,7 +559,10 @@ const StyledLinksTopRow = styled.div`
   }
 `;
 const StyledLinksContainerEditOff = styled.div`
-  width: fit-content;
+  @media (min-width: ${bp1}) {
+    width: fit-content;
+  }
+  max-width: 100%;
 `;
 
 const linksContainerOuter: Variants = {
@@ -682,20 +685,45 @@ export const Links: React.FC<LinksProps> = ({ app }) => {
 
 const StyledLink = styled.div`
   background: var(--layout-nav-background);
-  border: 1px solid ${(p) => rgba(p.theme.primary, 0.05)};
+  position: relative;
   border-radius: 6px;
-  margin-bottom: 1em;
-  padding: 0.5em;
+  padding: 1em;
+  padding-right: 2em;
+  @media (min-width: ${bp2}) {
+    padding-right: 1.5em;
+  }
+  border: 1px solid ${(p) => rgba(p.theme.primary, 0.05)};
   box-shadow: ${rgba(0, 0, 0, 0.01)} 0px 0px 15px;
   display: flex;
+  margin-bottom: 1em;
   flex-direction: column;
+  color: var(--navy);
+`;
 
-  a.link {
-    font-weight: 500;
+const StyledLinkLabel = styled.label`
+  font-size: 0.8rem;
+  margin-bottom: 0.6em;
+  font-weight: 500;
+  user-select: none;
+  color: #afb5c4;
+`;
+
+const StyledLinkBody = styled.a`
+  display: flex;
+  width: auto;
+  align-items: center;
+  svg {
+    margin: 1px 0.5em 0 0;
+    min-width: 18px;
+    min-height: 18px;
+  }
+  span {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 `;
-const StyledLinkLabel = styled.label``;
-const StyledLinkBody = styled.div``;
 
 interface LinkEditOffProps {
   link: string;
@@ -706,16 +734,15 @@ const LinkEditOff: React.FC<LinkEditOffProps> = ({ link, label }) => {
   return (
     <StyledLink as={motion.div} variants={textVariants} layout>
       <StyledLinkLabel>{label}</StyledLinkLabel>
-      <StyledLinkBody>
-        <motion.a
-          target="_blank"
-          rel="noopener noreferrer"
-          className="link"
-          href={link}
-          whileHover={{ color: theme.primary }}
-        >
-          {link}
-        </motion.a>
+      <StyledLinkBody
+        as={motion.a}
+        whileHover={{ color: theme.primary }}
+        target="_blank"
+        rel="noopener noreferrer"
+        href={link}
+      >
+        <IoMdLink />
+        <span className="link">{link}</span>
       </StyledLinkBody>
     </StyledLink>
   );
