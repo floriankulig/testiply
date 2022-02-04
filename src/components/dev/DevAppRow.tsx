@@ -12,9 +12,10 @@ import { App } from "ts";
 import { Button } from "components/Button";
 import { FiDownload } from "react-icons/fi";
 import { BiCommentDetail } from "react-icons/bi";
-import { AiOutlineNumber, AiOutlineEdit } from "react-icons/ai";
-import { IoMdLink } from "react-icons/io";
+import { AiOutlineNumber, AiOutlineEdit, AiOutlineApple } from "react-icons/ai";
+import { IoIosGlobe, IoMdLink } from "react-icons/io";
 import { theme } from "styles";
+import { IconType } from "react-icons/lib";
 
 export const StyledAppDevRow = styled.div`
   display: flex;
@@ -700,6 +701,17 @@ const StyledLink = styled.div`
   margin-bottom: 1em;
   flex-direction: column;
   color: var(--navy);
+  overflow: hidden;
+
+  & > svg {
+    position: absolute;
+    top: 0.1em;
+    right: 0.2em;
+    color: #f0f0f0;
+    width: 30px;
+    height: 30px;
+    z-index: -1;
+  }
 `;
 
 const StyledLinkLabel = styled.label`
@@ -733,6 +745,13 @@ interface LinkEditOffProps {
 }
 
 const LinkEditOff: React.FC<LinkEditOffProps> = ({ link, label }) => {
+  const Icon: IconType =
+    label.startsWith("i") && label.endsWith("OS")
+      ? AiOutlineApple
+      : label === "Web"
+      ? IoIosGlobe
+      : null;
+
   return (
     <StyledLink as={motion.div} variants={textVariants} layout>
       <StyledLinkLabel>{label}</StyledLinkLabel>
@@ -746,6 +765,7 @@ const LinkEditOff: React.FC<LinkEditOffProps> = ({ link, label }) => {
         <IoMdLink />
         <span className="link">{link}</span>
       </StyledLinkBody>
+      {!!Icon && <Icon />}
     </StyledLink>
   );
 };
