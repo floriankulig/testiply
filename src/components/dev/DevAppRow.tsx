@@ -604,6 +604,7 @@ export const Links: React.FC<LinksProps> = ({ app }) => {
           disableElevation
           disabled
           aria-label={`Toggle edit mode for app: ${app.name}`}
+          title="Feature is currently being developed"
           onTap={() => toggleEdit()}
           whileTap={{ scale: 0.85 }}
           animate={{
