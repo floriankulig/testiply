@@ -707,7 +707,7 @@ const StyledLink = styled.div`
     position: absolute;
     top: 0.1em;
     right: 0.2em;
-    color: #f0f0f0;
+    color: #eeeeee;
     width: 30px;
     height: 30px;
     z-index: -1;
