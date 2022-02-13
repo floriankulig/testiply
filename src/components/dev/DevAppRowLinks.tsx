@@ -155,12 +155,12 @@ export const Links: React.FC<LinksProps> = ({ app }) => {
               rounded
               as={motion.button}
               disableElevation
-              // disabled
+              disabled
               aria-label={`Toggle edit mode for app: ${app.name}`}
-              // title="Feature is currently being developed"
+              title="Feature is currently being developed"
               whileTap={{ scale: 0.85 }}
               animate={{
-                backgroundColor: editModeOn ? "#15a126" : theme.primary,
+                // backgroundColor: editModeOn ? "#15a126" : theme.primary,
                 transition: { duration: 0.3 },
               }}
               type="submit"
