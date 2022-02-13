@@ -1,28 +1,19 @@
 import { AnimatePresence, motion, Variants } from "framer-motion";
-import { darken, rgba } from "polished";
+import { rgba } from "polished";
 import styled, { css } from "styled-components";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import { FaChevronDown, FaStar } from "react-icons/fa";
-import {
-  DetailedHTMLProps,
-  InputHTMLAttributes,
-  useRef,
-  useState,
-} from "react";
-import Link from "next/link";
+import { useState } from "react";
 import * as Yup from "yup";
-import { useOnClickOutside } from "hooks";
-import { GoCheck, GoLinkExternal, GoTrashcan } from "react-icons/go";
-import { DeleteAppModal } from "components/DeleteAppModal";
+import { GoCheck } from "react-icons/go";
 import { App } from "ts";
 import { Button } from "components/Button";
-import { FiDownload } from "react-icons/fi";
-import { BiCommentDetail } from "react-icons/bi";
-import { AiOutlineNumber, AiOutlineEdit, AiOutlineApple } from "react-icons/ai";
+import { AiOutlineEdit, AiOutlineApple } from "react-icons/ai";
 import { IoIosGlobe, IoMdLink } from "react-icons/io";
 import { theme } from "styles";
 import { IconType } from "react-icons/lib";
-import { Form, Formik, FormikValues } from "formik";
+import { Form, Formik, FormikProps, FormikValues, useField } from "formik";
+import { ErrorMessage } from "components/ErrorMessage";
+import { MdError } from "react-icons/md";
+import axios from "axios";
 
 // we hardcode the values here because there is no suitable grid/flexbox solution
 const bp1 = "620px";
@@ -31,6 +22,7 @@ const bp3 = "1310px";
 
 const StyledLinks = styled.div`
   margin-top: 1.5em;
+  height: 100%;
 
   @media (min-width: ${bp1}) {
     width: 80%;
@@ -47,6 +39,16 @@ const StyledLinks = styled.div`
     color: var(--navy);
     margin: 0;
   }
+
+  ${ErrorMessage} {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 400px;
+
+    @media (min-width: ${bp2}) {
+      margin: 0;
+    }
+  }
 `;
 
 const StyledLinksTopRow = styled.div`
@@ -54,7 +56,6 @@ const StyledLinksTopRow = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   ${Button} {
     font-size: 0.9rem;
     span.edit-btn-svg {
@@ -115,6 +116,7 @@ interface LinksProps {
 
 export const Links: React.FC<LinksProps> = ({ app }) => {
   const [editModeOn, setEditModeOn] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const initialValues: FormValues = {
     testflightIos: app.testflightIos,
@@ -122,23 +124,44 @@ export const Links: React.FC<LinksProps> = ({ app }) => {
     website: app.website,
   };
 
+  const [lastSavedValues, setLastSavedValues] =
+    useState<FormikValues>(initialValues);
+
   const toggleEdit = async (values: FormikValues) => {
     if (!editModeOn) {
       setEditModeOn(true);
       return;
     }
-    if (JSON.stringify(values) !== JSON.stringify(initialValues)) {
-      await handleAppUpdate(values);
+    // all links were removed
+    if (Object.values(values).every((key) => (!!key ? false : true))) {
+      setErrorMessage("Must provide at least one link");
+      return;
+    }
+    setErrorMessage("");
+    // actually changed data
+    if (JSON.stringify(values) !== JSON.stringify(lastSavedValues)) {
+      try {
+        await handleAppUpdate(values);
+      } catch (err) {
+        return;
+      }
+      setLastSavedValues(values);
     }
     setEditModeOn(false);
   };
 
-  const handleAppUpdate = async ({
-    testflightIos,
-    testflightIpados,
-    website,
-  }: FormikValues) => {
-    console.log("update triggered");
+  const handleAppUpdate = async (newValues: FormikValues) => {
+    const { testflightIos, testflightIpados, website, ...restApp } = app;
+
+    const body = { updatedApp: { ...newValues, ...restApp } };
+    try {
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/updateApp?appId=${app._id}`,
+        body
+      );
+    } catch (err) {
+      setErrorMessage(err.response.data.err);
+    }
   };
 
   return (
@@ -148,110 +171,140 @@ export const Links: React.FC<LinksProps> = ({ app }) => {
         onSubmit={async (values) => await toggleEdit(values)}
         validationSchema={linkValidationSchema}
       >
-        <Form autoComplete="off">
-          <StyledLinksTopRow as={motion.div} layout variants={linkVariants}>
-            <h3 className="links-header">Links</h3>
-            <Button
-              rounded
-              as={motion.button}
-              disableElevation
-              disabled
-              aria-label={`Toggle edit mode for app: ${app.name}`}
-              title="Feature is currently being developed"
-              whileTap={{ scale: 0.85 }}
-              animate={{
-                // backgroundColor: editModeOn ? "#15a126" : theme.primary,
-                transition: { duration: 0.3 },
-              }}
-              type="submit"
-            >
-              <AnimatePresence exitBeforeEnter initial={false}>
-                {!!editModeOn && (
-                  <motion.div
-                    className="flex-center"
-                    key="editOn"
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: 20, opacity: 0 }}
-                    transition={{ duration: 0.15 }}
-                  >
-                    <span className="edit-btn-svg">
-                      <GoCheck />
-                    </span>{" "}
-                    <span>SAVE</span>
-                  </motion.div>
-                )}
-                {!editModeOn && (
-                  <motion.div
-                    className="flex-center"
-                    key="editOff"
-                    initial={{ y: -20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: -20, opacity: 0 }}
-                    transition={{ duration: 0.15 }}
-                  >
-                    <span className="edit-btn-svg">
-                      <AiOutlineEdit />
-                    </span>{" "}
-                    <span>EDIT</span>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </Button>
-          </StyledLinksTopRow>
-          <AnimatePresence exitBeforeEnter>
-            {editModeOn ? (
-              <motion.div
-                key={`links-editOn-${app._id}`}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                variants={linksContainer}
-                layout
+        {({ values }: FormikProps<any>) => (
+          <Form autoComplete="off">
+            <StyledLinksTopRow as={motion.div} layout variants={linkVariants}>
+              <h3 className="links-header">Links</h3>
+              <Button
+                rounded
+                as={motion.button}
+                disableElevation
+                midBold
+                aria-label={`Toggle edit mode for app: ${app.name}`}
+                whileTap={{ scale: 0.85 }}
+                animate={{
+                  backgroundColor: editModeOn ? "#15a126" : theme.primary,
+                  transition: { duration: 0.3 },
+                }}
+                type="submit"
               >
-                {app.testflightIos && (
-                  <LinkEditOn name="testflightIos" label="iOS" />
-                )}
-                {app.testflightIpados && (
-                  <LinkEditOn name="testflightIpados" label="iPadOS" />
-                )}
-                {app.website && <LinkEditOn name="website" label="Web" />}
-              </motion.div>
-            ) : (
-              <StyledLinksContainerEditOff
-                as={motion.div}
-                key={`links-editOff-${app._id}`}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                variants={linksContainer}
-                layout
-              >
-                {app.testflightIos && (
-                  <LinkEditOff link={app.testflightIos} label="iOS" />
-                )}
-                {app.testflightIpados && (
-                  <LinkEditOff link={app.testflightIpados} label="iPadOS" />
-                )}
-                {app.website && <LinkEditOff link={app.website} label="Web" />}
-              </StyledLinksContainerEditOff>
-            )}
-          </AnimatePresence>
-        </Form>
+                <AnimatePresence exitBeforeEnter initial={false}>
+                  {!!editModeOn && (
+                    <motion.div
+                      className="flex-center"
+                      key="editOn"
+                      initial={{ y: 20, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: 20, opacity: 0 }}
+                      transition={{ duration: 0.15 }}
+                    >
+                      <span className="edit-btn-svg">
+                        <GoCheck />
+                      </span>{" "}
+                      <span>SAVE</span>
+                    </motion.div>
+                  )}
+                  {!editModeOn && (
+                    <motion.div
+                      className="flex-center"
+                      key="editOff"
+                      initial={{ y: -20, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ y: -20, opacity: 0 }}
+                      transition={{ duration: 0.15 }}
+                    >
+                      <span className="edit-btn-svg">
+                        <AiOutlineEdit />
+                      </span>{" "}
+                      <span>EDIT</span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </Button>
+            </StyledLinksTopRow>
+            <AnimatePresence exitBeforeEnter>
+              {editModeOn ? (
+                <motion.div
+                  key={`links-editOn-${app._id}`}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  variants={linksContainer}
+                  layout
+                >
+                  <LinkEditOn
+                    name="testflightIos"
+                    label="iOS"
+                    placeholder="Provide your TestFlight link for iOS"
+                  />
+                  <LinkEditOn
+                    name="testflightIpados"
+                    placeholder="Provide your TestFlight link for iPadOS"
+                    label="iPadOS"
+                  />
+                  <LinkEditOn
+                    name="website"
+                    placeholder="Provide link for your WebApp"
+                    label="Web"
+                  />
+                  {!!errorMessage && (
+                    <ErrorMessage>
+                      <MdError /> {errorMessage}
+                    </ErrorMessage>
+                  )}
+                </motion.div>
+              ) : (
+                <StyledLinksContainerEditOff
+                  as={motion.div}
+                  key={`links-editOff-${app._id}`}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  variants={linksContainer}
+                  layout
+                >
+                  {values.testflightIos && (
+                    <LinkEditOff link={values.testflightIos} label="iOS" />
+                  )}
+                  {values.testflightIpados && (
+                    <LinkEditOff
+                      link={values.testflightIpados}
+                      label="iPadOS"
+                    />
+                  )}
+                  {values.website && (
+                    <LinkEditOff link={values.website} label="Web" />
+                  )}
+                </StyledLinksContainerEditOff>
+              )}
+            </AnimatePresence>
+          </Form>
+        )}
       </Formik>
     </StyledLinks>
   );
 };
 
-const StyledLink = styled.div`
+const StyledLink = styled.div<{ editOn?: boolean }>`
   background: var(--layout-nav-background);
   position: relative;
   border-radius: 6px;
   padding: 1em;
-  padding-right: 2em;
-  @media (min-width: ${bp2}) {
-    padding-right: 1.5em;
-  }
+  ${(p) =>
+    !p.editOn
+      ? css`
+          padding-right: 2em;
+          @media (min-width: ${bp2}) {
+            padding-right: 1.5em;
+          }
+        `
+      : css`
+          @media (min-width: ${bp2}) {
+            max-width: 400px;
+            padding: 0.8em 1em;
+            padding-right: 0.8em;
+          }
+        `}
   border: 1px solid ${(p) => rgba(p.theme.primary, 0.05)};
   box-shadow: ${rgba(0, 0, 0, 0.01)} 0px 0px 15px;
   display: flex;
@@ -296,20 +349,30 @@ const StyledLinkBody = styled.a`
   }
 `;
 
-const StyledLinkInput = styled.div`
+const StyledLinkInputWrapper = styled.div<{ showsError: boolean }>`
   display: flex;
-  width: auto;
+  width: 100%;
   align-items: center;
   svg {
     margin: 1px 0.5em 0 0;
     min-width: 18px;
     min-height: 18px;
   }
-  span {
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+  input {
+    width: 100%;
+    background-color: var(--layout-content-background);
+    border-radius: 4px;
+    padding: calc(0.5em - 2px); // border calculated in
+    font-size: 0.9rem;
+    color: var(--navy);
+
+    border: 1px solid
+      ${(p) => (p.showsError ? " red" : "var(--layout-content-background)")};
+    transition: border 0.5s;
+
+    &::placeholder {
+      color: ${({ theme }) => rgba(theme.navy, 0.7)};
+    }
   }
 `;
 
@@ -344,15 +407,10 @@ const LinkEditOff: React.FC<LinkEditOffProps> = ({ link, label }) => {
   );
 };
 
-interface LinkEditOnProps
-  extends DetailedHTMLProps<
-    InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  > {
-  label: string;
-}
+const LinkEditOn = ({ label, ...restProps }: any) => {
+  const [field, meta] = useField(restProps);
+  const showsError: boolean = meta.touched && meta.error ? true : false;
 
-const LinkEditOn: React.FC<LinkEditOnProps> = ({ label, ...restProps }) => {
   const Icon: IconType =
     label.startsWith("i") && label.endsWith("OS")
       ? AiOutlineApple
@@ -361,12 +419,12 @@ const LinkEditOn: React.FC<LinkEditOnProps> = ({ label, ...restProps }) => {
       : null;
 
   return (
-    <StyledLink as={motion.div} variants={linkVariants} layout>
+    <StyledLink as={motion.div} variants={linkVariants} editOn layout>
       <StyledLinkLabel>{label}</StyledLinkLabel>
-      <StyledLinkInput>
+      <StyledLinkInputWrapper showsError={showsError}>
         <IoMdLink />
-        <input {...restProps} />
-      </StyledLinkInput>
+        <input {...field} {...restProps} />
+      </StyledLinkInputWrapper>
       {!!Icon && <Icon />}
     </StyledLink>
   );
