@@ -6,7 +6,6 @@ import { App } from "ts";
 
 import {
   ExpandButton,
-  Links,
   OptionsButton,
   StatField,
   StatFieldGrid,
@@ -15,6 +14,7 @@ import {
   StyledAppDevRowHeader,
   StyledHeaderButtons,
 } from "./DevAppRow";
+import { Links } from "./DevAppRowLinks";
 
 const headerVariants: Variants = {
   initial: { scaleX: 0 },
