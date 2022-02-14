@@ -5,3 +5,4 @@ export { default as getCurrentCategoryFromRoute } from "./getCurrentCategoryFrom
 export { default as getCurrentGameCategoryFromRoute } from "./getCurrentGameCategoryFromRoute";
 export { default as getFormattedDate } from "./getFormattedDate";
 export { default as oppositeFormType } from "./oppositeFormType";
+export { default as generateNewPlatforms } from "./generateNewPlatforms";

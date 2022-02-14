@@ -15,6 +15,7 @@ import { ErrorMessage } from "components/ErrorMessage";
 import { MdError } from "react-icons/md";
 import axios from "axios";
 import { PlatformID } from "ts/types";
+import { generateNewPlatforms } from "helpers";
 
 // we hardcode the values here because there is no suitable grid/flexbox solution
 const bp1 = "620px";
@@ -155,13 +156,12 @@ export const Links: React.FC<LinksProps> = ({ app }) => {
     const { testflightIos, testflightIpados, website, platforms, ...restApp } =
       app;
 
-    const newPlatforms: Array<PlatformID> = [];
-    !!newValues.testflightIos && newPlatforms.push("ios");
-    !!newValues.testflightIpados && newPlatforms.push("ipados");
-    !!newValues.website && newPlatforms.push("web");
-
     const body = {
-      updatedApp: { ...newValues, platforms: newPlatforms, ...restApp },
+      updatedApp: {
+        ...newValues,
+        platforms: generateNewPlatforms(newValues as FormValues),
+        ...restApp,
+      },
     };
     try {
       await axios.post(
