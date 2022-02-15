@@ -135,7 +135,7 @@ export const Links: React.FC<LinksProps> = ({ app }) => {
       return;
     }
     // all links were removed
-    if (Object.values(values).every((key) => (!!key ? false : true))) {
+    if (Object.values(values).every((key) => key.length <= 0)) {
       setErrorMessage("Must provide at least one link");
       return;
     }
