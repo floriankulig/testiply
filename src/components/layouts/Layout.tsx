@@ -11,6 +11,13 @@ interface StyledContentProps {
   scrolled: boolean;
 }
 
+const StyledLayoutParentContainer = styled.div`
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  grid-template-rows: var(--header-height) 1fr;
+  min-height: 100vh;
+`;
+
 const StyledContent = styled.div<StyledContentProps>`
   min-height: calc(100vh - var(--header-height));
   width: 100vw;
@@ -58,15 +65,17 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <SelectedTabProvider>
       <FiltersProvider>
-        <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
-        <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-        <StyledContent
-          sidebarOpen={sidebarOpen}
-          className="inner-content"
-          scrolled={scrolled}
-        >
-          {children}
-        </StyledContent>
+        <StyledLayoutParentContainer>
+          <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
+          <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+          <StyledContent
+            sidebarOpen={sidebarOpen}
+            className="inner-content"
+            scrolled={scrolled}
+          >
+            {children}
+          </StyledContent>
+        </StyledLayoutParentContainer>
       </FiltersProvider>
     </SelectedTabProvider>
   );
