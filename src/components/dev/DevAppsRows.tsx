@@ -48,9 +48,6 @@ export const DevAppsRows: React.FC<DevAppsRowsProps> = ({ apps }) => {
     router.push("/dev/feedback");
   };
 
-  useEffect(() => {
-    console.log(expandedApp);
-  }, [expandedApp]);
   return (
     <Fragment>
       {apps?.map((app: App, i: number) => {
