@@ -80,7 +80,7 @@ const linkVariants: Variants = {
     opacity: 1,
     transition: { duration: 0.3 },
   },
-  exit: { y: -15, opacity: 0 },
+  exit: { y: -10, opacity: 0 },
 };
 
 const linksContainerOuter: Variants = {
