@@ -193,9 +193,13 @@ export const DevAuthForm: React.FC<DevAuthFormProps> = ({
             <FormikCheckbox name="acceptedTAS">
               {/*LINK NEEDS TO POINT TO TERMS AND CONDITIONS LATER*/}I agree to
               the&nbsp;
-              <Link href="https://api.testiply.n-mayr.net/privacy">
+              <a
+                rel="noopener noreferrer"
+                target="_blank"
+                href="https://api.testiply.n-mayr.net/privacy"
+              >
                 <span className="link">Terms and Conditions</span>
-              </Link>
+              </a>
             </FormikCheckbox>
           </FormikStep>
         </FormikStepper>
