@@ -338,9 +338,9 @@ export const Introduction: React.FC<IntroductionProps> = ({ close }) => {
               key="secondIntroAnimation"
             >
               <div className="greeting">
-                <motion.p variants={fadeUp}>Hey Kevin,</motion.p>{" "}
+                {/* <motion.p variants={fadeUp}>Hey Kevin,</motion.p>{" "} */}
                 <motion.p variants={fadeUp}>
-                  hey Community
+                  Hey Community
                   <motion.span className="hand" variants={fadeUp}>
                     {" "}
                     👋
