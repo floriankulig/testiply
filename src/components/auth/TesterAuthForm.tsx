@@ -163,11 +163,14 @@ export const TesterAuthForm: React.FC<TesterAuthFormProps> = ({
                       svgClickHandler={() => setShowPasswords((prev) => !prev)}
                     />
                     <FormikCheckbox name="acceptedTAS">
-                      {/*LINK NEEDS TO POINT TO TERMS AND CONDITIONS LATER*/}I
-                      agree to the&nbsp;
-                      <Link href="https://api.testiply.n-mayr.net/privacy">
+                      I agree to the&nbsp;
+                      <a
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        href="https://api.testiply.n-mayr.net/privacy"
+                      >
                         <span className="link">Terms and Conditions</span>
-                      </Link>
+                      </a>
                     </FormikCheckbox>
                   </>
                 )}
