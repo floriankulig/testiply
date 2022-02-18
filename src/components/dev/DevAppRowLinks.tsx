@@ -80,7 +80,7 @@ const linkVariants: Variants = {
     opacity: 1,
     transition: { duration: 0.3 },
   },
-  exit: { y: -15, opacity: 0 },
+  exit: { y: -10, opacity: 0 },
 };
 
 const linksContainerOuter: Variants = {
@@ -106,10 +106,6 @@ const linkValidationSchema = Yup.object({
   testflightIos: Yup.string().url("Must be a valid Testflight URL"),
   testflightIpados: Yup.string().url("Must be a valid Testflight URL"),
   website: Yup.string().url("Must be a valid Website URL"),
-  categories: Yup.array()
-    .of(Yup.object().shape({ id: Yup.string(), displayName: Yup.string() }))
-    .min(1, "Must select at least 1 category")
-    .max(4, "Can't select more than 4 categories"),
 });
 
 interface LinksProps {

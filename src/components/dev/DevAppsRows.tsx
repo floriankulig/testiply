@@ -1,7 +1,7 @@
 import { useFiltersValue } from "context";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import { useRouter } from "next/router";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { App } from "ts";
 
 import {
@@ -48,9 +48,6 @@ export const DevAppsRows: React.FC<DevAppsRowsProps> = ({ apps }) => {
     router.push("/dev/feedback");
   };
 
-  useEffect(() => {
-    console.log(expandedApp);
-  }, [expandedApp]);
   return (
     <Fragment>
       {apps?.map((app: App, i: number) => {
