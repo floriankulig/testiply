@@ -26,11 +26,12 @@ const headerVariants: Variants = {
 };
 
 interface DevAppsRowsProps {
-  apps: App[];
+  initialApps: App[];
 }
 
-export const DevAppsRows: React.FC<DevAppsRowsProps> = ({ apps }) => {
+export const DevAppsRows: React.FC<DevAppsRowsProps> = ({ initialApps }) => {
   const [expandedApp, setExpandedApp] = useState<string>("");
+  const [apps, setApps] = useState<App[]>(initialApps);
 
   const router = useRouter();
   const { setSearchQuery } = useFiltersValue();
@@ -101,7 +102,7 @@ export const DevAppsRows: React.FC<DevAppsRowsProps> = ({ apps }) => {
                     <StatFieldGrid as={motion.div} layout expanded={true}>
                       {statFields}
                     </StatFieldGrid>
-                    <Links app={app} />
+                    <Links app={app} apps={apps} setApps={setApps} />
                   </>
                 ) : (
                   <StatFieldGrid as={motion.div} layout expanded={false}>
