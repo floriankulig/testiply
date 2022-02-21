@@ -1,7 +1,7 @@
 import { AnimatePresence, motion, Variants } from "framer-motion";
 import { rgba } from "polished";
 import styled, { css } from "styled-components";
-import { useState } from "react";
+import React, { useState } from "react";
 import * as Yup from "yup";
 import { GoCheck } from "react-icons/go";
 import { App } from "ts";
@@ -110,9 +110,11 @@ const linkValidationSchema = Yup.object({
 
 interface LinksProps {
   app: App;
+  apps: App[];
+  setApps: React.Dispatch<React.SetStateAction<App[]>>;
 }
 
-export const Links: React.FC<LinksProps> = ({ app }) => {
+export const Links: React.FC<LinksProps> = ({ app, apps, setApps }) => {
   const [editModeOn, setEditModeOn] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -138,35 +140,47 @@ export const Links: React.FC<LinksProps> = ({ app }) => {
     setErrorMessage("");
     // actually changed data
     if (JSON.stringify(values) !== JSON.stringify(lastSavedValues)) {
+      const {
+        testflightIos,
+        testflightIpados,
+        website,
+        platforms,
+        ...restApp
+      } = app;
+
+      const updatedApp: App = {
+        ...values,
+        platforms: generateNewPlatforms(values as FormValues),
+        ...restApp,
+      };
       try {
-        await handleAppUpdate(values);
+        await handleAppUpdate(updatedApp);
       } catch (err) {
         return;
       }
       setLastSavedValues(values);
+      updateAppArray(updatedApp);
     }
     setEditModeOn(false);
   };
 
-  const handleAppUpdate = async (newValues: FormikValues) => {
-    const { testflightIos, testflightIpados, website, platforms, ...restApp } =
-      app;
-
-    const body = {
-      updatedApp: {
-        ...newValues,
-        platforms: generateNewPlatforms(newValues as FormValues),
-        ...restApp,
-      },
-    };
+  const handleAppUpdate = async (updatedApp: App) => {
     try {
       await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/updateApp?appId=${app._id}`,
-        body
+        { updatedApp }
       );
     } catch (err) {
       setErrorMessage(err.response.data.err);
     }
+  };
+
+  const updateAppArray = (updatedApp: App): void => {
+    const idx = apps.indexOf(app);
+
+    const newApps = apps;
+    newApps[idx] = updatedApp;
+    setApps(newApps);
   };
 
   return (
