@@ -63,6 +63,7 @@ export interface App {
     1: number;
   };
   downloads: number;
+  date: string;
   devId: string; // dev/dev_id
   devName: string;
   devWebsite: string;
