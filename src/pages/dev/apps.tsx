@@ -26,7 +26,7 @@ const DevApps = ({ apps, hasUser, isDev }: DevAppsProps) => {
           <NoAppsView hasApps={false}>No apps yet</NoAppsView>
         </AppGrid>
       ) : (
-        <DevAppsRows apps={apps} />
+        <DevAppsRows initialApps={apps} />
       )}
     </DevAuthorisation>
   );
