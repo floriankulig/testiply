@@ -170,6 +170,7 @@ export const sampleApp: App = {
   devName: "Testiply",
   devWebsite: "https://testiply.vercel.app/",
   downloads: 0,
+  date: "2022-01-24T18:13:36.056Z",
   isSample: true,
   name: "Todoist",
   platforms: ["ios", "ipados"],
