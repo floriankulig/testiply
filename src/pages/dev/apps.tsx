@@ -8,12 +8,8 @@ import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import Head from "next/head";
 import { App } from "ts";
 
-interface DevApp extends App {
-  feedbackAmount: number;
-}
-
 interface DevAppsProps {
-  apps: DevApp[];
+  apps: App[];
   hasUser: boolean;
   isDev: boolean;
 }
