@@ -52,16 +52,16 @@ export const DevAppsRows: React.FC<DevAppsRowsProps> = ({ initialApps }) => {
   return (
     <Fragment>
       {apps?.map((app: App, i: number) => {
+        let totalRating: string = app.rating.total?.toString();
+        totalRating =
+          totalRating.length <= 1 ? totalRating + ".0" : totalRating;
         const statFields = (
           <Fragment>
             <StatField
               value={app.downloads?.toString() || "0"}
               type="downloads"
             />
-            <StatField
-              value={app.rating.total?.toString() || "0.0"}
-              type="total_rating"
-            />
+            <StatField value={totalRating || "0.0"} type="total_rating" />
             <StatField
               value={app.rating.amount?.toString() || "0"}
               type="rating_amount"
