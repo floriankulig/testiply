@@ -68,6 +68,7 @@ const StyledMenus = styled.div`
 const StyledDisplayName = styled.h3`
   font-size: 1.15rem;
   font-weight: normal;
+  text-align: right;
   color: var(--navy);
   cursor: pointer;
 `;
