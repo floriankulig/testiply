@@ -329,8 +329,6 @@ export const StatFieldGrid = styled.div<{ expanded: boolean }>`
     gap: clamp(0.5em, 1vw, 1em);
   }
 
-  /* grid-template-columns: 1fr; */
-
   ${(p) =>
     !p.expanded &&
     css`
