@@ -64,7 +64,7 @@ export interface App {
   };
   downloads: number;
   date: string;
-  devId: string; // dev/dev_id
+  devId: string;
   devName: string;
   devWebsite: string;
   testflightIos?: string;
@@ -89,13 +89,6 @@ export interface User {
 export type AppPreview = Readonly<
   Pick<App, "name" | "description" | "_id" | "devName" | "rating">
 >;
-
-interface TodayAppWidgets {
-  heading: string;
-  opensLongDescription: boolean;
-  _id: string;
-  apps: App[];
-}
 
 export interface Feedback {
   heading: string;
