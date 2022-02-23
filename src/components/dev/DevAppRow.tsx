@@ -11,7 +11,7 @@ import {
 } from "react";
 import Link from "next/link";
 import * as Yup from "yup";
-import { useOnClickOutside } from "hooks";
+import { useIsMobile, useOnClickOutside } from "hooks";
 import { GoCheck, GoLinkExternal, GoTrashcan } from "react-icons/go";
 import { DeleteAppModal } from "components/DeleteAppModal";
 import { App } from "ts";
@@ -311,12 +311,7 @@ const bp3 = "1310px";
 
 export const StyledAppDevRowBody = styled.div`
   display: flex;
-  width: 90%;
   flex-direction: column;
-  margin: 0 auto;
-  @media (min-width: ${bp1}) {
-    width: 100%;
-  }
   @media (min-width: ${bp2}) {
     flex-direction: row;
     align-items: flex-start;
@@ -328,17 +323,17 @@ export const StatFieldGrid = styled.div<{ expanded: boolean }>`
   place-items: center;
   gap: 0.5em;
   width: 100%;
+  grid-template-columns: repeat(2, 1fr);
   @media (min-width: ${bp1}) {
-    gap: clamp(0.5em, 1vw, 1em);
     grid-template-columns: repeat(2, 1fr);
+    gap: clamp(0.5em, 1vw, 1em);
   }
 
-  grid-template-columns: 1fr;
+  /* grid-template-columns: 1fr; */
 
   ${(p) =>
     !p.expanded &&
     css`
-      grid-template-columns: 1fr;
       @media (${({ theme }) => theme.bp.big}) {
         display: flex;
         align-items: center;
@@ -361,8 +356,9 @@ const StyledStatField = styled.div`
   position: relative;
   height: clamp(125px, 12.5vw, 150px);
   width: 100%;
-  min-width: 265px;
+  overflow: hidden;
   @media (min-width: ${bp1}) {
+    min-width: 265px;
     width: 265px;
   }
   @media (min-width: ${bp3}) {
@@ -376,13 +372,28 @@ const StyledStatField = styled.div`
   align-items: center;
 `;
 
-const StyledStatFieldIconWrapper = styled.div<{ color: string }>`
+const StyledStatFieldIconWrapper = styled.div<{
+  color: string;
+  customBR?: string;
+}>`
   height: 60px;
   width: 60px;
   border-radius: 50%;
   background: ${(p) => rgba(p.color, 0.1)};
   display: grid;
   place-items: center;
+
+  @media (max-width: ${bp1}) {
+    position: absolute;
+    right: 0;
+    top: calc(50% - 30px);
+    z-index: -1;
+    & > div svg {
+      margin-left: 3px;
+    }
+    border-radius: ${(p) => p.customBR};
+  }
+
   & > div {
     color: ${(p) => p.color};
     height: max-content;
@@ -399,7 +410,7 @@ const StyledStatFieldIconWrapper = styled.div<{ color: string }>`
 const StyledStatFieldText = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 2.5em;
+  margin-left: clamp(0.5em, 2vw, 1em);
   @media (min-width: ${bp1}) {
     margin-left: clamp(1.5em, 2.5vw, 2.5em);
   }
@@ -506,6 +517,15 @@ export const StatField: React.FC<StatFieldProps> = ({
             : type === "downloads"
             ? "#0faa21"
             : "#0078FF"
+        }
+        customBR={
+          type === "total_rating"
+            ? "54% 46% 0% 100% / 58% 0% 100% 42%"
+            : type === "feedbacks"
+            ? "48% 52% 0% 100% / 62% 6% 94% 38%"
+            : type === "downloads"
+            ? "100% 0% 45% 55% / 46% 91% 9% 54%"
+            : "100% 0% 57% 43% / 63% 86% 14% 37%"
         }
       >
         <div>
