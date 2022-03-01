@@ -1,5 +1,6 @@
 import { useFiltersValue } from "context";
 import { AnimatePresence, motion, Variants } from "framer-motion";
+import { useDebug } from "hooks";
 import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
 import { App } from "ts";
@@ -34,7 +35,12 @@ export const DevAppsRows: React.FC<DevAppsRowsProps> = ({ initialApps }) => {
   const [expandedApp, setExpandedApp] = useState<string>("");
   const [apps, setApps] = useState<App[]>(initialApps);
 
+  // mimics inner components' edit modes
+  // gives access to edit state in most performant way
+  const [editModeOn, setEditModeOn] = useState<boolean>(false);
+
   const handleExpand = (clickedAppId: string) => {
+    setEditModeOn(false);
     if (expandedApp === clickedAppId) {
       setExpandedApp("");
     } else {
@@ -98,13 +104,18 @@ export const DevAppsRows: React.FC<DevAppsRowsProps> = ({ initialApps }) => {
             </StyledAppDevRowHeader>
             <StyledAppDevRowBody as={motion.div} layout>
               <StyledAppDevRowBodyTop>
-                <AnimatePresence>
+                <AnimatePresence exitBeforeEnter>
                   {expandedApp === app._id ? (
                     <>
                       <StatFieldGrid as={motion.div} layout expanded={true}>
                         {statFields}
                       </StatFieldGrid>
-                      <Links app={app} apps={apps} setApps={setApps} />
+                      <Links
+                        app={app}
+                        apps={apps}
+                        setApps={setApps}
+                        setOuterEditModeOn={setEditModeOn}
+                      />
                     </>
                   ) : (
                     <StatFieldGrid as={motion.div} layout expanded={false}>
