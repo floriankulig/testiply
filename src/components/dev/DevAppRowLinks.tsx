@@ -112,9 +112,15 @@ interface LinksProps {
   app: App;
   apps: App[];
   setApps: React.Dispatch<React.SetStateAction<App[]>>;
+  setOuterEditModeOn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const Links: React.FC<LinksProps> = ({ app, apps, setApps }) => {
+export const Links: React.FC<LinksProps> = ({
+  app,
+  apps,
+  setApps,
+  setOuterEditModeOn,
+}) => {
   const [editModeOn, setEditModeOn] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -127,9 +133,14 @@ export const Links: React.FC<LinksProps> = ({ app, apps, setApps }) => {
   const [lastSavedValues, setLastSavedValues] =
     useState<FormikValues>(initialValues);
 
+  const setEditModes = (value: boolean) => {
+    setEditModeOn(value);
+    setOuterEditModeOn(value);
+  };
+
   const toggleEdit = async (values: FormikValues) => {
     if (!editModeOn) {
-      setEditModeOn(true);
+      setEditModes(true);
       return;
     }
     // all links were removed
@@ -161,7 +172,7 @@ export const Links: React.FC<LinksProps> = ({ app, apps, setApps }) => {
       setLastSavedValues(values);
       updateAppArray(updatedApp);
     }
-    setEditModeOn(false);
+    setEditModes(false);
   };
 
   const handleAppUpdate = async (updatedApp: App) => {
@@ -327,7 +338,9 @@ const StyledLink = styled.div<{ editOn?: boolean }>`
   border: 1px solid ${(p) => rgba(p.theme.primary, 0.05)};
   box-shadow: ${rgba(0, 0, 0, 0.01)} 0px 0px 15px;
   display: flex;
-  margin-bottom: 1em;
+  &:not(:last-child) {
+    margin-bottom: 1em;
+  }
   flex-direction: column;
   color: var(--navy);
   overflow: hidden;
