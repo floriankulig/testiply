@@ -11,6 +11,7 @@ import {
   StatFieldGrid,
   StyledAppDevRow,
   StyledAppDevRowBody,
+  StyledAppDevRowBodyTop,
   StyledAppDevRowHeader,
   StyledHeaderButtons,
 } from "./DevAppRow";
@@ -96,20 +97,22 @@ export const DevAppsRows: React.FC<DevAppsRowsProps> = ({ initialApps }) => {
               </StyledHeaderButtons>
             </StyledAppDevRowHeader>
             <StyledAppDevRowBody as={motion.div} layout>
-              <AnimatePresence>
-                {expandedApp === app._id ? (
-                  <>
-                    <StatFieldGrid as={motion.div} layout expanded={true}>
+              <StyledAppDevRowBodyTop>
+                <AnimatePresence>
+                  {expandedApp === app._id ? (
+                    <>
+                      <StatFieldGrid as={motion.div} layout expanded={true}>
+                        {statFields}
+                      </StatFieldGrid>
+                      <Links app={app} apps={apps} setApps={setApps} />
+                    </>
+                  ) : (
+                    <StatFieldGrid as={motion.div} layout expanded={false}>
                       {statFields}
                     </StatFieldGrid>
-                    <Links app={app} apps={apps} setApps={setApps} />
-                  </>
-                ) : (
-                  <StatFieldGrid as={motion.div} layout expanded={false}>
-                    {statFields}
-                  </StatFieldGrid>
-                )}
-              </AnimatePresence>
+                  )}
+                </AnimatePresence>
+              </StyledAppDevRowBodyTop>
             </StyledAppDevRowBody>
           </StyledAppDevRow>
         );
