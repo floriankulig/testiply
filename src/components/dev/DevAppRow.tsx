@@ -309,7 +309,8 @@ const bp1 = "620px";
 const bp2 = "960px";
 const bp3 = "1310px";
 
-export const StyledAppDevRowBody = styled.div`
+export const StyledAppDevRowBody = styled.div``;
+export const StyledAppDevRowBodyTop = styled.div`
   display: flex;
   flex-direction: column;
   @media (min-width: ${bp2}) {
