@@ -34,9 +34,6 @@ export const DevAppsRows: React.FC<DevAppsRowsProps> = ({ initialApps }) => {
   const [expandedApp, setExpandedApp] = useState<string>("");
   const [apps, setApps] = useState<App[]>(initialApps);
 
-  const router = useRouter();
-  const { setSearchQuery } = useFiltersValue();
-
   const handleExpand = (clickedAppId: string) => {
     if (expandedApp === clickedAppId) {
       setExpandedApp("");
@@ -44,6 +41,9 @@ export const DevAppsRows: React.FC<DevAppsRowsProps> = ({ initialApps }) => {
       setExpandedApp(clickedAppId);
     }
   };
+
+  const router = useRouter();
+  const { setSearchQuery } = useFiltersValue();
 
   const handleFeedbackClick = (appName: string) => {
     setSearchQuery(appName);
