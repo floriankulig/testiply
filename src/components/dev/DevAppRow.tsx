@@ -315,7 +315,6 @@ export const StyledAppDevRowBodyTop = styled.div`
   flex-direction: column;
   @media (min-width: ${bp2}) {
     flex-direction: row;
-    align-items: flex-start;
   }
 `;
 
@@ -346,6 +345,8 @@ export const StatFieldGrid = styled.div<{ expanded: boolean }>`
     css`
       @media (min-width: ${bp2}) {
         width: min-content;
+        margin: auto 0 0;
+        height: 100%;
       }
     `}
 `;
@@ -353,10 +354,11 @@ export const StatFieldGrid = styled.div<{ expanded: boolean }>`
 const StyledStatField = styled.div`
   background: var(--layout-nav-background);
   position: relative;
-  height: clamp(125px, 12.5vw, 150px);
+  height: 125px;
   width: 100%;
   overflow: hidden;
   @media (min-width: ${bp1}) {
+    height: clamp(135px, 12.5vw, 150px);
     min-width: 265px;
     width: 265px;
   }
