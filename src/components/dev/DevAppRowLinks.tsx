@@ -14,8 +14,7 @@ import { Form, Formik, FormikProps, FormikValues, useField } from "formik";
 import { ErrorMessage } from "components/ErrorMessage";
 import { MdError } from "react-icons/md";
 import axios from "axios";
-import { PlatformID } from "ts/types";
-import { generateNewPlatforms } from "helpers";
+import { findPlatformIconFromLabel, generateNewPlatforms } from "helpers";
 
 // we hardcode the values here because there is no suitable grid/flexbox solution
 const bp1 = "620px";
@@ -414,12 +413,7 @@ interface LinkEditOffProps {
 }
 
 const LinkEditOff: React.FC<LinkEditOffProps> = ({ link, label }) => {
-  const Icon: IconType =
-    label.startsWith("i") && label.endsWith("OS")
-      ? AiOutlineApple
-      : label === "Web"
-      ? IoIosGlobe
-      : null;
+  const Icon = findPlatformIconFromLabel(label);
 
   return (
     <StyledLink as={motion.div} variants={linkVariants} layout>
