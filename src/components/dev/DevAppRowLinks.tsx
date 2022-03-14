@@ -437,12 +437,7 @@ const LinkEditOn = ({ label, ...restProps }: any) => {
   const [field, meta] = useField(restProps);
   const showsError: boolean = meta.touched && meta.error ? true : false;
 
-  const Icon: IconType =
-    label.startsWith("i") && label.endsWith("OS")
-      ? AiOutlineApple
-      : label === "Web"
-      ? IoIosGlobe
-      : null;
+  const Icon = findPlatformIconFromLabel(label);
 
   return (
     <StyledLink as={motion.div} variants={linkVariants} editOn layout>
