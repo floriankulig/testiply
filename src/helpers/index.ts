@@ -6,3 +6,4 @@ export { default as getCurrentGameCategoryFromRoute } from "./getCurrentGameCate
 export { default as getFormattedDate } from "./getFormattedDate";
 export { default as oppositeFormType } from "./oppositeFormType";
 export { default as generateNewPlatforms } from "./generateNewPlatforms";
+export { default as findPlatformIconFromLabel } from "./findPlatformIconFromLabel";
