@@ -68,20 +68,19 @@ const StyledListingListItem = styled.li`
 const containerVariants: Variants = {
   initialListings: {},
   animateListings: {
-    transition: { delayChildren: 0.3, staggerChildren: 0.1 },
+    transition: { delayChildren: 0.7, staggerChildren: 0.075 },
   },
   exitListings: {
     transition: {
-      //   delayChildren: 0.1,
       staggerChildren: 0.1,
       staggerDirection: -1,
     },
   },
 };
 const listHeaderVariants: Variants = {
-  initialListings: { y: -20, x: -2, opacity: 0 },
+  initialListings: { y: -20, x: -1, opacity: 0 },
   animateListings: { y: 0, x: 0, opacity: 1, transition: { duration: 0.35 } },
-  exitListings: { y: -20, x: -2, opacity: 0, transition: { duration: 0.25 } },
+  exitListings: { y: -20, x: -1, opacity: 0, transition: { duration: 0.25 } },
 };
 const listItemVariants: Variants = {
   initialListings: { x: -10, opacity: 0 },
