@@ -17,6 +17,7 @@ import {
   StyledHeaderButtons,
 } from "./DevAppRow";
 import { Links } from "./DevAppRowLinks";
+import { DevAppRowListings } from "./DevAppRowListings";
 
 const headerVariants: Variants = {
   initial: { scaleX: 0 },
@@ -124,6 +125,20 @@ export const DevAppsRows: React.FC<DevAppsRowsProps> = ({ initialApps }) => {
                   )}
                 </AnimatePresence>
               </StyledAppDevRowBodyTop>
+              <AnimatePresence exitBeforeEnter>
+                {expandedApp === app._id && (
+                  <StyledAppDevRowBodyTop
+                    as={motion.div}
+                    key={`appDevRowBottom-${app._id}`}
+                    layout
+                    initial="initialListings"
+                    animate="animateListings"
+                    exit="exitListings"
+                  >
+                    <DevAppRowListings app={app} />
+                  </StyledAppDevRowBodyTop>
+                )}
+              </AnimatePresence>
             </StyledAppDevRowBody>
           </StyledAppDevRow>
         );
