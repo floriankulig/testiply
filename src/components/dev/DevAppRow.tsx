@@ -317,6 +317,13 @@ export const StyledAppDevRowBodyTop = styled.div`
     flex-direction: row;
   }
 `;
+export const StyledAppDevRowBodyBottom = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media (min-width: ${bp2}) {
+    flex-direction: row;
+  }
+`;
 
 export const StatFieldGrid = styled.div<{ expanded: boolean }>`
   display: grid;
