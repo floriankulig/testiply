@@ -326,8 +326,10 @@ export const StyledAppDevRowBodyTop = styled.div`
 export const StyledAppDevRowBodyBottom = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 2em 0;
   @media (min-width: ${bp2}) {
     flex-direction: row;
+    justify-content: space-between;
   }
 `;
 
