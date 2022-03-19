@@ -24,6 +24,7 @@ const StyledListings = styled.div`
     margin: 0 auto 0;
   }
   @media (min-width: ${bp2}) {
+    width: min-content;
     margin: 0;
   }
 `;
