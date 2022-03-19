@@ -7,6 +7,7 @@ import {
   platforms as possiblePlatforms,
   categories as possibleCategories,
 } from "ts/constants";
+import { StyledAppDevRowSectionHeader } from "./DevAppRow";
 
 // we hardcode the values here because there is no suitable grid/flexbox solution
 const bp1 = "620px";
@@ -16,30 +17,20 @@ const bp3 = "1310px";
 const StyledListings = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 2em;
   height: 100%;
 
   @media (min-width: ${bp1}) {
     width: 80%;
-    margin: 2em auto 0;
+    margin: 0 auto 0;
   }
   @media (min-width: ${bp2}) {
     margin: 0;
-    margin-top: 2em;
   }
 `;
 const StyledListing = styled.div`
   &:not(:last-child) {
     margin-bottom: 1.25em;
   }
-`;
-const StyledListingHeader = styled.h4`
-  /* text-transform: uppercase; */
-  /* font-size: clamp(1.1rem, 2vw, 1.3rem); */
-  font-size: clamp(1.4rem, 3vw, 1.5rem);
-  font-weight: 500;
-  color: var(--navy);
-  margin: 0;
 `;
 const StyledListingList = styled.ul`
   display: flex;
@@ -109,9 +100,12 @@ export const DevAppRowListings: React.FC<DevAppRowListingsProps> = ({
     <StyledListings as={motion.div} layout variants={containerVariants}>
       {categories.length >= 1 && (
         <StyledListing as={motion.div}>
-          <StyledListingHeader as={motion.h4} variants={listHeaderVariants}>
+          <StyledAppDevRowSectionHeader
+            as={motion.h4}
+            variants={listHeaderVariants}
+          >
             {categories.length > 1 ? "Categories" : "Category"}
-          </StyledListingHeader>
+          </StyledAppDevRowSectionHeader>
           <StyledListingList as={motion.ul}>
             {categories?.map((category) => (
               <StyledListingListItem
@@ -129,9 +123,12 @@ export const DevAppRowListings: React.FC<DevAppRowListingsProps> = ({
       )}
       {platforms.length >= 1 && (
         <StyledListing as={motion.div}>
-          <StyledListingHeader as={motion.h4} variants={listHeaderVariants}>
+          <StyledAppDevRowSectionHeader
+            as={motion.h4}
+            variants={listHeaderVariants}
+          >
             {platforms.length > 1 ? "Platforms" : "Platform"}
-          </StyledListingHeader>
+          </StyledAppDevRowSectionHeader>
           <StyledListingList as={motion.ul}>
             {platforms?.map((platform) => {
               const Icon = findPlatformIconFromLabel(platform.displayName);
