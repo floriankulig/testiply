@@ -31,6 +31,11 @@ const StyledListing = styled.div`
   &:not(:last-child) {
     margin-bottom: 1.25em;
   }
+  @media (min-width: ${bp3}) {
+    &:not(:last-child) {
+      margin-bottom: 2em;
+    }
+  }
 `;
 const StyledListingList = styled.ul`
   display: flex;
