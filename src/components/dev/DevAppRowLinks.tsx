@@ -15,6 +15,7 @@ import { ErrorMessage } from "components/ErrorMessage";
 import { MdError } from "react-icons/md";
 import axios from "axios";
 import { findPlatformIconFromLabel, generateNewPlatforms } from "helpers";
+import { StyledAppDevRowSectionHeader } from "./DevAppRow";
 
 // we hardcode the values here because there is no suitable grid/flexbox solution
 const bp1 = "620px";
@@ -32,13 +33,6 @@ const StyledLinks = styled.div`
   @media (min-width: ${bp2}) {
     margin: 0;
     margin-left: clamp(2em, 4vw, 5em);
-  }
-
-  h3.links-header {
-    font-size: clamp(1.4rem, 3vw, 1.5rem);
-    font-weight: 500;
-    color: var(--navy);
-    margin: 0;
   }
 
   ${ErrorMessage} {
@@ -203,7 +197,7 @@ export const Links: React.FC<LinksProps> = ({
         {({ values }: FormikProps<any>) => (
           <Form autoComplete="off">
             <StyledLinksTopRow as={motion.div} layout variants={linkVariants}>
-              <h3 className="links-header">Links</h3>
+              <StyledAppDevRowSectionHeader>Links</StyledAppDevRowSectionHeader>
               <Button
                 rounded
                 as={motion.button}
