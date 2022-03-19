@@ -310,6 +310,12 @@ const bp2 = "960px";
 const bp3 = "1310px";
 
 export const StyledAppDevRowBody = styled.div``;
+export const StyledAppDevRowSectionHeader = styled.h4`
+  font-size: clamp(1.4rem, 3vw, 1.5rem);
+  font-weight: 500;
+  color: var(--navy);
+  margin: 0;
+`;
 export const StyledAppDevRowBodyTop = styled.div`
   display: flex;
   flex-direction: column;
