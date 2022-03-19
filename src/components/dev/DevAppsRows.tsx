@@ -4,7 +4,6 @@ import { useDebug } from "hooks";
 import { useRouter } from "next/router";
 import React, { Fragment, useState } from "react";
 import { App } from "ts";
-
 import {
   ExpandButton,
   OptionsButton,
@@ -12,12 +11,14 @@ import {
   StatFieldGrid,
   StyledAppDevRow,
   StyledAppDevRowBody,
+  StyledAppDevRowBodyBottom,
   StyledAppDevRowBodyTop,
   StyledAppDevRowHeader,
   StyledHeaderButtons,
 } from "./DevAppRow";
 import { Links } from "./DevAppRowLinks";
 import { DevAppRowListings } from "./DevAppRowListings";
+import { DevAppRowRating } from "./DevAppRowRating";
 
 const headerVariants: Variants = {
   initial: { scaleX: 0 },
@@ -127,7 +128,7 @@ export const DevAppsRows: React.FC<DevAppsRowsProps> = ({ initialApps }) => {
               </StyledAppDevRowBodyTop>
               <AnimatePresence exitBeforeEnter>
                 {expandedApp === app._id && (
-                  <StyledAppDevRowBodyTop
+                  <StyledAppDevRowBodyBottom
                     as={motion.div}
                     key={`appDevRowBottom-${app._id}`}
                     layout
@@ -136,7 +137,8 @@ export const DevAppsRows: React.FC<DevAppsRowsProps> = ({ initialApps }) => {
                     exit="exitListings"
                   >
                     <DevAppRowListings app={app} />
-                  </StyledAppDevRowBodyTop>
+                    <DevAppRowRating app={app} />
+                  </StyledAppDevRowBodyBottom>
                 )}
               </AnimatePresence>
             </StyledAppDevRowBody>
