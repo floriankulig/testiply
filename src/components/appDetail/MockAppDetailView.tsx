@@ -11,7 +11,7 @@ import { HeroSection, IconWrapper, MetaInfo, StyledRow } from "./Hero";
 
 const BodyOverlay = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 101vh;
   background: var(--layout-nav-background);
   h4 {
     margin-top: 4em;
