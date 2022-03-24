@@ -28,4 +28,15 @@ export const fadeUpVariants: Variants = {
     transition: { duration: 0.25 },
   },
   hidden: { opacity: 0, y: 25 },
+  animateListings: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.25, delayChildren: 5 },
+  },
+  initialListings: { opacity: 0, y: 15 },
+  exitListings: {
+    opacity: 0,
+    y: 15,
+    transition: { duration: 0.2 },
+  },
 };
