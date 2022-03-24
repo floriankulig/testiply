@@ -1,13 +1,11 @@
 import { useAuthValue } from "context";
-import { motion } from "framer-motion";
 import { getTextColor } from "helpers";
 import { useIsMobile } from "hooks";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { rgba } from "polished";
-import { CSSTransition } from "react-transition-group";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 interface HeaderProps {
   hasLogoBackground: boolean;
@@ -83,10 +81,6 @@ export const InfoPageHeader: React.FC<InfoPageHeaderProps> = ({
       className={className}
       style={style}
       hasLogoBackground={hasLogoBackground}
-      as={motion.div}
-      initial={{ y: "-100%" }}
-      animate={{ y: 0 }}
-      exit={{ y: "-100%" }}
     >
       <Link href="/">
         <div className="logo">
