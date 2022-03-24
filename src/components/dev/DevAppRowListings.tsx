@@ -69,6 +69,7 @@ const containerVariants: Variants = {
   },
   exitListings: {
     transition: {
+      delayChildren: 0.5,
       staggerChildren: 0.1,
       staggerDirection: -1,
     },
