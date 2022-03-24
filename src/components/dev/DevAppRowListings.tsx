@@ -1,8 +1,10 @@
 import { motion, Variants } from "framer-motion";
 import { findPlatformIconFromLabel } from "helpers";
+import { useHorizontalScroll } from "hooks";
 import { rgba } from "polished";
+import { useRef } from "react";
 import styled from "styled-components";
-import { App } from "ts";
+import { App, Category, Platform } from "ts";
 import {
   platforms as possiblePlatforms,
   categories as possibleCategories,
@@ -41,11 +43,12 @@ const StyledListing = styled.div`
 const StyledListingList = styled.ul`
   display: flex;
   margin-top: 0.6em;
+  white-space: nowrap;
+  width: max-content;
+  gap: 1em;
+  overflow: visible;
 `;
 const StyledListingListItem = styled.li`
-  &:not(:last-child) {
-    margin-right: 1em;
-  }
   background: var(--layout-nav-background);
   border-radius: 3em;
   padding: 0.5em 1em 0.5em 0.7em;
@@ -54,6 +57,7 @@ const StyledListingListItem = styled.li`
   display: flex;
   align-items: center;
   font-size: 0.95rem;
+  user-select: none;
   svg {
     margin-top: -2px;
     margin-right: 0.5em;
@@ -103,58 +107,93 @@ export const DevAppRowListings: React.FC<DevAppRowListingsProps> = ({
   const platforms = app.platforms.map((platID) =>
     possiblePlatforms.find((plat) => plat.id === platID)
   );
+
+  const chipsParentRef = useRef<HTMLHeadingElement>(null);
+
   return (
-    <StyledListings as={motion.div} layout variants={containerVariants}>
+    <StyledListings
+      as={motion.div}
+      layout
+      ref={chipsParentRef}
+      variants={containerVariants}
+    >
       {categories.length >= 1 && (
-        <StyledListing as={motion.div}>
-          <StyledAppDevRowSectionHeader
-            as={motion.h4}
-            variants={listHeaderVariants}
-          >
-            {categories.length > 1 ? "Categories" : "Category"}
-          </StyledAppDevRowSectionHeader>
-          <StyledListingList as={motion.ul}>
-            {categories?.map((category) => (
-              <StyledListingListItem
-                as={motion.li}
-                key={`category-${category.id}-app-${app._id}`}
-                layout
-                variants={listItemVariants}
-              >
-                <category.icon />
-                {category.displayName}
-              </StyledListingListItem>
-            ))}
-          </StyledListingList>
-        </StyledListing>
+        <Listing
+          array={categories}
+          parentRef={chipsParentRef}
+          type="categories"
+          app={app}
+        />
       )}
       {platforms.length >= 1 && (
-        <StyledListing as={motion.div}>
-          <StyledAppDevRowSectionHeader
-            as={motion.h4}
-            variants={listHeaderVariants}
-          >
-            {platforms.length > 1 ? "Platforms" : "Platform"}
-          </StyledAppDevRowSectionHeader>
-          <StyledListingList as={motion.ul}>
-            {platforms?.map((platform) => {
-              const Icon = findPlatformIconFromLabel(platform.displayName);
-              console.log(Icon);
-              return (
-                <StyledListingListItem
-                  as={motion.li}
-                  layout
-                  key={`platform-${platform.id}-app-${app._id}`}
-                  variants={listItemVariants}
-                >
-                  <Icon />
-                  {platform.displayName}
-                </StyledListingListItem>
-              );
-            })}
-          </StyledListingList>
-        </StyledListing>
+        <Listing
+          array={platforms}
+          parentRef={chipsParentRef}
+          type="platforms"
+          app={app}
+        />
       )}
     </StyledListings>
+  );
+};
+
+interface ListingProps {
+  array: Array<Platform> | Array<Category>;
+  type: "platforms" | "categories";
+  parentRef: React.MutableRefObject<HTMLHeadingElement>;
+  app: App;
+}
+
+const Listing: React.FC<ListingProps> = ({ array, type, parentRef, app }) => {
+  const chipListRef = useRef<HTMLUListElement>(null);
+  const { scrollable, retriggerScrollCheck } = useHorizontalScroll(
+    parentRef.current,
+    chipListRef.current
+  );
+  return (
+    <StyledListing as={motion.div}>
+      <StyledAppDevRowSectionHeader
+        as={motion.h4}
+        variants={listHeaderVariants}
+      >
+        {type === "platforms"
+          ? array.length > 1
+            ? "Platforms"
+            : "Platform"
+          : array.length > 1
+          ? "Categories"
+          : "Category"}
+      </StyledAppDevRowSectionHeader>
+      <StyledListingList
+        as={motion.ul}
+        animate={!scrollable ? { x: 0 } : {}}
+        onMouseEnter={() => retriggerScrollCheck()}
+        drag={scrollable ? "x" : false}
+        dragConstraints={parentRef}
+        dragTransition={{
+          bounceStiffness: 400,
+          bounceDamping: 50,
+        }}
+        ref={chipListRef}
+      >
+        {array?.map((item) => {
+          const Icon =
+            type === "platforms"
+              ? findPlatformIconFromLabel(item.displayName)
+              : item.icon;
+          return (
+            <StyledListingListItem
+              as={motion.li}
+              layout
+              key={`platform-${item.id}-app-${app._id}`}
+              variants={listItemVariants}
+            >
+              <Icon />
+              {item.displayName}
+            </StyledListingListItem>
+          );
+        })}
+      </StyledListingList>
+    </StyledListing>
   );
 };
