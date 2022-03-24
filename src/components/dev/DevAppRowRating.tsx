@@ -58,7 +58,7 @@ const listItemVariants: Variants = {
     opacity: 1,
     transition: { duration: 0.35 },
   },
-  exitListings: { x: -10, opacity: 0, transition: { duration: 0.25 } },
+  exitListings: { x: -10, y: -25, opacity: 0, transition: { duration: 0.25 } },
 };
 
 interface DevAppRowRatingProps {
