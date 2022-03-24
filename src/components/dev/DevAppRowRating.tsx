@@ -1,6 +1,6 @@
 import React from "react";
 import { App } from "ts";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import {
   RatingBar,
   RatingBars,
@@ -34,6 +34,33 @@ const StyledAppDevRowRating = styled.div`
   }
 `;
 
+const containerVariants: Variants = {
+  initialListings: {},
+  animateListings: {
+    transition: { delayChildren: 1, staggerChildren: 0.075 },
+  },
+  exitListings: {
+    transition: {
+      staggerChildren: 0.1,
+      staggerDirection: -1,
+    },
+  },
+};
+const listHeaderVariants: Variants = {
+  initialListings: { y: -20, x: -1, opacity: 0 },
+  animateListings: { y: 0, x: 0, opacity: 1, transition: { duration: 0.35 } },
+  exitListings: { y: -20, x: -1, opacity: 0, transition: { duration: 0.25 } },
+};
+const listItemVariants: Variants = {
+  initialListings: { x: -10, opacity: 0 },
+  animateListings: {
+    x: 0,
+    opacity: 1,
+    transition: { duration: 0.35 },
+  },
+  exitListings: { x: -10, opacity: 0, transition: { duration: 0.25 } },
+};
+
 interface DevAppRowRatingProps {
   app: App;
 }
@@ -41,19 +68,28 @@ interface DevAppRowRatingProps {
 export const DevAppRowRating: React.FC<DevAppRowRatingProps> = ({ app }) => {
   const rating = app.rating;
   return (
-    <StyledAppDevRowRating>
-      <StyledAppDevRowSectionHeader as={motion.h4}>
+    <StyledAppDevRowRating as={motion.div} variants={containerVariants}>
+      <StyledAppDevRowSectionHeader
+        as={motion.h4}
+        variants={listHeaderVariants}
+      >
         Rating
       </StyledAppDevRowSectionHeader>
-      <RatingContent style={{ marginBottom: 0 }}>
+      <RatingContent style={{ marginBottom: 0, overflow: "visible" }}>
         <RatingSummary>
-          <motion.h2>{rating.total}</motion.h2>
-          <StarPercentageRating percentage={rating.total} />
-          <motion.span className="rating__amount">
+          <motion.h2 variants={listHeaderVariants}>{rating.total}</motion.h2>
+          <motion.div variants={listItemVariants}>
+            <StarPercentageRating percentage={rating.total} />
+          </motion.div>
+          <motion.span className="rating__amount" variants={listHeaderVariants}>
             <IoPeople /> {rating.amount}
           </motion.span>
         </RatingSummary>
-        <RatingBars style={{ width: "100%" }}>
+        <RatingBars
+          as={motion.ul}
+          exit={{ transition: { staggerDirection: -1 } }}
+          style={{ width: "100%" }}
+        >
           {[...Array(5)].map((_, i) => (
             <RatingBar key={i} progress={rating[`${i + 1}`]} i={i} />
           ))}
