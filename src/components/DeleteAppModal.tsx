@@ -181,7 +181,7 @@ export const DeleteAppModal: React.FC<DeleteAppModalProps> = ({
           </motion.div>
         </TopBar>
         <motion.p layout className="modal-text" variants={scaleInVariants}>
-          Are you sure you want to delete this app? This action is unreversible
+          Are you sure you want to delete this app? This action is irreversible
           and will make the app no longer downloadable.
         </motion.p>
         <BottomBar as={motion.div} variants={scaleInVariants} layout>
